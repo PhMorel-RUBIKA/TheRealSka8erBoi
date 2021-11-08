@@ -224,6 +224,5 @@ public string bulletLightName;
     {
         currentHealth -= damageNumber;
         healthBar.value = (float)currentHealth / maxHealth;
-        
     }
 }

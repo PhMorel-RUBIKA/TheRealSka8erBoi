@@ -29,7 +29,7 @@ public class BulletPoolBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Target"))
         {
-            //other.GetComponent<Enemy>().TakeDamage(damage);
+            other.GetComponent<DamageManager>().TakeDamage(damage);
             Transform damageUI = Instantiate(damagePopUp, new Vector3(other.transform.position.x,other.transform.position.y,other.transform.position.z - 2),Quaternion.identity);
             damageUI.gameObject.GetComponent<TextMeshPro>().text = damage.ToString();
             Destroy(damageUI.gameObject,1);
