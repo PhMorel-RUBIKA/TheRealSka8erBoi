@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736bea936facbbb488857bf11fc8e923, type: 3}
+  m_Name: Amb1_Room1
+  m_EditorClassIdentifier: 
+  waves:
+  - waveName: Wave 1
+    spawnInterval: 0.5
+    numberOfenemies: 5
+    typeOfEnnemies:
+    - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
+      probability: 20
+    - enemy: {fileID: 2339571471071719281, guid: ec258ede5cd5a37478ff5633adae904f, type: 3}
+      probability: 80
+  - waveName: Wave 2
+    spawnInterval: 0.5
+    numberOfenemies: 8
+    typeOfEnnemies:
+    - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
+      probability: 50
+    - enemy: {fileID: 2339571471071719281, guid: ec258ede5cd5a37478ff5633adae904f, type: 3}
+      probability: 50
+  - waveName: Wave 3
+    spawnInterval: 0.5
+    numberOfenemies: 12
+    typeOfEnnemies:
+    - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
+      probability: 80
+    - enemy: {fileID: 2339571471071719281, guid: ec258ede5cd5a37478ff5633adae904f, type: 3}
+      probability: 80
