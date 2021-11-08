@@ -414,25 +414,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc6a44a06cd69547932a56171dea881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLightName: 
+  bulletLightName: lightArrow
   leftJoy: {x: 0, y: 0}
-  playerSpeed: 0
+  playerSpeed: 5
   deadzoneController: 0.3
   latestDirection: {x: 0, y: 0}
-  dashCd: 0
-  dashSpeed: 0
+  dashCd: 1
+  dashSpeed: 45
   dashGoingFor: 0
-  dashDuration: 0
+  dashDuration: 0.1
   isAiming: 0
   charge: 0
   resetShoot: 0
   timeMaxCharge: 0.9
-  cylindre: {fileID: 0}
-  bigMuzzle: {fileID: 0}
-  muzzle: {fileID: 0}
-  maxHealth: 0
+  cylindre: {fileID: 3781033170089914711, guid: d9776187b44b5ef48bcfeaeacacf8f00, type: 3}
+  bigMuzzle: {fileID: 6102590804729062838, guid: ff136e6dd231e9842a77527580c5262b, type: 3}
+  muzzle: {fileID: 6102590804729062838, guid: ccd5fdafe53796a49950381d1d28fefc, type: 3}
+  maxHealth: 100
   currentHealth: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 606659202}
 --- !u!114 &7546707292733615661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,8 +566,8 @@ MonoBehaviour:
   leftJoy: {x: 0, y: 0}
   EnemyDetector: {fileID: 6286426693065001320}
   angle: 0
-  smoothSpeed: 0
-  autoAimField: 0
+  smoothSpeed: 0.25
+  autoAimField: 70
 --- !u!114 &2366768219765360667
 MonoBehaviour:
   m_ObjectHideFlags: 0
