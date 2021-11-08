@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,12 +27,12 @@ public class Enemy_Vif_Behaviour : AbstComp
     private NavMeshAgent agent;
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        pj = PlayerBehaviour.playerBehaviour.gameObject;
+        target = pj.transform;
         
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        hp = 1f;
     }
 
     protected void BehaviourAggro()

@@ -42,8 +42,17 @@ public string bulletLightName;
     public int maxHealth;
     public int currentHealth;
     public Slider healthBar;
-    
-    
+
+    public static PlayerBehaviour playerBehaviour;
+
+
+    private void Awake()
+    {
+        if (playerBehaviour == null)
+        {
+            playerBehaviour = this;
+        }
+    }
 
     private void Start()
     {

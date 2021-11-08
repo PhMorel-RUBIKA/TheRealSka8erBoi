@@ -28,6 +28,6 @@ public class DamageManager : MonoBehaviour
     public void Die()
     {
         Destroy(this.gameObject);
-        //WaveManager.instance.enemyOnScreen.RemoveAt(0);
+        WaveManager.instance.enemyOnScreen.RemoveAt(0);
     }
 }

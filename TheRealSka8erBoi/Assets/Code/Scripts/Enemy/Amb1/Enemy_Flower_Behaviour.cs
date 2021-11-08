@@ -23,20 +23,20 @@ public class Enemy_Flower_Behaviour : AbstComp
     
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        pj = PlayerBehaviour.playerBehaviour.gameObject;
+        target = pj.transform;
         
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        hp = 1f;
     }
 
     void Update()
     {
         BehaviourAggro();
         Shoot();
-       
     }
+    
     protected void BehaviourAggro()
     {
         if(CheckPlayerInSight())
