@@ -3,18 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Target
+  - Manager
+  - Hole
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - IslandBorder
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Target
+  - Ground
+  - Wall
+  - EnemyProjectile
   - 
   - 
   - 
@@ -38,6 +41,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: map
+    uniqueID: 1847007253
+    locked: 0
+  - name: shadows
+    uniqueID: 2934542669
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: props
+    uniqueID: 464644773
     locked: 0
