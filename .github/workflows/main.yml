@@ -81,7 +81,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ matrix.projectPath }}/Library
-          key: Library-${{ matrix.projectPath }}-StandaloneWindows
+          key: Library-${{ matrix.projectPath }}-StandaloneWindows64
           restore-keys: |
             Library-${{ matrix.projectPath }}-
             Library-
@@ -91,9 +91,9 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 2020.3.17f1
-          targetPlatform: StandaloneWindows
+          targetPlatform: StandaloneWindows64 
 
       - uses: actions/upload-artifact@v2
         with:
-          name: build-StandaloneWindows
-          path: build/StandaloneWindows
+          name: TheRealSka8erBoi-Build
+          path: build/StandaloneWindows64
