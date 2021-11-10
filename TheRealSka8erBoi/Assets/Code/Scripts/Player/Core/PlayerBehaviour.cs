@@ -14,6 +14,9 @@ public string bulletLightName;
     [SerializeField] int playerSpeed;
     [SerializeField] private float deadzoneController = 0.3f;
     public Vector2 latestDirection;
+    private bool isSkating;
+    private Vector2 vectorManipulation;
+    private float floatManipulation;
 
     //Declaration Dash
     public float dashCd;
@@ -83,17 +86,20 @@ public string bulletLightName;
             latestDirection = leftJoy;
         }
         
-        if (Input.GetButtonDown("BowShot"))
+        if (Input.GetButtonDown("BowShot") && !isSkating)
         {
             transform.GetChild(0).gameObject.SetActive(true);
             isAiming = true;
+            animatorPlayer.SetBool("IsAiming",true);
             charge = 0;
         }
-        if (Input.GetButtonUp("BowShot"))
+        if (Input.GetButtonUp("BowShot") && isAiming)
         {
             
             Shoot(charge, GetComponentInChildren<CursorBehaviour>().AimDirection().Item2);
             transform.GetChild(0).gameObject.SetActive(false);
+            isAiming = false;
+            animatorPlayer.SetBool("IsAiming",false);
         }
 
         dashCd -= Time.deltaTime;
@@ -104,23 +110,38 @@ public string bulletLightName;
                 dashCd = 2;
                 dashGoingFor = 0;
                 dash = true;
-                GetComponent<BoxCollider2D>().isTrigger = true;
             }
         }
         
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetAxisRaw("SkateMode") > 0)
         {
-         TakeDamage(5);
+            isSkating = true;
+            animatorPlayer.SetBool("IsSkating",true);
+        }
+        else
+        {
+            isSkating = false;
+            animatorPlayer.SetBool("IsSkating",false);
         }
     }
 
     private void Ongoing()
     {
-        playerRigid.velocity = Vector2.zero;
-        if (!isAiming)
+        if (!isSkating)
+        {
+            playerRigid.velocity = Vector2.zero; 
+        }
+        else
+        {
+            if (Mathf.Abs(leftJoy.x) > deadzoneController || Mathf.Abs(leftJoy.y) > deadzoneController)
+            {
+                floatManipulation = playerRigid.velocity.magnitude; 
+                playerRigid.velocity = Vector2.Lerp(playerRigid.velocity,leftJoy,0.35f).normalized * floatManipulation;
+            }
+        }
+        if (!isAiming && !isSkating)
         {
             
-            animatorPlayer.SetBool("IsAiming",false);
             if (Mathf.Abs(leftJoy.x) > deadzoneController || Mathf.Abs(leftJoy.y) > deadzoneController)
             {
                 animatorPlayer.SetBool("IsRunning",true); 
@@ -133,9 +154,7 @@ public string bulletLightName;
         }
         else
         {
-            
             animatorPlayer.SetBool("IsRunning", false);
-            animatorPlayer.SetBool("IsAiming",true);
             if (charge < timeMaxCharge)
             {
                 charge += Time.deltaTime;
@@ -144,16 +163,23 @@ public string bulletLightName;
         
         if (dash)
         {
-            if (dashGoingFor > dashDuration)
+            if (isSkating)
             {
-                playerRigid.velocity = Vector2.zero;
+                playerRigid.velocity += playerRigid.velocity.normalized * 7;
                 dash = false;
-                GetComponent<BoxCollider2D>().isTrigger = false;
             }
             else
             {
-                dashGoingFor += Time.fixedDeltaTime;
-                playerRigid.velocity = new Vector2(leftJoy.x,leftJoy.y) * dashSpeed;
+                if (dashGoingFor > dashDuration)
+                {
+                    playerRigid.velocity = Vector2.zero;
+                    dash = false;
+                }
+                else
+                {
+                    dashGoingFor += Time.fixedDeltaTime;
+                    playerRigid.velocity = new Vector2(leftJoy.x, leftJoy.y) * dashSpeed;
+                }
             }
         }
     }
@@ -205,7 +231,7 @@ public string bulletLightName;
 
     private void Shoot(float charge, Vector2 projDirection)
     {
-        isAiming = false;
+        
         if (charge < timeMaxCharge/3)
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet(bulletLightName, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
@@ -224,9 +250,8 @@ public string bulletLightName;
         }
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.2f;
+        spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.25f;
         spawnedProj.GetComponent<BulletPoolBehaviour>().damage = 7 + Mathf.RoundToInt(charge * 20);
-        //Invoke(("ResetShoot"), resetShoot);
     }
 
     public void TakeDamage(int damageNumber)
