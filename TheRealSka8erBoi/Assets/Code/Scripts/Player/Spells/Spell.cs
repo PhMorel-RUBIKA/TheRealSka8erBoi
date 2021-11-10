@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Spell : ScriptableObject
 {
     [Header("Ability Persona")]
+    public int id;
     public string name;
     public string description;
-    public int id;
+    public Sprite spellImage;
 
     [Header("Ability Attributes")]
     public float cooldownTime;
