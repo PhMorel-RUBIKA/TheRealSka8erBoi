@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class SpellHolder : MonoBehaviour
 {
-    public Spell spell;
+    public Inventory slot1;
+    [Range(0,1)] public int spellNumber;
+    [HideInInspector] public Spell spell;
     private float cooldownTime;
     private float activeTime;
 
@@ -16,6 +19,11 @@ public class SpellHolder : MonoBehaviour
     private SpellState state = SpellState.ready;
 
     public KeyCode key;
+
+    private void Start()
+    {
+        spell = slot1.slots[spellNumber].GetComponent<Item>().TheItems[0].SpellItem.spellScriptable;
+    }
 
     private void Update()
     {

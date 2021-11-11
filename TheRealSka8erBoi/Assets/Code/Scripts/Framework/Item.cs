@@ -26,12 +26,24 @@ public class Item : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Joystick1Button4))
             {
-                
+                if (_inventory.isFull[0] == false)
+                {
+                    _inventory.isFull[0] = true;
+                    _inventory.slots[0] = gameObject;
+                    gameObject.transform.parent = _inventory.gameObject.transform;
+                    gameObject.SetActive(false);
+                }
             }
 
             if (Input.GetKey(KeyCode.Joystick1Button5))
             {
-                
+                if (_inventory.isFull[1] == false)
+                {
+                    _inventory.isFull[1] = true;
+                    _inventory.slots[1] = gameObject;
+                    gameObject.transform.parent = _inventory.gameObject.transform;
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
