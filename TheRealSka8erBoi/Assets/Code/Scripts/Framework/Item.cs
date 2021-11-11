@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] private Inventory _inventory;
-    public List<theItem> TheItems = new List<theItem>();
+    public Inventory _inventory;
+    public theItem TheItem;
 
     private void Start()
     {
-        switch (TheItems[0].TypeOfItem)
+        switch (TheItem.TypeOfItem)
         {
             case typeOfItem.SPELL :
-                gameObject.GetComponent<SpriteRenderer>().sprite = TheItems[0].SpellItem.spellImage;
+                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.SpellItem.spellImage;
                 break;
             case typeOfItem.COINS : 
                 break;
@@ -24,25 +24,31 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKey(KeyCode.Joystick1Button4))
+            if (Input.GetKeyDown(KeyCode.JoystickButton4))
             {
-                if (_inventory.isFull[0] == false)
+                if (!_inventory.slots[0].isFull)
                 {
-                    _inventory.isFull[0] = true;
-                    _inventory.slots[0] = gameObject;
-                    gameObject.transform.parent = _inventory.gameObject.transform;
-                    gameObject.SetActive(false);
+                    slot newSlot = new slot();
+                    newSlot.item = gameObject;
+                    newSlot.isFull = true;
+                    _inventory.slots.Insert(0, newSlot);
+
+                    _inventory.slots.Remove(_inventory.slots[1]);
+                    Destroy(gameObject);
                 }
             }
 
-            if (Input.GetKey(KeyCode.Joystick1Button5))
+            if (Input.GetKeyDown(KeyCode.JoystickButton5))
             {
-                if (_inventory.isFull[1] == false)
+                if (!_inventory.slots[1].isFull)
                 {
-                    _inventory.isFull[1] = true;
-                    _inventory.slots[1] = gameObject;
-                    gameObject.transform.parent = _inventory.gameObject.transform;
-                    gameObject.SetActive(false);
+                    slot newSlot = new slot();
+                    newSlot.item = gameObject;
+                    newSlot.isFull = true;
+                    _inventory.slots.Insert(1, newSlot);
+
+                    _inventory.slots.Remove(_inventory.slots[3]);
+                    Destroy(gameObject);
                 }
             }
         }

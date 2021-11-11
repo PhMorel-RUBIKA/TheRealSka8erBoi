@@ -5,7 +5,7 @@ public class Spell : ScriptableObject
 {
     [Header("Ability Persona")]
     public int id;
-    public string name;
+    public string spellName;
     public string description;
     public Sprite spellImage;
 

@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class SpellHolder : MonoBehaviour
 {
-    public Inventory slot1;
+    public Inventory inventory;
     [Range(0,1)] public int spellNumber;
     [HideInInspector] public Spell spell;
+    public Spell neutral;
     private float cooldownTime;
     private float activeTime;
 
@@ -20,13 +21,25 @@ public class SpellHolder : MonoBehaviour
 
     public KeyCode key;
 
-    private void Start()
-    {
-        spell = slot1.slots[spellNumber].GetComponent<Item>().TheItems[0].SpellItem.spellScriptable;
-    }
-
     private void Update()
     {
+        if (inventory.slots[spellNumber].item != null)
+        {
+            if (inventory.slots[spellNumber].item.GetComponent<Item>().TheItem.SpellItem.spellScriptable != null)
+            {
+                spell = inventory.slots[spellNumber].item.GetComponent<Item>().TheItem.SpellItem.spellScriptable;
+            }
+            else
+            {
+                spell = neutral;
+            }
+        }
+        else
+        {
+            spell = neutral;
+        }
+        
+        
         switch (state)
         {
             case SpellState.ready:
@@ -54,10 +67,5 @@ public class SpellHolder : MonoBehaviour
                     state = SpellState.ready;
                 break;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        spell.Gizmo(this.gameObject);
     }
 }

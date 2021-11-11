@@ -1,31 +1,55 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public bool[] isFull;
-    public List<GameObject> slots = new List<GameObject>();
+    public List<slot> slots = new List<slot>();
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Joystick1Button4))
+        if (Input.GetKeyDown(KeyCode.JoystickButton4))
         {
-            if (isFull[0] == true)
+            if (slots[0].isFull)
             {
-                GameObject itemToDish = slots[0].gameObject; 
+                GameObject itemToDish = slots[0].item;
+                itemToDish.GetComponent<SpriteRenderer>().sprite =
+                    itemToDish.GetComponent<Item>().TheItem.SpellItem.spellImage;
+                Instantiate(itemToDish, gameObject.transform.position, quaternion.identity);
                 itemToDish.transform.SetParent(null);
+                itemToDish.SetActive(true);
+                
+                slots[0].item = null;
+                slots[0].isFull = false;
+                Debug.Log(slots[0]);
             }
         }
         
-        if (Input.GetKey(KeyCode.Joystick1Button5))
+        if (Input.GetKeyDown(KeyCode.JoystickButton5))
         {
-            if (isFull[1] == false)
+            if (slots[1].isFull)
             {
-                GameObject itemToDish = slots[0].gameObject; 
+                GameObject itemToDish = slots[1].item;
+                itemToDish.GetComponent<SpriteRenderer>().sprite =
+                    itemToDish.GetComponent<Item>().TheItem.SpellItem.spellImage;
+                Instantiate(itemToDish, gameObject.transform.position, quaternion.identity);
                 itemToDish.transform.SetParent(null);
+                itemToDish.SetActive(true);
+
+                
+                slots[1].item = null;
+                slots[1].isFull = false;
+                Debug.Log(slots[0]);
             }
         }
     }
+}
+
+[Serializable]
+public class slot
+{
+    public bool isFull;
+    public GameObject item;
 }
