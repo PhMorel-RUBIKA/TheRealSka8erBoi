@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,14 @@ using UnityEngine;
 public class FirePointManager : MonoBehaviour
 {
     public Transform source;
-    public Transform pj;
+    private GameObject pj;
     public float moveSpeed = 3f;
-    
+
+    private void Start()
+    {
+        pj = PlayerBehaviour.playerBehaviour.gameObject;
+    }
+
     void Update()
     { 
         Vector2 direction = pj.transform.position - source.transform.position;

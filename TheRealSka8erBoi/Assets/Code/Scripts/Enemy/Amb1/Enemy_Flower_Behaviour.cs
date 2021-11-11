@@ -8,7 +8,7 @@ public class Enemy_Flower_Behaviour : AbstComp
     private Vector2 movement;
     public float moveSpeed = 3f;
     public Rigidbody2D rb;
-    public GameObject projectiles;
+    public Rigidbody2D projectiles;
     private bool canshoot=false;
     public GameObject firePoint;
     [SerializeField] float cooldown;
@@ -103,17 +103,16 @@ public class Enemy_Flower_Behaviour : AbstComp
     }
 
 
-    IEnumerator LongShot()
+  IEnumerator LongShot()
     {
         canshoot=false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         animator.SetTrigger("Stop");
-        GameObject bullet = Instantiate(projectiles, new Vector2(firePoint.transform.position.x, firePoint.transform.position.y), Quaternion.identity);
+        Rigidbody2D bullet = Instantiate(projectiles, new Vector2(firePoint.transform.position.x, firePoint.transform.position.y), Quaternion.identity);
         
-
         
-        Vector2 toplayer = new Vector2(pj.transform.position.x - bullet.transform.position.x, pj.transform.position.y - bullet.transform.position.y);
-        bullet.GetComponent<Rigidbody2D>().AddForce(toplayer * fireForce);
+        Vector2 toplayer = (pj.transform.position - bullet.transform.position).normalized;
+        bullet.AddForce(toplayer*fireForce);
         
     }
 }
