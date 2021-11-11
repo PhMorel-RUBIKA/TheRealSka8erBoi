@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu]
 public class Faucheuse : Spell
@@ -6,6 +7,7 @@ public class Faucheuse : Spell
     public float attackRange;
     public int damage;
     public GameObject VFX;
+
 
     public override void Activate(GameObject parent)
     {
@@ -21,10 +23,15 @@ public class Faucheuse : Spell
         }
     }
 
-    public override void BeginCooldown(GameObject parent)
+    /*public override void BeginCooldown(GameObject parent)
     {
-        
-    }
+        spellImage.GetComponent<Image>().fillAmount -= 1 / cooldownTime * Time.deltaTime;
+
+        if (spellImage.GetComponent<Image>().fillAmount <= 0)
+        {
+            spellImage.GetComponent<Image>().fillAmount = 0;
+        }
+    }*/
 
     public override void Gizmo(GameObject parent)
     {

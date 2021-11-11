@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 public class SpellHolder : MonoBehaviour
 {
-    public Spell spell;
+    public Inventory inventory;
+    [Range(0,1)] public int spellNumber;
+    [HideInInspector] public Spell spell;
+    public Spell neutral;
     private float cooldownTime;
     private float activeTime;
 
@@ -19,6 +23,16 @@ public class SpellHolder : MonoBehaviour
 
     private void Update()
     {
+        if (inventory.slots[spellNumber].item != null)
+        {
+            spell = inventory.slots[spellNumber].item.GetComponent<Item>().TheItem.SpellItem.spellScriptable;
+        }
+        else
+        {
+            spell = neutral;
+        }
+        
+        
         switch (state)
         {
             case SpellState.ready:
@@ -46,10 +60,5 @@ public class SpellHolder : MonoBehaviour
                     state = SpellState.ready;
                 break;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        spell.Gizmo(this.gameObject);
     }
 }
