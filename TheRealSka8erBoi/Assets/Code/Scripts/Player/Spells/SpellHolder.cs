@@ -25,14 +25,7 @@ public class SpellHolder : MonoBehaviour
     {
         if (inventory.slots[spellNumber].item != null)
         {
-            if (inventory.slots[spellNumber].item.GetComponent<Item>().TheItem.SpellItem.spellScriptable != null)
-            {
-                spell = inventory.slots[spellNumber].item.GetComponent<Item>().TheItem.SpellItem.spellScriptable;
-            }
-            else
-            {
-                spell = neutral;
-            }
+            spell = inventory.slots[spellNumber].item.GetComponent<Item>().TheItem.SpellItem.spellScriptable;
         }
         else
         {

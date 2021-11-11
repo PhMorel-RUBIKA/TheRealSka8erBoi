@@ -8,8 +8,12 @@ public class Item : MonoBehaviour
     public Inventory _inventory;
     public theItem TheItem;
 
+    public bool checkIfGood; 
+
     private void Start()
     {
+        checkIfGood = false;
+        
         switch (TheItem.TypeOfItem)
         {
             case typeOfItem.SPELL :
@@ -20,37 +24,46 @@ public class Item : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton4) && checkIfGood)
+        {
+            if (_inventory.slots[0].isFull == false)
+            {
+                _inventory.slots[0].item = this.gameObject;
+                _inventory.slots[0].isFull = true;
+                Debug.Log("Je ramasse0");
+                this.gameObject.SetActive(false);
+                this.gameObject.transform.parent = _inventory.transform;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.JoystickButton5) && checkIfGood)
+        {
+            if (_inventory.slots[1].isFull == false)
+            {
+                _inventory.slots[1].item = gameObject;
+                _inventory.slots[1].isFull = true;
+                Debug.Log("Je ramasse");
+                gameObject.SetActive(false);
+                gameObject.transform.parent = _inventory.transform;
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.JoystickButton4))
-            {
-                if (!_inventory.slots[0].isFull)
-                {
-                    slot newSlot = new slot();
-                    newSlot.item = gameObject;
-                    newSlot.isFull = true;
-                    _inventory.slots.Insert(0, newSlot);
+            checkIfGood = true;
+        }
+    }
 
-                    _inventory.slots.Remove(_inventory.slots[1]);
-                    Destroy(gameObject);
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.JoystickButton5))
-            {
-                if (!_inventory.slots[1].isFull)
-                {
-                    slot newSlot = new slot();
-                    newSlot.item = gameObject;
-                    newSlot.isFull = true;
-                    _inventory.slots.Insert(1, newSlot);
-
-                    _inventory.slots.Remove(_inventory.slots[3]);
-                    Destroy(gameObject);
-                }
-            }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            checkIfGood = false;
         }
     }
 }
