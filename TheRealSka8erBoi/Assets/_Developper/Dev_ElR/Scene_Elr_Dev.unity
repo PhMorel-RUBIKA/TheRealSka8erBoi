@@ -1725,13 +1725,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullets:
   - name: lightArrow
-    prefab: {fileID: 6923119167068159588, guid: 0f49147ed1ba1bb4095ad3be0e7c6662, type: 3}
+    prefab: {fileID: 6923119167068159588, guid: e1908874401ec2c4389d2e18eea9ecf1, type: 3}
     size: 10
   - name: mediumArrow
-    prefab: {fileID: 6923119167068159588, guid: 004d4916e87486d43b8649d5f11b2f63, type: 3}
+    prefab: {fileID: 6923119167068159588, guid: c371c71b7448bce43be393ccc7f94a91, type: 3}
     size: 10
   - name: heavyArrow
-    prefab: {fileID: 6923119167068159588, guid: 0c285c623adfcf3448965e9e6f039dff, type: 3}
+    prefab: {fileID: 6923119167068159588, guid: c1a32b7045c6f354d85f445452de7f64, type: 3}
     size: 10
 --- !u!114 &1509367059
 MonoBehaviour:
@@ -2709,10 +2709,10 @@ MonoBehaviour:
   charge: 0
   resetShoot: 0
   timeMaxCharge: 0.9
-  cylindre: {fileID: 3781033170089914711, guid: d9776187b44b5ef48bcfeaeacacf8f00, type: 3}
-  bigMuzzle: {fileID: 6102590804729062838, guid: ff136e6dd231e9842a77527580c5262b, type: 3}
-  muzzle: {fileID: 6102590804729062838, guid: ccd5fdafe53796a49950381d1d28fefc, type: 3}
-  giantMuzzle: {fileID: 6102590804729062838, guid: ff136e6dd231e9842a77527580c5262b, type: 3}
+  cylindre: {fileID: 1475337109035453509, guid: ea5cc55a7c063a64bab39f45100101c1, type: 3}
+  bigMuzzle: {fileID: 1919837915371265931, guid: 44aeaa95a8fae554f8b39dcaef29f7f8, type: 3}
+  muzzle: {fileID: 6138741664477259675, guid: fec5ea49d9079754e85dfa0695ca6b42, type: 3}
+  giantMuzzle: {fileID: 3266663899729837402, guid: 67c47c66bf2349d499ab0f7b21f8820b, type: 3}
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 1755431183}
@@ -3040,7 +3040,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdc6505b71c553439f3eb838f2b0f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
+  spellNumber: 0
   spell: {fileID: 11400000, guid: a70b0a30a2155b24f8960ab28cd2d857, type: 2}
+  neutral: {fileID: 11400000, guid: db7ae095ab94ff84584168651da2d0ed, type: 2}
   key: 331
 --- !u!1 &8308599736640521614
 GameObject:
