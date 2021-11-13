@@ -9,7 +9,7 @@ public class EnemyProjectileScript : MonoBehaviour
     {
         if (other.CompareTag("Border"))
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
     }

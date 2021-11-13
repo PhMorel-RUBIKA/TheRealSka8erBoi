@@ -24,6 +24,8 @@ public class Enemy_Vif_Behaviour : AbstComp
 
     [SerializeField] private bool motionless;
 
+    public float offset;
+
     private NavMeshAgent agent;
     void Start()
     {
@@ -181,16 +183,21 @@ public class Enemy_Vif_Behaviour : AbstComp
         
    }
 
-   IEnumerator LongShot()
+    
+    IEnumerator LongShot()
     {
-        canshoot=false;
-        yield return new WaitForSeconds(1f);
+
+        canshoot = false;
+        yield return new WaitForSeconds(0.7f);
         animator.SetTrigger("Stop");
-        Rigidbody2D bullet = Instantiate(projectiles, new Vector2(firePoint.transform.position.x, firePoint.transform.position.y), Quaternion.identity);
-        
-        
+        Rigidbody2D bullet = Instantiate(projectiles, new Vector2(firePoint.transform.position.x, firePoint.transform.position.y), transform.rotation);
+
         Vector2 toplayer = (pj.transform.position - bullet.transform.position).normalized;
-        bullet.AddForce(toplayer*fireForce);
-        
+        float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
+        bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
+        bullet.AddForce(toplayer.normalized * fireForce);
+
+
     }
+
 }
