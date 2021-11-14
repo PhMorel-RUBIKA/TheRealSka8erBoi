@@ -7,7 +7,6 @@ public class Spell : ScriptableObject
     public int id;
     public string spellName;
     public string description;
-    public Sprite spellImage;
 
     [Header("Ability Attributes")]
     public float cooldownTime;

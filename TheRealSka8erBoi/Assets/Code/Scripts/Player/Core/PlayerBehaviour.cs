@@ -65,6 +65,7 @@ public string bulletLightName;
         playerRender = GetComponent<SpriteRenderer>();
         animatorPlayer = GetComponent<Animator>();
         dashGoingFor = dashDuration;
+        currentHealth = maxHealth;
     }
 
     void Update()

@@ -1,4 +1,7 @@
 using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 [CreateAssetMenu]
@@ -23,15 +26,9 @@ public class Faucheuse : Spell
         }
     }
 
-    /*public override void BeginCooldown(GameObject parent)
+    public override void BeginCooldown(GameObject parent)
     {
-        spellImage.GetComponent<Image>().fillAmount -= 1 / cooldownTime * Time.deltaTime;
-
-        if (spellImage.GetComponent<Image>().fillAmount <= 0)
-        {
-            spellImage.GetComponent<Image>().fillAmount = 0;
-        }
-    }*/
+    }
 
     public override void Gizmo(GameObject parent)
     {

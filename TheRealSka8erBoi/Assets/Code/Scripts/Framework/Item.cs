@@ -87,6 +87,7 @@ public class spellItem
 {
     public Spell spellScriptable;
     public Sprite spellImage;
+    public Sprite spellUI;
 }
 
 [Serializable]

@@ -58,8 +58,7 @@ public class PropsGenerator : MonoBehaviour
     private void Start()
     {
         GameObject propsParent = new GameObject();
-        GameObject.DontDestroyOnLoad(propsParent);
-        
+
         for (int i = 0; i < Random.Range(minObjectToSpawn, maxObjectToSpawn); i++)
         {
             possible = true;
@@ -90,7 +89,6 @@ public class PropsGenerator : MonoBehaviour
             if (hit.Length == 1)
             {
                 possible = false;
-                Debug.Log("Not on Island");
             }
         }
         else if (!simpleIsland)
@@ -98,7 +96,6 @@ public class PropsGenerator : MonoBehaviour
             if (hit.Length == 0 || hit.Length == 2)
             {
                 possible = false;
-                Debug.Log("Not on Island");
             }
         }
 
@@ -106,7 +103,6 @@ public class PropsGenerator : MonoBehaviour
         foreach (Collider flowerCollider in flowerColliders)
         {
             possible = false;
-            Debug.Log("Overlap");
         }
     }
 }

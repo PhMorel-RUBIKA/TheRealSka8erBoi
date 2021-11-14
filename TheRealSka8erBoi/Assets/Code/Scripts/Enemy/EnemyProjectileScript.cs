@@ -12,6 +12,11 @@ public class EnemyProjectileScript : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerBehaviour>().TakeDamage(5);
+            Destroy(gameObject);
+        }
     }
 
 }
