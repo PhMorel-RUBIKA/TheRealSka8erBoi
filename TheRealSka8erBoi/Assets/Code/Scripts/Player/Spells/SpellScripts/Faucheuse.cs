@@ -1,4 +1,8 @@
 using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 [CreateAssetMenu]
 public class Faucheuse : Spell
@@ -6,6 +10,7 @@ public class Faucheuse : Spell
     public float attackRange;
     public int damage;
     public GameObject VFX;
+
 
     public override void Activate(GameObject parent)
     {
@@ -23,7 +28,6 @@ public class Faucheuse : Spell
 
     public override void BeginCooldown(GameObject parent)
     {
-        
     }
 
     public override void Gizmo(GameObject parent)

@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
 public class PropsGenerator : MonoBehaviour
 {
-     public enum GizmoColor
+    public enum GizmoColor
     {
         Rouge,
         Vert,
@@ -25,8 +27,7 @@ public class PropsGenerator : MonoBehaviour
     public int maxObjectToSpawn;
     public float gapBetweenObjects;
     public GameObject[] objectToSpawn;
-
-
+    
     private Collider[] flowerColliders;
     private RaycastHit2D[] hit;
     private bool possible;
@@ -53,22 +54,25 @@ public class PropsGenerator : MonoBehaviour
         
         Gizmos.DrawWireSphere(transform.position, generatorSize);
     }
-    
+
     private void Start()
     {
+        GameObject propsParent = new GameObject();
+
         for (int i = 0; i < Random.Range(minObjectToSpawn, maxObjectToSpawn); i++)
         {
             possible = true;
             var position = this.transform.position;
             Vector3 pos = position + Random.insideUnitSphere * generatorSize;
             pos.z = 0;
-
+            
             CheckDistance(pos);
 
             if (possible)
             {
                 GameObject selected = objectToSpawn[Random.Range(0, objectToSpawn.Length)];
-                GameObject obj = Instantiate(selected, pos, selected.transform.rotation);
+                GameObject obj = Instantiate(selected, pos, selected.transform.rotation, propsParent.transform);
+                propsParent.name = obj + "Parent";
             }
         }
     }
@@ -85,7 +89,6 @@ public class PropsGenerator : MonoBehaviour
             if (hit.Length == 1)
             {
                 possible = false;
-                Debug.Log("Not on Island");
             }
         }
         else if (!simpleIsland)
@@ -93,7 +96,6 @@ public class PropsGenerator : MonoBehaviour
             if (hit.Length == 0 || hit.Length == 2)
             {
                 possible = false;
-                Debug.Log("Not on Island");
             }
         }
 
@@ -101,7 +103,6 @@ public class PropsGenerator : MonoBehaviour
         foreach (Collider flowerCollider in flowerColliders)
         {
             possible = false;
-            Debug.Log("Overlap");
         }
     }
 }

@@ -72,7 +72,7 @@ public class LoadSceneManager : MonoBehaviour
 
         void ChangeRoom()
         { 
-            SceneManager.LoadScene(finalList[numberOfRoom]);
+            SceneManager.LoadSceneAsync(finalList[numberOfRoom]);
             numberOfRoom++;
 
             if (numberOfRoom == 11)

@@ -8,7 +8,7 @@ public class Enemy_Flower_Behaviour : AbstComp
     private Vector2 movement;
     public float moveSpeed = 3f;
     public Rigidbody2D rb;
-    public GameObject projectiles;
+    public Rigidbody2D projectiles;
     private bool canshoot=false;
     public GameObject firePoint;
     [SerializeField] float cooldown;
@@ -20,7 +20,9 @@ public class Enemy_Flower_Behaviour : AbstComp
     [SerializeField] private bool motionless;
 
     private NavMeshAgent agent;
-    
+
+    public float offset;
+
     void Start()
     {
         pj = PlayerBehaviour.playerBehaviour.gameObject;
@@ -102,18 +104,26 @@ public class Enemy_Flower_Behaviour : AbstComp
     */
     }
 
+    //Version modifiée 
 
     IEnumerator LongShot()
     {
-        canshoot=false;
-        yield return new WaitForSeconds(1f);
-        animator.SetTrigger("Stop");
-        GameObject bullet = Instantiate(projectiles, new Vector2(firePoint.transform.position.x, firePoint.transform.position.y), Quaternion.identity);
-        
 
-        
-        Vector2 toplayer = new Vector2(pj.transform.position.x - bullet.transform.position.x, pj.transform.position.y - bullet.transform.position.y);
-        bullet.GetComponent<Rigidbody2D>().AddForce(toplayer * fireForce);
-        
+        canshoot = false;
+        yield return new WaitForSeconds(0.7f);
+
+        animator.SetTrigger("Stop");
+        Rigidbody2D bullet = Instantiate(projectiles, new Vector2(firePoint.transform.position.x, firePoint.transform.position.y),transform.rotation);
+
+        Vector2 toplayer = (pj.transform.position - bullet.transform.position).normalized;
+
+        float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
+        bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
+
+        bullet.AddForce(toplayer.normalized * fireForce);
+
+
     }
+
+    
 }
