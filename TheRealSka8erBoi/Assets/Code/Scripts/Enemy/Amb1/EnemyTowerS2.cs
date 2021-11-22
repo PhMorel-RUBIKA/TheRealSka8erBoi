@@ -36,7 +36,6 @@ public class EnemyTowerS2 : AbstComp
     [SerializeField] private float rayonAngle=90;
     
     
-    
     void Start()
     {
         pj = PlayerBehaviour.playerBehaviour.gameObject;
@@ -109,14 +108,7 @@ public class EnemyTowerS2 : AbstComp
 
         Vector2 direction = pj.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rb.rotation = angle; 
-        //Vector2.angle
-    /*
-        direction.Normalize();
-        movement = direction;
- 
-        transform.position = Vector2.MoveTowards(this.transform.position, pj.transform.position, moveSpeed * Time.deltaTime);
-    */
+        rb.rotation = angle;
     }
 
     //Version modifi�e 
@@ -146,6 +138,7 @@ public class EnemyTowerS2 : AbstComp
         }
     private void SpreadShot()
     {
+        canshoot = false;
         var intervalle = rayonAngle / bulletsAmount;
         for (int i = 0; i < bulletsAmount; i++)
         {
