@@ -8,7 +8,8 @@ public class Item : MonoBehaviour
     public Inventory _inventory;
     public theItem TheItem;
 
-    public bool checkIfGood; 
+    public bool checkIfGood;
+    
 
     private void Start()
     {
@@ -74,11 +75,17 @@ public class Item : MonoBehaviour
 
     void GetSpellItem()
     {
-        if (Input.GetKeyDown(KeyCode.JoystickButton4) && checkIfGood)
+        if (Input.GetAxisRaw("LeftSpell") > 0.95f && checkIfGood && _inventory.resetTriggerLeft)
+        {
             WitchSpellItem(0);
+            _inventory.resetTriggerLeft = false;
+        }
 
-        if (Input.GetKeyDown(KeyCode.JoystickButton5) && checkIfGood)
+        if (Input.GetAxisRaw("RightSpell") > 0.95f && checkIfGood && _inventory.resetTriggerRight)
+        {
             WitchSpellItem(1);
+            _inventory.resetTriggerRight = false;
+        }
     }
 
     void WitchSpellItem(int slotNumber)
@@ -89,6 +96,7 @@ public class Item : MonoBehaviour
             _inventory.slots[slotNumber].isFull = true;
             this.gameObject.SetActive(false);
             this.gameObject.transform.parent = _inventory.transform;
+            Debug.Log("J'ai pris le spell");
         }
     }
     

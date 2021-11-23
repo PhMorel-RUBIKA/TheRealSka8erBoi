@@ -18,9 +18,10 @@ public class SpellHolder : MonoBehaviour
         cooldown, 
     }
 
-    private SpellState state = SpellState.ready;
+    SpellState state = SpellState.ready;
 
     public KeyCode key;
+    public string AxeKey;
 
     private void Update()
     {
@@ -37,7 +38,7 @@ public class SpellHolder : MonoBehaviour
         switch (state)
         {
             case SpellState.ready:
-                if (Input.GetKeyDown(key))
+                if (Input.GetAxisRaw(AxeKey) > 0.95f)
                 {
                     spell.Activate(this.gameObject);
                     state = SpellState.active;
