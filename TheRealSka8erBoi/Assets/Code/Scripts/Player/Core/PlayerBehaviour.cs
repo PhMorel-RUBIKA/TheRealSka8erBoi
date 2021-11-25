@@ -10,19 +10,23 @@ public string bulletLightName;
     //Declaration Movement
     private Rigidbody2D playerRigid;
     private SpriteRenderer playerRender;
-    [SerializeField] Vector2 leftJoy;
+    private Vector2 leftJoy;
+    private float floatManipulation;
+    [HideInInspector]public Vector2 latestDirection;
+    
+    [Header("Player Control")]
     [SerializeField] int playerSpeed;
     [SerializeField] private float deadzoneController = 0.3f;
-    public Vector2 latestDirection;
-    private bool isSkating;
-    private Vector2 vectorManipulation;
-    private float floatManipulation;
-
+    [Space]
+    
     //Declaration Dash
+    [Header("Dash Tweaking")]
     public float dashCd;
     public float dashSpeed;
-    public float dashGoingFor;
     public float dashDuration;
+    [Space]
+    private float dashOngoingCd;
+    private float dashGoingFor;
     private bool dash = true;
     
     //Declaration Animation
@@ -30,22 +34,26 @@ public string bulletLightName;
     private int playerDirec = 0; 
     
     //Declaration Shoot
-    [SerializeField] bool isAiming;
-    [SerializeField] private float charge;
-    [SerializeField] private float resetShoot;
+    [Header("Shoot Tweaking")]
     [SerializeField] private float timeMaxCharge = 0.9f;
+    [Space]
+    private bool isAiming;
+    private float charge;
+
     private GameObject spawnedProj;
 
     //Declaration VFXShoot
+    [Header("FX Declaration")]
     public GameObject cylindre;
     public GameObject bigMuzzle;
     public GameObject muzzle;
     public GameObject giantMuzzle;
 
+    [Space]
 
     //Declaration UI
-    public int maxHealth;
-    public int currentHealth;
+    [HideInInspector] public int maxHealth = 100;
+    [HideInInspector] public int currentHealth;
     public Slider healthBar;
 
     public static PlayerBehaviour playerBehaviour;
@@ -89,7 +97,7 @@ public string bulletLightName;
             latestDirection = leftJoy;
         }
         
-        if (Input.GetButtonDown("BowShot") && !isSkating)
+        if (Input.GetButtonDown("BowShot"))
         {
             transform.GetChild(0).gameObject.SetActive(true);
             isAiming = true;
@@ -105,36 +113,21 @@ public string bulletLightName;
             animatorPlayer.SetBool("IsAiming",false);
         }
 
-        dashCd -= Time.deltaTime;
-        if (Input.GetAxisRaw("Dash") > 0)
+        dashOngoingCd -= Time.deltaTime;
+        if (Input.GetAxisRaw("Dash") > 0 && !isAiming)
         {
-            if (dashCd <= 0)
+            if (dashOngoingCd <= 0)
             {
-                dashCd = 2;
+                dashOngoingCd = dashCd ;
                 dashGoingFor = 0;
                 dash = true;
             }
-        }
-        
-        if (Input.GetAxisRaw("SkateMode") > 0)
-        {
-            isSkating = true;
-            animatorPlayer.SetBool("IsSkating",true);
-        }
-        else
-        {
-            isSkating = false;
-            animatorPlayer.SetBool("IsSkating",false);
         }
     }
 
     private void Ongoing()
     {
-        if (!isSkating)
-        {
-            playerRigid.velocity = Vector2.zero; 
-        }
-        else
+        playerRigid.velocity = Vector2.zero;
         {
             if (Mathf.Abs(leftJoy.x) > deadzoneController || Mathf.Abs(leftJoy.y) > deadzoneController)
             {
@@ -142,7 +135,7 @@ public string bulletLightName;
                 playerRigid.velocity = Vector2.Lerp(playerRigid.velocity,leftJoy,0.35f).normalized * floatManipulation;
             }
         }
-        if (!isAiming && !isSkating)
+        if (!isAiming)
         {
             
             if (Mathf.Abs(leftJoy.x) > deadzoneController || Mathf.Abs(leftJoy.y) > deadzoneController)
@@ -166,23 +159,15 @@ public string bulletLightName;
         
         if (dash)
         {
-            if (isSkating)
+            if (dashGoingFor > dashDuration)
             {
-                playerRigid.velocity += playerRigid.velocity.normalized * 7;
+                playerRigid.velocity = Vector2.zero;
                 dash = false;
             }
             else
             {
-                if (dashGoingFor > dashDuration)
-                {
-                    playerRigid.velocity = Vector2.zero;
-                    dash = false;
-                }
-                else
-                {
-                    dashGoingFor += Time.fixedDeltaTime;
-                    playerRigid.velocity = new Vector2(leftJoy.x, leftJoy.y) * dashSpeed;
-                }
+                dashGoingFor += Time.fixedDeltaTime;
+                playerRigid.velocity = new Vector2(leftJoy.x, leftJoy.y) * dashSpeed;
             }
         }
     }

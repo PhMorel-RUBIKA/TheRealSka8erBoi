@@ -20,7 +20,7 @@ public class CursorBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        leftJoy = GetComponentInParent<PlayerBehaviour>().latestDirection;
+        /*leftJoy = GetComponentInParent<PlayerBehaviour>().latestDirection;
         transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(leftJoy.y, leftJoy.x) * Mathf.Rad2Deg + 90);
         closestEnemy = new Vector2(200, 200);
         if (GetClosestEnemies().Count != 0)
@@ -33,8 +33,8 @@ public class CursorBehaviour : MonoBehaviour
                 }
             }
             transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(closestEnemy.y, closestEnemy.x) * Mathf.Rad2Deg + 90);
-        }
-        
+        }*/
+        transform.rotation = AimDirection().Item1;
     }
     
     void FixedUpdate()
