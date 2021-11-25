@@ -1477,6 +1477,10 @@ PrefabInstance:
       propertyPath: autoAimField
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2405914211602718712, guid: db987897e5064e54c9968672d46499df, type: 3}
+      propertyPath: AxeKey
+      value: RightSpell
+      objectReference: {fileID: 0}
     - target: {fileID: 4794550508007352128, guid: db987897e5064e54c9968672d46499df, type: 3}
       propertyPath: dashCd
       value: 0.7
@@ -1554,9 +1558,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7546707292733615661, guid: db987897e5064e54c9968672d46499df, type: 3}
+      propertyPath: AxeKey
+      value: LeftSpell
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546707292733615661, guid: db987897e5064e54c9968672d46499df, type: 3}
       propertyPath: neutral
       value: 
-      objectReference: {fileID: 11400000, guid: a70b0a30a2155b24f8960ab28cd2d857, type: 2}
+      objectReference: {fileID: 11400000, guid: db7ae095ab94ff84584168651da2d0ed, type: 2}
     - target: {fileID: 8848090402553150128, guid: db987897e5064e54c9968672d46499df, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -1870,6 +1878,9 @@ MonoBehaviour:
     size: 1
   - name: heavyArrow
     prefab: {fileID: 6923119167068159588, guid: 0c285c623adfcf3448965e9e6f039dff, type: 3}
+    size: 1
+  - name: shurikenFaucheuse
+    prefab: {fileID: 4435891344548269061, guid: 54ed82c4e0f2fb44fbc1e5cccbae8b2f, type: 3}
     size: 1
 --- !u!114 &1509367059
 MonoBehaviour:
