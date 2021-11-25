@@ -73,6 +73,7 @@ public class PropsGenerator : MonoBehaviour
                 GameObject selected = objectToSpawn[Random.Range(0, objectToSpawn.Length)];
                 GameObject obj = Instantiate(selected, pos, selected.transform.rotation, propsParent.transform);
                 propsParent.name = obj + "Parent";
+                propsParent.transform.parent = this.transform.parent;
             }
         }
     }
