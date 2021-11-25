@@ -50,6 +50,7 @@ public class Enemy360NoScope : AbstComp
     void Update()
     {
         BehaviourAggro();
+        Shoot();
     }
 
     private void BehaviourAggro()
@@ -62,13 +63,18 @@ public class Enemy360NoScope : AbstComp
         }
 
         if (!CheckPlayerInRange()) return;
-        if (canshoot && !s2)
+        if (canshoot)
         {
-            NoScope();
-        }
-        else
-        {
-            StartCoroutine("NoNoNoScope");
+            if (s2)
+            {   
+                Debug.Log("tir2");
+                StartCoroutine("NoNoNoScope");
+            }
+            else if(!s2)
+            {
+                Debug.Log("tir1");
+                StartCoroutine(NoScope());
+            }
         }
     }
     
@@ -78,8 +84,9 @@ public class Enemy360NoScope : AbstComp
         angle = (180 / Mathf.PI) * angleRad;
     }
 
-    private void NoScope()
+    IEnumerator NoScope()
     {
+        agent.SetDestination(transform.position);
         canshoot = false;
         var intervalle = greatAngle / bulletsAmount;
         for (int i = 0; i < bulletsAmount; i++)
@@ -90,18 +97,22 @@ public class Enemy360NoScope : AbstComp
             bul.SetActive(true);
             GetAngle(pj.transform.position, transform.position, out float angle);
             bul.transform.rotation = Quaternion.Euler(0, 0, angle+index*intervalle); 
-            bul.GetComponent<Rigidbody2D>().velocity = -bul.transform.right;
+            bul.GetComponent<Rigidbody2D>().velocity = -bul.transform.right*fireForce;
         }
+
+        yield return new WaitForSeconds(0.5f);
+        GoToPlayer();
     }
 
 
     IEnumerator NoNoNoScope()
     {
+        agent.SetDestination(transform.position);
         canshoot = false;
         var intervalle = greatAngle / bulletsAmount;
         for (int x = 0; x < 3; x++)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.5f);
             for (int y = 0; y < bulletsAmount; y++)
             {
                 var index = y - bulletsAmount / 2;
@@ -110,9 +121,12 @@ public class Enemy360NoScope : AbstComp
                 bul.SetActive(true);
                 GetAngle(pj.transform.position, transform.position, out float angle);
                 bul.transform.rotation = Quaternion.Euler(0, 0, angle+index*intervalle); 
-                bul.GetComponent<Rigidbody2D>().velocity = -bul.transform.right;
+                bul.GetComponent<Rigidbody2D>().velocity = -bul.transform.right*fireForce;
             }                
-        }  
+        }
+
+        yield return new WaitForSeconds(0.2f);
+        GoToPlayer();
     }
     
      public void TakeDamage(int damage)
