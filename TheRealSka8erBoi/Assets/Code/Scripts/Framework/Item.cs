@@ -8,7 +8,8 @@ public class Item : MonoBehaviour
     public Inventory _inventory;
     public theItem TheItem;
 
-    public bool checkIfGood; 
+    public bool checkIfGood;
+    
 
     private void Start()
     {
@@ -21,33 +22,36 @@ public class Item : MonoBehaviour
                 break;
             case typeOfItem.COINS : 
                 break;
+            case typeOfItem.STICKER_RED :
+                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerRed.sprite;
+                break; 
+            case typeOfItem.STICKER_BLUE : 
+                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerBlue.sprite;
+                break;
+            case typeOfItem.STICKER_GREEN :
+                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerGreen.sprite;
+                break;
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.JoystickButton4) && checkIfGood)
+        switch (TheItem.TypeOfItem)
         {
-            if (_inventory.slots[0].isFull == false)
-            {
-                _inventory.slots[0].item = this.gameObject;
-                _inventory.slots[0].isFull = true;
-                Debug.Log("Je ramasse0");
-                this.gameObject.SetActive(false);
-                this.gameObject.transform.parent = _inventory.transform;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.JoystickButton5) && checkIfGood)
-        {
-            if (_inventory.slots[1].isFull == false)
-            {
-                _inventory.slots[1].item = gameObject;
-                _inventory.slots[1].isFull = true;
-                Debug.Log("Je ramasse");
-                gameObject.SetActive(false);
-                gameObject.transform.parent = _inventory.transform;
-            }
+            case typeOfItem.SPELL :
+                GetSpellItem();
+                break;
+            case typeOfItem.COINS : 
+                break;
+            case typeOfItem.STICKER_RED :
+                GetItemStickerRed();
+                break; 
+            case typeOfItem.STICKER_BLUE : 
+                GetItemStickerBlue();
+                break;
+            case typeOfItem.STICKER_GREEN :
+                GetItemStickerGreen();
+                break;
         }
     }
 
@@ -66,12 +70,79 @@ public class Item : MonoBehaviour
             checkIfGood = false;
         }
     }
+    
+    // FONCTIONS LIER AU ITEMS SPELL
+
+    void GetSpellItem()
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
+        {
+            Debug.Log("State 1");
+            if (_inventory.slots[0].isFull)
+            {
+                Debug.Log("State 2");
+                switch (_inventory.slots[1].isFull)
+                {
+                    case true:
+                        Debug.Log("State 3");
+                        return;
+                    case false:
+                        Debug.Log("State 4");
+                        WitchSpellItem(1);
+                        break;
+                }
+            }
+            else WitchSpellItem(0);
+        }
+    }
+
+    void WitchSpellItem(int slotNumber)
+    {
+        if (_inventory.slots[slotNumber].isFull == false)
+        {
+            _inventory.slots[slotNumber].item = this.gameObject;
+            _inventory.slots[slotNumber].isFull = true;
+            this.gameObject.SetActive(false);
+            this.gameObject.transform.parent = _inventory.transform;
+            Debug.Log("J'ai pris le spell");
+        }
+    }
+    
+    // FONCTIONS LIER AU ITEMS STICKER
+
+    void GetItemStickerRed()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        {
+            BonusManager.instance.redStat += TheItem.stickerRed.value;
+            Destroy(gameObject);
+        }
+    }
+    void GetItemStickerBlue()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        {
+            BonusManager.instance.blueStat += TheItem.stickerBlue.value;
+            Destroy(gameObject);
+        }
+    }
+    void GetItemStickerGreen()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        {
+            BonusManager.instance.greenStat += TheItem.stickerGreen.value;
+            Destroy(gameObject);
+        }
+    }
 }
 
 public enum typeOfItem
 {
     SPELL, 
     COINS,
+    STICKER_RED,
+    STICKER_BLUE,
+    STICKER_GREEN,
 }
 
 [Serializable]
@@ -80,6 +151,9 @@ public class theItem
     public typeOfItem TypeOfItem;
     public spellItem SpellItem;
     public coinItem CoinItem;
+    public stickerRed stickerRed;
+    public stickerBlue stickerBlue;
+    public stickerGreen stickerGreen;
 }
 
 [Serializable]
@@ -94,4 +168,25 @@ public class spellItem
 public class coinItem
 {
     public int value;
+}
+
+[Serializable]
+ public class stickerRed
+ {
+     public int value;
+     public Sprite sprite;
+ }
+ 
+[Serializable]
+public class stickerBlue
+{
+    public int value;
+    public Sprite sprite;
+}
+
+[Serializable]
+public class stickerGreen
+{
+    public int value;
+    public Sprite sprite;
 }

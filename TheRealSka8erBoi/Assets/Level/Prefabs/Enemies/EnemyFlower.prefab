@@ -314,22 +314,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 2339571471071719281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db3c213491ccec41ac0cbbb5b2b93d7, type: 3}
+  m_Script: {fileID: 11500000, guid: f111d8b19fe775545bdf20cf75c8e7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pj: {fileID: 2339571471071719281}
+  pj: {fileID: 5394200822797100280, guid: db987897e5064e54c9968672d46499df, type: 3}
   hp: 50
-  lineOfSight: 9
-  range: 9
+  lineOfSight: 5.5
+  range: 5
   animator: {fileID: 2339571470749599353}
   moveSpeed: 3
   rb: {fileID: 2339571471071718541}
-  projectiles: {fileID: 1090616013937759306, guid: 6d6d0081fdf9a974384ee8c0cd44a77d, type: 3}
+  projectiles: {fileID: -5328092223451056176, guid: d092d002b2fb13543b2b01bff4288366, type: 3}
   firePoint: {fileID: 2339571469173076058}
-  cooldown: 2
+  cooldown: 3
   initcooldown: 3
-  fireForce: 350
-  target: {fileID: 2339571470839724251}
+  fireForce: 100
+  target: {fileID: 0}
   motionless: 1
   offset: 0
 --- !u!114 &4016009613132676720
@@ -345,3 +345,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abstComp: {fileID: 2339571471071718542}
+  spellItem: {fileID: 8097088439704099618, guid: ee033c967ff771b47b8b0a21d08b2d42, type: 3}

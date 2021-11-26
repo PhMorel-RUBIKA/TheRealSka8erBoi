@@ -7,7 +7,7 @@ public class LoadSceneManager : MonoBehaviour
 {
         [HideInInspector] public int numberOfRoom;
         [HideInInspector] public List<int> randomIndex = new List<int>();
-    
+
         [Header("Liste pour la Génération des Salles")]
         public List<string> roomS1 = new List<string>(); 
         public List<string> roomS2 = new List<string>();
@@ -70,7 +70,7 @@ public class LoadSceneManager : MonoBehaviour
             finalList.Add(utilityRoom[3]);
         }
 
-        void ChangeRoom()
+        public void ChangeRoom()
         { 
             SceneManager.LoadSceneAsync(finalList[numberOfRoom]);
             numberOfRoom++;

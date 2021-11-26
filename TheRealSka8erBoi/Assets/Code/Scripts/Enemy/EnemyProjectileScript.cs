@@ -15,6 +15,9 @@ public class EnemyProjectileScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerBehaviour>().TakeDamage(5);
+            StartCoroutine(CameraShake.instance.Shake(1, 0.5f));
+            StartCoroutine(CameraShake.instance.Shake(1, 0.5f));
+
             Destroy(gameObject);
         }
     }

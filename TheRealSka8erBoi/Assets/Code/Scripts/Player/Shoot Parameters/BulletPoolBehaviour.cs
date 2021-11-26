@@ -10,7 +10,7 @@ public class BulletPoolBehaviour : MonoBehaviour
     public string bulletName;
     public float waitForDestruction;
     public Vector2 force;
-    [SerializeField] private int speed;
+    public float speed;
     private Rigidbody2D rb;
     public int damage;
     [SerializeField] private Transform damagePopUp;
@@ -18,7 +18,6 @@ public class BulletPoolBehaviour : MonoBehaviour
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)

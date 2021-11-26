@@ -9,7 +9,6 @@ public class SpellHolder : MonoBehaviour
     public Spell neutral;
     private float cooldownTime;
     private float activeTime;
-    public float cooldownNumber;
 
     enum SpellState
     {
@@ -18,9 +17,10 @@ public class SpellHolder : MonoBehaviour
         cooldown, 
     }
 
-    private SpellState state = SpellState.ready;
+    SpellState state = SpellState.ready;
 
     public KeyCode key;
+    public string AxeKey;
 
     private void Update()
     {
@@ -37,7 +37,7 @@ public class SpellHolder : MonoBehaviour
         switch (state)
         {
             case SpellState.ready:
-                if (Input.GetKeyDown(key))
+                if (Input.GetAxisRaw(AxeKey) > 0.95f)
                 {
                     spell.Activate(this.gameObject);
                     state = SpellState.active;
@@ -51,23 +51,10 @@ public class SpellHolder : MonoBehaviour
                 {
                     spell.BeginCooldown(this.gameObject); 
                     state = SpellState.cooldown;
-                    cooldownTime = spell.cooldownTime;
-                    cooldownNumber = 0;
                 }
                 break;
             case SpellState.cooldown:
-                if (cooldownTime > 0)
-                {
-                    cooldownTime -= Time.deltaTime;
-                    cooldownNumber += 0.5f / cooldownTime * Time.deltaTime;
-                    if (cooldownNumber >= 1)
-                        cooldownNumber = 1;
-                }
-                else
-                {
-                    state = SpellState.ready;
-                    cooldownNumber = 1;
-                }
+                state = SpellState.ready;
                 break;
         }
     }
