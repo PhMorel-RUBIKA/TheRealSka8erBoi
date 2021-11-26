@@ -106,7 +106,6 @@ public string bulletLightName;
         }
         if (Input.GetButtonUp("BowShot") && isAiming)
         {
-            
             Shoot(charge, GetComponentInChildren<CursorBehaviour>().AimDirection().Item2);
             transform.GetChild(0).gameObject.SetActive(false);
             isAiming = false;

@@ -7,6 +7,7 @@ public class WaveManager : MonoBehaviour
 {
     public Transform[] spawnPoints;
     public WaveLevel waveLevel;
+    public GameObject gate;
 
     private bool canSpawn = true;
     private float nextSpawnTime;
@@ -33,12 +34,15 @@ public class WaveManager : MonoBehaviour
     {
         currentWave = waveLevel.waves[currentWaveNumber];
         SpawnWave();
-        if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber+1 !=waveLevel.waves.Length)
+        if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber+1 != waveLevel.waves.Length)
         {
             currentWaveNumber ++;
             waypointUsed.Clear();
             canSpawn = true;
         }
+
+        if (currentWaveNumber + 1 == waveLevel.waves.Length)
+            gate.SetActive(true);
     }
 
     void SpawnWave()
