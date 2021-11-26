@@ -533,7 +533,7 @@ MonoBehaviour:
   playerSpeed: 5
   deadzoneController: 0.3
   dashCd: 0.5
-  dashSpeed: 30
+  dashSpeed: 40
   dashDuration: 0.1
   timeMaxCharge: 0.9
   cylindre: {fileID: 1475337109035453509, guid: ea5cc55a7c063a64bab39f45100101c1, type: 3}
@@ -560,8 +560,6 @@ MonoBehaviour:
     item: {fileID: 0}
   - isFull: 0
     item: {fileID: 0}
-  resetTriggerLeft: 0
-  resetTriggerRight: 0
 --- !u!114 &4834553342933288153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +576,6 @@ MonoBehaviour:
   spellNumber: 0
   spell: {fileID: 11400000, guid: a70b0a30a2155b24f8960ab28cd2d857, type: 2}
   neutral: {fileID: 11400000, guid: db7ae095ab94ff84584168651da2d0ed, type: 2}
-  cooldownNumber: 0
   key: 331
   AxeKey: LeftSpell
 --- !u!114 &5501638938004983748
@@ -597,7 +594,6 @@ MonoBehaviour:
   spellNumber: 1
   spell: {fileID: 0}
   neutral: {fileID: 11400000, guid: db7ae095ab94ff84584168651da2d0ed, type: 2}
-  cooldownNumber: 0
   key: 333
   AxeKey: RightSpell
 --- !u!1 &3727118582301772759
@@ -717,7 +713,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inventory: {fileID: 3498011852449812536}
-  player: {fileID: 3498011852449812487}
   neutral: {fileID: 21300000, guid: fbee1363b7d66ff4e91733d60db2fb0f, type: 3}
   spell1: {fileID: 7006392548962504474}
   spell2: {fileID: 7187614498520455887}
@@ -974,6 +969,7 @@ GameObject:
   - component: {fileID: 4536355853167523687}
   - component: {fileID: 2244951836966277672}
   - component: {fileID: 3506307968127916728}
+  - component: {fileID: 6948077350352362288}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1099,6 +1095,18 @@ MonoBehaviour:
   bottomLimit: -200
   topLimit: 200
   aimMultiplier: 0.2
+--- !u!114 &6948077350352362288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6579917561629085491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86c62cb3441a754880492428bd4a9bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7019818323522023472
 GameObject:
   m_ObjectHideFlags: 0

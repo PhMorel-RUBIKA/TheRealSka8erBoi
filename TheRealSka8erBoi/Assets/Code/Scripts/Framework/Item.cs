@@ -75,16 +75,24 @@ public class Item : MonoBehaviour
 
     void GetSpellItem()
     {
-        if (Input.GetAxisRaw("LeftSpell") > 0.95f && checkIfGood && _inventory.resetTriggerLeft)
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
-            WitchSpellItem(0);
-            _inventory.resetTriggerLeft = false;
-        }
-
-        if (Input.GetAxisRaw("RightSpell") > 0.95f && checkIfGood && _inventory.resetTriggerRight)
-        {
-            WitchSpellItem(1);
-            _inventory.resetTriggerRight = false;
+            Debug.Log("State 1");
+            if (_inventory.slots[0].isFull)
+            {
+                Debug.Log("State 2");
+                switch (_inventory.slots[1].isFull)
+                {
+                    case true:
+                        Debug.Log("State 3");
+                        return;
+                    case false:
+                        Debug.Log("State 4");
+                        WitchSpellItem(1);
+                        break;
+                }
+            }
+            else WitchSpellItem(0);
         }
     }
 
@@ -106,7 +114,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
         {
-            BonusManager.BonusManagerInstance.redStat += TheItem.stickerRed.value;
+            BonusManager.instance.redStat += TheItem.stickerRed.value;
             Destroy(gameObject);
         }
     }
@@ -114,7 +122,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
         {
-            BonusManager.BonusManagerInstance.blueStat += TheItem.stickerBlue.value;
+            BonusManager.instance.blueStat += TheItem.stickerBlue.value;
             Destroy(gameObject);
         }
     }
@@ -122,7 +130,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
         {
-            BonusManager.BonusManagerInstance.greenStat += TheItem.stickerGreen.value;
+            BonusManager.instance.greenStat += TheItem.stickerGreen.value;
             Destroy(gameObject);
         }
     }
