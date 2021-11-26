@@ -104,7 +104,7 @@ public class Enemy_Flower_Behaviour : AbstComp
     */
     }
 
-    //Version modifiée 
+    //Version modifiÃ©e 
 
     IEnumerator LongShot()
     {
