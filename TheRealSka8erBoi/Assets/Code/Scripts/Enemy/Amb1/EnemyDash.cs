@@ -22,12 +22,13 @@ public class EnemyDash : AbstComp
     private NavMeshAgent agent;
     private Vector2 movement;
     private Vector2 direction;
+    private Vector2 dashPointPos;
     
     [SerializeField] private BoxCollider2D boxCo;
     [SerializeField] private int dashSpeed;
     private bool attackFinished = true;
     [SerializeField] private int damages = 10;
-    
+    [SerializeField] private bool s2;
 
     void Start()
     { 
@@ -54,11 +55,19 @@ public class EnemyDash : AbstComp
             GoToPlayer();
             if(CheckPlayerInRange())
             {
-                if (canhit)
+                if (canhit && !s2)
                 {
                     //attackFinished = false;
                     //animator.SetTrigger("inrange");
-                    DashAttck();
+                    canhit = !canhit;
+                    attackFinished = false;
+                    StartCoroutine(DashAttck());
+                }
+                else if(canhit && s2)
+                {
+                    canhit = !canhit;
+                    attackFinished = false;
+                    StartCoroutine(MultipleDashAttack());
                 }
 
             }
@@ -106,12 +115,14 @@ public class EnemyDash : AbstComp
     IEnumerator StopMotion()
     {
         agent.SetDestination(transform.position);
+        rb.velocity=Vector2.zero;
         yield return new WaitForSeconds(0.8f);
     }
 
     IEnumerator StopMotion2()
     {
         agent.SetDestination(transform.position);
+        rb.velocity=Vector2.zero;
         yield return new WaitForSeconds(0.2f);
     }
 
@@ -121,35 +132,56 @@ public class EnemyDash : AbstComp
         {
             other.GetComponent<PlayerBehaviour>().TakeDamage(damages);
         }
+
+        if (other.CompareTag("Border"))
+        {
+            rb.velocity=Vector2.zero;
+        }
         
     }
 
-
-    void DashAttck()
+    private const float upToFitPlayer = 0.1f;
+    IEnumerator DashAttck()
     {
-        //StartCoroutine(StopMotion());
+        agent.SetDestination(transform.position);
+        rb.velocity=Vector2.zero;
         boxCo.isTrigger = true;
-        Debug.Log("je commence le dash");
-        agent.SetDestination(target.position*dashSpeed);
+        //Debug.Log("je commence le dash");
+        dashPointPos = (target.position - transform.position);
+        dashPointPos.Normalize();
+        yield return new WaitForSeconds(.2f);
+
+        rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
+        yield return new WaitForSeconds(.6f);
+        rb.velocity=Vector2.zero;
         attackFinished = true;
-        Debug.Log("Je fini le dash");
+        boxCo.isTrigger = false;
+        agent.SetDestination(target.position);
+        
+        //Debug.Log("Je fini le dash");
     }
 
     
     
-    void MultipleDashAttack()
+    IEnumerator MultipleDashAttack()
     {
-        canhit = false;
-        StartCoroutine(StopMotion());
+        agent.SetDestination(transform.position);
+        rb.velocity=Vector2.zero;
+        boxCo.isTrigger = true;
         for (int i = 0; i < 3; i++)
         {
-            StartCoroutine(StopMotion2());
-            boxCo.isTrigger = true;
-            agent.SetDestination(target.position*dashSpeed);
-            StartCoroutine(StopMotion2());
-            boxCo.isTrigger = false;
+            dashPointPos = (target.position - transform.position);
+            dashPointPos.Normalize();
+            yield return new WaitForSeconds(.2f);
+
+            rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
+            yield return new WaitForSeconds(.6f);
+            rb.velocity=Vector2.zero;
+
         }
 
+        agent.SetDestination(target.position);
+        boxCo.isTrigger = false;
         attackFinished = true;
 
     }

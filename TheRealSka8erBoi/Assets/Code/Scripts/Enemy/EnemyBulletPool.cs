@@ -7,9 +7,13 @@ public class EnemyBulletPool : MonoBehaviour
 {
     
     public EnemyBulletPool enemyBulletPoolInstance;
-    public GameObject pooledBullet; 
-    private bool notEnought = true; 
+    public GameObject pooledBullet;
+    public GameObject pooledFollower;
+    
+    private bool notEnoughtfollower = true;
+    private bool notEnoughtbullet = true;
     private List<GameObject> enemyBullets;
+    private List<GameObject> followerBullets;
 
    private void Awake()
    {
@@ -19,26 +23,49 @@ public class EnemyBulletPool : MonoBehaviour
    void Start()
    {
        enemyBullets = new List<GameObject>();
+       followerBullets = new List<GameObject>();
    }
    
    public GameObject GetBullet()
+         {
+             if(enemyBullets.Count >0)
+             {
+                 for (int i = 0; i < enemyBullets.Count; i++)
+                 {
+                     if (!enemyBullets[i].activeInHierarchy)
+                     {
+                         return enemyBullets[i];
+                     }
+                 }
+             }
+             if(notEnoughtbullet)
+             {
+                 GameObject bul = Instantiate(pooledBullet);
+                 bul.SetActive(false);
+                 enemyBullets.Add(bul);
+                 return bul;
+             }
+             return null;
+         }
+   
+   public GameObject GetFollowBullet()
     {
-        if(enemyBullets.Count >0)
+        if(followerBullets.Count >0)
         {
-            for (int i = 0; i < enemyBullets.Count; i++)
+            for (int y = 0; y < followerBullets.Count; y++)
             {
-                if (!enemyBullets[i].activeInHierarchy)
+                if (!followerBullets[y].activeInHierarchy)
                 {
-                    return enemyBullets[i];
+                    return followerBullets[y];
                 }
             }
         }
-        if(notEnought)
+        if(notEnoughtfollower)
         {
-            GameObject bul = Instantiate(pooledBullet);
-            bul.SetActive(false);
-            enemyBullets.Add(bul);
-            return bul;
+            GameObject fol = Instantiate(pooledFollower);
+            fol.SetActive(false);
+            followerBullets.Add(fol);
+            return fol;
         }
         return null;
     }
