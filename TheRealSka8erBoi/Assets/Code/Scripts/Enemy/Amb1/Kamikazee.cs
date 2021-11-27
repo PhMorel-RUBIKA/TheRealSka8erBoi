@@ -7,10 +7,9 @@ public class Kamikazee : AbstComp
 {
 
     public Animator animator;
+    private int animValue;
     public float moveSpeed = 3.5f;
     private bool canhit = true;
-    public float hitcd = 0.5f;
-    public float inithitcd = 0.5f;
     public Rigidbody2D rb;
     public SpriteRenderer myspriterenderer;
 
@@ -52,6 +51,36 @@ public class Kamikazee : AbstComp
     protected void BehaviourAggro()
     {
         if (!CheckPlayerInSight()) return;
+                    if (pj.transform.position.x-transform.position.x>-3 & pj.transform.position.x-transform.position.x < 3 & pj.transform.position.y-transform.position.y <= 0)
+            {
+                animator.SetTrigger("Front");
+                animValue = 1;
+            }
+            else if(pj.transform.position.x-transform.position.x<-3 & pj.transform.position.y-transform.position.y <= 0)
+            {
+                animator.SetTrigger("FrontLeft");
+                animValue = 2;
+            }
+            else if(pj.transform.position.x-transform.position.x > 3 & pj.transform.position.y-transform.position.y <= 0)
+            {
+                animator.SetTrigger("FrontRight");
+                animValue = 3;
+            }
+            else if(pj.transform.position.x-transform.position.x > 3 & pj.transform.position.y-transform.position.y > 0)
+            {
+                animator.SetTrigger("BackRight");
+                animValue = 4;
+            }
+            else if(pj.transform.position.x-transform.position.x < -3 & pj.transform.position.y-transform.position.y > 0)
+            {
+                animator.SetTrigger("BackLeft");
+                animValue = 5;
+            }
+            else if(pj.transform.position.x-transform.position.x>-3 & pj.transform.position.x-transform.position.x < 3 & pj.transform.position.y-transform.position.y > 0)
+            {
+                animator.SetTrigger("Back");
+                animValue = 6;
+            }
         lineOfSight = 100;
         GoToPlayer();
         if (!CheckPlayerInRange()) return;
@@ -67,7 +96,6 @@ public class Kamikazee : AbstComp
     void GoToPlayer()
     {
         agent.SetDestination(target.position);
-        animator.SetTrigger("onmov");
     }
 
     
@@ -76,6 +104,13 @@ public class Kamikazee : AbstComp
     {
         myspriterenderer.flipX = !(pj.transform.position.x - transform.position.x < 0);
 
+        
+        
+        
+        
+        
+        
+        
         if (!(hp <= 0)) return;
         animator.SetTrigger("isded");
         Destroy(gameObject, 0.35f);
