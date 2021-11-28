@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 2339571471071718543}
   - component: {fileID: 4016009613132676720}
   - component: {fileID: 5939050239230787038}
+  - component: {fileID: 8472715951887271154}
   m_Layer: 0
   m_Name: GE_Tourelle
   m_TagString: Target
@@ -333,20 +334,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pj: {fileID: 5394200822797100280, guid: db987897e5064e54c9968672d46499df, type: 3}
   hp: 50
-  lineOfSight: 6
-  range: 6
+  lineOfSight: 15
+  range: 10
   animator: {fileID: 2339571470749599353}
   moveSpeed: 0
   rb: {fileID: 2339571471071718541}
   projectiles: {fileID: 150225610689303445, guid: d092d002b2fb13543b2b01bff4288366, type: 3}
   firePoint: {fileID: 2339571469173076059}
   cooldown: 1
-  initcooldown: 3
-  fireForce: 150
+  initcooldown: 4
+  fireForce: 400
   target: {fileID: 0}
   motionless: 1
   offset: 0
   s2: 0
-  ebp: {fileID: 0}
+  ebp: {fileID: 8472715951887271154}
   bulletsAmount: 4
   rayonAngle: 90
+--- !u!114 &8472715951887271154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2339571471071719281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41470eb77d9961b4ab89038bd8543d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyBulletPoolInstance: {fileID: 8472715951887271154}
+  pooledBullet: {fileID: 2219615159806874933, guid: f845a5c03a825614d8562aaa4a956dc3, type: 3}
+  pooledFollower: {fileID: 2219615159806874933, guid: 6d6d0081fdf9a974384ee8c0cd44a77d, type: 3}

@@ -10,22 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 736bea936facbbb488857bf11fc8e923, type: 3}
-  m_Name: Amb1_Room1
+  m_Name: Amb2_Room1
   m_EditorClassIdentifier: 
   waves:
   - waveName: Wave 1
     spawnInterval: 0.5
-    numberOfenemies: 4
+    numberOfenemies: 3
     typeOfEnnemies:
-    - enemy: {fileID: 2339571471071719281, guid: 45dbe3c6b8661714aac8870c5ff6135a, type: 3}
-      probability: 70
-    - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
-      probability: 30
+    - enemy: {fileID: 2339571471071719281, guid: c19d425ebdb8f0b4e821d196755cc2e0, type: 3}
+      probability: 100
   - waveName: Wave 2
     spawnInterval: 0.5
-    numberOfenemies: 8
+    numberOfenemies: 6
     typeOfEnnemies:
-    - enemy: {fileID: 2339571471071719281, guid: 45dbe3c6b8661714aac8870c5ff6135a, type: 3}
-      probability: 30
+    - enemy: {fileID: 2339571471071719281, guid: c19d425ebdb8f0b4e821d196755cc2e0, type: 3}
+      probability: 60
     - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
-      probability: 70
+      probability: 40
