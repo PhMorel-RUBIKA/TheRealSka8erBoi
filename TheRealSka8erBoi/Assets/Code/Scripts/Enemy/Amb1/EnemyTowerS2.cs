@@ -10,7 +10,7 @@ public class EnemyTowerS2 : AbstComp
     private Vector2 movement;
     public float moveSpeed = 3f;
     public Rigidbody2D rb;
-    public Rigidbody2D projectiles;
+    public GameObject projectiles;
     private bool canshoot=false;
     public Transform firePoint;
     [SerializeField] float cooldown;
@@ -63,7 +63,7 @@ public class EnemyTowerS2 : AbstComp
 
         if (!CheckPlayerInRange()) return;
         if (!canshoot) return;
-        animator.SetTrigger("Atk");
+       //animator.SetTrigger("Atk");
         if (s2 == false)
         {
             StartCoroutine(LongShot());
@@ -122,7 +122,7 @@ public class EnemyTowerS2 : AbstComp
         animator.SetTrigger("Stop");
 
         GameObject bul = ebp.enemyBulletPoolInstance.GetBullet();
-        Vector2 toplayer = (pj.transform.position - bul.transform.position).normalized;
+        Vector2 toplayer = (pj.transform.position - firePoint.transform.position).normalized;
         float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
         bul.transform.position = firePoint.transform.position;
         bul.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
@@ -148,7 +148,7 @@ public class EnemyTowerS2 : AbstComp
             bul.SetActive(true);
             GetAngle(pj.transform.position, firePoint.position, out float angle); 
             bul.transform.rotation = Quaternion.Euler(0, 0, angle+index*intervalle); 
-            bul.GetComponent<Rigidbody2D>().velocity = -bul.transform.right;
+            bul.GetComponent<Rigidbody2D>().velocity = -bul.transform.right*fireForce;
             //bul.transform.DOScale(new Vector3(3, 3, 3), 0.5f);
         }
     }

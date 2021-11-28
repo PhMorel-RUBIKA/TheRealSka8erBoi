@@ -13,9 +13,9 @@ public class Enemy_Vif_Behaviour : AbstComp
     private Vector2 movement;
     public float moveSpeed = 3f;
     public Rigidbody2D rb;
-    public Rigidbody2D projectiles;
+    public GameObject bul;
     private bool canshoot=false;
-    public GameObject firePoint;
+    public Transform firePoint;
     [SerializeField] float cooldown;
     [SerializeField] float initcooldown;
     [SerializeField] private float fireForce=100f;
@@ -23,7 +23,7 @@ public class Enemy_Vif_Behaviour : AbstComp
     [SerializeField] private Transform target;
 
     [SerializeField] private bool motionless;
-
+    [SerializeField] private EnemyBulletPool ebp;
     public float offset;
 
     private NavMeshAgent agent;
@@ -163,17 +163,7 @@ public class Enemy_Vif_Behaviour : AbstComp
     {
        
         agent.SetDestination(target.position);
-    /*
-        Vector2 direction = pj.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rb.rotation = angle; 
-        //Vector2.angle
-    
-        direction.Normalize();
-        movement = direction;
- 
-        transform.position = Vector2.MoveTowards(this.transform.position, pj.transform.position, moveSpeed * Time.deltaTime);
-    */
+
     }
 
    private void LateUpdate()
@@ -190,14 +180,15 @@ public class Enemy_Vif_Behaviour : AbstComp
         canshoot = false;
         yield return new WaitForSeconds(0.7f);
         animator.SetTrigger("Stop");
-        Rigidbody2D bullet = Instantiate(projectiles, new Vector2(firePoint.transform.position.x, firePoint.transform.position.y), transform.rotation);
 
-        Vector2 toplayer = (pj.transform.position - bullet.transform.position).normalized;
+        //GameObject bul = ebp.GetFollowBullet();
+        Instantiate(bul, firePoint.position, Quaternion.identity);
+        Vector2 toplayer = (pj.transform.position - bul.transform.position).normalized;
         float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
-        bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
-        bullet.AddForce(toplayer.normalized * fireForce);
-
-
+        bul.transform.position = firePoint.transform.position;
+        //bul.SetActive(true);
+        
+        //bul.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized * fireForce);
     }
 
 }

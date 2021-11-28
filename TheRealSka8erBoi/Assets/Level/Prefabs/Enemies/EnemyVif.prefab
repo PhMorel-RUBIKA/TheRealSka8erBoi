@@ -100,13 +100,14 @@ MonoBehaviour:
   mySprite: {fileID: 6536779596051279065}
   moveSpeed: 3
   rb: {fileID: 2549962309932058109}
-  projectiles: {fileID: 1090616013937759306, guid: 6d6d0081fdf9a974384ee8c0cd44a77d, type: 3}
-  firePoint: {fileID: 6735369614864517611}
+  bul: {fileID: 2219615159806874933, guid: 6d6d0081fdf9a974384ee8c0cd44a77d, type: 3}
+  firePoint: {fileID: 8838285122159194605}
   cooldown: 2
   initcooldown: 4
-  fireForce: 350
+  fireForce: 250
   target: {fileID: 5394200822797100284, guid: db987897e5064e54c9968672d46499df, type: 3}
   motionless: 0
+  ebp: {fileID: 2120568775219422793, guid: 9b4e18f01823a20459d6dd987e3b0499, type: 3}
   offset: 0
 --- !u!61 &1119283989612834508
 BoxCollider2D:
@@ -147,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abstComp: {fileID: 1890644171}
-  spellItem: {fileID: 8097088439704099618, guid: ee033c967ff771b47b8b0a21d08b2d42, type: 3}
+  spellItem: {fileID: 66269100412727337, guid: 8a7b6c03c928c2445b7aeaacc7b1d133, type: 3}
 --- !u!1 &6262841357682788830
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +221,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 5557173668106773730, guid: 3c0db0d65a8bd8840a0b32ee56b37442, type: 3}
+  m_Sprite: {fileID: -3504804735058626556, guid: 6b3d8b4072c3dd3488b64b320999b68d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

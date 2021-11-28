@@ -37,9 +37,14 @@ public class DamageManager : MonoBehaviour
 
     void GiveTheSpell()
     {
-        GameObject spellToGive = Instantiate(spellItem, this.gameObject.transform.position, Quaternion.identity);
-        spellToGive.GetComponent<Item>()._inventory = player.GetComponent<Inventory>();
-        spellToGive.GetComponent<SpriteRenderer>().sprite =
-            spellItem.GetComponent<Item>().TheItem.SpellItem.spellImage;
+        int random = Random.Range(0, 2);
+
+        if (random == 1)
+        {
+            GameObject spellToGive = Instantiate(spellItem, this.gameObject.transform.position, Quaternion.identity);
+            spellToGive.GetComponent<Item>()._inventory = player.GetComponent<Inventory>();
+            spellToGive.GetComponent<SpriteRenderer>().sprite =
+                spellItem.GetComponent<Item>().TheItem.SpellItem.spellImage;
+        }
     }
 }

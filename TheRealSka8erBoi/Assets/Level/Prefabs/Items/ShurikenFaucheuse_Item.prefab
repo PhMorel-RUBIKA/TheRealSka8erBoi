@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 66269100412727316}
   - component: {fileID: 66269100412727319}
   - component: {fileID: 66269100412727318}
+  - component: {fileID: -50438855678490925}
   m_Layer: 0
   m_Name: ShurikenFaucheuse_Item
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66269100412727337}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.71879196, y: -10.182423, z: -2.8126519}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: edea4f601382db54b872a9aebc130af3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6446203, b: 0.6179246, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,7 +96,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -139,7 +140,8 @@ MonoBehaviour:
     TypeOfItem: 0
     SpellItem:
       spellScriptable: {fileID: 11400000, guid: 5d7df566f6bbcd3469177570a1237419, type: 2}
-      spellImage: {fileID: -7801888643340081244, guid: 7cef579b39dd2354d87d9a3a2eac006a, type: 3}
+      timeToPick: 1
+      spellImage: {fileID: 21300000, guid: 34821965af1cee844a8c1175b0bf7327, type: 3}
       spellUI: {fileID: 3676699452124461142, guid: 7cef579b39dd2354d87d9a3a2eac006a, type: 3}
     CoinItem:
       value: 0
@@ -153,3 +155,16 @@ MonoBehaviour:
       value: 0
       sprite: {fileID: 0}
   checkIfGood: 0
+--- !u!114 &-50438855678490925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66269100412727337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfee6d21c0c9d6b46a07b2e1395c4965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: edea4f601382db54b872a9aebc130af3, type: 2}
