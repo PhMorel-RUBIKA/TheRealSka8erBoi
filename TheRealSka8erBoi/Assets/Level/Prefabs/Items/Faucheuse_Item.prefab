@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 551664778557599764}
   - component: {fileID: 4533250768589650066}
   - component: {fileID: 4623560827932219603}
-  - component: {fileID: 2026643550528458225}
   - component: {fileID: 6638695326713349610}
+  - component: {fileID: 2026643550528458225}
+  - component: {fileID: 6720445171092537621}
   m_Layer: 0
   m_Name: Faucheuse_Item
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8097088439704099618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.62, y: -4.720008, z: -0.5833289}
+  m_LocalPosition: {x: 2.36, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: edea4f601382db54b872a9aebc130af3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1224369995
-  m_SortingLayer: 0
+  m_SortingLayerID: -1012055403
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -101,37 +102,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
---- !u!114 &2026643550528458225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8097088439704099618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3def1c609fd1e1b4eaf7de375b7e21bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inventory: {fileID: 0}
-  TheItem:
-    TypeOfItem: 0
-    SpellItem:
-      spellScriptable: {fileID: 11400000, guid: a70b0a30a2155b24f8960ab28cd2d857, type: 2}
-      spellImage: {fileID: 21300000, guid: 8fc361849010f8046b948dd2ede1f289, type: 3}
-      spellUI: {fileID: 21300000, guid: 6d22777629070c94fba2fc82672b000b, type: 3}
-    CoinItem:
-      value: 0
-    stickerRed:
-      value: 0
-      sprite: {fileID: 0}
-    stickerBlue:
-      value: 0
-      sprite: {fileID: 0}
-    stickerGreen:
-      value: 0
-      sprite: {fileID: 0}
-  checkIfGood: 0
 --- !u!50 &6638695326713349610
 Rigidbody2D:
   serializedVersion: 4
@@ -153,3 +123,48 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2026643550528458225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097088439704099618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3def1c609fd1e1b4eaf7de375b7e21bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventory: {fileID: 0}
+  TheItem:
+    TypeOfItem: 0
+    SpellItem:
+      spellScriptable: {fileID: 11400000, guid: a70b0a30a2155b24f8960ab28cd2d857, type: 2}
+      timeToPick: 1
+      spellImage: {fileID: 21300000, guid: 34821965af1cee844a8c1175b0bf7327, type: 3}
+      spellUI: {fileID: 21300000, guid: 6d22777629070c94fba2fc82672b000b, type: 3}
+    CoinItem:
+      value: 0
+    stickerRed:
+      value: 0
+      sprite: {fileID: 0}
+    stickerBlue:
+      value: 0
+      sprite: {fileID: 0}
+    stickerGreen:
+      value: 0
+      sprite: {fileID: 0}
+  checkIfGood: 0
+--- !u!114 &6720445171092537621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097088439704099618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfee6d21c0c9d6b46a07b2e1395c4965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: edea4f601382db54b872a9aebc130af3, type: 2}

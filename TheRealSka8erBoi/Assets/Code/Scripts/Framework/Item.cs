@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +10,8 @@ public class Item : MonoBehaviour
     public theItem TheItem;
 
     public bool checkIfGood;
+    private GameObject player;
     
-
     private void Start()
     {
         checkIfGood = false;
@@ -60,6 +61,7 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             checkIfGood = true;
+            player = other.gameObject;
         }
     }
 
@@ -77,23 +79,37 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
-            Debug.Log("State 1");
             if (_inventory.slots[0].isFull)
             {
-                Debug.Log("State 2");
                 switch (_inventory.slots[1].isFull)
                 {
                     case true:
-                        Debug.Log("State 3");
                         return;
                     case false:
-                        Debug.Log("State 4");
-                        WitchSpellItem(1);
+                        StartCoroutine(GetSpellItem(1, TheItem.SpellItem.timeToPick));
                         break;
                 }
             }
-            else WitchSpellItem(0);
+            else StartCoroutine(GetSpellItem(0, TheItem.SpellItem.timeToPick));
         }
+    }
+
+    IEnumerator GetSpellItem(int slotNumber, float timeToPick)
+    {
+        Vector3 position = player.transform.position;
+        DissolveEffect dissolveEffect = GetComponent<DissolveEffect>();
+
+        dissolveEffect.StartDissolve(timeToPick);
+        yield return new WaitForSeconds(timeToPick);
+
+        if (player.transform.position == position)
+        {
+            WitchSpellItem(slotNumber);
+        }
+        else
+        {
+            dissolveEffect.StopDissolve(timeToPick);
+        } 
     }
 
     void WitchSpellItem(int slotNumber)
@@ -160,6 +176,7 @@ public class theItem
 public class spellItem
 {
     public Spell spellScriptable;
+    public float timeToPick;
     public Sprite spellImage;
     public Sprite spellUI;
 }
