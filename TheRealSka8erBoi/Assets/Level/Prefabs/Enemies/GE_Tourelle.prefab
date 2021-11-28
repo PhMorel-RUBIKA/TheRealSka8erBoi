@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2339571469173076059}
   - component: {fileID: 2339571469173076056}
   m_Layer: 0
-  m_Name: FirePointFlower
+  m_Name: FirePointTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2339571469173076058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.66, y: 0, z: 0}
+  m_LocalPosition: {x: -1.33, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2339571470839724251}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 2339571470749599350}
   - component: {fileID: 2339571470749599353}
   m_Layer: 0
-  m_Name: FlowerSpriteHolder
+  m_Name: S1TowerSpriteHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 2407703315444127348, guid: 26ef9d41d9c3fae4a990e7e2d00b9baa, type: 3}
+  m_Sprite: {fileID: -5040882901508457691, guid: dd6c59e0395b61f48948a2712c2b6177, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,7 +138,7 @@ Animator:
   m_GameObject: {fileID: 2339571470749599355}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: be09fd1d5c319d54c92b199c6254565b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 28de1d6413361ad4196c983915c7b42e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -160,8 +160,8 @@ GameObject:
   - component: {fileID: 2339571471071718541}
   - component: {fileID: 2339571471071718540}
   - component: {fileID: 2339571471071718543}
-  - component: {fileID: 2339571471071718542}
   - component: {fileID: 4016009613132676720}
+  - component: {fileID: 5939050239230787038}
   m_Layer: 0
   m_Name: GE_Tourelle
   m_TagString: Target
@@ -270,7 +270,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012314796, y: -0.012314916}
+  m_Offset: {x: -0.117275625, y: -0.2284109}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -281,7 +281,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5074053, y: 0.6798134}
+  m_Size: {x: 2.1497347, y: 1.6306356}
   m_EdgeRadius: 0
 --- !u!195 &2339571471071718543
 NavMeshAgent:
@@ -305,33 +305,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2339571471071718542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339571471071719281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f111d8b19fe775545bdf20cf75c8e7a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pj: {fileID: 3498011852449812487, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-  hp: 50
-  lineOfSight: 10
-  range: 9
-  animator: {fileID: 2339571470749599353}
-  moveSpeed: 3
-  rb: {fileID: 2339571471071718541}
-  projectiles: {fileID: -5328092223451056176, guid: d092d002b2fb13543b2b01bff4288366, type: 3}
-  firePoint: {fileID: 2339571469173076058}
-  cooldown: 1.5
-  initcooldown: 2
-  fireForce: 300
-  target: {fileID: 0}
-  motionless: 1
-  offset: 0
 --- !u!114 &4016009613132676720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,5 +317,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9223de2b327d3d47b9facdd8333025c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abstComp: {fileID: 2339571471071718542}
+  abstComp: {fileID: 5939050239230787038}
   spellItem: {fileID: 8097088439704099618, guid: ee033c967ff771b47b8b0a21d08b2d42, type: 3}
+--- !u!114 &5939050239230787038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2339571471071719281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db3c213491ccec41ac0cbbb5b2b93d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pj: {fileID: 5394200822797100280, guid: db987897e5064e54c9968672d46499df, type: 3}
+  hp: 50
+  lineOfSight: 6
+  range: 6
+  animator: {fileID: 2339571470749599353}
+  moveSpeed: 0
+  rb: {fileID: 2339571471071718541}
+  projectiles: {fileID: 150225610689303445, guid: d092d002b2fb13543b2b01bff4288366, type: 3}
+  firePoint: {fileID: 2339571469173076059}
+  cooldown: 1
+  initcooldown: 3
+  fireForce: 150
+  target: {fileID: 0}
+  motionless: 1
+  offset: 0
+  s2: 0
+  ebp: {fileID: 0}
+  bulletsAmount: 4
+  rayonAngle: 90

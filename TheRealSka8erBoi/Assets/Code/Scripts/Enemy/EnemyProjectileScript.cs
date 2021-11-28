@@ -9,13 +9,13 @@ public class EnemyProjectileScript : MonoBehaviour
     {
         if (other.CompareTag("Border"))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerBehaviour>().TakeDamage(5);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

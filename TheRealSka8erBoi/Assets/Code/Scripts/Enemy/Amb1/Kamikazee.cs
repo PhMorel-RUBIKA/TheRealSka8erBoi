@@ -7,11 +7,10 @@ public class Kamikazee : AbstComp
 {
 
     public Animator animator;
-    private int animValue;
+    private int animValue=1;
     public float moveSpeed = 3.5f;
     private bool canhit = true;
     public Rigidbody2D rb;
-    public SpriteRenderer myspriterenderer;
 
     public bool facingRight = true;
 
@@ -50,33 +49,36 @@ public class Kamikazee : AbstComp
     
     protected void BehaviourAggro()
     {
+        float distanceX = pj.transform.position.x - transform.position.x;
+        float distanceY = pj.transform.position.y - transform.position.y;
+        
         if (!CheckPlayerInSight()) return;
-                    if (pj.transform.position.x-transform.position.x>-3 & pj.transform.position.x-transform.position.x < 3 & pj.transform.position.y-transform.position.y <= 0)
+            if (distanceX>-4 & distanceX < 4 & distanceY <= 0)
             {
                 animator.SetTrigger("Front");
                 animValue = 1;
             }
-            else if(pj.transform.position.x-transform.position.x<-3 & pj.transform.position.y-transform.position.y <= 0)
+            else if(distanceX<=-4 & distanceY <= 0)
             {
                 animator.SetTrigger("FrontLeft");
                 animValue = 2;
             }
-            else if(pj.transform.position.x-transform.position.x > 3 & pj.transform.position.y-transform.position.y <= 0)
+            else if(distanceX >= 4 & distanceY <= 0)
             {
                 animator.SetTrigger("FrontRight");
                 animValue = 3;
             }
-            else if(pj.transform.position.x-transform.position.x > 3 & pj.transform.position.y-transform.position.y > 0)
+            else if(distanceX >= 4 & distanceY > 0)
             {
                 animator.SetTrigger("BackRight");
                 animValue = 4;
             }
-            else if(pj.transform.position.x-transform.position.x < -3 & pj.transform.position.y-transform.position.y > 0)
+            else if(distanceX <= -4 & distanceY > 0)
             {
                 animator.SetTrigger("BackLeft");
                 animValue = 5;
             }
-            else if(pj.transform.position.x-transform.position.x>-3 & pj.transform.position.x-transform.position.x < 3 & pj.transform.position.y-transform.position.y > 0)
+            else if(distanceX > -4 & distanceX < 4 & distanceY > 0)
             {
                 animator.SetTrigger("Back");
                 animValue = 6;
@@ -102,19 +104,10 @@ public class Kamikazee : AbstComp
 
     private void FixedUpdate()
     {
-        myspriterenderer.flipX = !(pj.transform.position.x - transform.position.x < 0);
-
-        
-        
-        
-        
-        
-        
-        
         if (!(hp <= 0)) return;
         animator.SetTrigger("isded");
         Destroy(gameObject, 0.35f);
-        Explosion();
+        StartCoroutine(Explosion());
     }
 
     IEnumerator StopMotion()
@@ -131,10 +124,35 @@ public class Kamikazee : AbstComp
 
     IEnumerator Explosion()
     {
+        switch (animValue)
+        {
+            case 1:
+                animator.SetTrigger("STrigger");
+                break;
+            case 2:
+                animator.SetTrigger("SWTrigger");
+                break;
+            case 3 : 
+                animator.SetTrigger("SETrigger");
+                break;
+            case 4 :
+                animator.SetTrigger("NETrigger");
+                break;
+            case 5 :
+                animator.SetTrigger("NWTrigger");
+                break;
+            case 6 :
+                animator.SetTrigger("NTrigger");
+                break;
+        }
+        
+        FinalBoom();
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position,areaSize);
-        yield return new WaitForSeconds(0f);
+        /*Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position,areaSize);*/
+        yield return new WaitForSeconds(.54f);
+        agent.SetDestination(transform.position);
+        
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.gameObject.CompareTag("Player"))
@@ -147,6 +165,42 @@ public class Kamikazee : AbstComp
                 DamageManager.instance.TakeDamage(damage);
             }
         }
+        
+    }
+
+    void FinalBoom()
+    {
+        switch (animValue)
+        {
+            case 1 :
+                animator.SetTrigger("SExplo");
+                break;
+            case 2 :
+                animator.SetTrigger("SExplo");
+                break;
+            case 3 :
+                animator.SetTrigger("SExplo");
+                break;
+            case 4 :
+                animator.SetTrigger("SExplo");
+                break;
+            case 5 :
+                animator.SetTrigger("SExplo");
+                break; 
+            case 6 :
+                animator.SetTrigger("SExplo");
+                break;
+        }
+        Destroy(gameObject,1);
     }
     
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        Debug.Log(hp);
+        if (hp <= 0)
+        {
+            FinalBoom();
+        }
+    }
 }
