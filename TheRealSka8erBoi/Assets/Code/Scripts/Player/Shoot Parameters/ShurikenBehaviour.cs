@@ -18,6 +18,7 @@ public class ShurikenBehaviour : MonoBehaviour
         GetComponent<BulletPoolBehaviour>().speed = 10;
         target = null;
     }
+    
 
     private void FixedUpdate()
     {
