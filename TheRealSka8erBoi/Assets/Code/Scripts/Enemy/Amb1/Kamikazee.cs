@@ -5,30 +5,23 @@ using UnityEngine.AI;
 
 public class Kamikazee : AbstComp
 {
-
+    [Header("Animation Parameters")]
     public Animator animator;
     private int animValue=1;
-    public float moveSpeed = 3.5f;
-    private bool canhit = true;
-    public Rigidbody2D rb;
-
     public bool facingRight = true;
-
+    [Space]
+    
+    [Header("NavMesh Parameters")]
     [SerializeField] private Transform target;
-
     private NavMeshAgent agent;
     private Vector2 movement;
     private Vector2 direction;
-
-
-    /// <summary>
-    /// For the Explosion
-    /// </summary>
+    [Space]
     
+    [Header("Comportment Parameters")]
+    private bool canhit = true;
     [SerializeField] private float areaSize;
-
     [SerializeField] private int damage = 10;
-
     [SerializeField] private float delay;
 
     void Start()
@@ -87,12 +80,40 @@ public class Kamikazee : AbstComp
         GoToPlayer();
         if (!CheckPlayerInRange()) return;
         if (canhit)
-        {
+        { 
+            Debug.Log("triggerAnim");
+            switch (animValue)
+            {
+            case 1:
+                animator.SetTrigger("STrigger");
+                Debug.Log("triggerAnim");
+                break;
+            case 2:
+                animator.SetTrigger("SWTrigger");
+                Debug.Log("triggerAnim");
+                break;
+            case 3 : 
+                animator.SetTrigger("SETrigger");
+                Debug.Log("triggerAnim");
+                break;
+            case 4 :
+                animator.SetTrigger("NETrigger");
+                Debug.Log("triggerAnim");
+                break;
+            case 5 :
+                animator.SetTrigger("NWTrigger");
+                Debug.Log("triggerAnim");
+                break;
+            case 6 :
+                animator.SetTrigger("NTrigger");
+                Debug.Log("triggerAnim");
+                break;
+            }           
             StartCoroutine("Explosion");
             canhit = false;
         }
         
-
+        Debug.Log("triggerAnim");
     }
 
     void GoToPlayer()
@@ -110,48 +131,15 @@ public class Kamikazee : AbstComp
         StartCoroutine(Explosion());
     }
 
-    IEnumerator StopMotion()
-    {
-        moveSpeed = 0;
-        yield return new WaitForSeconds(0.5f);
-    }
-
-    IEnumerator StopMotion2()
-    {
-        moveSpeed = 0;
-        yield return new WaitForSeconds(0.1f);
-    }
-
     IEnumerator Explosion()
     {
-        switch (animValue)
-        {
-            case 1:
-                animator.SetTrigger("STrigger");
-                break;
-            case 2:
-                animator.SetTrigger("SWTrigger");
-                break;
-            case 3 : 
-                animator.SetTrigger("SETrigger");
-                break;
-            case 4 :
-                animator.SetTrigger("NETrigger");
-                break;
-            case 5 :
-                animator.SetTrigger("NWTrigger");
-                break;
-            case 6 :
-                animator.SetTrigger("NTrigger");
-                break;
-        }
-        
+        yield return new WaitForSeconds(2f);
         FinalBoom();
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
+        
         /*Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(transform.position,areaSize);*/
         yield return new WaitForSeconds(.54f);
-        agent.SetDestination(transform.position);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
         
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -170,28 +158,52 @@ public class Kamikazee : AbstComp
 
     void FinalBoom()
     {
+        agent.SetDestination(transform.position);
+        Debug.Log("exploAnim");
         switch (animValue)
         {
+            
             case 1 :
                 animator.SetTrigger("SExplo");
+                Debug.Log("exploAnim");
                 break;
             case 2 :
-                animator.SetTrigger("SExplo");
+                animator.SetTrigger("SEExplo");
+                Debug.Log("exploAnim");
                 break;
             case 3 :
-                animator.SetTrigger("SExplo");
+                animator.SetTrigger("SWExplo");
+                Debug.Log("exploAnim");
                 break;
             case 4 :
-                animator.SetTrigger("SExplo");
+                animator.SetTrigger("NEExplo");
+                Debug.Log("exploAnim");
                 break;
             case 5 :
-                animator.SetTrigger("SExplo");
+                animator.SetTrigger("NWExplo");
+                Debug.Log("exploAnim");
                 break; 
             case 6 :
-                animator.SetTrigger("SExplo");
+                animator.SetTrigger("NExplo");
+                Debug.Log("exploAnim");
                 break;
         }
-        Destroy(gameObject,1);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
+        
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            if (enemy.gameObject.CompareTag("Player"))
+            {
+                PlayerBehaviour.playerBehaviour.TakeDamage(damage);
+            }
+
+            else if (enemy.gameObject.CompareTag("Target"))
+            {
+                DamageManager.instance.TakeDamage(damage);
+            }
+        }
+        Destroy(gameObject,.9f);
+        Debug.Log("exploAnim");
     }
     
     public void TakeDamage(int damage)
