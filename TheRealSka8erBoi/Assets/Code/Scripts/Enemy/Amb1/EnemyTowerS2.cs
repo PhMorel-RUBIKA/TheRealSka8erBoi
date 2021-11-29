@@ -6,33 +6,27 @@ using UnityEngine;
 
 public class EnemyTowerS2 : AbstComp
 {
+    [Header("Animator Parmeters")]
     [SerializeField] private Animator animator;
+    [Space]
+    [Header("NavMesh Parameters")]
+    [SerializeField] private Transform target;
+    private NavMeshAgent agent;
+    [SerializeField] private bool motionless;
     private Vector2 movement;
-    public float moveSpeed = 3f;
     public Rigidbody2D rb;
-    public GameObject projectiles;
-    private bool canshoot=false;
+    [Space]
+    [Header("Atk Parameters")]
     public Transform firePoint;
     [SerializeField] float cooldown;
     [SerializeField] float initcooldown;
     [SerializeField] private float fireForce=100f;
-    
-    [SerializeField] private Transform target;
-
-    [SerializeField] private bool motionless;
-
-    private NavMeshAgent agent;
-
+    //public GameObject projectiles;
+    private bool canshoot=false;
     public float offset;
-
     [SerializeField] private bool s2 = false;
-
-    /// <summary>
-    /// For S2
-    /// </summary>
     [SerializeField] private EnemyBulletPool ebp;
     [SerializeField] public int bulletsAmount = 8;
-
     [SerializeField] private float rayonAngle=90;
     
     
@@ -136,6 +130,7 @@ public class EnemyTowerS2 : AbstComp
             float angleRad = Mathf.Atan2(to.y - from.y, to.x - from.x);
             angle = (180 / Mathf.PI) * angleRad;
         }
+            
     private void SpreadShot()
     {
         canshoot = false;
