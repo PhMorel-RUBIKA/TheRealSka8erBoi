@@ -9,32 +9,27 @@ using Random = UnityEngine.Random;
 
 public class EnemyZoner : AbstComp
 {
+    //[Header("Animator Parameters")]
     //[SerializeField] private Animator animator;
+    //[Space]
+    [Header("Behaviour")]
     private Vector2 movement;
-    public float moveSpeed = 3f;
     public Rigidbody2D rb;
+    [SerializeField] private Transform target;
+    private NavMeshAgent agent;
+    [SerializeField] private bool s2 = false;
+    [Space]
+    
+    [Header("Attack Parameters")]
     public GameObject zone;
     private bool canshoot=false;
     [SerializeField] float cooldown;
     [SerializeField] float initcooldown;
-    
-    
-    [SerializeField] private Transform target;
-
-    [SerializeField] private bool motionless;
-
-    private NavMeshAgent agent;
-
-    public float offset;
-
-    [SerializeField] private bool s2 = false;
-    
-    
     [SerializeField] private float rayonAngle=360;
-
     [SerializeField] private int bulletAmount;
     private GameObject implosionZone;
     private GameObject sndImplosionZone;
+    
     void Start()
     {
         pj = PlayerBehaviour.playerBehaviour.gameObject;
@@ -55,10 +50,6 @@ public class EnemyZoner : AbstComp
     {
         if (!CheckPlayerInSight()) return;
         lineOfSight = 100;
-        if (!motionless)
-        {
-            GoToPlayer();  
-        }
 
         if (!CheckPlayerInRange()) return;
         if (!canshoot) return;
