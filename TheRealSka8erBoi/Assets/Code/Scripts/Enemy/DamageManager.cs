@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class DamageManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class DamageManager : MonoBehaviour
     private GameObject player;
     public static DamageManager instance;
     public GameObject spellItem;
+    public MMFeedbacks damageFeedback;
 
     private void Start()
     {
@@ -20,6 +22,8 @@ public class DamageManager : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        damageFeedback.PlayFeedbacks();
+        CameraShake.instance.StartShake(0.1f, 0.1f, 5f);
         Debug.Log(currentHealth);
 
         if (currentHealth <= 0)
