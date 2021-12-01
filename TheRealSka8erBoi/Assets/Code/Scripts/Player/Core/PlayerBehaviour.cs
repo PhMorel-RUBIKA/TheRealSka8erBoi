@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour
 {
-public string bulletLightName;
-    
     //Declaration Movement
     private Rigidbody2D playerRigid;
     private SpriteRenderer playerRender;
@@ -31,8 +29,8 @@ public string bulletLightName;
     
     //Declaration Animation
     private Animator animatorPlayer;
-    private int playerDirec = 0; 
-    
+    public List<int> animatorID;
+
     //Declaration Shoot
     [Header("Shoot Tweaking")]
     [SerializeField] private float timeMaxCharge = 0.9f;
@@ -52,7 +50,7 @@ public string bulletLightName;
     [Space]
 
     //Declaration UI
-    [HideInInspector] public int maxHealth = 100;
+    [HideInInspector] public int maxHealth = 5;
     [HideInInspector] public int currentHealth;
     public Slider healthBar;
 
@@ -74,6 +72,22 @@ public string bulletLightName;
         animatorPlayer = GetComponent<Animator>();
         dashGoingFor = dashDuration;
         currentHealth = maxHealth;
+        
+        
+        //Set animatorID
+        animatorID.Add(Animator.StringToHash("GoingUp"));
+        animatorID.Add(Animator.StringToHash("GoingDown"));
+        animatorID.Add(Animator.StringToHash("GoingRightFront"));
+        animatorID.Add(Animator.StringToHash("GoingRightBack"));
+        animatorID.Add(Animator.StringToHash("GoingLeftFront"));
+        animatorID.Add(Animator.StringToHash("GoingLeftBack"));
+        animatorID.Add(Animator.StringToHash("Release"));
+        animatorID.Add(Animator.StringToHash("Death"));
+        animatorID.Add(Animator.StringToHash("IsRunning"));
+        animatorID.Add(Animator.StringToHash("IsAiming"));
+        animatorID.Add(Animator.StringToHash("Horizontal"));
+        animatorID.Add(Animator.StringToHash("Vertical"));
+        
     }
 
     void Update()
@@ -101,7 +115,7 @@ public string bulletLightName;
         {
             transform.GetChild(0).gameObject.SetActive(true);
             isAiming = true;
-            animatorPlayer.SetBool("IsAiming",true);
+            animatorPlayer.SetBool(animatorID[9], isAiming);
             charge = 0;
         }
         if (Input.GetButtonUp("BowShot") && isAiming)
@@ -109,7 +123,9 @@ public string bulletLightName;
             Shoot(charge, GetComponentInChildren<CursorBehaviour>().AimDirection().Item2);
             transform.GetChild(0).gameObject.SetActive(false);
             isAiming = false;
-            animatorPlayer.SetBool("IsAiming",false);
+            animatorPlayer.SetTrigger(animatorID[6]);//Release
+            animatorPlayer.SetBool(animatorID[9], isAiming);
+            
         }
 
         dashOngoingCd -= Time.deltaTime;
@@ -139,17 +155,17 @@ public string bulletLightName;
             
             if (Mathf.Abs(leftJoy.x) > deadzoneController || Mathf.Abs(leftJoy.y) > deadzoneController)
             {
-                animatorPlayer.SetBool("IsRunning",true); 
+                animatorPlayer.SetBool(animatorID[8],true); 
                 playerRigid.velocity = leftJoy * playerSpeed;
             }
             else
             {
-                animatorPlayer.SetBool("IsRunning",false);
+                animatorPlayer.SetBool(animatorID[8],false);
             }
         }
         else
         {
-            animatorPlayer.SetBool("IsRunning", false);
+            animatorPlayer.SetBool(animatorID[8], false);
             if (charge < timeMaxCharge)
             {
                 charge += Time.deltaTime;
@@ -173,46 +189,35 @@ public string bulletLightName;
 
     private void AnimatorManagement()
     {
-        if (leftJoy.x < -deadzoneController)
+        if (isAiming)
         {
-            playerRender.flipX = true;
-        }
-        else if (leftJoy.x > deadzoneController)
-        {
-            playerRender.flipX = false;
+            animatorPlayer.SetFloat(animatorID[10],GetComponentInChildren<CursorBehaviour>().AimDirection().Item2.x);//Horizontal
+            animatorPlayer.SetFloat(animatorID[11],GetComponentInChildren<CursorBehaviour>().AimDirection().Item2.y);//Vertical
         }
         
-        if (leftJoy.y < -Mathf.Abs(leftJoy.x))
-        {
-            if (playerDirec != 0)
-            {
-                   animatorPlayer.SetTrigger("GoingDown");
-                   playerDirec = 0;
-            }
+        if (Mathf.Abs(leftJoy.x) < deadzoneController && leftJoy.y > deadzoneController)
+        {// Going Up
+            animatorPlayer.SetTrigger(animatorID[0]);
         }
-        else if (Mathf.Abs(leftJoy.x) > Mathf.Abs(leftJoy.y) && leftJoy.y > 0.3f)
-        {
-                if (playerDirec != 1)
-                {
-                    animatorPlayer.SetTrigger("GoingBackSide");
-                    playerDirec = 1;
-                } 
+        else if (Mathf.Abs(leftJoy.x) < deadzoneController && leftJoy.y < -deadzoneController)
+        {//Going Down
+            animatorPlayer.SetTrigger(animatorID[1]);
         }
-        else if (Mathf.Abs(leftJoy.x) > Mathf.Abs(leftJoy.y) && leftJoy.y < 0.3f) 
-        {
-                if (playerDirec != 2)
-                {
-                    animatorPlayer.SetTrigger("GoingDownSide");
-                    playerDirec = 2;
-                } 
+        else if (leftJoy.x > deadzoneController && leftJoy.y < -deadzoneController)
+        {//GoingRightFront
+            animatorPlayer.SetTrigger(animatorID[2]);
         }
-        else if (leftJoy.y > Mathf.Abs(leftJoy.x)) 
-        {
-                if (playerDirec != 3)
-                {
-                    animatorPlayer.SetTrigger("GoingUp");
-                    playerDirec = 3;
-                } 
+        else if (leftJoy.x > deadzoneController && leftJoy.y > deadzoneController) 
+        {//GoingRightBack
+            animatorPlayer.SetTrigger(animatorID[3]); 
+        }
+        else if (leftJoy.x < -deadzoneController && leftJoy.y < -deadzoneController)
+        {//GoingLeftFront
+            animatorPlayer.SetTrigger(animatorID[4]);
+        }
+        else if (leftJoy.x < -deadzoneController && leftJoy.y > deadzoneController) 
+        {//GoingLeftBack
+            animatorPlayer.SetTrigger(animatorID[5]);
         }
     }
 
@@ -221,7 +226,7 @@ public string bulletLightName;
         
         if (charge < timeMaxCharge/3)
         {
-            spawnedProj = PoolObjectManager.Instance.GetBullet(bulletLightName, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
+            spawnedProj = PoolObjectManager.Instance.GetBullet("lightArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(muzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             
 
@@ -248,5 +253,9 @@ public string bulletLightName;
     {
         currentHealth -= damageNumber;
         healthBar.value = (float)currentHealth / maxHealth;
+        if (currentHealth < 1)
+        {
+            animatorPlayer.SetTrigger(animatorID[7]);
+        }
     }
 }
