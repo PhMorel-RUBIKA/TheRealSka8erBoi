@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour
@@ -47,6 +48,9 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject muzzle;
     public GameObject giantMuzzle;
 
+    [Space] [Header("Feedback Declaration")]
+    public MMFeedbacks DamageFeedbacks;
+    
     [Space]
 
     //Declaration UI
@@ -253,6 +257,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentHealth -= damageNumber;
         healthBar.value = (float)currentHealth / maxHealth;
+        
+        DamageFeedbacks.PlayFeedbacks();
+        CameraShake.instance.StartShake(0.2f, 0.15f, 10f);
+        
         if (currentHealth < 1)
         {
             animatorPlayer.SetTrigger(animatorID[7]);
