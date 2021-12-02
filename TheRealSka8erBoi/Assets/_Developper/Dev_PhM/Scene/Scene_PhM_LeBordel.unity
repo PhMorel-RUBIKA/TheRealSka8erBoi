@@ -1257,85 +1257,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &509187918 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6065451229026305032, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-  m_PrefabInstance: {fileID: 1529666271}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &509187920 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6845691750493086621, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-  m_PrefabInstance: {fileID: 1529666271}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509187918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f387a825823ff64cacd01b702865516, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &509187921 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2947749812057125447, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-  m_PrefabInstance: {fileID: 1529666271}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509187918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &509187922 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7594405736941803814, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-  m_PrefabInstance: {fileID: 1529666271}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509187918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0598124d440bea94aaf85767e74a38b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &509187923
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509187918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3e1ec70856fe5439234683b34b4737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Timescale Modifier
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
-    InterruptsOnStop: 1
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    UseIntensityInterval: 0
-    IntensityIntervalMin: 0
-    IntensityIntervalMax: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Mode: 0
-  TimeScale: 0.1
-  TimeScaleDuration: 0.3
-  TimeScaleLerp: 0
-  TimeScaleLerpSpeed: 2
-  ResetTimescaleOnStop: 0
 --- !u!4 &521845596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7798315073275171041, guid: 37133de0827cf564993e8153271eaa15, type: 3}
@@ -2024,16 +1945,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4ae678cfd7a58c4eaced4112748f218, type: 3}
---- !u!50 &726376231 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 4682252588181767784, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-  m_PrefabInstance: {fileID: 1529666271}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &726376232 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 366900918709360317, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-  m_PrefabInstance: {fileID: 1529666271}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &731445385
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,7 +1956,6 @@ GameObject:
   - component: {fileID: 731445387}
   - component: {fileID: 731445386}
   - component: {fileID: 731445388}
-  - component: {fileID: 731445389}
   m_Layer: 0
   m_Name: ~~ Map Manager ~~
   m_TagString: Untagged
@@ -2123,24 +2033,6 @@ MonoBehaviour:
   - name: shurikenFaucheuse
     prefab: {fileID: 4435891344548269061, guid: 54ed82c4e0f2fb44fbc1e5cccbae8b2f, type: 3}
     size: 1
---- !u!114 &731445389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731445385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f7de9ef06f04864391a928af29f4b46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NormalTimescale: 1
-  CurrentTimeScale: 1
-  TargetTimeScale: 1
-  LerpTimescale: 1
-  LerpSpeed: 0
-  TestButton: 0
 --- !u!4 &743696335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6154734244894102978, guid: 6d0ef7709d0510a4fb25fb03ebcddb98, type: 3}
@@ -4190,33 +4082,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2947749812057125447, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: Feedbacks.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947749812057125447, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: Feedbacks.Array.data[0]
-      value: 
-      objectReference: {fileID: 509187923}
-    - target: {fileID: 2947749812057125447, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: Feedbacks.Array.data[1]
-      value: 
-      objectReference: {fileID: 509187920}
-    - target: {fileID: 2947749812057125447, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: Feedbacks.Array.data[2]
-      value: 
-      objectReference: {fileID: 509187922}
-    - target: {fileID: 2947749812057125447, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: Feedbacks.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3498011852449812487, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: m_Name
       value: 'PlayerWithCamera '
       objectReference: {fileID: 0}
     - target: {fileID: 3498011852449812537, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3498011852449812537, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4258,10 +4130,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4575743385051871419, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: AnimateScaleTarget
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5075100126292862212, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4270,28 +4138,7 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6845691750493086621, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: TargetRigidbody2D
-      value: 
-      objectReference: {fileID: 726376231}
-    - target: {fileID: 6845691750493086621, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: Timing.InitialDelay
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7594405736941803814, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: Duration
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7594405736941803814, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: BoundSpriteRenderer
-      value: 
-      objectReference: {fileID: 726376232}
-    - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
-      propertyPath: DamageFeedbacks
-      value: 
-      objectReference: {fileID: 509187921}
-    m_RemovedComponents:
-    - {fileID: 4575743385051871419, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
 --- !u!1001 &1585138620
 PrefabInstance:
@@ -6779,7 +6626,7 @@ Transform:
   - {fileID: 2135007422}
   - {fileID: 853973252}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5655102155790971410
 Animator:

@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 3498011852449812536}
   - component: {fileID: 4834553342933288153}
   - component: {fileID: 5501638938004983748}
+  - component: {fileID: 6902068902137927784}
   m_Layer: 6
   m_Name: PlayerWithCamera
   m_TagString: Player
@@ -543,7 +544,7 @@ MonoBehaviour:
   bigMuzzle: {fileID: 1919837915371265931, guid: 44aeaa95a8fae554f8b39dcaef29f7f8, type: 3}
   muzzle: {fileID: 6138741664477259675, guid: fec5ea49d9079754e85dfa0695ca6b42, type: 3}
   giantMuzzle: {fileID: 3266663899729837402, guid: 67c47c66bf2349d499ab0f7b21f8820b, type: 3}
-  DamageFeedbacks: {fileID: 0}
+  DamageFeedbacks: {fileID: 2947749812057125447}
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 1737631998134540139}
@@ -600,6 +601,24 @@ MonoBehaviour:
   neutral: {fileID: 11400000, guid: db7ae095ab94ff84584168651da2d0ed, type: 2}
   key: 333
   AxeKey: RightSpell
+--- !u!114 &6902068902137927784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498011852449812487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7de9ef06f04864391a928af29f4b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NormalTimescale: 1
+  CurrentTimeScale: 1
+  TargetTimeScale: 1
+  LerpTimescale: 1
+  LerpSpeed: 0
+  TestButton: 0
 --- !u!1 &3727118582301772759
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +991,7 @@ GameObject:
   - component: {fileID: 2947749812057125447}
   - component: {fileID: 6845691750493086621}
   - component: {fileID: 7594405736941803814}
-  - component: {fileID: 4575743385051871419}
+  - component: {fileID: 509187923}
   m_Layer: 6
   m_Name: DamageFeedback
   m_TagString: Untagged
@@ -1007,9 +1026,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks:
+  - {fileID: 509187923}
   - {fileID: 6845691750493086621}
   - {fileID: 7594405736941803814}
-  - {fileID: 4575743385051871419}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -1058,7 +1077,7 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    InitialDelay: 0
+    InitialDelay: 0.2
     CooldownDuration: 0
     ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
@@ -1076,7 +1095,7 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  TargetRigidbody2D: {fileID: 0}
+  TargetRigidbody2D: {fileID: 4682252588181767784}
   Mode: 0
   MinForce: {x: -0.5, y: -0.5}
   MaxForce: {x: -1, y: -1}
@@ -1118,9 +1137,9 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  BoundSpriteRenderer: {fileID: 0}
+  BoundSpriteRenderer: {fileID: 366900918709360317}
   Mode: 0
-  Duration: 0.2
+  Duration: 0.3
   StartsOff: 0
   Channel: 0
   ResetShakerValuesAfterShake: 1
@@ -1188,7 +1207,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   FlipX: 0
   FlipY: 0
---- !u!114 &4575743385051871419
+--- !u!114 &509187923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1197,11 +1216,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6065451229026305032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d958a52145b19904aa2a5bcb3849eafb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f3e1ec70856fe5439234683b34b4737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Active: 0
-  Label: Scale
+  Active: 1
+  Label: Timescale Modifier
   Chance: 100
   Timing:
     TimescaleMode: 0
@@ -1224,90 +1243,11 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   Mode: 0
-  TimeScale: 0
-  AnimateScaleTarget: {fileID: 0}
-  AnimateScaleDuration: 0.2
-  RemapCurveZero: 1
-  RemapCurveOne: 2
-  Offset: 0
-  AnimateX: 1
-  AnimateScaleX:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0.79290015
-      outSlope: 0.79290015
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.022836387
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  AnimateY: 1
-  AnimateScaleY:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0.9290834
-      outSlope: 0.9290834
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.015116274
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  AnimateZ: 1
-  AnimateScaleZ:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0.90628517
-      outSlope: 0.90628517
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.012209475
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  AllowAdditivePlays: 0
-  DetermineScaleOnPlay: 0
-  DestinationScale: {x: 0.5, y: 0.5, z: 0.5}
+  TimeScale: 0.1
+  TimeScaleDuration: 0.3
+  TimeScaleLerp: 0
+  TimeScaleLerpSpeed: 2
+  ResetTimescaleOnStop: 0
 --- !u!1 &6579917561629085491
 GameObject:
   m_ObjectHideFlags: 0
