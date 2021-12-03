@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+using MoreMountains.NiceVibrations;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using UnityEngine;
@@ -35,6 +34,8 @@ public class PlayerBehaviour : MonoBehaviour
     //Declaration Shoot
     [Header("Shoot Tweaking")]
     [SerializeField] private float timeMaxCharge = 0.9f;
+    [SerializeField] private float perfectShootValue;
+    [SerializeField] private HapticTypes _hapticTypesForPerfectShoot = HapticTypes.Success;
     [Space]
     private bool isAiming;
     private float charge;
@@ -227,6 +228,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Shoot(float charge, Vector2 projDirection)
     {
+        float multiplicatorShoot = 1;
         
         if (charge < timeMaxCharge/3)
         {
@@ -241,6 +243,16 @@ public class PlayerBehaviour : MonoBehaviour
             Instantiate(bigMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             
         }
+        else if (charge >= timeMaxCharge - perfectShootValue && charge <= timeMaxCharge)
+        {
+            spawnedProj = PoolObjectManager.Instance.GetBullet("perfectTimingAmmo",
+                transform.GetChild(0).position - new Vector3(-projDirection.x, -projDirection.y, 0).normalized,
+                transform.GetChild(0).rotation);
+            Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            multiplicatorShoot = 1.5f;
+            MMVibrationManager.Haptic(_hapticTypesForPerfectShoot, false, true, this);
+        }
         else
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("heavyArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
@@ -250,7 +262,7 @@ public class PlayerBehaviour : MonoBehaviour
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
         spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.25f;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().damage = 7 + Mathf.RoundToInt(charge * 20);
+        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) (7 + Mathf.RoundToInt(charge * 20) * multiplicatorShoot);
     }
 
     public void TakeDamage(int damageNumber)

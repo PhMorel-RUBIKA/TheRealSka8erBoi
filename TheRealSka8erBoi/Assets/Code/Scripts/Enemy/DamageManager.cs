@@ -23,7 +23,7 @@ public class DamageManager : MonoBehaviour
     {
         currentHealth -= damage;
         damageFeedback.PlayFeedbacks();
-        CameraShake.instance.StartShake(0.1f, 0.1f, 5f);
+        CameraShake.instance.StartShake(0.05f, 0.05f, 3f);
         Debug.Log(currentHealth);
 
         if (currentHealth <= 0)
