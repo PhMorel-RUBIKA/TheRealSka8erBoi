@@ -1,6 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Unity.Mathematics;
 using UnityEngine;
+using static UnityEngine.Random;
+using Random = UnityEngine;
+using System.Collections.Generic;
+
 
 public class BossTimeline : MonoBehaviour
 {
@@ -10,17 +16,19 @@ public class BossTimeline : MonoBehaviour
     [Space(20)]
     public int refreshTime = 1500;
     public List<AttackSlot> attackSlots = new List<AttackSlot>();
+    public int define;
 
     private void FixedUpdate()
     {
         if (_frameCounter < refreshTime) _frameCounter += 1;
         else _frameCounter = 0;
         inSecond = (int)(_frameCounter / 50);
-
+        
         for (int i = 0; i < attackSlots.Count; i++)
         {
             if (_frameCounter == attackSlots[i].callingFrame)
             {
+                define = Range(1, 4);
                 switch (attackSlots[i].attackLibrary)
                 {
                     case AttackLibrary.Attack1 : 
@@ -42,7 +50,6 @@ public class BossTimeline : MonoBehaviour
 
     void Attack1(Attack1 attack1)
     {
-        throw new NotImplementedException();
         float speed = attack1.var1;
         int size = attack1.var2;
         bool isActive = attack1.var3;
@@ -101,6 +108,7 @@ public class Attack1
     public float var1;
     public int var2;
     public bool var3;
+
 }
 
 [Serializable]

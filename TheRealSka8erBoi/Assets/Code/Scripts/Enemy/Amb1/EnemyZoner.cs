@@ -111,7 +111,7 @@ public class EnemyZoner : AbstComp
     private void SoloZone()
     {
         canshoot = false;
-        implosionZone = Instantiate(zone, target.transform.position, quaternion.identity);
+        implosionZone = Instantiate(zone, target.transform.position, Quaternion.identity);
         implosionZone.transform.localScale=Vector3.zero;
         implosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack);
     }
