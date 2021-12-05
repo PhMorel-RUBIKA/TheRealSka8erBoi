@@ -133,7 +133,7 @@ public class Kamikazee : AbstComp
 
     IEnumerator Explosion()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         FinalBoom();
         
         /*Gizmos.color = Color.yellow;

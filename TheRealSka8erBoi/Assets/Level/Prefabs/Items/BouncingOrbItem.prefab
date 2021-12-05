@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -537381419419361645}
   - component: {fileID: -8138285156362202724}
   - component: {fileID: -1969948904824819907}
+  - component: {fileID: -4190749436114186864}
   m_Layer: 0
   m_Name: BouncingOrbItem
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7387089405965634867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06303549, y: -11.1212635, z: 13.54516}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9ccf5fb510d03dc49a03b7b4ee64c4ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1012055403
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -139,6 +140,7 @@ MonoBehaviour:
     TypeOfItem: 0
     SpellItem:
       spellScriptable: {fileID: 11400000, guid: 022513b4ac70f7648aec3729c671d2ac, type: 2}
+      timeToPick: 1
       spellImage: {fileID: -621473508321055999, guid: c123a711c65204e41b6442cd4e29a91d, type: 3}
       spellUI: {fileID: -3257548249418069461, guid: 95803ae43da0e464baec86fc670b3fc2, type: 3}
     CoinItem:
@@ -153,3 +155,16 @@ MonoBehaviour:
       value: 0
       sprite: {fileID: 0}
   checkIfGood: 0
+--- !u!114 &-4190749436114186864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387089405965634867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfee6d21c0c9d6b46a07b2e1395c4965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 9ccf5fb510d03dc49a03b7b4ee64c4ff, type: 2}
