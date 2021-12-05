@@ -6,13 +6,17 @@ using UnityEngine.AI;
 
 public class Enemy_Vif_Behaviour : AbstComp
 {
-   [SerializeField] private Animator animator;
+    [Header("Animator PArameters")]
+    [SerializeField] private Animator animator;
     private int animValue;
     [SerializeField] private SpriteRenderer mySprite;
-    
+    [Space]
+    [Header("Behaviour")]
     private Vector2 movement;
-    public float moveSpeed = 3f;
-    public Rigidbody2D rb;
+    [SerializeField] private Transform target;
+    private NavMeshAgent agent;
+    [Space]
+    [Header("Attack Parameters")]
     public GameObject bul;
     private bool canshoot=false;
     public Transform firePoint;
@@ -20,13 +24,10 @@ public class Enemy_Vif_Behaviour : AbstComp
     [SerializeField] float initcooldown;
     [SerializeField] private float fireForce=100f;
     
-    [SerializeField] private Transform target;
-
-    [SerializeField] private bool motionless;
+    
     [SerializeField] private EnemyBulletPool ebp;
-    public float offset;
 
-    private NavMeshAgent agent;
+
     void Start()
     {
         pj = PlayerBehaviour.playerBehaviour.gameObject;
@@ -72,11 +73,7 @@ public class Enemy_Vif_Behaviour : AbstComp
                 animValue = 6;
             }
             lineOfSight = 100;
-            if (!motionless)
-            {
-              GoToPlayer();  
-            }
-            
+            GoToPlayer();
             if(CheckPlayerInRange())
             {
                 if(canshoot)

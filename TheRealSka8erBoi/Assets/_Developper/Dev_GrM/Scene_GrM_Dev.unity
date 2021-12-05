@@ -1493,13 +1493,17 @@ PrefabInstance:
       propertyPath: dashDuration
       value: 0.07
       objectReference: {fileID: 0}
+    - target: {fileID: 4794550508007352128, guid: db987897e5064e54c9968672d46499df, type: 3}
+      propertyPath: deadzoneController
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5394200822797100280, guid: db987897e5064e54c9968672d46499df, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5394200822797100282, guid: db987897e5064e54c9968672d46499df, type: 3}
       propertyPath: m_LinearDrag
-      value: 0.1
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 5394200822797100283, guid: db987897e5064e54c9968672d46499df, type: 3}
       propertyPath: m_Size.x
@@ -1882,6 +1886,9 @@ MonoBehaviour:
   - name: shurikenFaucheuse
     prefab: {fileID: 4435891344548269061, guid: 54ed82c4e0f2fb44fbc1e5cccbae8b2f, type: 3}
     size: 1
+  - name: bouncingOrb
+    prefab: {fileID: 914436026254448049, guid: 7d114e8fc31c6cf4d8107e21e2016e72, type: 3}
+    size: 1
 --- !u!114 &1509367059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1909,6 +1916,7 @@ MonoBehaviour:
   - {fileID: 8540784708633565248}
   - {fileID: 8540784709627352553}
   waveLevel: {fileID: 11400000, guid: 0ee1dd918d25eef41ad2b1f8984b52c2, type: 2}
+  gate: {fileID: 0}
   enemyOnScreen: 
 --- !u!114 &1769247599 stripped
 MonoBehaviour:
