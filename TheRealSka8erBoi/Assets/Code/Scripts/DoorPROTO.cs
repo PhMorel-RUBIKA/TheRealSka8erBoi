@@ -10,8 +10,8 @@ public class DoorPROTO : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Porte Franchi COLLIDER");
-            LoadSceneManagerPROTO.LoadSceneManagerProtoInstance.ChangeRoom();
-            other.transform.position = Vector3.zero;
+            StartCoroutine(LoadSceneManagerPROTO.LoadSceneManagerProtoInstance.ChangeRoom());
+            other.transform.position = new Vector3(0,0,0);
         }
     }
 }

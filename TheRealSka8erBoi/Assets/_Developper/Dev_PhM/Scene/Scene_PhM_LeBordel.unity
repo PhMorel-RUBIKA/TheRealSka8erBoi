@@ -2088,7 +2088,7 @@ MonoBehaviour:
     prefab: {fileID: 6923119167068159588, guid: 0c285c623adfcf3448965e9e6f039dff, type: 3}
     size: 1
   - name: shurikenFaucheuse
-    prefab: {fileID: 4435891344548269061, guid: 54ed82c4e0f2fb44fbc1e5cccbae8b2f, type: 3}
+    prefab: {fileID: 8838483989744106253, guid: f28dc019c27eaac408da63bb0e9d77a6, type: 3}
     size: 1
   - name: perfectTimingAmmo
     prefab: {fileID: 6923119167068159588, guid: dde09722947adf948850a0c1be4e3513, type: 3}
@@ -4199,6 +4199,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: timeMaxCharge
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: perfectShootValue
       value: 0.2
       objectReference: {fileID: 0}
@@ -4834,6 +4838,10 @@ PrefabInstance:
     - target: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
       propertyPath: m_Name
       value: EnemyVif (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3325560124296795752, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
       propertyPath: m_RootOrder
@@ -6843,7 +6851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8846493984781146007
 MonoBehaviour:
   m_ObjectHideFlags: 0

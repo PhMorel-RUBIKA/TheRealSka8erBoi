@@ -62,6 +62,7 @@ public class Item : MonoBehaviour
         {
             checkIfGood = true;
             player = other.gameObject;
+            _inventory = player.GetComponent<Inventory>();
         }
     }
 
@@ -102,7 +103,7 @@ public class Item : MonoBehaviour
         dissolveEffect.StartDissolve(timeToPick);
         yield return new WaitForSeconds(timeToPick);
 
-        if (player.transform.position == position)
+        if (Vector3.Distance(player.transform.position, position) <= 0.1)
         {
             WitchSpellItem(slotNumber);
         }

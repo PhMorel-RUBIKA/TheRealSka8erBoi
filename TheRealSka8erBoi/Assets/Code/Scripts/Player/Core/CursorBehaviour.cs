@@ -81,6 +81,7 @@ public class CursorBehaviour : MonoBehaviour
          List<Vector2> direcCloseEnemies = new List<Vector2>();
          foreach (GameObject enemy in EnemyDetector.GetComponent<EnemyDetector>().closeEnemies)
          {
+             if (enemy == null) EnemyDetector.GetComponent<EnemyDetector>().closeEnemies.Remove(enemy);
              direcCloseEnemies.Add(new Vector2(enemy.transform.position.x - transform.position.x, enemy.transform.position.y - transform.position.y));
          }
 

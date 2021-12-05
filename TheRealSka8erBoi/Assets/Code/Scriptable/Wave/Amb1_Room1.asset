@@ -15,17 +15,27 @@ MonoBehaviour:
   waves:
   - waveName: Wave 1
     spawnInterval: 0.5
-    numberOfenemies: 4
+    numberOfenemies: 3
     typeOfEnnemies:
     - enemy: {fileID: 2339571471071719281, guid: 45dbe3c6b8661714aac8870c5ff6135a, type: 3}
-      probability: 70
+      probability: 0
     - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
-      probability: 30
+      probability: 100
   - waveName: Wave 2
-    spawnInterval: 0.5
+    spawnInterval: 1
+    numberOfenemies: 5
+    typeOfEnnemies:
+    - enemy: {fileID: 2339571471071719281, guid: 45dbe3c6b8661714aac8870c5ff6135a, type: 3}
+      probability: 50
+    - enemy: {fileID: 1816336349083481416, guid: 351ed76a1cad95140934fbf061e3ec0d, type: 3}
+      probability: 50
+  - waveName: Wave 3
+    spawnInterval: 1
     numberOfenemies: 8
     typeOfEnnemies:
     - enemy: {fileID: 2339571471071719281, guid: 45dbe3c6b8661714aac8870c5ff6135a, type: 3}
       probability: 30
+    - enemy: {fileID: 1816336349083481416, guid: 351ed76a1cad95140934fbf061e3ec0d, type: 3}
+      probability: 20
     - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
-      probability: 70
+      probability: 50

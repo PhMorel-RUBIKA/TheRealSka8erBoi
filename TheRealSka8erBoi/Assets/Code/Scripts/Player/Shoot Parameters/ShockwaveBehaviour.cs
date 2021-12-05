@@ -6,6 +6,7 @@ public class ShockwaveBehaviour : MonoBehaviour
 {
     public int damage = 10;
     public float force = 10;
+    public float radius = 10f;
     void Start()
     {
         StartCoroutine(Explosion());
@@ -14,7 +15,7 @@ public class ShockwaveBehaviour : MonoBehaviour
     IEnumerator Explosion()
     {
         yield return new WaitForSeconds(0.3f);
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 3f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
 
         foreach (Collider2D hit in hits)
         {
