@@ -13,9 +13,15 @@ public class EnemyProjFollower : MonoBehaviour
     private void Start()
     {
         target = PlayerBehaviour.playerBehaviour.gameObject.transform;
-        Vector2 toplayer = (target.transform.position - transform.position).normalized;
+
+        Vector3 direction = target.transform.position - transform.position;
+        transform.forward = direction;
+
+        /*Vector2 toplayer = (target.transform.position - transform.position).normalized;
         float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
-        transform.rotation= Quaternion.Euler(0f, 0f, rotZ);
+        transform.rotation= Quaternion.Euler(0f, 0f, rotZ);*/
+        
+        
         StartCoroutine(Evaporate());
     }
 
@@ -45,7 +51,7 @@ public class EnemyProjFollower : MonoBehaviour
 
     IEnumerator Evaporate()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         gameObject.SetActive(false);
     }
 }

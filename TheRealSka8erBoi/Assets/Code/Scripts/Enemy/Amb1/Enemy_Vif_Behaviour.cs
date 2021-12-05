@@ -180,9 +180,6 @@ public class Enemy_Vif_Behaviour : AbstComp
 
         //GameObject bul = ebp.GetFollowBullet();
         Instantiate(bul, firePoint.position, Quaternion.identity);
-        Vector2 toplayer = (pj.transform.position - bul.transform.position).normalized;
-        float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
-        bul.transform.position = firePoint.transform.position;
         //bul.SetActive(true);
         
         //bul.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized * fireForce);
