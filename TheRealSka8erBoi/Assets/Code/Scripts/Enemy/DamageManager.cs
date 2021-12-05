@@ -23,7 +23,7 @@ public class DamageManager : MonoBehaviour
     {
         currentHealth -= damage;
         damageFeedback.PlayFeedbacks();
-        CameraShake.instance.StartShake(0.1f, 0.1f, 5f);
+        CameraShake.instance.StartShake(0.05f, 0.05f, 3f);
         Debug.Log(currentHealth);
 
         if (currentHealth <= 0)
@@ -41,14 +41,8 @@ public class DamageManager : MonoBehaviour
 
     void GiveTheSpell()
     {
-        int random = Random.Range(0, 2);
-
-        if (random == 1)
-        {
-            GameObject spellToGive = Instantiate(spellItem, this.gameObject.transform.position, Quaternion.identity);
-            spellToGive.GetComponent<Item>()._inventory = player.GetComponent<Inventory>();
-            spellToGive.GetComponent<SpriteRenderer>().sprite =
-                spellItem.GetComponent<Item>().TheItem.SpellItem.spellImage;
-        }
+        GameObject spellToGive = Instantiate(spellItem, this.gameObject.transform.position, Quaternion.identity);
+        spellToGive.GetComponent<Item>()._inventory = player.GetComponent<Inventory>();
+        spellToGive.GetComponent<SpriteRenderer>().sprite = spellItem.GetComponent<Item>().TheItem.SpellItem.spellImage;
     }
 }

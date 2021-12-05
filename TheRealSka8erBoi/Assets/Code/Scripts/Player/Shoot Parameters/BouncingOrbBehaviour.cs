@@ -30,7 +30,7 @@ public class BouncingOrbBehaviour : MonoBehaviour
             actual = target;
 
 
-            enemiesInRange = Physics2D.OverlapCircleAll(transform.position,400);
+            enemiesInRange = Physics2D.OverlapCircleAll(transform.position,10);
             
             if (enemiesInRange.Length < 2)
             {

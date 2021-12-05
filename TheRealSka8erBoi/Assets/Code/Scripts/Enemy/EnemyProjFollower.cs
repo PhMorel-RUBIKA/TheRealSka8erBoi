@@ -36,9 +36,11 @@ public class EnemyProjFollower : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 ajust = ((target.position-transform.position).normalized);
-        transform.rotation=Quaternion.FromToRotation(Vector3.forward, target.position);
-        rb.velocity=ajust*3;
+        Vector2 direction = Vector2.Lerp(rb.velocity, target.position - transform.position, 0.01f);
+        Vector2 adjust = direction.normalized;
+        
+        transform.rotation = Quaternion.FromToRotation(Vector3.forward, target.position);
+        rb.velocity = adjust*3;
     }
 
     IEnumerator Evaporate()

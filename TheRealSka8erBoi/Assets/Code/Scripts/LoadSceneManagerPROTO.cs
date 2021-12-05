@@ -7,6 +7,8 @@ public class LoadSceneManagerPROTO : MonoBehaviour
 {
     public List<string> roomOrder;
     public int numberOfRoom;
+    public Animator transition;
+    public float transitionTime;
     public static LoadSceneManagerPROTO LoadSceneManagerProtoInstance;
     
     public void Awake()
@@ -20,9 +22,14 @@ public class LoadSceneManagerPROTO : MonoBehaviour
         numberOfRoom = 0;
     }
     
-    public void ChangeRoom()
+    public IEnumerator ChangeRoom()
     { 
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadSceneAsync(roomOrder[numberOfRoom]);
+        transition.SetTrigger("Stop");
+        
         numberOfRoom++;
+        
     }
 }

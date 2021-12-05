@@ -7,24 +7,27 @@ using UnityEngine;
 
 public class ArmBossBehaviour : MonoBehaviour
 {
-    [Header("Behaviour")]
-    private Transform target;
+    [Header("Behaviour")] 
+    [SerializeField] private FinalBossBehaviour fbb;
+    [SerializeField] private Transform target;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float moveSpeed;
     [Space]
     [Header("AtckParameters")]
     [SerializeField] private float strenght;
-    [SerializeField] private int damage = 10;
+    [SerializeField] private int damage = 7;
     private int pushValue;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        
-        target = PlayerBehaviour.playerBehaviour.gameObject.transform;
-        
+        target = PlayerBehaviour.playerBehaviour.transform;
         ShockWave();
+        if (fbb.bossIsMidLife)
+        {
+            damage *= 2;
+        }
     }
     
 
@@ -35,24 +38,19 @@ public class ArmBossBehaviour : MonoBehaviour
 
     private void ShockWave()
     {
-        Debug.Log("target : " + target.name + " at " + target.position);
-        Vector2 toplayer = new Vector2(target.position.x-transform.position.x, transform.position.y);
+       
+        var toplayer = new Vector2(target.position.x-transform.position.x, transform.position.y);
         if (toplayer.x>0)
         {
-            Debug.Log(">0");
-            
             rb.AddForce(Vector2.right * moveSpeed);
             pushValue = 1;
         }
         else if (toplayer.x<0)
         {
-            Debug.Log("<0");
             rb.AddForce(Vector2.left* moveSpeed);
             pushValue = 2;
         }
 
-        
-        
     }
     
         private void OnTriggerEnter2D(Collider2D other)
