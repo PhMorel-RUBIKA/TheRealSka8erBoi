@@ -1,16 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.Random;
 
-public class EnemyCac : AbstComp
+public class EnemyCaC : AbstComp
 {
     [Header("Animator Parameters")]
-    public Animator animator;
-    public SpriteRenderer myspriterenderer;
-    public bool facingRight = true;
+    //public Animator animator;
     [Space]
     
     [Header("Atck Parameters")]
@@ -68,7 +68,7 @@ public class EnemyCac : AbstComp
             {
                 if (canhit)
                 {
-                    if (!s2)
+                    if (s2==false)
                     {
                       ConeAtk();  
                     }
@@ -91,7 +91,7 @@ public class EnemyCac : AbstComp
     {
        
         agent.SetDestination(target.position);
-        animator.SetTrigger("onmov");
+      //  animator.SetTrigger("onmov");
     }
 
     public void TakeDamage(int damage)
@@ -106,14 +106,6 @@ public class EnemyCac : AbstComp
 
     private void FixedUpdate()
     {
-        if (pj.transform.position.x-transform.position.x < 0)
-        {
-            myspriterenderer.flipX = false;
-        }
-        else
-        {
-            myspriterenderer.flipX = true;
-        }
 
     }
 
@@ -124,9 +116,9 @@ public class EnemyCac : AbstComp
         }
     private void ConeAtk()
     {
-        Vector2 direction = pj.transform.position - transform.position;
+        Vector2 direction = transform.position - pj.transform.position;
         GetAngle(pj.transform.position, transform.position, out float angle);
-        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(transform.position, direction, angle);
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(transform.position, new Vector2(3,1), angle);
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.gameObject.CompareTag("Player"))
@@ -134,6 +126,12 @@ public class EnemyCac : AbstComp
                 PlayerBehaviour.playerBehaviour.TakeDamage(damage);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position,new Vector3(2,2,0));
+        Gizmos.color=Color.yellow;
     }
 
     IEnumerator Teleport()
