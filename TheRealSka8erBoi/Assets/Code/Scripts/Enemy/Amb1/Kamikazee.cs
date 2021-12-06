@@ -21,7 +21,7 @@ public class Kamikazee : AbstComp
     [Header("Comportment Parameters")]
     private bool canhit = true;
     [SerializeField] private float areaSize;
-    [SerializeField] private int damage = 10;
+    [SerializeField] private int damages = 10;
     [SerializeField] private float delay;
 
     void Start()
@@ -81,39 +81,34 @@ public class Kamikazee : AbstComp
         if (!CheckPlayerInRange()) return;
         if (canhit)
         { 
-            Debug.Log("triggerAnim");
             switch (animValue)
             {
             case 1:
                 animator.SetTrigger("STrigger");
-                Debug.Log("triggerAnim");
                 break;
             case 2:
                 animator.SetTrigger("SWTrigger");
-                Debug.Log("triggerAnim");
                 break;
             case 3 : 
                 animator.SetTrigger("SETrigger");
-                Debug.Log("triggerAnim");
                 break;
             case 4 :
                 animator.SetTrigger("NETrigger");
-                Debug.Log("triggerAnim");
+               
                 break;
             case 5 :
                 animator.SetTrigger("NWTrigger");
-                Debug.Log("triggerAnim");
+             
                 break;
             case 6 :
                 animator.SetTrigger("NTrigger");
-                Debug.Log("triggerAnim");
+
                 break;
             }           
             StartCoroutine("Explosion");
             canhit = false;
         }
         
-        Debug.Log("triggerAnim");
     }
 
     void GoToPlayer()
@@ -123,87 +118,55 @@ public class Kamikazee : AbstComp
 
     
 
-    private void FixedUpdate()
-    {
-        if (!(hp <= 0)) return;
-        animator.SetTrigger("isded");
-        Destroy(gameObject, 0.35f);
-        StartCoroutine(Explosion());
-    }
-
     IEnumerator Explosion()
     {
-        yield return new WaitForSeconds(4f);
-        FinalBoom();
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine(FinalBoom());
         
-        /*Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position,areaSize);*/
-        yield return new WaitForSeconds(.54f);
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
-        
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            if (enemy.gameObject.CompareTag("Player"))
-            {
-                PlayerBehaviour.playerBehaviour.TakeDamage(damage);
-            }
-
-            else if (enemy.gameObject.CompareTag("Target"))
-            {
-                DamageManager.instance.TakeDamage(damage);
-            }
-        }
-        
+        //Gizmos.color = Color.yellow;
     }
 
-    void FinalBoom()
+    IEnumerator FinalBoom()
     {
         agent.SetDestination(transform.position);
-        Debug.Log("exploAnim");
         switch (animValue)
         {
             
             case 1 :
                 animator.SetTrigger("SExplo");
-                Debug.Log("exploAnim");
                 break;
             case 2 :
                 animator.SetTrigger("SEExplo");
-                Debug.Log("exploAnim");
                 break;
             case 3 :
                 animator.SetTrigger("SWExplo");
-                Debug.Log("exploAnim");
                 break;
             case 4 :
                 animator.SetTrigger("NEExplo");
-                Debug.Log("exploAnim");
                 break;
             case 5 :
                 animator.SetTrigger("NWExplo");
-                Debug.Log("exploAnim");
                 break; 
             case 6 :
                 animator.SetTrigger("NExplo");
-                Debug.Log("exploAnim");
                 break;
         }
+        yield return new WaitForSeconds(.84f);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
         
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.gameObject.CompareTag("Player"))
             {
-                PlayerBehaviour.playerBehaviour.TakeDamage(damage);
+                PlayerBehaviour.playerBehaviour.TakeDamage(damages);
             }
 
             else if (enemy.gameObject.CompareTag("Target"))
             {
-                DamageManager.instance.TakeDamage(damage);
+                DamageManager.instance.TakeDamage(damages);
             }
         }
-        Destroy(gameObject,.9f);
-        Debug.Log("exploAnim");
+        Destroy(gameObject,0f);
     }
     
     public void TakeDamage(int damage)
@@ -212,7 +175,8 @@ public class Kamikazee : AbstComp
         Debug.Log(hp);
         if (hp <= 0)
         {
-            FinalBoom();
+            animator.SetBool("Instantkill", true);
+            StartCoroutine(FinalBoom());
         }
     }
 }
