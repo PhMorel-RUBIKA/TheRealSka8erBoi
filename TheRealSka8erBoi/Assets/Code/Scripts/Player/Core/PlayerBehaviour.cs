@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     //Declaration Movement
     private Rigidbody2D playerRigid;
     private SpriteRenderer playerRender;
-    private Vector2 leftJoy;
+    [SerializeField]private Vector2 leftJoy;
     private float floatManipulation;
     [HideInInspector]public Vector2 latestDirection;
     
@@ -208,19 +208,19 @@ public class PlayerBehaviour : MonoBehaviour
         {//Going Down
             animatorPlayer.SetTrigger(animatorID[1]);
         }
-        else if (leftJoy.x > deadzoneController && leftJoy.y < -deadzoneController)
+        else if (leftJoy.x > deadzoneController && leftJoy.y < 0.01f)
         {//GoingRightFront
             animatorPlayer.SetTrigger(animatorID[2]);
         }
-        else if (leftJoy.x > deadzoneController && leftJoy.y > deadzoneController) 
+        else if (leftJoy.x > deadzoneController && leftJoy.y > 0.01f) 
         {//GoingRightBack
             animatorPlayer.SetTrigger(animatorID[3]); 
         }
-        else if (leftJoy.x < -deadzoneController && leftJoy.y < -deadzoneController)
+        else if (leftJoy.x < -deadzoneController && leftJoy.y < 0.01f)
         {//GoingLeftFront
             animatorPlayer.SetTrigger(animatorID[4]);
         }
-        else if (leftJoy.x < -deadzoneController && leftJoy.y > deadzoneController) 
+        else if (leftJoy.x < -deadzoneController && leftJoy.y > 0.01f) 
         {//GoingLeftBack
             animatorPlayer.SetTrigger(animatorID[5]);
         }
