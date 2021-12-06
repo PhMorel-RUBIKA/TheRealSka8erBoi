@@ -7,6 +7,7 @@ using UnityEngine;
 public class BonusManager : MonoBehaviour
 {
     public static BonusManager instance;
+    public bool isDebug;
     public int redStat, greenStat, blueStat;
     public TextMeshProUGUI redText, greenText, blueText;
 

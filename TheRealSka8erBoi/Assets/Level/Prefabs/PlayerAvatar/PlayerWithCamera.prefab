@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 4834553342933288153}
   - component: {fileID: 5501638938004983748}
   - component: {fileID: 6902068902137927784}
+  - component: {fileID: 75124782}
   m_Layer: 6
   m_Name: PlayerWithCamera
   m_TagString: Player
@@ -532,24 +533,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc6a44a06cd69547932a56171dea881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftJoy: {x: 0, y: 0}
   latestDirection: {x: 0, y: 0}
-  playerSpeed: 5
+  _playerSpeed: 5
   deadzoneController: 0.3
-  dashCd: 0.5
+  _dashCd: 0.5
   dashSpeed: 40
   dashDuration: 0.1
   animatorID: 
   timeMaxCharge: 0.7
   perfectShootValue: 0.1
   _hapticTypesForPerfectShoot: 6
+  _baseDamage: 7
   cylindre: {fileID: 1475337109035453509, guid: ea5cc55a7c063a64bab39f45100101c1, type: 3}
   bigMuzzle: {fileID: 1919837915371265931, guid: 44aeaa95a8fae554f8b39dcaef29f7f8, type: 3}
   muzzle: {fileID: 6138741664477259675, guid: fec5ea49d9079754e85dfa0695ca6b42, type: 3}
   giantMuzzle: {fileID: 3266663899729837402, guid: 67c47c66bf2349d499ab0f7b21f8820b, type: 3}
   DamageFeedbacks: {fileID: 2947749812057125447}
-  maxHealth: 100
+  _maxHealth: 50
   currentHealth: 0
   healthBar: {fileID: 1737631998134540139}
+  descriptonRouge: maxHealth = BaseLife + (RedStatQuantity / BaseLife) * 100
+  RedStatModifier: 1
+  descriptonBleu: damage = baseDamage + (BlueStatQuantity * blueStatModifier)
+  BlueStatModifier: 0.8
+  descriptonVert: "playerSpeed = baseSpeed + (GreenStatQuantity * greenStatModifier)
+    \ndashCd = baseDashCd + (BlueStatQuantity * greenStatModifier)"
+  GreenStatModifier: 0.2
 --- !u!114 &3498011852449812536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,6 +631,25 @@ MonoBehaviour:
   LerpTimescale: 1
   LerpSpeed: 0
   TestButton: 0
+--- !u!114 &75124782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498011852449812487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c1a783264b8fc4f901ebf8e3ddc4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 0
+  redStat: 0
+  greenStat: 0
+  blueStat: 0
+  redText: {fileID: 0}
+  greenText: {fileID: 0}
+  blueText: {fileID: 0}
 --- !u!1 &3727118582301772759
 GameObject:
   m_ObjectHideFlags: 0

@@ -129,7 +129,7 @@ public class Item : MonoBehaviour
 
     void GetItemStickerRed()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.redStat += TheItem.stickerRed.value;
             Destroy(gameObject);
@@ -137,7 +137,7 @@ public class Item : MonoBehaviour
     }
     void GetItemStickerBlue()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.blueStat += TheItem.stickerBlue.value;
             Destroy(gameObject);
@@ -145,7 +145,7 @@ public class Item : MonoBehaviour
     }
     void GetItemStickerGreen()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.greenStat += TheItem.stickerGreen.value;
             Destroy(gameObject);

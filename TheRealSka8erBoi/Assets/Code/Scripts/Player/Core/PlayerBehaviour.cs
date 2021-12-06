@@ -13,13 +13,18 @@ public class PlayerBehaviour : MonoBehaviour
     [HideInInspector]public Vector2 latestDirection;
     
     [Header("Player Control")]
-    [SerializeField] int playerSpeed;
+    [SerializeField] int _playerSpeed;
+
+    public int playerSpeed => (int) (_playerSpeed + (BonusManager.instance.greenStat * GreenStatModifier));
+    
     [SerializeField] private float deadzoneController = 0.3f;
     [Space]
     
     //Declaration Dash
     [Header("Dash Tweaking")]
-    public float dashCd;
+    [SerializeField] private float _dashCd;
+
+    public float dashCd => _dashCd - (BonusManager.instance.greenStat * GreenStatModifier);
     public float dashSpeed;
     public float dashDuration;
     [Space]
@@ -36,6 +41,9 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float timeMaxCharge = 0.9f;
     [SerializeField] private float perfectShootValue;
     [SerializeField] private HapticTypes _hapticTypesForPerfectShoot = HapticTypes.Success;
+    [SerializeField] private float _baseDamage;
+    public float baseDamage => _baseDamage + (BonusManager.instance.blueStat * BlueStatModifier);
+    
     [Space]
     private bool isAiming;
     private float charge;
@@ -55,9 +63,23 @@ public class PlayerBehaviour : MonoBehaviour
     [Space]
 
     //Declaration UI
-    [HideInInspector] public int maxHealth = 5;
+    [SerializeField] private int _maxHealth = 5;
+
+    public int maxHealth => _maxHealth + (BonusManager.instance.redStat / _maxHealth * 100);
     [HideInInspector] public int currentHealth;
     public Slider healthBar;
+    
+    [Space(20)]
+    
+    [Header("BonusManager Attributs")]
+    [TextArea] public string descriptonRouge;
+    public float RedStatModifier;
+    [Space]
+    [TextArea] public string descriptonBleu;
+    public float BlueStatModifier;
+    [Space]
+    [TextArea] public string descriptonVert;
+    public float GreenStatModifier;
 
     public static PlayerBehaviour playerBehaviour;
 
@@ -262,7 +284,7 @@ public class PlayerBehaviour : MonoBehaviour
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
         spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.25f;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) (7 + Mathf.RoundToInt(charge * 20) * multiplicatorShoot);
+        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) (baseDamage + Mathf.RoundToInt(charge * 20) * multiplicatorShoot);
     }
 
     public void TakeDamage(int damageNumber)
