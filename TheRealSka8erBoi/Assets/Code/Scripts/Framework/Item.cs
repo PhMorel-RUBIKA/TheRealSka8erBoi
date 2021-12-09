@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Item : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class Item : MonoBehaviour
                 GetSpellItem();
                 break;
             case typeOfItem.COINS : 
+                GetMoney();
                 break;
             case typeOfItem.STICKER_RED :
                 GetItemStickerRed();
@@ -148,6 +150,17 @@ public class Item : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.greenStat += TheItem.stickerGreen.value;
+            Destroy(gameObject);
+        }
+    }
+
+    void GetMoney()
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) &&  checkIfGood)
+        {
+            int rand = Random.Range(1, TheItem.CoinItem.value / 10);
+            BonusManager.instance.money += TheItem.CoinItem.value;
+            BonusManager.instance.money += rand;
             Destroy(gameObject);
         }
     }
