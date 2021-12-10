@@ -33,6 +33,12 @@ public class Item : MonoBehaviour
             case typeOfItem.STICKER_GREEN :
                 gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerGreen.sprite;
                 break;
+            case typeOfItem.FOOD :
+                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.food.sprite; 
+                break;
+            case typeOfItem.DEATH :
+                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.death.sprite;
+                break;
         }
     }
 
@@ -54,6 +60,12 @@ public class Item : MonoBehaviour
                 break;
             case typeOfItem.STICKER_GREEN :
                 GetItemStickerGreen();
+                break;
+            case typeOfItem.FOOD : 
+                GetFood();
+                break;
+            case typeOfItem.DEATH : 
+                GetDeath();
                 break;
         }
     }
@@ -164,6 +176,33 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void GetFood()
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
+        {
+            player.GetComponent<PlayerBehaviour>().currentHealth += TheItem.food.value; 
+            Destroy(gameObject);
+        }
+    }
+
+    void GetDeath()
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) &&  checkIfGood)
+        {
+            switch (_inventory.deathDefiance1)
+            {
+                case false:
+                    _inventory.deathDefiance1 = true;
+                    Destroy(gameObject);
+                    return;
+                case true when !_inventory.deathDefiance2:
+                    _inventory.deathDefiance2 = true;
+                    break;
+            }
+            Destroy(gameObject);
+        }
+    }
 }
 
 public enum typeOfItem
@@ -173,6 +212,8 @@ public enum typeOfItem
     STICKER_RED,
     STICKER_BLUE,
     STICKER_GREEN,
+    FOOD, 
+    DEATH,
 }
 
 [Serializable]
@@ -184,6 +225,8 @@ public class theItem
     public stickerRed stickerRed;
     public stickerBlue stickerBlue;
     public stickerGreen stickerGreen;
+    public food food;
+    public death death;
 }
 
 [Serializable]
@@ -219,5 +262,18 @@ public class stickerBlue
 public class stickerGreen
 {
     public int value;
+    public Sprite sprite;
+}
+
+[Serializable]
+public class food
+{
+    public int value;
+    public Sprite sprite;
+}
+
+[Serializable]
+public class death
+{
     public Sprite sprite;
 }
