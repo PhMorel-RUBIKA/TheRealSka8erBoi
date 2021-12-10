@@ -1,6 +1,7 @@
 using MoreMountains.NiceVibrations;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour
@@ -27,11 +28,15 @@ public class PlayerBehaviour : MonoBehaviour
     public float dashCd => _dashCd - (BonusManager.instance.greenStat * GreenStatModifier);
     public float dashSpeed;
     public float dashDuration;
-    [Space]
     private float dashOngoingCd;
     private float dashGoingFor;
     private bool dash = true;
-    
+    public bool dashSpellActive = false;
+    public int dashSpellactivation;
+    public GameObject dashNode;
+    public List<GameObject> dashNodeList;
+    public GameObject spellDashLaser;
+    [Space]
     //Declaration Animation
     private Animator animatorPlayer;
     public List<int> animatorID;
@@ -163,6 +168,11 @@ public class PlayerBehaviour : MonoBehaviour
                 dashOngoingCd = dashCd ;
                 dashGoingFor = 0;
                 dash = true;
+                if (dashSpellActive && dashSpellactivation == 4)
+                {
+                    dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
+                }
+                    
             }
         }
     }
@@ -205,6 +215,10 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 playerRigid.velocity = Vector2.zero;
                 dash = false;
+                if (dashSpellActive)
+                {
+                    DashSpell();
+                }
             }
             else
             {
@@ -298,6 +312,34 @@ public class PlayerBehaviour : MonoBehaviour
         if (currentHealth < 1)
         {
             animatorPlayer.SetTrigger(animatorID[7]);
+        }
+    }
+
+    public void DashSpell()
+    {
+        dashSpellactivation -= 1;
+        dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
+        if (dashSpellactivation < 1)
+        {
+            dashSpellActive = false;
+            for (int i = 0; i < dashNodeList.Count-1; i++)
+            {
+                GameObject laser = Instantiate(spellDashLaser, dashNodeList[i].transform.position, quaternion.identity,dashNodeList[i].transform);
+                laser.GetComponentInChildren<LineRenderer>().SetPosition(1, dashNodeList[i+1].transform.position - laser.transform.position);
+                Vector3 perpendicular = Vector2.Perpendicular(dashNodeList[i + 1].transform.position - laser.transform.position).normalized; 
+                laser.GetComponentInChildren<PolygonCollider2D>().SetPath(0,new List<Vector2>
+                {
+                    perpendicular*0.3f,
+                    -perpendicular*0.3f,
+                    dashNodeList[i + 1].transform.position - laser.transform.position - perpendicular*0.3f,
+                    dashNodeList[i + 1].transform.position - laser.transform.position + perpendicular*0.3f
+                });
+                Debug.Log(dashNodeList[i].transform.position + perpendicular.normalized);
+                Debug.Log(dashNodeList[i + 1].transform.position - perpendicular.normalized);
+
+                Destroy(dashNodeList[i], 3);
+            }
+            Destroy(dashNodeList[dashNodeList.Count-1], 3);
         }
     }
 }
