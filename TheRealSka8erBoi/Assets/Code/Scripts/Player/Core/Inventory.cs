@@ -7,6 +7,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public List<slot> slots = new List<slot>();
+    public bool deathDefiance1, deathDefiance2;
 
     private void Update()
     {
