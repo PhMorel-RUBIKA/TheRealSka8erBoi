@@ -24,7 +24,8 @@ public class BonusManager : MonoBehaviour
         greenStat = 0;
         blueStat = 0;
         money = 0;
-        
+
+        if (canvas == null) canvas = null;
         switch (isDebug)
         {
             case true :
@@ -43,6 +44,7 @@ public class BonusManager : MonoBehaviour
 
     void IsDebug(bool isActive)
     {
+        if (canvas == null) return;
         canvas.gameObject.SetActive(isActive);
     }
 

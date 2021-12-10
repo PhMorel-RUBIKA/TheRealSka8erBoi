@@ -9,8 +9,9 @@ public class LoadSceneManagerPROTO : MonoBehaviour
     public int numberOfRoom;
     public Animator transition;
     public float transitionTime;
+    public GameObject player;
     public static LoadSceneManagerPROTO LoadSceneManagerProtoInstance;
-    
+
     public void Awake()
     {
         if (LoadSceneManagerProtoInstance == null)
@@ -23,12 +24,12 @@ public class LoadSceneManagerPROTO : MonoBehaviour
     }
     
     public IEnumerator ChangeRoom()
-    { 
-        transition.SetTrigger("Start");
+    {
         yield return new WaitForSeconds(transitionTime);
+        player.transform.position = new Vector3(0,0,0);
         SceneManager.LoadSceneAsync(roomOrder[numberOfRoom]);
         transition.SetTrigger("Stop");
-        
+
         numberOfRoom++;
         
     }
