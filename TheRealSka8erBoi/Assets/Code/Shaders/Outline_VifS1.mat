@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy
+  m_Name: Outline_VifS1
   m_Shader: {fileID: -6465566751694194690, guid: 19ea62bb6f05e8746adc25e704bc085a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: dd6c59e0395b61f48948a2712c2b6177, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2ba163ff3437a8447b251935799298b4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -36,8 +36,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Thickness: 0.001
+    - _OffsetY: 6
+    - _Thickness: 0.002
     m_Colors:
-    - _ColorOutline: {r: 2.670157, g: 2.670157, b: 2.670157, a: 1}
+    - _ColorOutline: {r: 3.5648696, g: 2.8004344, b: 0.28586224, a: 1}
     - _Offset: {r: 0.001, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
