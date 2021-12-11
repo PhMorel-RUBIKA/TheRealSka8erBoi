@@ -23,6 +23,7 @@ public class Kamikazee : AbstComp
     [SerializeField] private float areaSize;
     [SerializeField] private int damages = 10;
     [SerializeField] private float delay;
+    private bool explod = false;
 
     void Start()
     {
@@ -80,7 +81,31 @@ public class Kamikazee : AbstComp
         GoToPlayer();
         if (!CheckPlayerInRange()) return;
         if (canhit)
-        { 
+        {
+            StartCoroutine(FinalBoom());
+            canhit = false;
+        }
+        
+    }
+
+    void GoToPlayer()
+    {
+        if (!explod)
+        {
+           agent.SetDestination(target.position); 
+        }
+        else
+        {
+            agent.SetDestination(transform.position);
+        }
+        
+    }
+
+    
+    IEnumerator FinalBoom()
+    {
+        explod = true;
+        animator.SetBool("TriggerLaunched", true);
             switch (animValue)
             {
             case 1:
@@ -104,54 +129,11 @@ public class Kamikazee : AbstComp
                 animator.SetTrigger("NTrigger");
 
                 break;
-            }           
-            StartCoroutine("Explosion");
-            canhit = false;
-        }
-        
-    }
+            }
 
-    void GoToPlayer()
-    {
-        agent.SetDestination(target.position);
-    }
+        yield return new WaitForSeconds(1.55f);
+  
 
-    
-
-    IEnumerator Explosion()
-    {
-        yield return new WaitForSeconds(1.5f);
-        StartCoroutine(FinalBoom());
-        
-        //Gizmos.color = Color.yellow;
-    }
-
-    IEnumerator FinalBoom()
-    {
-        agent.SetDestination(transform.position);
-        switch (animValue)
-        {
-            
-            case 1 :
-                animator.SetTrigger("SExplo");
-                break;
-            case 2 :
-                animator.SetTrigger("SEExplo");
-                break;
-            case 3 :
-                animator.SetTrigger("SWExplo");
-                break;
-            case 4 :
-                animator.SetTrigger("NEExplo");
-                break;
-            case 5 :
-                animator.SetTrigger("NWExplo");
-                break; 
-            case 6 :
-                animator.SetTrigger("NExplo");
-                break;
-        }
-        yield return new WaitForSeconds(.84f);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
         
         foreach (Collider2D enemy in hitEnemies)
