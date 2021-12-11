@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public LoadSceneManager LoadSceneManager;
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
-            LoadSceneManager.ChangeRoom();
+        {
+            LoadSceneManager.instance.transition.SetTrigger("Start");
+            StartCoroutine(LoadSceneManager.instance.ChangeRoom());
+        }
     }
 }

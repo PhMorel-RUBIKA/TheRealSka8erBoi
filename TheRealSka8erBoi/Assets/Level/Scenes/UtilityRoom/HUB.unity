@@ -1847,7 +1847,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1165539956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faf59730a752d24889142aafd526254, type: 3}
+  m_Script: {fileID: 11500000, guid: b5edbcee775adb44ab2b63f0e05e7782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1191850008
@@ -2572,8 +2572,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1449619371}
-  - component: {fileID: 1449619370}
   - component: {fileID: 1449619372}
+  - component: {fileID: 1449619373}
   m_Layer: 0
   m_Name: ~~ INSTANCE MANAGER ~~
   m_TagString: Untagged
@@ -2581,26 +2581,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1449619370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449619369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3697d185a003c443a241a1cc45e0682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomOrder:
-  - Amb1-Room1
-  - Amb2-Room1
-  - Merchant
-  numberOfRoom: 0
-  transition: {fileID: 1415255819}
-  transitionTime: 4
-  player: {fileID: 1263764727}
 --- !u!4 &1449619371
 Transform:
   m_ObjectHideFlags: 0
@@ -2632,6 +2612,45 @@ MonoBehaviour:
   seed: 0
   useStringSeed: 0
   stringSeed: 
+--- !u!114 &1449619373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449619369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234ec24b0a594a949b21d626375f80ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfRoom: 0
+  randomIndex: 
+  roomS1:
+  - Amb1-Room1
+  - Amb1-Room2
+  - Amb1-Room3
+  - Amb1-Room4
+  - Amb1-Room5
+  - Amb1-Room6
+  - Amb1-Room7
+  roomS2:
+  - Amb2-Room1
+  - Amb2-Room2
+  - Amb2-Room3
+  - Amb2-Room4
+  - Amb2-Room5
+  - Amb2-Room6
+  - Amb2-Room7
+  utilityRoom:
+  - Merchant
+  - Semi Boss
+  - Boss
+  - HUB
+  finalList: []
+  player: {fileID: 1263764727}
+  transition: {fileID: 1415255819}
+  transitionTime: 3
 --- !u!1 &1451370434
 GameObject:
   m_ObjectHideFlags: 0
