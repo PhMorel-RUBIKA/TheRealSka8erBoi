@@ -320,6 +320,11 @@ MonoBehaviour:
     stickerGreen:
       value: 0
       sprite: {fileID: 0}
+    food:
+      value: 0
+      sprite: {fileID: 0}
+    death:
+      sprite: {fileID: 0}
   checkIfGood: 0
 --- !u!50 &2380168002199657967
 Rigidbody2D:
@@ -540,6 +545,11 @@ MonoBehaviour:
   _dashCd: 0.5
   dashSpeed: 40
   dashDuration: 0.1
+  dashSpellActive: 0
+  dashSpellactivation: 0
+  dashNode: {fileID: 8967867004947012951, guid: d9b18206db012f740aab63e285e69ee8, type: 3}
+  dashNodeList: []
+  spellDashLaser: {fileID: 669065867579327252, guid: 626e8a795baa1394da70509c1c057bf1, type: 3}
   animatorID: 
   timeMaxCharge: 0.7
   perfectShootValue: 0.1
@@ -577,6 +587,8 @@ MonoBehaviour:
     item: {fileID: 0}
   - isFull: 0
     item: {fileID: 0}
+  deathDefiance1: 0
+  deathDefiance2: 0
 --- !u!114 &4834553342933288153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,9 +659,12 @@ MonoBehaviour:
   redStat: 0
   greenStat: 0
   blueStat: 0
+  money: 0
   redText: {fileID: 0}
   greenText: {fileID: 0}
   blueText: {fileID: 0}
+  moneyText: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!1 &3727118582301772759
 GameObject:
   m_ObjectHideFlags: 0

@@ -325,7 +325,10 @@ public class PlayerBehaviour : MonoBehaviour
             for (int i = 0; i < dashNodeList.Count-1; i++)
             {
                 GameObject laser = Instantiate(spellDashLaser, dashNodeList[i].transform.position, quaternion.identity,dashNodeList[i].transform);
-                laser.GetComponentInChildren<LineRenderer>().SetPosition(1, dashNodeList[i+1].transform.position - laser.transform.position);
+                for (int j = 0; j < laser.transform.childCount - 1; j++)
+                {
+                    laser.transform.GetChild(j).GetComponent<LineRenderer>().SetPosition(1, dashNodeList[i+1].transform.position - laser.transform.position);
+                }
                 Vector3 perpendicular = Vector2.Perpendicular(dashNodeList[i + 1].transform.position - laser.transform.position).normalized; 
                 laser.GetComponentInChildren<PolygonCollider2D>().SetPath(0,new List<Vector2>
                 {
