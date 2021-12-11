@@ -1688,6 +1688,7 @@ MonoBehaviour:
   - {fileID: 8540784709627352553}
   waveLevel: {fileID: 11400000, guid: 0ee1dd918d25eef41ad2b1f8984b52c2, type: 2}
   gate: {fileID: 0}
+  timeBetweenWave: 0
   enemyOnScreen: 
 --- !u!1001 &1758863348
 PrefabInstance:
@@ -2396,6 +2397,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProtoBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427456, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427483, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2492,14 +2497,6 @@ PrefabInstance:
     - target: {fileID: 1816336349083481416, guid: 351ed76a1cad95140934fbf061e3ec0d, type: 3}
       propertyPath: m_Name
       value: Kamikazee
-      objectReference: {fileID: 0}
-    - target: {fileID: 1816336349083481416, guid: 351ed76a1cad95140934fbf061e3ec0d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1816336349083481418, guid: 351ed76a1cad95140934fbf061e3ec0d, type: 3}
-      propertyPath: target
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1816336349083481429, guid: 351ed76a1cad95140934fbf061e3ec0d, type: 3}
       propertyPath: m_RootOrder
