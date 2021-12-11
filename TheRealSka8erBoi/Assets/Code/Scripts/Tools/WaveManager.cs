@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class WaveManager : MonoBehaviour
     public Transform[] spawnPoints;
     public WaveLevel waveLevel;
     public GameObject gate;
+    public float timeBetweenWave;
 
     private bool canSpawn = true;
     private float nextSpawnTime;
@@ -22,27 +24,26 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         WaveManager.instance = this;
-
-        for (int i = 0; i < waveLevel.waves.Length; i++)
-        {
-            currentNumberOfEnemies.Add(waveLevel.waves[i].numberOfenemies);
-        }
-        
+        for (int i = 0; i < waveLevel.waves.Length; i++) currentNumberOfEnemies.Add(waveLevel.waves[i].numberOfenemies);
     }
 
     private void Update()
     {
         currentWave = waveLevel.waves[currentWaveNumber];
-        SpawnWave();
+        StartCoroutine(CoroutineForWave());
         if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber+1 != waveLevel.waves.Length)
         {
             currentWaveNumber ++;
-            waypointUsed.Clear();
             canSpawn = true;
         }
 
-        if (currentWaveNumber + 1 == waveLevel.waves.Length)
-            gate.SetActive(true);
+        if (currentWaveNumber == waveLevel.waves.Length) gate.SetActive(true);
+    }
+
+    IEnumerator CoroutineForWave()
+    {
+        yield return new WaitForSeconds(timeBetweenWave);
+        SpawnWave();
     }
 
     void SpawnWave()
@@ -56,10 +57,7 @@ public class WaveManager : MonoBehaviour
             currentNumberOfEnemies[currentWaveNumber]--;
             nextSpawnTime = Time.time + currentWave.spawnInterval;
 
-            if (currentNumberOfEnemies[currentWaveNumber] == 0)
-            {
-                canSpawn = false;
-            }
+            if (currentNumberOfEnemies[currentWaveNumber] == 0) canSpawn = false;
         }
     }
 
@@ -84,10 +82,8 @@ public class WaveManager : MonoBehaviour
         int index = Random.Range(0, spawnPoints.Length);
 
         while (waypointUsed.Contains(spawnPoints[index]))
-        {
             index = Random.Range(0, spawnPoints.Length);
-        }
-        
+
         randomPoint = spawnPoints[index];
         waypointUsed.Add(spawnPoints[index]);
 
