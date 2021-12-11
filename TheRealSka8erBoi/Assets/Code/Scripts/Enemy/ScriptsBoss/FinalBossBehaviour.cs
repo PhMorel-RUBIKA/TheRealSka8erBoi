@@ -32,12 +32,11 @@ public class FinalBossBehaviour : MonoBehaviour
     [SerializeField] private float leftArmRecover = 10;
     [SerializeField] private float rightArmRecover = 10;
     [SerializeField] private float armRecoverInit = 10;
-    [Space] [Header("Punch Parameters")]
-    [SerializeField] private Rigidbody2D punch;
+    [Space] [Header("Crush Parameters")]
+    //[SerializeField] private Rigidbody2D Crush;
     [SerializeField] private float areaSize;
     [SerializeField] private int damage;
     private int punchDamage = 15;
-
     [Space] [Header("EnemySpawnParameters")]
     private int spawningFactor;
     [SerializeField] List<Rigidbody2D> enemyPool;
