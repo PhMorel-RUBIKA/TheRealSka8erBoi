@@ -50,7 +50,7 @@ public class EnemyZoner : AbstComp
     {
         if (!CheckPlayerInSight()) return;
         lineOfSight = 100;
-
+        GoToPlayer();
         if (!CheckPlayerInRange()) return;
         if (!canshoot) return;
        //animator.SetTrigger("Atk");
