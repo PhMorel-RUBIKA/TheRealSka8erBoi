@@ -1931,11 +1931,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4356133853032495780, guid: 6bc48db564bc0b24ca0872bfbdfc75a5, type: 3}
   m_PrefabInstance: {fileID: 781090499}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &781090501 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4356133853032495783, guid: 6bc48db564bc0b24ca0872bfbdfc75a5, type: 3}
-  m_PrefabInstance: {fileID: 781090499}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &783833402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2262,7 +2257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &948515858
 Transform:
   m_ObjectHideFlags: 0
@@ -3194,7 +3189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1506023853
 Transform:
   m_ObjectHideFlags: 0
@@ -4659,7 +4654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2137919900
 Transform:
   m_ObjectHideFlags: 0
@@ -4749,7 +4744,8 @@ MonoBehaviour:
   - {fileID: 255521329}
   - {fileID: 852935427}
   waveLevel: {fileID: 11400000, guid: 0223537d29ada284a82e4434fc6b1e36, type: 2}
-  gate: {fileID: 781090501}
+  gateZone: {fileID: 0}
+  timeBetweenWave: 0
   enemyOnScreen: 
 --- !u!4 &2143781287
 Transform:
