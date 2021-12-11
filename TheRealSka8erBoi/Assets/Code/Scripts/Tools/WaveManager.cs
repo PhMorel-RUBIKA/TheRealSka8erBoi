@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
 {
     public Transform[] spawnPoints;
     public WaveLevel waveLevel;
-    public GameObject gate;
+    public GameObject gateZone;
     public float timeBetweenWave;
 
     private bool canSpawn = true;
@@ -34,10 +34,11 @@ public class WaveManager : MonoBehaviour
         if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber+1 != waveLevel.waves.Length)
         {
             currentWaveNumber ++;
+            Debug.Log(currentWaveNumber);
             canSpawn = true;
         }
-
-        if (currentWaveNumber == waveLevel.waves.Length) gate.SetActive(true);
+        else if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber + 1 == waveLevel.waves.Length)
+            gateZone.SetActive(true);
     }
 
     IEnumerator CoroutineForWave()

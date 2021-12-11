@@ -41,10 +41,8 @@ public class PoolObjectManager : MonoBehaviour
     //Mise en place de l'instance
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
+        if (Instance == null) Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     //Création de la pool

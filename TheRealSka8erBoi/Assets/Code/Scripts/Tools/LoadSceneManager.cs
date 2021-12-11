@@ -43,13 +43,19 @@ public class LoadSceneManager : MonoBehaviour
             {
                 ChangeRoom();
             }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("Amb1-Room1");
+                player.transform.position = Vector3.zero;
+            }
         }
 
         void GetRandomNumber()
         {
             for (int i = 0; i < 3; i++)
             {
-                int index = Random.Range(0, 8);
+                int index = Random.Range(0, 7);
                 if (!randomIndex.Contains(index))
                 {
                     randomIndex.Add(index);
