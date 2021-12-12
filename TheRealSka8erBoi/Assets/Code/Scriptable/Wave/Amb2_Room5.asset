@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736bea936facbbb488857bf11fc8e923, type: 3}
+  m_Name: Amb2_Room5
+  m_EditorClassIdentifier: 
+  waves:
+  - waveName: First
+    spawnInterval: 0.5
+    numberOfenemies: 2
+    typeOfEnnemies:
+    - enemy: {fileID: 4076993939007909676, guid: 294231e3e2194a641b598d28e1d448fd, type: 3}
+      probability: 0
+    - enemy: {fileID: 6544971654555334627, guid: 340b4c6b59392e146931eccc1827eae8, type: 3}
+      probability: 0
+    - enemy: {fileID: 5457594598274452330, guid: 226b9ac80df69994bbf6c297aa288ca4, type: 3}
+      probability: 0
