@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using DG.Tweening;
-using UnityEditor.AnimatedValues;
 using UnityEngine.AI;
 using UnityEngine;
 using UnityEngine.UI;

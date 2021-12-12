@@ -56,7 +56,7 @@ public class MenuManagerBehaviour : MonoBehaviour
 
     public void StartPlaying()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("HUB");
     }
 
     public void QuitGame()
