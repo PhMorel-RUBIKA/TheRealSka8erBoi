@@ -387,6 +387,8 @@ GameObject:
   - component: {fileID: 199819863}
   - component: {fileID: 199819862}
   - component: {fileID: 199819861}
+  - component: {fileID: 199819865}
+  - component: {fileID: 199819864}
   m_Layer: 0
   m_Name: S_map5_sol_S2
   m_TagString: Border
@@ -548,6 +550,73 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &199819864
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199819859}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 6.0289683, y: -1.5377345}
+  - {x: 6.9529834, y: -1.5244972}
+  - {x: 6.9511094, y: -2.6666057}
+  - {x: 8.849826, y: -2.6505964}
+  - {x: 8.998889, y: -4.368766}
+  - {x: -6.980765, y: -4.44371}
+  - {x: -6.9195952, y: -2.5285861}
+  - {x: 3.0073497, y: -2.530755}
+  - {x: 2.9624329, y: -1.4711047}
+  - {x: 3.9628243, y: -1.4801444}
+  - {x: 4.0007906, y: -0.50036156}
+  - {x: 6.004794, y: -0.55157423}
+  - {x: 6.020613, y: -1.6906658}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!68 &199819865
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199819859}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.8154986, y: 2.4388752}
+  - {x: -0.37894106, y: 2.6219487}
+  - {x: 5.012764, y: 2.473417}
+  - {x: 4.9977803, y: 4.2034936}
+  - {x: 4.0376124, y: 4.163631}
+  - {x: 3.9855556, y: 8.473375}
+  - {x: -1.0429995, y: 8.468386}
+  - {x: -1.0296657, y: 6.158865}
+  - {x: -2.002999, y: 6.189909}
+  - {x: -1.9545896, y: 3.6178002}
+  - {x: -0.936445, y: 3.5149453}
+  - {x: -0.9396355, y: 2.6992738}
+  - {x: -0.8332857, y: 2.4208763}
+  - {x: -0.53646827, y: 3.077867}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &216220207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,8 +3109,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692150040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5421, y: 7.03, z: 0}
-  m_LocalScale: {x: 4.846438, y: 2.3693454, z: 1}
+  m_LocalPosition: {x: 1.7342, y: 6.7526, z: 0}
+  m_LocalScale: {x: 4.376762, y: 1.8145852, z: 1}
   m_Children: []
   m_Father: {fileID: 531315348}
   m_RootOrder: 0
