@@ -6,11 +6,20 @@ using Random = UnityEngine.Random;
 
 public class WaveManager : MonoBehaviour
 {
-    public Transform[] spawnPoints;
+    
+    [Header("Core Attributs")]
     public WaveLevel waveLevel;
-    public GameObject gateZone;
+    public GameObject gateZone1;
+    public GameObject gateZone2;
     public float timeBetweenWave;
-
+    [Space]
+    [Header("Array Attributs")]
+    public Transform[] spawnPoints;
+    public GameObject[] rewardObjects;
+    
+    public GameObject itemDoor1;
+    public GameObject itemDoor2;
+    
     private bool canSpawn = true;
     private float nextSpawnTime;
     private Wave currentWave;
@@ -37,8 +46,7 @@ public class WaveManager : MonoBehaviour
             Debug.Log(currentWaveNumber);
             canSpawn = true;
         }
-        else if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber + 1 == waveLevel.waves.Length)
-            gateZone.SetActive(true);
+        else if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber + 1 == waveLevel.waves.Length) EndWave();
     }
 
     IEnumerator CoroutineForWave()
@@ -90,5 +98,27 @@ public class WaveManager : MonoBehaviour
 
         return randomPoint;
     }
-    
+
+    void EndWave()
+    {
+        Instantiate(LoadSceneManager.instance.nextItemToSpawn, Vector3.zero, Quaternion.identity);
+
+        LoadSceneManager.instance.nextItemToSpawn = null;
+        itemDoor1 = null;
+        gateZone1.GetComponent<SpriteRenderer>().sprite = null;
+        itemDoor2 = null;
+        gateZone1.GetComponent<SpriteRenderer>().sprite = null;
+        
+        int rand1 = Random.Range(0, rewardObjects.Length);
+        int rand2 = Random.Range(0, rewardObjects.Length);
+        while (rand2 == rand1) rand2 = Random.Range(0, rewardObjects.Length);
+
+        itemDoor1 = rewardObjects[rand1];
+        gateZone1.GetComponent<SpriteRenderer>().sprite = itemDoor1.GetComponent<SpriteRenderer>().sprite;
+        itemDoor2 = rewardObjects[rand2];
+        gateZone2.GetComponent<SpriteRenderer>().sprite = itemDoor2.GetComponent<SpriteRenderer>().sprite;
+        
+        gateZone1.SetActive(true);
+        gateZone2.SetActive(true);
+    }
 }

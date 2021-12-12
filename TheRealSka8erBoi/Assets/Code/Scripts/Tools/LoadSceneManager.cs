@@ -23,6 +23,7 @@ public class LoadSceneManager : MonoBehaviour
         public float transitionTime;
 
         public static LoadSceneManager instance;
+        public GameObject nextItemToSpawn;
 
         public void Awake()
         {
