@@ -39,7 +39,7 @@ public class FinalBossBehaviour : MonoBehaviour
     private int punchDamage = 15;
     [Space] [Header("EnemySpawnParameters")]
     private int spawningFactor;
-    [SerializeField] List<Rigidbody2D> enemyPool;
+    [SerializeField] List<GameObject> enemyPool;
     private int enemySelection;
     public Transform[] spawnPoints;
     private List<Transform> waypointUsed = new List<Transform>();
@@ -278,23 +278,21 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         if(bossIsMidLife)
         {
-            spawningFactor = Range(2, 8);
-        for (int e = 0; e < spawningFactor; e++)
-        {
-            enemySelection = Range(0, 5);
-            Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity);
-        }
-        enemySelection = Range(1, 6);
+            spawningFactor = Range(2, 4);
+            for (int e = 0; e < spawningFactor; e++)
+            {
+                enemySelection = Range(0, 5);
+                Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity);
+            }
         }
         else
         {
-            spawningFactor = Range(1, 4);
-        for (int e = 0; e < spawningFactor; e++)
-        {
-            enemySelection = Range(0, 5);
-            Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity);
-        }
-        enemySelection = Range(1, 6);
+            spawningFactor = Range(1, 2);
+            for (int e = 0; e < spawningFactor; e++)
+            {
+                enemySelection = Range(0, 5);
+                Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity); 
+            }
         }
         
     }
@@ -316,7 +314,6 @@ public class FinalBossBehaviour : MonoBehaviour
 
             Transform GetRandomFirePoint()
     {
-        firePoints = null;
         int index = Range(0, firePoints.Length);
 
         while (firePointsUsed.Contains(firePoints[index]))
