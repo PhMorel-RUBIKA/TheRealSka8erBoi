@@ -24,15 +24,6 @@ public class Item : MonoBehaviour
                 break;
             case typeOfItem.COINS : 
                 break;
-            case typeOfItem.STICKER_RED :
-                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerRed.sprite;
-                break; 
-            case typeOfItem.STICKER_BLUE : 
-                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerBlue.sprite;
-                break;
-            case typeOfItem.STICKER_GREEN :
-                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerGreen.sprite;
-                break;
             case typeOfItem.FOOD :
                 gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.food.sprite; 
                 break;
@@ -248,21 +239,18 @@ public class coinItem
  public class stickerRed
  {
      public int value;
-     public Sprite sprite;
  }
  
 [Serializable]
 public class stickerBlue
 {
     public int value;
-    public Sprite sprite;
 }
 
 [Serializable]
 public class stickerGreen
 {
     public int value;
-    public Sprite sprite;
 }
 
 [Serializable]
