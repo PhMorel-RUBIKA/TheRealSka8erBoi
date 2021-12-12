@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8773585, g: 0.7845929, b: 0.26900145, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -140,9 +140,9 @@ MonoBehaviour:
     TypeOfItem: 0
     SpellItem:
       spellScriptable: {fileID: 11400000, guid: 022513b4ac70f7648aec3729c671d2ac, type: 2}
-      timeToPick: 1
-      spellImage: {fileID: -621473508321055999, guid: c123a711c65204e41b6442cd4e29a91d, type: 3}
-      spellUI: {fileID: -3257548249418069461, guid: 95803ae43da0e464baec86fc670b3fc2, type: 3}
+      timeToPick: 0
+      spellImage: {fileID: 21300000, guid: 34821965af1cee844a8c1175b0bf7327, type: 3}
+      spellUI: {fileID: 1044336041427382195, guid: 4cbdb144bca01bd4e844f1421ee92911, type: 3}
     CoinItem:
       value: 0
     stickerRed:
@@ -153,6 +153,11 @@ MonoBehaviour:
       sprite: {fileID: 0}
     stickerGreen:
       value: 0
+      sprite: {fileID: 0}
+    food:
+      value: 0
+      sprite: {fileID: 0}
+    death:
       sprite: {fileID: 0}
   checkIfGood: 0
 --- !u!114 &-4190749436114186864

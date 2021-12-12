@@ -103,7 +103,7 @@ public class Enemy_Vif_Behaviour : AbstComp
                 }
             }
         }
-     }
+    }
     void Shoot() 
     { 
         if(canshoot==false) 
