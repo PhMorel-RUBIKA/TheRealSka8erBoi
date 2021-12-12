@@ -28,24 +28,35 @@ public class VendingMachine : MonoBehaviour
         switch (objectType)
         {
             case "sticker" :
-                int rand = Random.Range(1, 4);
-                ObjectType(rand);
+                ObjectType();
                 break;
             case "food" : 
-                ObjectType(0);
+                ObjectTypeAutre(0);
                 break;
             case "death" : 
-                ObjectType(4);
+                ObjectTypeAutre(4);
                 break;
         }
     }
 
-    void ObjectType(int number)
+    void ObjectType()
+    {
+        int rand = Random.Range(0, 4);
+        
+        if (!Input.GetKeyDown(KeyCode.JoystickButton3)) return;
+        if (Input.GetKeyDown(KeyCode.JoystickButton3) && BonusManager.instance.money < possibleItems[rand].value) return;
+        
+        Instantiate(possibleItems[rand].prefab, gameObject.transform.position + new Vector3(0, 0.85f,0), Quaternion.identity);
+        BonusManager.instance.money -= possibleItems[rand].value;
+        Destroy(gameObject);
+    }
+    
+    void ObjectTypeAutre(int number)
     {
         if (!Input.GetKeyDown(KeyCode.JoystickButton3)) return;
         if (Input.GetKeyDown(KeyCode.JoystickButton3) && BonusManager.instance.money < possibleItems[number].value) return;
         
-        Instantiate(possibleItems[number].prefab, gameObject.transform.position, Quaternion.identity);
+        Instantiate(possibleItems[number].prefab, gameObject.transform.position + new Vector3(0, 0.85f,0), Quaternion.identity);
         BonusManager.instance.money -= possibleItems[number].value;
         Destroy(gameObject);
     }
