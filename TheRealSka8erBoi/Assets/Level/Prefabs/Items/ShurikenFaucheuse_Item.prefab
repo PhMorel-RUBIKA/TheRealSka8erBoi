@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 66269100412727319}
   - component: {fileID: 66269100412727318}
   - component: {fileID: -50438855678490925}
+  - component: {fileID: 1293186028}
+  - component: {fileID: 1293186029}
   m_Layer: 0
   m_Name: ShurikenFaucheuse_Item
   m_TagString: Untagged
@@ -72,18 +74,18 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1012055403
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 0.6446203, b: 0.6179246, a: 1}
+  m_Sprite: {fileID: -7501617604676689946, guid: 4bec18d21a895aa47a18598fd6a8458b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &66269100412727316
@@ -140,19 +142,21 @@ MonoBehaviour:
     TypeOfItem: 0
     SpellItem:
       spellScriptable: {fileID: 11400000, guid: 5d7df566f6bbcd3469177570a1237419, type: 2}
-      timeToPick: 1
-      spellImage: {fileID: 21300000, guid: 34821965af1cee844a8c1175b0bf7327, type: 3}
-      spellUI: {fileID: 3676699452124461142, guid: 7cef579b39dd2354d87d9a3a2eac006a, type: 3}
+      timeToPick: 0
+      spellImage: {fileID: -7501617604676689946, guid: 4bec18d21a895aa47a18598fd6a8458b, type: 3}
+      spellUI: {fileID: -7501617604676689946, guid: 4bec18d21a895aa47a18598fd6a8458b, type: 3}
     CoinItem:
       value: 0
     stickerRed:
       value: 0
-      sprite: {fileID: 0}
     stickerBlue:
       value: 0
-      sprite: {fileID: 0}
     stickerGreen:
       value: 0
+    food:
+      value: 0
+      sprite: {fileID: 0}
+    death:
       sprite: {fileID: 0}
   checkIfGood: 0
 --- !u!114 &-50438855678490925
@@ -168,3 +172,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: edea4f601382db54b872a9aebc130af3, type: 2}
+--- !u!95 &1293186028
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66269100412727337}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 719a674243b3d204eb3a5fee9eee9e45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1293186029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66269100412727337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41d4902685b612439de1af1ec6e8554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRender: {fileID: 66269100412727317}
+  offset: 0
