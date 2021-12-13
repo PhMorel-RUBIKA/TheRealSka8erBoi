@@ -8,7 +8,6 @@ public class ParallaxBackground : MonoBehaviour
 
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
-
     private void Start()
     {
         cameraTransform = Camera.main.transform;

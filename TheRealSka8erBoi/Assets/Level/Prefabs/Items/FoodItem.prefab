@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5171459184879079779}
   - component: {fileID: 4130465422056057639}
   - component: {fileID: 3187533887618467011}
-  - component: {fileID: 1990780571}
-  - component: {fileID: 1990780572}
+  - component: {fileID: -8674918161017471502}
+  - component: {fileID: 801412694007580348}
   m_Layer: 0
   m_Name: FoodItem
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8447129368079113841, guid: 44db5ab3612057c43a3b0790584fa71e, type: 3}
+  m_Sprite: {fileID: 8447129368079113841, guid: af3a5857aae87dc4f8ad4b2e3f4798fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,11 +132,11 @@ MonoBehaviour:
       value: 0
     food:
       value: 50
-      sprite: {fileID: 8447129368079113841, guid: 44db5ab3612057c43a3b0790584fa71e, type: 3}
+      sprite: {fileID: -1336135337445997060, guid: a129a5b01f2648648a0302d315acf315, type: 3}
     death:
       sprite: {fileID: 0}
   checkIfGood: 0
---- !u!95 &1990780571
+--- !u!95 &-8674918161017471502
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ Animator:
   m_GameObject: {fileID: 3336894836744179486}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 03ff2117cd06495408f04d97e957708d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 387895f984cd6264d97bc0cf66d736c3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -155,17 +155,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1990780572
-MonoBehaviour:
+--- !u!111 &801412694007580348
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3336894836744179486}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d41d4902685b612439de1af1ec6e8554, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerRender: {fileID: 5171459184879079779}
-  offset: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: c1642b746eacfb74196a85034774b25f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

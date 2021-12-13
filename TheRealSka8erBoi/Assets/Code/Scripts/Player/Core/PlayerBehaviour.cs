@@ -1,6 +1,7 @@
 using MoreMountains.NiceVibrations;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -64,10 +65,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Space] [Header("Feedback Declaration")]
     public MMFeedbacks DamageFeedbacks;
-    
+
     [Space]
 
     //Declaration UI
+    public TextMeshProUGUI lifeText;
     [SerializeField] private int _maxHealth = 5;
 
     public int maxHealth => _maxHealth + (BonusManager.instance.redStat / _maxHealth * 100);
@@ -104,7 +106,7 @@ public class PlayerBehaviour : MonoBehaviour
         animatorPlayer = GetComponent<Animator>();
         dashGoingFor = dashDuration;
         currentHealth = maxHealth;
-        
+        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         
         //Set animatorID
         animatorID.Add(Animator.StringToHash("GoingUp"));
@@ -168,6 +170,7 @@ public class PlayerBehaviour : MonoBehaviour
                 dashOngoingCd = dashCd ;
                 dashGoingFor = 0;
                 dash = true;
+                gameObject.tag = "PlayerDashing";
                 if (dashSpellActive && dashSpellactivation == 4)
                 {
                     dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
@@ -215,6 +218,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 playerRigid.velocity = Vector2.zero;
                 dash = false;
+                gameObject.tag = "Player";
                 if (dashSpellActive)
                 {
                     DashSpell();
@@ -305,6 +309,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentHealth -= damageNumber;
         healthBar.value = (float)currentHealth / maxHealth;
+        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         
         DamageFeedbacks.PlayFeedbacks();
         CameraShake.instance.StartShake(0.2f, 0.15f, 10f);
