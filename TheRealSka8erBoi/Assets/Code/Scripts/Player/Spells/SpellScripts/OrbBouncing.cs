@@ -10,5 +10,6 @@ public class OrbBouncing : Spell
     {
         GameObject spawnedProj = PoolObjectManager.Instance.GetBullet("bouncingOrb", parent.transform.position, parent.transform.rotation);
         spawnedProj.GetComponent<BouncingOrbBehaviour>().target = parent.transform;
+        Debug.Log("BOUYAH");
     }
 }

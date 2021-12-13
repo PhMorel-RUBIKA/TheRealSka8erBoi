@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -219.59998, y: 108.160034}
+  m_AnchoredPosition: {x: -252.59991, y: 141.15997}
   m_SizeDelta: {x: 100, y: 127.32001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &791839233996781622
@@ -185,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109.79999, y: 108.160034}
+  m_AnchoredPosition: {x: -142.79993, y: 141.15997}
   m_SizeDelta: {x: 100, y: 127.32001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2831437635625576555
@@ -313,13 +313,10 @@ MonoBehaviour:
       value: 0
     stickerRed:
       value: 0
-      sprite: {fileID: 0}
     stickerBlue:
       value: 0
-      sprite: {fileID: 0}
     stickerGreen:
       value: 0
-      sprite: {fileID: 0}
     food:
       value: 0
       sprite: {fileID: 0}
@@ -1308,6 +1305,7 @@ GameObject:
   - component: {fileID: 2244951836966277672}
   - component: {fileID: 3506307968127916728}
   - component: {fileID: 6948077350352362288}
+  - component: {fileID: 5801609619488685249}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1426,7 +1424,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3498011852449812537}
+  cameraHelper: {fileID: 5801609619488685249}
   smoothSpeed: 0.1
+  targetFps: 60
   offset: {x: 0, y: 0, z: -10}
   leftLimit: -200
   rightLimit: 200
@@ -1445,6 +1445,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86c62cb3441a754880492428bd4a9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5801609619488685249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6579917561629085491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4c2ba764dd415458cff3a00110050e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elCamera: {fileID: 8167702758266919491}
+  pixelPerUnit: 24
+  zoom: 400
+  usePixelScale: 0
+  pixelScale: 3
 --- !u!1 &7019818323522023472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,7 +2042,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -164, y: 105}
+  m_AnchoredPosition: {x: -197, y: 138}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6802775703813332656
@@ -2176,7 +2193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 180, y: 47}
+  m_AnchoredPosition: {x: 198, y: 74}
   m_SizeDelta: {x: 140, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1737631998134540139

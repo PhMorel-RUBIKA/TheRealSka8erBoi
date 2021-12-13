@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 905151695084082109}
   - component: {fileID: 522729376639302402}
   - component: {fileID: 5311046094595738488}
+  - component: {fileID: 2110243540}
+  - component: {fileID: 2110243539}
   m_Layer: 0
   m_Name: ShadowDash_item
   m_TagString: Untagged
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9132354681331367037, guid: 2620a475cdf62e44ab5e794e41c4a384, type: 3}
+  m_Sprite: {fileID: -2504660098631971021, guid: 4fbd51cd6b3fcb94a9d360674b8fa3b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -141,18 +143,20 @@ MonoBehaviour:
     SpellItem:
       spellScriptable: {fileID: 11400000, guid: 38ed1b15087a1a145ba77600eb257648, type: 2}
       timeToPick: 0
-      spellImage: {fileID: -8132088901358331348, guid: dd6c59e0395b61f48948a2712c2b6177, type: 3}
-      spellUI: {fileID: 7004508903663709596, guid: 9e52783d9e080a747bbdc9ca12f49eb6, type: 3}
+      spellImage: {fileID: -2504660098631971021, guid: 4fbd51cd6b3fcb94a9d360674b8fa3b7, type: 3}
+      spellUI: {fileID: -2504660098631971021, guid: 4fbd51cd6b3fcb94a9d360674b8fa3b7, type: 3}
     CoinItem:
       value: 0
     stickerRed:
       value: 0
-      sprite: {fileID: 0}
     stickerBlue:
       value: 0
-      sprite: {fileID: 0}
     stickerGreen:
       value: 0
+    food:
+      value: 0
+      sprite: {fileID: 0}
+    death:
       sprite: {fileID: 0}
   checkIfGood: 0
 --- !u!114 &5311046094595738488
@@ -168,3 +172,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: edea4f601382db54b872a9aebc130af3, type: 2}
+--- !u!95 &2110243540
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4651320251387781764}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c79f4fe1f2b1fb248b85afae77c2a79e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2110243539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4651320251387781764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41d4902685b612439de1af1ec6e8554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRender: {fileID: 9052274126385129193}
+  offset: 0

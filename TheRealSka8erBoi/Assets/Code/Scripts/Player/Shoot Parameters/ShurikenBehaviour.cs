@@ -15,17 +15,21 @@ public class ShurikenBehaviour : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(Explode());
-        GetComponent<BulletPoolBehaviour>().speed = 10;
+        GetComponent<BulletPoolBehaviour>().speed = 20;
         target = null;
     }
     
 
     private void FixedUpdate()
     {
-        GetComponent<BulletPoolBehaviour>().speed -= 4 * Time.deltaTime;
+        
         if (target != null)
         {
             transform.position = Vector3.Lerp(transform.position,target.position,0.1f);
+        }
+        else
+        {
+            GetComponent<BulletPoolBehaviour>().speed -= 6 * Time.deltaTime;
         }
     }
 

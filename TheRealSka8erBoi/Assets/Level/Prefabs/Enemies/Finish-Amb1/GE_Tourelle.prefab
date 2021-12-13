@@ -344,8 +344,8 @@ MonoBehaviour:
   motionless: 1
   rb: {fileID: 2339571471071718541}
   firePoint: {fileID: 2339571469173076059}
-  cooldown: 1
-  initcooldown: 4
+  cooldown: 0.5
+  initcooldown: 1.5
   fireForce: 400
   offset: 0
   s2: 0
@@ -907,7 +907,7 @@ MonoBehaviour:
   EventRange: 100
   EventOriginTransform: {fileID: 0}
   AllowAdditivePlays: 0
-  InitialColorMode: 1
+  InitialColorMode: 0
   ModifyColor: 1
   ColorOverTime:
     serializedVersion: 2
