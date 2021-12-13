@@ -1797,6 +1797,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1091682851}
     m_Modifications:
+    - target: {fileID: 75124782, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: redStat
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75124782, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: blueStat
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3498011852449812487, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: m_Name
       value: PlayerWithCamera
@@ -1856,6 +1864,23 @@ PrefabInstance:
     - target: {fileID: 5801609619488685249, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: zoom
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: _dashCd
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: descriptonVert
+      value: "playerSpeed = baseSpeed + (GreenStatQuantity * greenStatModifier) \ndashCd
+        = baseDashCd - (GreenStatQuantity * greenStatModifier)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: RedStatModifier
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: GreenStatModifier
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}

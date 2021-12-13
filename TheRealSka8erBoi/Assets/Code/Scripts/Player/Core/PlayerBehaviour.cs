@@ -72,7 +72,7 @@ public class PlayerBehaviour : MonoBehaviour
     public TextMeshProUGUI lifeText;
     [SerializeField] private int _maxHealth = 5;
 
-    public int maxHealth => _maxHealth + (BonusManager.instance.redStat / _maxHealth * 100);
+    public int maxHealth => (int)(_maxHealth + BonusManager.instance.redStat * RedStatModifier);
     [HideInInspector] public int currentHealth;
     public Slider healthBar;
     
@@ -302,7 +302,7 @@ public class PlayerBehaviour : MonoBehaviour
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
         spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.25f;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) (baseDamage + Mathf.RoundToInt(charge * 20) * multiplicatorShoot);
+        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge) * multiplicatorShoot);
     }
 
     public void TakeDamage(int damageNumber)
