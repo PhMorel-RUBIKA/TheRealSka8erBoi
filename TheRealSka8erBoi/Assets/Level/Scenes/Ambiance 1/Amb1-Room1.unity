@@ -4605,6 +4605,7 @@ GameObject:
   - component: {fileID: 1903257031}
   - component: {fileID: 1903257033}
   - component: {fileID: 1903257032}
+  - component: {fileID: 1903257034}
   m_Layer: 0
   m_Name: '---World--- '
   m_TagString: Untagged
@@ -4823,6 +4824,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1903257034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903257030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a259caaa1467b264c8ae014ecae616e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intro: {fileID: 0}
+  fightloop: {fileID: 0}
+  playsong: 0
 --- !u!1 &1927886772
 GameObject:
   m_ObjectHideFlags: 0
