@@ -6,7 +6,6 @@ public class SpellHolder : MonoBehaviour
     public Inventory inventory;
     [Range(0,1)] public int spellNumber;
     [HideInInspector] public Spell spell;
-    public Spell neutral;
     private float cooldownTime;
     private float activeTime;
 
@@ -22,17 +21,19 @@ public class SpellHolder : MonoBehaviour
     public KeyCode key;
     public string AxeKey;
 
+    private void Start()
+    {
+        spell = null;
+    }
+
     private void Update()
     {
         if (inventory.slots[spellNumber].item != null)
         {
             spell = inventory.slots[spellNumber].item.GetComponent<Item>().TheItem.SpellItem.spellScriptable;
         }
-        else
-        {
-            spell = neutral;
-        }
-        
+
+        if (spell == null) return;
         
         switch (state)
         {
@@ -42,6 +43,7 @@ public class SpellHolder : MonoBehaviour
                     spell.Activate(this.gameObject);
                     state = SpellState.active;
                     activeTime = spell.activeTime;
+                    spell = null;
                 }
                 break;
             case SpellState.active:
