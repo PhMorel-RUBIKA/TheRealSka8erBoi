@@ -21,7 +21,7 @@ public class BonusManager : MonoBehaviour
     private void Start()
     {
         redStat = 0;
-        greenStat = 2;
+        greenStat = 0;
         blueStat = 0;
         money = 0;
     }
