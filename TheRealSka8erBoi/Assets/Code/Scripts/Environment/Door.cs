@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("PlayerDash"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("PlayerDashing"))
         {
             LoadSceneManager.instance.transition.SetTrigger("Start");
             StartCoroutine(LoadSceneManager.instance.ChangeRoom());
