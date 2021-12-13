@@ -19,7 +19,8 @@ public class WaveManager : MonoBehaviour
     
     public GameObject itemDoor1;
     public GameObject itemDoor2;
-    
+
+    private bool canEndwave;
     private bool canSpawn = true;
     private float nextSpawnTime;
     private Wave currentWave;
@@ -33,6 +34,7 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         WaveManager.instance = this;
+        canEndwave = true;
         for (int i = 0; i < waveLevel.waves.Length; i++) currentNumberOfEnemies.Add(waveLevel.waves[i].numberOfenemies);
     }
 
@@ -46,7 +48,7 @@ public class WaveManager : MonoBehaviour
             Debug.Log(currentWaveNumber);
             canSpawn = true;
         }
-        else if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber + 1 == waveLevel.waves.Length) EndWave();
+        else if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber + 1 == waveLevel.waves.Length && canEndwave) EndWave();
     }
 
     IEnumerator CoroutineForWave()
@@ -101,7 +103,8 @@ public class WaveManager : MonoBehaviour
 
     void EndWave()
     {
-        Instantiate(LoadSceneManager.instance.nextItemToSpawn, Vector3.zero, Quaternion.identity);
+        if (LoadSceneManager.instance.nextItemToSpawn != null)
+            Instantiate(LoadSceneManager.instance.nextItemToSpawn, BonusManager.instance.gameObject.transform.position, Quaternion.identity);
 
         LoadSceneManager.instance.nextItemToSpawn = null;
         itemDoor1 = null;
@@ -118,7 +121,37 @@ public class WaveManager : MonoBehaviour
         itemDoor2 = rewardObjects[rand2];
         gateZone2.GetComponent<SpriteRenderer>().sprite = itemDoor2.GetComponent<SpriteRenderer>().sprite;
         
+        RandomItem(itemDoor1);
+        RandomItem(itemDoor2);
+        
         gateZone1.SetActive(true);
         gateZone2.SetActive(true);
+
+        canEndwave = false;
+    }
+
+    void RandomItem(GameObject item)
+    {
+        switch (item.GetComponent<Item>().TheItem.TypeOfItem)
+        {
+            case typeOfItem.STICKER_RED:
+                int randRed = Random.Range(1 + LoadSceneManager.instance.numberOfRoom,
+                    5 + LoadSceneManager.instance.numberOfRoom);
+                item.GetComponent<Item>().TheItem.stickerRed.value += randRed;
+                break;
+            case typeOfItem.STICKER_GREEN:
+                int randGreen = Random.Range(1 + LoadSceneManager.instance.numberOfRoom,
+                    5 + LoadSceneManager.instance.numberOfRoom);
+                item.GetComponent<Item>().TheItem.stickerGreen.value += randGreen;
+                break;
+            case typeOfItem.STICKER_BLUE:
+                int randBlue = Random.Range(1 + LoadSceneManager.instance.numberOfRoom,
+                    5 + LoadSceneManager.instance.numberOfRoom);
+                item.GetComponent<Item>().TheItem.stickerBlue.value += randBlue;
+                break;
+            case typeOfItem.COINS :
+                item.GetComponent<Item>().TheItem.CoinItem.value += (int)(200 + LoadSceneManager.instance.numberOfRoom * 2f);
+                break;
+        } 
     }
 }
