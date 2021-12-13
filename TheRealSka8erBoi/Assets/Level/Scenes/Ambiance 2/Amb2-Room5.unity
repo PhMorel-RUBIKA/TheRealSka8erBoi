@@ -1749,6 +1749,36 @@ MonoBehaviour:
   - {fileID: 2790966145797152650, guid: 086ac8625a7d7ab47a0bba8a65b27ff3, type: 3}
   - {fileID: 3289177792090677411, guid: 6e6ec956c4deb3a44b2f216fc8dbdb07, type: 3}
   - {fileID: 6154734244894102845, guid: 80dcac1abc8e8634aad6d9d8a213c0ea, type: 3}
+--- !u!1 &593824719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593824720}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &593824720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593824719}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &658457294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2967,6 +2997,7 @@ MonoBehaviour:
   gateZone1: {fileID: 1113703430}
   gateZone2: {fileID: 1069094723}
   timeBetweenWave: 1
+  enemySpawn: {fileID: 0}
   spawnPoints:
   - {fileID: 2102224153}
   - {fileID: 296245457}

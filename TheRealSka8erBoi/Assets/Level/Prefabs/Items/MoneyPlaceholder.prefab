@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6282338021771806145}
   - component: {fileID: 7109512447257761144}
   - component: {fileID: 8593283555292036701}
+  - component: {fileID: 947354041756772567}
   m_Layer: 0
   m_Name: MoneyPlaceholder
   m_TagString: Untagged
@@ -95,7 +96,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -154,3 +155,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &947354041756772567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7991126725538244174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41d4902685b612439de1af1ec6e8554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRender: {fileID: 5142914208602433418}
+  offset: 0

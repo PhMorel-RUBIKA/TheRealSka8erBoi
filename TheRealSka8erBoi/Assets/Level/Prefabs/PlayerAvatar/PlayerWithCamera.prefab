@@ -665,7 +665,7 @@ MonoBehaviour:
   latestDirection: {x: 0, y: 0}
   _playerSpeed: 5
   deadzoneController: 0.3
-  _dashCd: 0.5
+  _dashCd: 1.5
   dashSpeed: 40
   dashDuration: 0.1
   dashSpellActive: 0
@@ -688,11 +688,11 @@ MonoBehaviour:
   currentHealth: 0
   healthBar: {fileID: 1737631998134540139}
   descriptonRouge: maxHealth = BaseLife + (RedStatQuantity / BaseLife) * 100
-  RedStatModifier: 1
+  RedStatModifier: 20
   descriptonBleu: damage = baseDamage + (BlueStatQuantity * blueStatModifier)
   BlueStatModifier: 3
   descriptonVert: "playerSpeed = baseSpeed + (GreenStatQuantity * greenStatModifier)
-    \ndashCd = baseDashCd + (BlueStatQuantity * greenStatModifier)"
+    \ndashCd = baseDashCd - (GreenStatQuantity * greenStatModifier)"
   GreenStatModifier: 0.2
 --- !u!114 &3498011852449812536
 MonoBehaviour:
@@ -778,9 +778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 0
-  redStat: 5
+  redStat: 0
   greenStat: 0
-  blueStat: 1
+  blueStat: 0
   money: 0
   redText: {fileID: 0}
   greenText: {fileID: 0}
@@ -1721,7 +1721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elCamera: {fileID: 8167702758266919491}
   pixelPerUnit: 24
-  zoom: 400
+  zoom: 500
   usePixelScale: 0
   pixelScale: 3
 --- !u!1 &6855425320982900114

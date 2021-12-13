@@ -183,7 +183,7 @@ public class EnemyTowerS2 : AbstComp
             bul.SetActive(true);
 
             GetAngle(pj.transform.position, firePoint.position, out float angle); 
-            bul.transform.rotation = Quaternion.Euler(0, 0, -(angle+index*intervalle)); 
+            bul.transform.rotation = Quaternion.Euler(0, 0, (angle+index*intervalle)); 
             bul.GetComponent<Rigidbody2D>().AddForce(bul.transform.right.normalized*fireForce);
             //bul.transform.DOScale(new Vector3(3, 3, 3), 0.5f);
         }

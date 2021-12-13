@@ -63,7 +63,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("PlayerDash"))
+        if (other.CompareTag("Player") || other.CompareTag("PlayerDashing"))
         {
             checkIfGood = true;
             player = other.gameObject;
@@ -137,6 +137,7 @@ public class Item : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.redStat += TheItem.stickerRed.value;
+            player.GetComponent<PlayerBehaviour>().TakeDamage((int)(-player.GetComponent<PlayerBehaviour>().RedStatModifier));
             Destroy(gameObject);
         }
     }
@@ -170,7 +171,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
-            player.GetComponent<PlayerBehaviour>().currentHealth += TheItem.food.value; 
+            player.GetComponent<PlayerBehaviour>().TakeDamage(-TheItem.food.value);
             Destroy(gameObject);
         }
     }

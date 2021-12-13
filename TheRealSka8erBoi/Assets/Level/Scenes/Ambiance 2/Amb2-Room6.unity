@@ -796,6 +796,7 @@ MonoBehaviour:
   gateZone1: {fileID: 165482923}
   gateZone2: {fileID: 1065479437}
   timeBetweenWave: 1
+  enemySpawn: {fileID: 0}
   spawnPoints:
   - {fileID: 2049226352}
   - {fileID: 307195880}
@@ -1046,7 +1047,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3957067989524913185, guid: 2c26cfcd7c79c6f4aa6fd8bbe45a68f0, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3957067989524913185, guid: 2c26cfcd7c79c6f4aa6fd8bbe45a68f0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2669,7 +2670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5168675781619221673, guid: dccf862f864b4864b80cf111d96f8e66, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5168675781619221673, guid: dccf862f864b4864b80cf111d96f8e66, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3117,6 +3118,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8600581024840469068, guid: e8aa0404d449f544b9382fc64f339368, type: 3}
   m_PrefabInstance: {fileID: 847316687}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &874867193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 874867194}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &874867194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874867193}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &915196187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3629,7 +3660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5168675781619221673, guid: dccf862f864b4864b80cf111d96f8e66, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5168675781619221673, guid: dccf862f864b4864b80cf111d96f8e66, type: 3}
       propertyPath: m_LocalPosition.x

@@ -63,10 +63,7 @@ public class WaveManager : MonoBehaviour
         if (canSpawn && nextSpawnTime < Time.time)
         {
             GameObject randomEnemy = GetRandomEnemy();
-            Vector3 pos = GetRandomPoint().position;
-            
-            Instantiate(enemySpawn, pos + new Vector3(0.1f, -1f,0), quaternion.Euler(-90, 0 ,0));
-            Instantiate(randomEnemy, pos, Quaternion.identity);
+            Instantiate(randomEnemy, GetRandomPoint().position, Quaternion.identity);
             
             enemyOnScreen.Add(1);
             
@@ -140,19 +137,13 @@ public class WaveManager : MonoBehaviour
         switch (item.GetComponent<Item>().TheItem.TypeOfItem)
         {
             case typeOfItem.STICKER_RED:
-                int randRed = Random.Range(1 + LoadSceneManager.instance.numberOfRoom,
-                    5 + LoadSceneManager.instance.numberOfRoom);
-                item.GetComponent<Item>().TheItem.stickerRed.value += randRed;
+                item.GetComponent<Item>().TheItem.stickerRed.value += 1;
                 break;
             case typeOfItem.STICKER_GREEN:
-                int randGreen = Random.Range(1 + LoadSceneManager.instance.numberOfRoom,
-                    5 + LoadSceneManager.instance.numberOfRoom);
-                item.GetComponent<Item>().TheItem.stickerGreen.value += randGreen;
+                item.GetComponent<Item>().TheItem.stickerGreen.value += 1;
                 break;
             case typeOfItem.STICKER_BLUE:
-                int randBlue = Random.Range(1 + LoadSceneManager.instance.numberOfRoom,
-                    5 + LoadSceneManager.instance.numberOfRoom);
-                item.GetComponent<Item>().TheItem.stickerBlue.value += randBlue;
+                item.GetComponent<Item>().TheItem.stickerBlue.value += 1;
                 break;
             case typeOfItem.COINS :
                 item.GetComponent<Item>().TheItem.CoinItem.value += (int)(200 + LoadSceneManager.instance.numberOfRoom * 2f);
