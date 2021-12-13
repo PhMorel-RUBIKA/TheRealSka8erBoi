@@ -73,7 +73,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("PlayerDash"))
+        if (other.CompareTag("Player") || other.CompareTag("PlayerDashing"))
         {
             checkIfGood = false;
         }

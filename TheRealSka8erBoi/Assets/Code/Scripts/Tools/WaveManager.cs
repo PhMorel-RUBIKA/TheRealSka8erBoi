@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
     public GameObject gateZone1;
     public GameObject gateZone2;
     public float timeBetweenWave;
+    public GameObject enemySpawn; 
     [Space]
     [Header("Array Attributs")]
     public Transform[] spawnPoints;
@@ -62,7 +63,11 @@ public class WaveManager : MonoBehaviour
         if (canSpawn && nextSpawnTime < Time.time)
         {
             GameObject randomEnemy = GetRandomEnemy();
-            Instantiate(randomEnemy, GetRandomPoint().position, quaternion.identity);
+            Vector3 pos = GetRandomPoint().position;
+            
+            Instantiate(enemySpawn, pos + new Vector3(0.1f, -1f,0), quaternion.Euler(-90, 0 ,0));
+            Instantiate(randomEnemy, pos, Quaternion.identity);
+            
             enemyOnScreen.Add(1);
             
             currentNumberOfEnemies[currentWaveNumber]--;
