@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 749, y: -234}
+  m_AnchoredPosition: {x: 729, y: -282}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &802415658031801541
@@ -690,7 +690,7 @@ MonoBehaviour:
   descriptonRouge: maxHealth = BaseLife + (RedStatQuantity / BaseLife) * 100
   RedStatModifier: 1
   descriptonBleu: damage = baseDamage + (BlueStatQuantity * blueStatModifier)
-  BlueStatModifier: 0.8
+  BlueStatModifier: 3
   descriptonVert: "playerSpeed = baseSpeed + (GreenStatQuantity * greenStatModifier)
     \ndashCd = baseDashCd + (BlueStatQuantity * greenStatModifier)"
   GreenStatModifier: 0.2
@@ -728,7 +728,6 @@ MonoBehaviour:
   inventory: {fileID: 3498011852449812536}
   spellNumber: 0
   spell: {fileID: 11400000, guid: a70b0a30a2155b24f8960ab28cd2d857, type: 2}
-  neutral: {fileID: 11400000, guid: db7ae095ab94ff84584168651da2d0ed, type: 2}
   key: 331
   AxeKey: LeftSpell
 --- !u!114 &5501638938004983748
@@ -746,7 +745,6 @@ MonoBehaviour:
   inventory: {fileID: 3498011852449812536}
   spellNumber: 1
   spell: {fileID: 0}
-  neutral: {fileID: 11400000, guid: db7ae095ab94ff84584168651da2d0ed, type: 2}
   key: 333
   AxeKey: RightSpell
 --- !u!114 &6902068902137927784
@@ -780,9 +778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 0
-  redStat: 0
+  redStat: 5
   greenStat: 0
-  blueStat: 0
+  blueStat: 1
   money: 0
   redText: {fileID: 0}
   greenText: {fileID: 0}
@@ -2818,7 +2816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 298, y: 74}
+  m_AnchoredPosition: {x: 298, y: 98}
   m_SizeDelta: {x: 140, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1737631998134540139
