@@ -161,9 +161,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) &&  checkIfGood)
         {
-            int rand = Random.Range(1, TheItem.CoinItem.value / 10);
-            BonusManager.instance.money += TheItem.CoinItem.value;
-            BonusManager.instance.money += rand;
+            BonusManager.instance.GainCoins(TheItem.CoinItem.value);
             Destroy(gameObject);
         }
     }
