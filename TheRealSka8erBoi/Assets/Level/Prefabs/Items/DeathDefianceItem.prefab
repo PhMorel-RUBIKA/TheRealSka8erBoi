@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7620930524832773093}
   - component: {fileID: 5319867141116108748}
   - component: {fileID: 6925430595006143506}
+  - component: {fileID: -2172014291541457551}
+  - component: {fileID: -5766107539119114036}
   m_Layer: 0
   m_Name: DeathDefianceItem
   m_TagString: Untagged
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 3373527914779792292, guid: c24a14d28e5b859439fc6d240d2b6a28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,7 +83,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &5319867141116108748
@@ -124,16 +126,48 @@ MonoBehaviour:
       value: 0
     stickerRed:
       value: 0
-      sprite: {fileID: 0}
     stickerBlue:
       value: 0
-      sprite: {fileID: 0}
     stickerGreen:
       value: 0
-      sprite: {fileID: 0}
     food:
       value: 50
       sprite: {fileID: -1336135337445997060, guid: a129a5b01f2648648a0302d315acf315, type: 3}
     death:
       sprite: {fileID: -2469906589920540089, guid: a129a5b01f2648648a0302d315acf315, type: 3}
   checkIfGood: 0
+--- !u!95 &-2172014291541457551
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5005992637343976988}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c575c0e2ae5dac41b9ed33572a0ba81, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &-5766107539119114036
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5005992637343976988}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: c6a2ffd23451b4b4fa933acb638f763b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

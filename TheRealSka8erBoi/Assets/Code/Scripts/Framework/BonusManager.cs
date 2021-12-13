@@ -24,35 +24,24 @@ public class BonusManager : MonoBehaviour
         greenStat = 0;
         blueStat = 0;
         money = 0;
-
-        if (canvas == null) canvas = null;
-        switch (isDebug)
-        {
-            case true :
-                IsDebug(true);
-                break;
-            case false :
-                IsDebug(false);
-                break;
-        }
     }
 
     private void Update()
     {
-        if(isDebug) ActualizeText();
-    }
 
-    void IsDebug(bool isActive)
-    {
-        if (canvas == null) return;
-        canvas.gameObject.SetActive(isActive);
     }
 
     void ActualizeText()
     {
-        redText.text = redStat.ToString();
-        greenText.text = greenStat.ToString();
-        blueText.text = blueStat.ToString();
+        //redText.text = redStat.ToString();
+        //greenText.text = greenStat.ToString();
+        //blueText.text = blueStat.ToString();
         moneyText.text = money.ToString();
+    }
+
+    public void GainCoins(int gain)
+    {
+        money += gain;
+        ActualizeText();
     }
 }
