@@ -13,6 +13,9 @@ public class VendingMachine : MonoBehaviour
     [Space]
     public possibleItem[] possibleItems;
 
+    [HideInInspector] public GameObject item;
+    [HideInInspector] public int itemValue;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")) checkIfGood = true;
@@ -22,42 +25,42 @@ public class VendingMachine : MonoBehaviour
         if (other.CompareTag("Player")) checkIfGood = false;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (!checkIfGood) return;
         switch (objectType)
         {
             case "sticker" :
-                ObjectType();
+                int rand = Random.Range(1, 4);
+                item = possibleItems[rand].prefab;
+                itemValue = possibleItems[rand].value;
+                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
                 break;
             case "food" : 
-                ObjectTypeAutre(0);
+                item = possibleItems[0].prefab;
+                itemValue = possibleItems[0].value;
+                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
                 break;
             case "death" : 
-                ObjectTypeAutre(4);
+                item = possibleItems[4].prefab;
+                itemValue = possibleItems[4].value;
+                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
                 break;
         }
     }
 
+    private void Update()
+    {
+        if (!checkIfGood) return;
+       ObjectType();
+    }
+
     void ObjectType()
     {
-        int rand = Random.Range(0, 4);
-        
         if (!Input.GetKeyDown(KeyCode.JoystickButton3)) return;
-        if (Input.GetKeyDown(KeyCode.JoystickButton3) && BonusManager.instance.money < possibleItems[rand].value) return;
+        if (Input.GetKeyDown(KeyCode.JoystickButton3) && BonusManager.instance.money < itemValue) return;
         
-        Instantiate(possibleItems[rand].prefab, gameObject.transform.position + new Vector3(0, 0.85f,0), Quaternion.identity);
-        BonusManager.instance.money -= possibleItems[rand].value;
-        Destroy(gameObject);
-    }
-    
-    void ObjectTypeAutre(int number)
-    {
-        if (!Input.GetKeyDown(KeyCode.JoystickButton3)) return;
-        if (Input.GetKeyDown(KeyCode.JoystickButton3) && BonusManager.instance.money < possibleItems[number].value) return;
-        
-        Instantiate(possibleItems[number].prefab, gameObject.transform.position + new Vector3(0, 0.85f,0), Quaternion.identity);
-        BonusManager.instance.money -= possibleItems[number].value;
+        Instantiate(item, gameObject.transform.position + new Vector3(0,-1f,0), Quaternion.identity);
+        BonusManager.instance.money -= itemValue;
         Destroy(gameObject);
     }
 }
