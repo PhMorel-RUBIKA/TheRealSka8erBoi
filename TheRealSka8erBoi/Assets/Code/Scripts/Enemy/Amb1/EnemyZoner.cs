@@ -65,15 +65,7 @@ public class EnemyZoner : AbstComp
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        hp -= damage;
-        Debug.Log(hp);
-         if (hp <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+
 
     void Shoot() 
     { 

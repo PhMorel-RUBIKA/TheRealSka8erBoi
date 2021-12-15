@@ -14,6 +14,7 @@ public class ArmBossBehaviour : MonoBehaviour
     private int pushValue;
     
     
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,18 +40,20 @@ public class ArmBossBehaviour : MonoBehaviour
         {
             rb.AddForce(Vector2.right * moveSpeed);
             pushValue = 1;
+            Destroy(gameObject,1f);
         }
         else if (toplayer.x<0)
         {
             rb.AddForce(Vector2.left* moveSpeed);
             pushValue = 2;
+            Destroy(gameObject,1.5f);
         }
 
     }
     
         private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")) 
         {
             PlayerBehaviour.playerBehaviour.TakeDamage(damage);
             if(pushValue==1)
@@ -62,8 +65,18 @@ public class ArmBossBehaviour : MonoBehaviour
                 other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left*strenght);
             }
             Destroy(gameObject);
-
         }
-
+        else if (other.gameObject.CompareTag("Target"))
+        {
+            other.GetComponent<DamageManager>().TakeDamage(damage);
+             if(pushValue==1)
+            {
+                other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right*strenght);
+            }
+            else if (pushValue==2)
+            {
+                other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left*strenght);
+            }
+        }
     }
 }
