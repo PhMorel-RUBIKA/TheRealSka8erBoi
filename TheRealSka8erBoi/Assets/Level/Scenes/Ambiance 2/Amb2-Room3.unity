@@ -3279,6 +3279,7 @@ MonoBehaviour:
   gateZone2: {fileID: 1170689062}
   timeBetweenWave: 1
   enemySpawn: {fileID: 0}
+  fireflies: {fileID: 1550325824}
   spawnPoints:
   - {fileID: 1719192484}
   - {fileID: 1339215795}
@@ -5106,6 +5107,72 @@ MonoBehaviour:
   - {fileID: 500425637218050614, guid: 364008e0d6336ff43a9d09b5c4796dd9, type: 3}
   - {fileID: 55206109354518826, guid: 1545a2e2e738f6f43826d061a1262581, type: 3}
   - {fileID: 2865910077260005173, guid: cf30488284aaa6f44a1f36dd72c0d613, type: 3}
+--- !u!1001 &1550325823
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863679865777962008, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_Name
+      value: FirefliesAmb2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863679865777962008, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+--- !u!1 &1550325824 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1863679865777962008, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+  m_PrefabInstance: {fileID: 1550325823}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1579369443
 GameObject:
   m_ObjectHideFlags: 0

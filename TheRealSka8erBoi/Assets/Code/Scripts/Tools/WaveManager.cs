@@ -12,7 +12,8 @@ public class WaveManager : MonoBehaviour
     public GameObject gateZone1;
     public GameObject gateZone2;
     public float timeBetweenWave;
-    public GameObject enemySpawn; 
+    public GameObject enemySpawn;
+    public GameObject fireflies;
     [Space]
     [Header("Array Attributs")]
     public Transform[] spawnPoints;
@@ -129,6 +130,8 @@ public class WaveManager : MonoBehaviour
         gateZone1.SetActive(true);
         gateZone2.SetActive(true);
 
+        if (fireflies != null) fireflies.SetActive(true);
+        
         canEndwave = false;
     }
 

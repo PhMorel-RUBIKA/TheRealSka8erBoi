@@ -3267,6 +3267,7 @@ MonoBehaviour:
   gateZone2: {fileID: 998788705}
   timeBetweenWave: 0
   enemySpawn: {fileID: 0}
+  fireflies: {fileID: 2096789678}
   spawnPoints:
   - {fileID: 1925760860}
   - {fileID: 1194565982}
@@ -4994,6 +4995,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5799490202409517382, guid: f38c3b49f402614499fb20b2a3fd19ad, type: 3}
   m_PrefabInstance: {fileID: 2068364518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2096789677
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701883000285264992, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863679865777962008, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_Name
+      value: FirefliesAmb2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863679865777962008, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+--- !u!1 &2096789678 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1863679865777962008, guid: 9c354ca8fc5be0d46966c20d8b259273, type: 3}
+  m_PrefabInstance: {fileID: 2096789677}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2126476692
 GameObject:
