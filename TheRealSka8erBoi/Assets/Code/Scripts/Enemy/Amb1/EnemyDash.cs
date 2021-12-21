@@ -149,7 +149,7 @@ public class EnemyDash : AbstComp
         //Debug.Log("je commence le dash");
         dashPointPos = (target.position - transform.position);
         dashPointPos.Normalize();
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.5f);
 
         rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
         yield return new WaitForSeconds(.6f);
@@ -172,7 +172,7 @@ public class EnemyDash : AbstComp
         {
             dashPointPos = (target.position - transform.position);
             dashPointPos.Normalize();
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.5f);
 
             rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
             yield return new WaitForSeconds(.6f);

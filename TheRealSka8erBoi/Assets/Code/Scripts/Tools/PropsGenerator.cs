@@ -87,14 +87,14 @@ public class PropsGenerator : MonoBehaviour
 
         if (simpleIsland)
         {
-            if (hit.Length == 1)
+            if (hit.Length == 1 || hit.Length == 3 || hit.Length == 5 || hit.Length == 7 || hit.Length == 9 || hit.Length == 11)
             {
                 possible = false;
             }
         }
         else if (!simpleIsland)
         {
-            if (hit.Length == 0 || hit.Length == 2)
+            if (hit.Length == 0 || hit.Length == 2 || hit.Length == 4 || hit.Length == 6 || hit.Length == 8 || hit.Length == 10)
             {
                 possible = false;
             }

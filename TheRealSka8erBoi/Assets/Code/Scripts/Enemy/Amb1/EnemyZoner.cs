@@ -50,7 +50,7 @@ public class EnemyZoner : AbstComp
     {
         if (!CheckPlayerInSight()) return;
         lineOfSight = 100;
-
+        GoToPlayer();
         if (!CheckPlayerInRange()) return;
         if (!canshoot) return;
        //animator.SetTrigger("Atk");
@@ -65,15 +65,7 @@ public class EnemyZoner : AbstComp
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        hp -= damage;
-        Debug.Log(hp);
-         if (hp <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+
 
     void Shoot() 
     { 

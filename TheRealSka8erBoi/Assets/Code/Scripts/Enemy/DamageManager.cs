@@ -17,6 +17,10 @@ public class DamageManager : MonoBehaviour
         DamageManager.instance = this;
         currentHealth = this.abstComp.hp;
         player = GameObject.FindWithTag("Player");
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("PlayerDashing");
+        }
     }
 
     public void TakeDamage(int damage)
@@ -24,7 +28,6 @@ public class DamageManager : MonoBehaviour
         currentHealth -= damage;
         damageFeedback.PlayFeedbacks();
         CameraShake.instance.StartShake(0.05f, 0.05f, 3f);
-        Debug.Log(currentHealth);
 
         if (currentHealth <= 0)
         {

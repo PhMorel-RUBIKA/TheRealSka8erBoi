@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Item : MonoBehaviour
 {
@@ -23,14 +24,11 @@ public class Item : MonoBehaviour
                 break;
             case typeOfItem.COINS : 
                 break;
-            case typeOfItem.STICKER_RED :
-                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerRed.sprite;
-                break; 
-            case typeOfItem.STICKER_BLUE : 
-                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerBlue.sprite;
+            case typeOfItem.FOOD :
+                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.food.sprite; 
                 break;
-            case typeOfItem.STICKER_GREEN :
-                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.stickerGreen.sprite;
+            case typeOfItem.DEATH :
+                gameObject.GetComponent<SpriteRenderer>().sprite = TheItem.death.sprite;
                 break;
         }
     }
@@ -43,6 +41,7 @@ public class Item : MonoBehaviour
                 GetSpellItem();
                 break;
             case typeOfItem.COINS : 
+                GetMoney();
                 break;
             case typeOfItem.STICKER_RED :
                 GetItemStickerRed();
@@ -53,12 +52,18 @@ public class Item : MonoBehaviour
             case typeOfItem.STICKER_GREEN :
                 GetItemStickerGreen();
                 break;
+            case typeOfItem.FOOD : 
+                GetFood();
+                break;
+            case typeOfItem.DEATH : 
+                GetDeath();
+                break;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("PlayerDashing"))
         {
             checkIfGood = true;
             player = other.gameObject;
@@ -68,7 +73,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("PlayerDashing"))
         {
             checkIfGood = false;
         }
@@ -129,15 +134,16 @@ public class Item : MonoBehaviour
 
     void GetItemStickerRed()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.redStat += TheItem.stickerRed.value;
+            player.GetComponent<PlayerBehaviour>().TakeDamage((int)(-player.GetComponent<PlayerBehaviour>().RedStatModifier));
             Destroy(gameObject);
         }
     }
     void GetItemStickerBlue()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.blueStat += TheItem.stickerBlue.value;
             Destroy(gameObject);
@@ -145,9 +151,45 @@ public class Item : MonoBehaviour
     }
     void GetItemStickerGreen()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && checkIfGood)
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.greenStat += TheItem.stickerGreen.value;
+            Destroy(gameObject);
+        }
+    }
+
+    void GetMoney()
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) &&  checkIfGood)
+        {
+            BonusManager.instance.GainCoins(TheItem.CoinItem.value);
+            Destroy(gameObject);
+        }
+    }
+
+    void GetFood()
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
+        {
+            player.GetComponent<PlayerBehaviour>().TakeDamage(-TheItem.food.value);
+            Destroy(gameObject);
+        }
+    }
+
+    void GetDeath()
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) &&  checkIfGood)
+        {
+            switch (_inventory.deathDefiance1)
+            {
+                case false:
+                    _inventory.deathDefiance1 = true;
+                    Destroy(gameObject);
+                    return;
+                case true when !_inventory.deathDefiance2:
+                    _inventory.deathDefiance2 = true;
+                    break;
+            }
             Destroy(gameObject);
         }
     }
@@ -160,6 +202,8 @@ public enum typeOfItem
     STICKER_RED,
     STICKER_BLUE,
     STICKER_GREEN,
+    FOOD, 
+    DEATH,
 }
 
 [Serializable]
@@ -171,6 +215,8 @@ public class theItem
     public stickerRed stickerRed;
     public stickerBlue stickerBlue;
     public stickerGreen stickerGreen;
+    public food food;
+    public death death;
 }
 
 [Serializable]
@@ -192,19 +238,29 @@ public class coinItem
  public class stickerRed
  {
      public int value;
-     public Sprite sprite;
  }
  
 [Serializable]
 public class stickerBlue
 {
     public int value;
-    public Sprite sprite;
 }
 
 [Serializable]
 public class stickerGreen
 {
     public int value;
+}
+
+[Serializable]
+public class food
+{
+    public int value;
+    public Sprite sprite;
+}
+
+[Serializable]
+public class death
+{
     public Sprite sprite;
 }

@@ -7,8 +7,10 @@ using UnityEngine;
 public class BonusManager : MonoBehaviour
 {
     public static BonusManager instance;
-    public int redStat, greenStat, blueStat;
-    public TextMeshProUGUI redText, greenText, blueText;
+    public bool isDebug;
+    public int redStat, greenStat, blueStat, money;
+    public TextMeshProUGUI redText, greenText, blueText, moneyText;
+    public Canvas canvas;
 
     private void Awake()
     {
@@ -21,17 +23,25 @@ public class BonusManager : MonoBehaviour
         redStat = 0;
         greenStat = 0;
         blueStat = 0;
+        money = 0;
     }
 
     private void Update()
     {
-        ActualizeText();
+
     }
 
     void ActualizeText()
     {
-        redText.text = redStat.ToString();
-        greenText.text = greenStat.ToString();
-        blueText.text = blueStat.ToString();
+        //redText.text = redStat.ToString();
+        //greenText.text = greenStat.ToString();
+        //blueText.text = blueStat.ToString();
+        moneyText.text = money.ToString();
+    }
+
+    public void GainCoins(int gain)
+    {
+        money += gain;
+        ActualizeText();
     }
 }

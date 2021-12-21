@@ -3,11 +3,13 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyTowerS2 : AbstComp
 {
     [Header("Animator Parmeters")]
     [SerializeField] private Animator animator;
+    private int animValue;
     [Space]
     [Header("NavMesh Parameters")]
     [SerializeField] private Transform target;
@@ -104,16 +106,52 @@ public class EnemyTowerS2 : AbstComp
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rb.rotation = angle;
     }
-
-    //Version modifi�e 
+   
 
     IEnumerator LongShot()
     {
 
         canshoot = false;
-        yield return new WaitForSeconds(0.7f);
+        float distanceX = pj.transform.position.x - transform.position.x;
+        float distanceY = pj.transform.position.y - transform.position.y;
+        if (distanceY <= 0)
+        {
+            if (distanceX >= -4 & distanceX < 4)
+            {
+                animator.SetTrigger("AtkS");
+                animValue = 1;
+            }
+            else if (distanceX <= -4)
+            {
+                animator.SetTrigger("AtkSE");
+                animValue = 2;
+            }
+            else if (distanceX >= 4)
+            {
+                animator.SetTrigger("AtkSE");
+                animValue = 3;
+            }
+        }
+        else if (distanceY > 0)
+        {
+            if (distanceX >= -4 & distanceX < 4)
+            {
+                animator.SetTrigger("AtkN");
+                animValue = 4;
+            }
+            else if (distanceX > -4)
+            {
+                animator.SetTrigger("AtkNW");
+                animValue = 5;
+            }
+            else if (distanceX <= -4)
+            {
+                animator.SetTrigger("AtkNW");
+                animValue = 6;
+            }
+        }
 
-        animator.SetTrigger("Stop");
+        yield return new WaitForSeconds(0.7f);
 
         GameObject bul = ebp.enemyBulletPoolInstance.GetBullet();
         Vector2 toplayer = (pj.transform.position - firePoint.transform.position).normalized;
@@ -138,12 +176,17 @@ public class EnemyTowerS2 : AbstComp
         for (int i = 0; i < bulletsAmount; i++)
         {
             var index = i - bulletsAmount / 2;
+            Vector2 toplayer = (pj.transform.position - firePoint.transform.position).normalized;
+            float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
             GameObject bul = ebp.enemyBulletPoolInstance.GetBullet();
             bul.transform.position = firePoint.transform.position;
             bul.SetActive(true);
+
             GetAngle(pj.transform.position, firePoint.position, out float angle); 
-            bul.transform.rotation = Quaternion.Euler(0, 0, angle+index*intervalle); 
-            bul.GetComponent<Rigidbody2D>().velocity = -bul.transform.right*fireForce;
+            bul.transform.rotation = Quaternion.Euler(0, 0, (angle+index*intervalle));
+            bul.GetComponent<Rigidbody2D>().AddForce(-bul.transform.right*fireForce);
+            
+            
             //bul.transform.DOScale(new Vector3(3, 3, 3), 0.5f);
         }
     }

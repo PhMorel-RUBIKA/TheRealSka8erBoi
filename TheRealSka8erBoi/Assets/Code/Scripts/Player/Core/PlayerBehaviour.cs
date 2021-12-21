@@ -1,6 +1,8 @@
 using MoreMountains.NiceVibrations;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour
@@ -8,25 +10,34 @@ public class PlayerBehaviour : MonoBehaviour
     //Declaration Movement
     private Rigidbody2D playerRigid;
     private SpriteRenderer playerRender;
-    private Vector2 leftJoy;
+    [SerializeField]private Vector2 leftJoy;
     private float floatManipulation;
     [HideInInspector]public Vector2 latestDirection;
     
     [Header("Player Control")]
-    [SerializeField] int playerSpeed;
+    [SerializeField] int _playerSpeed;
+
+    public int playerSpeed => (int) (_playerSpeed + (BonusManager.instance.greenStat * GreenStatModifier));
+    
     [SerializeField] private float deadzoneController = 0.3f;
     [Space]
     
     //Declaration Dash
     [Header("Dash Tweaking")]
-    public float dashCd;
+    [SerializeField] private float _dashCd;
+
+    public float dashCd => _dashCd - (BonusManager.instance.greenStat * GreenStatModifier);
     public float dashSpeed;
     public float dashDuration;
-    [Space]
     private float dashOngoingCd;
     private float dashGoingFor;
     private bool dash = true;
-    
+    public bool dashSpellActive = false;
+    public int dashSpellactivation;
+    public GameObject dashNode;
+    public List<GameObject> dashNodeList;
+    public GameObject spellDashLaser;
+    [Space]
     //Declaration Animation
     private Animator animatorPlayer;
     public List<int> animatorID;
@@ -36,6 +47,9 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float timeMaxCharge = 0.9f;
     [SerializeField] private float perfectShootValue;
     [SerializeField] private HapticTypes _hapticTypesForPerfectShoot = HapticTypes.Success;
+    [SerializeField] private float _baseDamage;
+    public float baseDamage => _baseDamage + (BonusManager.instance.blueStat * BlueStatModifier);
+    
     [Space]
     private bool isAiming;
     private float charge;
@@ -51,13 +65,28 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Space] [Header("Feedback Declaration")]
     public MMFeedbacks DamageFeedbacks;
-    
+
     [Space]
 
     //Declaration UI
-    [HideInInspector] public int maxHealth = 5;
+    public TextMeshProUGUI lifeText;
+    [SerializeField] private int _maxHealth = 5;
+
+    public int maxHealth => (int)(_maxHealth + BonusManager.instance.redStat * RedStatModifier);
     [HideInInspector] public int currentHealth;
     public Slider healthBar;
+    
+    [Space(20)]
+    
+    [Header("BonusManager Attributs")]
+    [TextArea] public string descriptonRouge;
+    public float RedStatModifier;
+    [Space]
+    [TextArea] public string descriptonBleu;
+    public float BlueStatModifier;
+    [Space]
+    [TextArea] public string descriptonVert;
+    public float GreenStatModifier;
 
     public static PlayerBehaviour playerBehaviour;
 
@@ -77,7 +106,7 @@ public class PlayerBehaviour : MonoBehaviour
         animatorPlayer = GetComponent<Animator>();
         dashGoingFor = dashDuration;
         currentHealth = maxHealth;
-        
+        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         
         //Set animatorID
         animatorID.Add(Animator.StringToHash("GoingUp"));
@@ -141,6 +170,12 @@ public class PlayerBehaviour : MonoBehaviour
                 dashOngoingCd = dashCd ;
                 dashGoingFor = 0;
                 dash = true;
+                gameObject.tag = "PlayerDashing";
+                if (dashSpellActive && dashSpellactivation == 4)
+                {
+                    dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
+                }
+                    
             }
         }
     }
@@ -183,6 +218,11 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 playerRigid.velocity = Vector2.zero;
                 dash = false;
+                gameObject.tag = "Player";
+                if (dashSpellActive)
+                {
+                    DashSpell();
+                }
             }
             else
             {
@@ -208,19 +248,19 @@ public class PlayerBehaviour : MonoBehaviour
         {//Going Down
             animatorPlayer.SetTrigger(animatorID[1]);
         }
-        else if (leftJoy.x > deadzoneController && leftJoy.y < -deadzoneController)
+        else if (leftJoy.x > deadzoneController && leftJoy.y < 0.01f)
         {//GoingRightFront
             animatorPlayer.SetTrigger(animatorID[2]);
         }
-        else if (leftJoy.x > deadzoneController && leftJoy.y > deadzoneController) 
+        else if (leftJoy.x > deadzoneController && leftJoy.y > 0.01f) 
         {//GoingRightBack
             animatorPlayer.SetTrigger(animatorID[3]); 
         }
-        else if (leftJoy.x < -deadzoneController && leftJoy.y < -deadzoneController)
+        else if (leftJoy.x < -deadzoneController && leftJoy.y < 0.01f)
         {//GoingLeftFront
             animatorPlayer.SetTrigger(animatorID[4]);
         }
-        else if (leftJoy.x < -deadzoneController && leftJoy.y > deadzoneController) 
+        else if (leftJoy.x < -deadzoneController && leftJoy.y > 0.01f) 
         {//GoingLeftBack
             animatorPlayer.SetTrigger(animatorID[5]);
         }
@@ -261,14 +301,15 @@ public class PlayerBehaviour : MonoBehaviour
         }
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.25f;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) (7 + Mathf.RoundToInt(charge * 20) * multiplicatorShoot);
+        spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.4f;
+        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge) * multiplicatorShoot);
     }
 
     public void TakeDamage(int damageNumber)
     {
         currentHealth -= damageNumber;
         healthBar.value = (float)currentHealth / maxHealth;
+        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         
         DamageFeedbacks.PlayFeedbacks();
         CameraShake.instance.StartShake(0.2f, 0.15f, 10f);
@@ -276,6 +317,37 @@ public class PlayerBehaviour : MonoBehaviour
         if (currentHealth < 1)
         {
             animatorPlayer.SetTrigger(animatorID[7]);
+        }
+    }
+
+    public void DashSpell()
+    {
+        dashSpellactivation -= 1;
+        dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
+        if (dashSpellactivation < 1)
+        {
+            dashSpellActive = false;
+            for (int i = 0; i < dashNodeList.Count-1; i++)
+            {
+                GameObject laser = Instantiate(spellDashLaser, dashNodeList[i].transform.position, quaternion.identity,dashNodeList[i].transform);
+                for (int j = 0; j < laser.transform.childCount - 1; j++)
+                {
+                    laser.transform.GetChild(j).GetComponent<LineRenderer>().SetPosition(1, dashNodeList[i+1].transform.position - laser.transform.position);
+                }
+                Vector3 perpendicular = Vector2.Perpendicular(dashNodeList[i + 1].transform.position - laser.transform.position).normalized; 
+                laser.GetComponentInChildren<PolygonCollider2D>().SetPath(0,new List<Vector2>
+                {
+                    perpendicular*0.3f,
+                    -perpendicular*0.3f,
+                    dashNodeList[i + 1].transform.position - laser.transform.position - perpendicular*0.3f,
+                    dashNodeList[i + 1].transform.position - laser.transform.position + perpendicular*0.3f
+                });
+                Debug.Log(dashNodeList[i].transform.position + perpendicular.normalized);
+                Debug.Log(dashNodeList[i + 1].transform.position - perpendicular.normalized);
+
+                Destroy(dashNodeList[i], 3);
+            }
+            Destroy(dashNodeList[dashNodeList.Count-1], 3);
         }
     }
 }

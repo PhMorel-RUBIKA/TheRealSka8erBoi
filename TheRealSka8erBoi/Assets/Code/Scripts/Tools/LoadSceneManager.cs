@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,11 +15,20 @@ public class LoadSceneManager : MonoBehaviour
         public List<string> utilityRoom = new List<string>();
     
         [Header("Liste des Salles pour cette partie")]
-        public List<string> finalList = new List<string>(); 
+        public List<string> finalList = new List<string>();
+        
+        [Header("Attributs")]
+        public GameObject player;
+        public Animator transition;
+        public float transitionTime;
+
+        public static LoadSceneManager instance;
+        public GameObject nextItemToSpawn;
 
         public void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
+            if (instance == null) instance = this;
             numberOfRoom = 0;
         }
 
@@ -33,6 +43,12 @@ public class LoadSceneManager : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 ChangeRoom();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("Amb1-Room1");
+                player.transform.position = Vector3.zero;
             }
         }
 
@@ -59,26 +75,25 @@ public class LoadSceneManager : MonoBehaviour
             finalList.Add(roomS1[randomIndex[2]]);
         
             finalList.Add(utilityRoom[0]);
-            finalList.Add(utilityRoom[1]);
-        
+
             finalList.Add(roomS2[randomIndex[2]]);
             finalList.Add(roomS2[randomIndex[1]]);
             finalList.Add(roomS2[randomIndex[0]]);
         
             finalList.Add(utilityRoom[0]);
+            finalList.Add(utilityRoom[1]);
             finalList.Add(utilityRoom[2]);
-            finalList.Add(utilityRoom[3]);
         }
 
-        public void ChangeRoom()
-        { 
-            SceneManager.LoadSceneAsync(finalList[numberOfRoom]);
+        public IEnumerator ChangeRoom()
+        {
+            yield return new WaitForSeconds(transitionTime);
+            SceneManager.LoadScene(finalList[numberOfRoom]);
+            player.transform.position = new Vector3(0,0,0);
+            transition.SetTrigger("Stop");
+            
             numberOfRoom++;
-
-            if (numberOfRoom == 11)
-            {
-                ResetProcedural();
-            }
+            if (numberOfRoom == 11) ResetProcedural();
         }
 
         void ResetProcedural()

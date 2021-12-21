@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4084219767416896012}
   - component: {fileID: -8327491986802610486}
   - component: {fileID: -7044368530023824873}
+  - component: {fileID: 955373517}
+  - component: {fileID: 955373518}
   m_Layer: 0
   m_Name: Shockwave_item
   m_TagString: Untagged
@@ -72,10 +74,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1012055403
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 4060159395866903046, guid: 3de3f1f32a1bb50468f770cf32947362, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,7 +85,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &-7506756108043282969
@@ -140,19 +142,21 @@ MonoBehaviour:
     TypeOfItem: 0
     SpellItem:
       spellScriptable: {fileID: 11400000, guid: 73ef880e166b92a40a1da5c19b7ba506, type: 2}
-      timeToPick: 1
-      spellImage: {fileID: -7592598093260022168, guid: 86d1b72348cc3834f85149e00d7f65e2, type: 3}
-      spellUI: {fileID: 8165009960630308545, guid: e1d641dfa25cb6b468654c1135ea6778, type: 3}
+      timeToPick: 0
+      spellImage: {fileID: 4060159395866903046, guid: 3de3f1f32a1bb50468f770cf32947362, type: 3}
+      spellUI: {fileID: 4060159395866903046, guid: 3de3f1f32a1bb50468f770cf32947362, type: 3}
     CoinItem:
       value: 0
     stickerRed:
       value: 0
-      sprite: {fileID: 0}
     stickerBlue:
       value: 0
-      sprite: {fileID: 0}
     stickerGreen:
       value: 0
+    food:
+      value: 0
+      sprite: {fileID: 0}
+    death:
       sprite: {fileID: 0}
   checkIfGood: 0
 --- !u!114 &-7044368530023824873
@@ -168,3 +172,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: d721f54c4076c514ca6fee1818737db3, type: 2}
+--- !u!95 &955373517
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7785707712691717809}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc1b5c6a233da5c4fb4662724741ca6a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &955373518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7785707712691717809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41d4902685b612439de1af1ec6e8554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRender: {fileID: 899100714044385183}
+  offset: 0

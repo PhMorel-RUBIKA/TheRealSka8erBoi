@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2984205770326782560}
   m_Layer: 0
   m_Name: P_LowWall_02
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRender: {fileID: 3362970516301516837}
-  offset: 1.5
+  offset: 0
 --- !u!114 &3362970516301516833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,9 +218,12 @@ EdgeCollider2D:
   - {x: 0.33144206, y: -1.0050797}
   - {x: 1.0033369, y: -0.9983036}
   - {x: 1.0009999, y: 0.53787994}
+  - {x: 1.0026264, y: 1.0018744}
+  - {x: -1.0015831, y: 1.0105574}
   - {x: -0.9949342, y: 0.5399158}
-  - {x: -1.0012562, y: -0.037483633}
-  - {x: 0.32377413, y: -0.039446518}
+  - {x: -0.99597406, y: 0.10504198}
+  - {x: -1.0012562, y: 0.073673785}
+  - {x: 0.34310606, y: 0.07654412}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

@@ -13,21 +13,21 @@ public class EnemyProjFollower : MonoBehaviour
     private void Start()
     {
         target = PlayerBehaviour.playerBehaviour.gameObject.transform;
-        Vector2 toplayer = (target.transform.position - transform.position).normalized;
+
+        Vector3 direction = target.transform.position - transform.position;
+        transform.forward = direction;
+
+        /*Vector2 toplayer = (target.transform.position - transform.position).normalized;
         float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
-        transform.rotation= Quaternion.Euler(0f, 0f, rotZ);
+        transform.rotation= Quaternion.Euler(0f, 0f, rotZ);*/
+        
+        
         StartCoroutine(Evaporate());
     }
-
-    // Start is called before the first frame update
+    
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.CompareTag("Border"))
-        {
-            gameObject.SetActive(false);
-        }
-
-        else if (other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerBehaviour>().TakeDamage(5);
             gameObject.SetActive(false);
@@ -36,16 +36,16 @@ public class EnemyProjFollower : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 direction = Vector2.Lerp(rb.velocity, target.position - transform.position, 0.01f);
+        Vector2 direction = Vector2.MoveTowards(rb.velocity, (target.position - transform.position), 0.37f);
         Vector2 adjust = direction.normalized;
         
         transform.rotation = Quaternion.FromToRotation(Vector3.forward, target.position);
-        rb.velocity = adjust*3;
+        rb.velocity = adjust*5.5f;
     }
 
     IEnumerator Evaporate()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         gameObject.SetActive(false);
     }
 }
