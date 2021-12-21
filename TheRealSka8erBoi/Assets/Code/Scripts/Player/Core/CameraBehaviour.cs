@@ -34,6 +34,6 @@ public class CameraBehaviour : MonoBehaviour
             Mathf.Clamp(transform.position.x + (aimoff.x*aimMultiplier), leftLimit, rightLimit),
             Mathf.Clamp(transform.position.y + (aimoff.y*aimMultiplier), bottomLimit, topLimit),
             transform.position.z);
-        //cameraHelper.MoveTo(transform.position);
+        cameraHelper.MoveTo(transform.position);
     }
 }

@@ -301,7 +301,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.25f;
+        spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.4f;
         spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge) * multiplicatorShoot);
     }
 
