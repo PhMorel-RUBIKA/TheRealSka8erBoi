@@ -1567,7 +1567,7 @@ GameObject:
   - component: {fileID: 2244951836966277672}
   - component: {fileID: 3506307968127916728}
   - component: {fileID: 6948077350352362288}
-  - component: {fileID: 5801609619488685249}
+  - component: {fileID: 3868046546942658154}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1686,7 +1686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3498011852449812537}
-  cameraHelper: {fileID: 5801609619488685249}
+  cameraHelper: {fileID: 3868046546942658154}
   smoothSpeed: 0.1
   targetFps: 60
   offset: {x: 0, y: 0, z: -10}
@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86c62cb3441a754880492428bd4a9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5801609619488685249
+--- !u!114 &3868046546942658154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1723,7 +1723,7 @@ MonoBehaviour:
   pixelPerUnit: 24
   zoom: 500
   usePixelScale: 0
-  pixelScale: 3
+  pixelScale: 4
 --- !u!1 &6855425320982900114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,7 +2220,7 @@ MonoBehaviour:
   EnemyDetector: {fileID: 791839233996781622}
   angle: 0
   smoothSpeed: 0.25
-  autoAimField: 70
+  autoAimField: 260
 --- !u!114 &4075284088661258817
 MonoBehaviour:
   m_ObjectHideFlags: 0

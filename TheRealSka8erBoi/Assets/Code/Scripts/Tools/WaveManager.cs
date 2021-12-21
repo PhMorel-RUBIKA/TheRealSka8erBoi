@@ -12,7 +12,8 @@ public class WaveManager : MonoBehaviour
     public GameObject gateZone1;
     public GameObject gateZone2;
     public float timeBetweenWave;
-    public GameObject enemySpawn; 
+    public GameObject enemySpawn;
+    public GameObject fireflies;
     [Space]
     [Header("Array Attributs")]
     public Transform[] spawnPoints;
@@ -62,8 +63,7 @@ public class WaveManager : MonoBehaviour
     {
         if (canSpawn && nextSpawnTime < Time.time)
         {
-            GameObject randomEnemy = GetRandomEnemy();
-            Instantiate(randomEnemy, GetRandomPoint().position, Quaternion.identity);
+            StartCoroutine(SpawnEnemy(GetRandomPoint().position));
             
             enemyOnScreen.Add(1);
             
@@ -72,6 +72,14 @@ public class WaveManager : MonoBehaviour
 
             if (currentNumberOfEnemies[currentWaveNumber] == 0) canSpawn = false;
         }
+    }
+
+    IEnumerator SpawnEnemy(Vector3 position)
+    {
+        GameObject randomEnemy = GetRandomEnemy();
+        Instantiate(enemySpawn, position + new Vector3(-0.05f, -0.5f, 0), Quaternion.identity);
+        yield return new WaitForSeconds(0.8f);
+        Instantiate(randomEnemy, position, Quaternion.identity);
     }
 
     GameObject GetRandomEnemy()
@@ -129,6 +137,11 @@ public class WaveManager : MonoBehaviour
         gateZone1.SetActive(true);
         gateZone2.SetActive(true);
 
+        if (fireflies != null) fireflies.SetActive(true);
+
+        int randMoney = Random.Range(30, 40); 
+        BonusManager.instance.GainCoins(randMoney);
+        
         canEndwave = false;
     }
 
