@@ -25,6 +25,8 @@ public class LoadSceneManager : MonoBehaviour
         public static LoadSceneManager instance;
         public GameObject nextItemToSpawn;
 
+        public bool canChangeRoom;
+
         public void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
@@ -36,16 +38,12 @@ public class LoadSceneManager : MonoBehaviour
         {
             GetRandomNumber();
             CreateFinalList();
+            canChangeRoom = true;
         }
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                ChangeRoom();
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKey(KeyCode.R) && Input.GetKeyDown(KeyCode.P))
             {
                 SceneManager.LoadScene("Amb1-Room1");
                 player.transform.position = Vector3.zero;
@@ -93,6 +91,7 @@ public class LoadSceneManager : MonoBehaviour
             transition.SetTrigger("Stop");
             
             numberOfRoom++;
+            canChangeRoom = true;
             if (numberOfRoom == 11) ResetProcedural();
         }
 

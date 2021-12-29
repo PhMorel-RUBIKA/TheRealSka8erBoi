@@ -11,6 +11,9 @@ public class Door : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("PlayerDashing"))
         {
+            if (!LoadSceneManager.instance.canChangeRoom) return;
+
+            LoadSceneManager.instance.canChangeRoom = false;
             LoadSceneManager.instance.transition.SetTrigger("Start");
             StartCoroutine(LoadSceneManager.instance.ChangeRoom());
             
