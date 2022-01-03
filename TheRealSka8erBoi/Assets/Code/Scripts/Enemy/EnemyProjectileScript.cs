@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyProjectileScript : MonoBehaviour
 {
+    [SerializeField] private int damages = 5;
     void Start()
     {
         Invoke("SetFalse",5);
@@ -14,7 +15,7 @@ public class EnemyProjectileScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerBehaviour>().TakeDamage(5);
+            other.GetComponent<PlayerBehaviour>().TakeDamage(damages);
             gameObject.SetActive(false);
         }
     }

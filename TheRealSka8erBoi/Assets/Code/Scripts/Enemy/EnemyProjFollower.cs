@@ -8,6 +8,7 @@ public class EnemyProjFollower : MonoBehaviour
 {
     private Transform target;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private int damages = 3;
 
 
     private void Start()
@@ -29,7 +30,7 @@ public class EnemyProjFollower : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerBehaviour>().TakeDamage(5);
+            other.GetComponent<PlayerBehaviour>().TakeDamage(damages);
             gameObject.SetActive(false);
         }
     }
