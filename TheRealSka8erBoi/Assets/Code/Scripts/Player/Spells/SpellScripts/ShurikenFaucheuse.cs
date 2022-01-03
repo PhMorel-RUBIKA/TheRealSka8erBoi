@@ -10,9 +10,6 @@ public class ShurikenFaucheuse : Spell
 
     public override void Activate(GameObject parent)
     {
-        GameObject spawnedProj =
-            PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", parent.transform.position, Quaternion.Euler(Mathf.Atan2(parent.GetComponent<PlayerBehaviour>().latestDirection.y, -parent.GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
-        Debug.Log("shuriken");
-        spawnedProj.GetComponent<BulletPoolBehaviour>().force = parent.GetComponent<PlayerBehaviour>().latestDirection.normalized;
+        parent.GetComponent<PlayerBehaviour>().shurikenActive = true;
     }
 }

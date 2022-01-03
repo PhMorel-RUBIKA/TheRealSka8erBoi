@@ -49,12 +49,13 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private HapticTypes _hapticTypesForPerfectShoot = HapticTypes.Success;
     [SerializeField] private float _baseDamage;
     public float baseDamage => _baseDamage + (BonusManager.instance.blueStat * BlueStatModifier);
-    
+    public bool shurikenActive;
     [Space]
     private bool isAiming;
     private float charge;
 
     private GameObject spawnedProj;
+    private GameObject spawnedShuriken;
 
     //Declaration VFXShoot
     [Header("FX Declaration")]
@@ -274,14 +275,21 @@ public class PlayerBehaviour : MonoBehaviour
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("lightArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(muzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
-            
-
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
         }
         else if (charge < timeMaxCharge/1.5)
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("mediumArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(bigMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
-            
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
         }
         else if (charge >= timeMaxCharge - perfectShootValue && charge <= timeMaxCharge)
         {
@@ -292,17 +300,34 @@ public class PlayerBehaviour : MonoBehaviour
             Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             multiplicatorShoot = 1.5f;
             MMVibrationManager.Haptic(_hapticTypesForPerfectShoot, false, true, this);
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
         }
         else
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("heavyArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
         }
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
         spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.4f;
         spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge) * multiplicatorShoot);
+
+        if (shurikenActive)
+        {
+            spawnedShuriken.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
+            spawnedShuriken.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.4f;
+            shurikenActive = false;
+        }
     }
 
     public void TakeDamage(int damageNumber)
