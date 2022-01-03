@@ -49,6 +49,10 @@ public class EnemyDash : AbstComp
 
     private void BehaviourAggro()
     {
+        if (hp<maxhp)
+        {
+            lineOfSight = 100;
+        }
         if(CheckPlayerInSight())
         {
             lineOfSight = 100;
@@ -185,6 +189,7 @@ public class EnemyDash : AbstComp
         attackFinished = true;
 
     }
+    
 
     void AbleToAttack()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
@@ -7,12 +8,17 @@ using UnityEngine;
 public class AbstComp : MonoBehaviour 
 {
     public GameObject pj;
-    
+    public float maxhp;
     public float hp;
     public float lineOfSight;
     protected float distanceFromPlayer;
     [SerializeField] float range = 1;
-    
+
+
+    private void Awake()
+    {
+        hp = maxhp;
+    }
 
     public bool CheckPlayerInSight()
     {

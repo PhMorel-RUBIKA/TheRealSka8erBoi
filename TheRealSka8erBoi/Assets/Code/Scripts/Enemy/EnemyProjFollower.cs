@@ -37,7 +37,7 @@ public class EnemyProjFollower : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 direction = Vector2.MoveTowards(rb.velocity, (target.position - transform.position), 0.37f);
+        Vector2 direction = Vector2.MoveTowards(rb.velocity, (target.position - transform.position), 0.70f);
         Vector2 adjust = direction.normalized;
         
         transform.rotation = Quaternion.FromToRotation(Vector3.forward, target.position);

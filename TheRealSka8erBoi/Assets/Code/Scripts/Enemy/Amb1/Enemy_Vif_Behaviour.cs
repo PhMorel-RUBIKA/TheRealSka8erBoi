@@ -40,6 +40,10 @@ public class Enemy_Vif_Behaviour : AbstComp
 
     protected void BehaviourAggro()
     {
+        if (hp<maxhp)
+        {
+            lineOfSight = 100;
+        }
         if(CheckPlayerInSight())
         {
             if (pj.transform.position.x-transform.position.x>-3 & pj.transform.position.x-transform.position.x < 3 & pj.transform.position.y-transform.position.y <= 0)

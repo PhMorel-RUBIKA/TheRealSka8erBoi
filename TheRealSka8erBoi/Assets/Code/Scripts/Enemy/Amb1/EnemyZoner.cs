@@ -46,6 +46,10 @@ public class EnemyZoner : AbstComp
     
     protected void BehaviourAggro()
     {
+        if (hp<maxhp)
+        {
+            lineOfSight = 100;
+        }
         if (!CheckPlayerInSight()) return;
         lineOfSight = 100;
         GoToPlayer();

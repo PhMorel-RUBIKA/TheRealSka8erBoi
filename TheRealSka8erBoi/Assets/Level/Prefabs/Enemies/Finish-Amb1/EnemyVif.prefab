@@ -537,7 +537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3325560124296795752
 Transform:
   m_ObjectHideFlags: 0
@@ -612,8 +612,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pj: {fileID: 1721679794653617870}
+  maxhp: 25
   hp: 25
-  lineOfSight: 9
+  lineOfSight: 11
   range: 7
   animator: {fileID: 2959359728698865773}
   mySprite: {fileID: 6536779596051279065}
