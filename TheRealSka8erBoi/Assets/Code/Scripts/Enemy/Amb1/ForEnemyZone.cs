@@ -7,7 +7,9 @@ public class ForEnemyZone : MonoBehaviour
 
     [SerializeField] private float areaSize;
 
-    [SerializeField] private int damage=5;
+    [SerializeField] private int damage=10;
+
+    [SerializeField] private int cd = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class ForEnemyZone : MonoBehaviour
 
     IEnumerator Implosion()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(cd);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
 
         foreach (Collider2D enemy in hitEnemies)

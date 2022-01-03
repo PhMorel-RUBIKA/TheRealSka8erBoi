@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
 using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine.AI;
 using UnityEngine;
-using static UnityEngine.Random;
-using Random = UnityEngine.Random;
+
 
 public class EnemyZoner : AbstComp
 {

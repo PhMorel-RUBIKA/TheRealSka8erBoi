@@ -36,7 +36,7 @@ public class FinalBossBehaviour : MonoBehaviour
     //[SerializeField] private Rigidbody2D Crush;
     [SerializeField] private float areaSize;
     [SerializeField] private int damage;
-    private int punchDamage = 15;
+    private int punchDamage = 10;
     [Space] [Header("EnemySpawnParameters")]
     private int spawningFactor;
     [SerializeField] List<GameObject> enemyPool;

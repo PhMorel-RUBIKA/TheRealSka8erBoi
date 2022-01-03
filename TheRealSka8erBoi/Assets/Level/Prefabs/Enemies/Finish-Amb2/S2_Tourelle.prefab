@@ -542,7 +542,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2339571469173076058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.33, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2339571470839724251}
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pj: {fileID: 5394200822797100280, guid: db987897e5064e54c9968672d46499df, type: 3}
-  hp: 50
+  hp: 35
   lineOfSight: 15
   range: 10
   animator: {fileID: 2339571470749599353}
@@ -861,8 +861,8 @@ MonoBehaviour:
   rb: {fileID: 2339571471071718541}
   firePoint: {fileID: 2339571469173076059}
   cooldown: 0.5
-  initcooldown: 2.5
-  fireForce: 200
+  initcooldown: 3
+  fireForce: 300
   offset: 0
   s2: 1
   ebp: {fileID: -5609374974082673189}

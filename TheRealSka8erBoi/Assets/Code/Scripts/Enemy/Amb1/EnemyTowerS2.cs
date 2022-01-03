@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using DG.Tweening;
 using UnityEngine.AI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -175,16 +174,14 @@ public class EnemyTowerS2 : AbstComp
         var intervalle = rayonAngle / bulletsAmount;
         for (int i = 0; i < bulletsAmount; i++)
         {
-            var index = i - bulletsAmount / 2;
-            Vector2 toplayer = (pj.transform.position - firePoint.transform.position).normalized;
-            float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
+            var index = i-bulletsAmount/2;
             GameObject bul = ebp.enemyBulletPoolInstance.GetBullet();
             bul.transform.position = firePoint.transform.position;
             bul.SetActive(true);
 
-            GetAngle(pj.transform.position, firePoint.position, out float angle); 
-            bul.transform.rotation = Quaternion.Euler(0, 0, (angle+index*intervalle));
-            bul.GetComponent<Rigidbody2D>().AddForce(-bul.transform.right*fireForce);
+            GetAngle(firePoint.position,pj.transform.position, out float angle);
+            bul.transform.rotation = Quaternion.Euler(0,0,(angle+index*intervalle));
+            bul.GetComponent<Rigidbody2D>().AddForce(bul.transform.right*fireForce);
             
             
             //bul.transform.DOScale(new Vector3(3, 3, 3), 0.5f);
