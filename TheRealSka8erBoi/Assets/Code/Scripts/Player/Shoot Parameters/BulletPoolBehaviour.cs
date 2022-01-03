@@ -13,7 +13,7 @@ public class BulletPoolBehaviour : MonoBehaviour
     public float speed;
     private Rigidbody2D rb;
     public int damage;
-    [SerializeField] private Transform damagePopUp;
+    //[SerializeField] private Transform damagePopUp;
 
     private void OnEnable()
     {
@@ -25,9 +25,9 @@ public class BulletPoolBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Target"))
         {
             other.GetComponent<DamageManager>().TakeDamage(damage);
-            Transform damageUI = Instantiate(damagePopUp, new Vector3(other.transform.position.x,other.transform.position.y + 1,other.transform.position.z - 2),Quaternion.identity);
-            damageUI.gameObject.GetComponent<TextMeshPro>().text = damage.ToString();
-            Destroy(damageUI.gameObject,1);
+            //Transform damageUI = Instantiate(damagePopUp, new Vector3(other.transform.position.x,other.transform.position.y + 1,other.transform.position.z - 2),Quaternion.identity);
+            //damageUI.gameObject.GetComponent<TextMeshPro>().text = damage.ToString();
+            //Destroy(damageUI.gameObject,1);
         }
     }
     
