@@ -1,3 +1,4 @@
+using System.Collections;
 using MoreMountains.NiceVibrations;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
@@ -91,6 +92,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public static PlayerBehaviour playerBehaviour;
 
+    private bool canActivateStepSound;
+
 
     private void Awake()
     {
@@ -108,6 +111,7 @@ public class PlayerBehaviour : MonoBehaviour
         dashGoingFor = dashDuration;
         currentHealth = maxHealth;
         lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        canActivateStepSound = true;
         
         //Set animatorID
         animatorID.Add(Animator.StringToHash("GoingUp"));
@@ -231,6 +235,19 @@ public class PlayerBehaviour : MonoBehaviour
                 playerRigid.velocity = new Vector2(leftJoy.x, leftJoy.y) * dashSpeed;
             }
         }
+
+        if (playerRigid.velocity != Vector2.zero && canActivateStepSound)
+        {
+            canActivateStepSound = false;
+            StartCoroutine(CallStepSound()); 
+        }
+    }
+
+    IEnumerator CallStepSound()
+    {
+        SoundCaller.instance.StepSound();
+        yield return new WaitForSeconds(SoundCaller.instance.timeBetweenSoundsStep);
+        canActivateStepSound = true;
     }
 
     private void AnimatorManagement()
