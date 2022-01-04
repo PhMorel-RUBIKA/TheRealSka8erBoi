@@ -8,10 +8,17 @@ public class SoundCaller : MonoBehaviour
 {
     public static SoundCaller instance;
     
+    [Header("Step Sound")]
     public float timeBetweenSoundsStep = 0.3f;
-    public AudioSource audioSource;
+    public AudioSource stepAudioSource;
     public AudioClip[] stepSound;
 
+    [Space]
+    
+    [Header("Dash Sound")]
+    public AudioSource dashAudioSource;
+    public AudioClip dashSound;
+    
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -20,6 +27,11 @@ public class SoundCaller : MonoBehaviour
     public void StepSound()
     {
         int rand = Random.Range(0, 2);
-        audioSource.PlayOneShot(stepSound[rand]);
+        stepAudioSource.PlayOneShot(stepSound[rand]);
+    }
+
+    public void DashSound()
+    {
+        dashAudioSource.PlayOneShot(dashSound);
     }
 }

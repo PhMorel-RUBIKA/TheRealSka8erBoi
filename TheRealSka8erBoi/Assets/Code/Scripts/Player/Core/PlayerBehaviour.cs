@@ -180,7 +180,7 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
                 }
-                    
+                SoundCaller.instance.DashSound();
             }
         }
     }
