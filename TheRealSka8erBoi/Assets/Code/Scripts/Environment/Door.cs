@@ -6,28 +6,40 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public int doorNumber;
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("PlayerDashing"))
         {
             if (!LoadSceneManager.instance.canChangeRoom) return;
 
-            LoadSceneManager.instance.canChangeRoom = false;
-            LoadSceneManager.instance.transition.SetTrigger("Start");
-            StartCoroutine(LoadSceneManager.instance.ChangeRoom());
-            
             switch (doorNumber)
             {
                 case 0:
+                    CallTheChangeRoom();
                     return;
                 case 1:
+                    CallTheChangeRoom();
                     LoadSceneManager.instance.nextItemToSpawn = WaveManager.instance.itemDoor1;
                     break;
                 case 2:
+                    CallTheChangeRoom();
                     LoadSceneManager.instance.nextItemToSpawn = WaveManager.instance.itemDoor2;
+                    break;
+                case 3:
+                    if (Input.GetKeyDown(KeyCode.JoystickButton3))
+                    {
+                        
+                    }
                     break;
             }
         }
+    }
+
+    void CallTheChangeRoom()
+    {
+        LoadSceneManager.instance.canChangeRoom = false;
+        LoadSceneManager.instance.transition.SetTrigger("Start");
+        StartCoroutine(LoadSceneManager.instance.ChangeRoom());
     }
 }
