@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour
 {
+    private GameObject chargeProjectile;
     //Declaration Movement
     private Rigidbody2D playerRigid;
     private SpriteRenderer playerRender;
@@ -64,6 +65,8 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject bigMuzzle;
     public GameObject muzzle;
     public GameObject giantMuzzle;
+    public GameObject chargeProjo;
+    
 
     [Space] [Header("Feedback Declaration")]
     public MMFeedbacks DamageFeedbacks;
@@ -149,6 +152,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             latestDirection = leftJoy;
         }
+
+       
         
         if (Input.GetButtonDown("BowShot"))
         {
@@ -156,6 +161,8 @@ public class PlayerBehaviour : MonoBehaviour
             isAiming = true;
             animatorPlayer.SetBool(animatorID[9], isAiming);
             charge = 0;
+            
+            chargeProjectile = Instantiate(chargeProjo, transform.position, Quaternion.identity);
         }
         if (Input.GetButtonUp("BowShot") && isAiming)
         {
@@ -164,8 +171,11 @@ public class PlayerBehaviour : MonoBehaviour
             isAiming = false;
             animatorPlayer.SetTrigger(animatorID[6]);//Release
             animatorPlayer.SetBool(animatorID[9], isAiming);
+       
+            Destroy(chargeProjectile);
             
         }
+        
 
         dashOngoingCd -= Time.deltaTime;
         if (Input.GetAxisRaw("Dash") > 0 && !isAiming)
@@ -202,6 +212,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 animatorPlayer.SetBool(animatorID[8],true); 
                 playerRigid.velocity = leftJoy * playerSpeed;
+                
             }
             else
             {
@@ -287,11 +298,12 @@ public class PlayerBehaviour : MonoBehaviour
     private void Shoot(float charge, Vector2 projDirection)
     {
         float multiplicatorShoot = 1;
-        
+
         if (charge < timeMaxCharge/3)
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("lightArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(muzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            
             if (shurikenActive)
             {
                 spawnedShuriken =

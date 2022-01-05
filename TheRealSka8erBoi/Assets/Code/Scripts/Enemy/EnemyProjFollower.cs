@@ -9,6 +9,7 @@ public class EnemyProjFollower : MonoBehaviour
     private Transform target;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private int damages = 3;
+    public GameObject playerImpact;
 
 
     private void Start()
@@ -32,7 +33,10 @@ public class EnemyProjFollower : MonoBehaviour
         {
             other.GetComponent<PlayerBehaviour>().TakeDamage(damages);
             gameObject.SetActive(false);
+            Instantiate(playerImpact, transform.position, quaternion.identity);
         }
+
+        
     }
 
     private void FixedUpdate()
