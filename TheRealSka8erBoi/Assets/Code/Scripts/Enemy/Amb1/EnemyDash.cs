@@ -6,9 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyDash : AbstComp
 {
-
+    [Header("Comportment Parameters")]
     //public Animator animator;
-    public float moveSpeed = 3.5f;
     private bool canhit = true;
     public float hitcd = 0.5f;
     public float inithitcd=0.5f;
@@ -23,12 +22,15 @@ public class EnemyDash : AbstComp
     private Vector2 movement;
     private Vector2 direction;
     private Vector2 dashPointPos;
-    
+    [Space]
+    [Header("Atck Parameters")]
     [SerializeField] private BoxCollider2D boxCo;
     [SerializeField] private int dashSpeed;
     private bool attackFinished = true;
     [SerializeField] private int damages = 10;
     [SerializeField] private bool s2;
+
+    private BonusManager bm;
 
     void Start()
     { 
@@ -91,9 +93,18 @@ public class EnemyDash : AbstComp
         hp -= damage;
         Debug.Log(hp);
          if (hp <= 0)
-        {
+         {
+             
             //animator.SetTrigger("Ded");
             Destroy(gameObject,1f);
+            if (s2)
+            {
+                bm.finalScore += 315;
+            }
+            else
+            {
+                bm.finalScore += 255;
+            }
         }
     }
 

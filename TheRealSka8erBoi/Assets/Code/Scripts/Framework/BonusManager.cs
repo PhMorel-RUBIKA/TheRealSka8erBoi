@@ -11,7 +11,7 @@ public class BonusManager : MonoBehaviour
     public int redStat, greenStat, blueStat, money;
     public TextMeshProUGUI redText, greenText, blueText, moneyText;
     public Canvas canvas;
-
+    public int finalScore = 0;
     private void Awake()
     {
         if (instance == null)

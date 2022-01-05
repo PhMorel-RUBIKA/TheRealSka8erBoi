@@ -59,6 +59,7 @@ public class PlayerBehaviour : MonoBehaviour
     private GameObject spawnedProj;
     private GameObject spawnedShuriken;
 
+    public bool perfectTiming=false;
     //Declaration VFXShoot
     [Header("FX Declaration")]
     public GameObject cylindre;
@@ -322,6 +323,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
         else if (charge >= timeMaxCharge - perfectShootValue && charge <= timeMaxCharge)
         {
+            perfectTiming = true;
             spawnedProj = PoolObjectManager.Instance.GetBullet("perfectTimingAmmo",
                 transform.GetChild(0).position - new Vector3(-projDirection.x, -projDirection.y, 0).normalized,
                 transform.GetChild(0).rotation);

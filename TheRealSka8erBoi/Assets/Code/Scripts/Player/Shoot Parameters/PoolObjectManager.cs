@@ -116,5 +116,6 @@ public class PoolObjectManager : MonoBehaviour
             poolObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             poolObject.SetActive(false);
         }
+        
     }
 }

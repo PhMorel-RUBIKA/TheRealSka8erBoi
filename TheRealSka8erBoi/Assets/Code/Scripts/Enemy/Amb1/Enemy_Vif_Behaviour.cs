@@ -26,7 +26,7 @@ public class Enemy_Vif_Behaviour : AbstComp
     
     
     [SerializeField] private EnemyBulletPool ebp;
-
+    private BonusManager bm;
 
     void Start()
     {
@@ -155,6 +155,8 @@ public class Enemy_Vif_Behaviour : AbstComp
                     break;
                     
             }
+
+            bm.finalScore += 175;
             
             Destroy(gameObject,1f);
         }

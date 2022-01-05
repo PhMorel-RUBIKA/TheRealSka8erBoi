@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -32,6 +33,12 @@ public class WaveManager : MonoBehaviour
     private List<int> currentNumberOfEnemies = new List<int>();
     private GameObject[] probabilityForSpawn;
     public static WaveManager instance;
+    [Header("Scoring Parameters")]
+    private BonusManager bm;
+    [SerializeField] private int frameCounter=0;
+    [SerializeField] private int scoreRef;
+    private bool stopFrameCounter=false;
+    private int finalFrameCounter;
 
     private void Start()
     {
@@ -53,6 +60,22 @@ public class WaveManager : MonoBehaviour
         else if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber + 1 == waveLevel.waves.Length && canEndwave) EndWave();
     }
 
+    private void FixedUpdate()
+    {
+        IncrementingFramesCounter();
+    }
+
+    private void IncrementingFramesCounter()
+    {
+        frameCounter +=1;
+    }
+
+    private void GettingScore()
+    {
+        if (!stopFrameCounter) return;
+        finalFrameCounter = frameCounter;
+        bm.finalScore += (scoreRef - finalFrameCounter/10);
+    }
     IEnumerator CoroutineForWave()
     {
         yield return new WaitForSeconds(timeBetweenWave);
@@ -143,6 +166,7 @@ public class WaveManager : MonoBehaviour
         BonusManager.instance.GainCoins(randMoney);
         
         canEndwave = false;
+        GettingScore();
     }
 
     void RandomItem(GameObject item)

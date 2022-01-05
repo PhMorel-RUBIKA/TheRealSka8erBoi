@@ -16,7 +16,8 @@ public class BulletPoolBehaviour : MonoBehaviour
     public int damage;
     //[SerializeField] private Transform damagePopUp;
     public GameObject impactTir;
-
+    private PlayerBehaviour pb;
+    private BonusManager bm;
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,6 +27,11 @@ public class BulletPoolBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Target"))
         {
+            if (pb.perfectTiming)
+            {
+                bm.finalScore += 50;
+                pb.perfectTiming = false;
+            }
             other.GetComponent<DamageManager>().TakeDamage(damage);
             //Transform damageUI = Instantiate(damagePopUp, new Vector3(other.transform.position.x,other.transform.position.y + 1,other.transform.position.z - 2),Quaternion.identity);
             //damageUI.gameObject.GetComponent<TextMeshPro>().text = damage.ToString();
@@ -45,5 +51,6 @@ public class BulletPoolBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(waitForDestruction); 
         PoolObjectManager.Instance.DestroyBullet(bulletName, this.gameObject);
+        pb.perfectTiming = false;
     }
 }
