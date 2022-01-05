@@ -138,7 +138,7 @@ public class Item : MonoBehaviour
         {
             BonusManager.instance.redStat += TheItem.stickerRed.value;
             player.GetComponent<PlayerBehaviour>().TakeDamage((int)(-player.GetComponent<PlayerBehaviour>().RedStatModifier));
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
     void GetItemStickerBlue()
@@ -146,7 +146,7 @@ public class Item : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.blueStat += TheItem.stickerBlue.value;
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
     void GetItemStickerGreen()
@@ -154,7 +154,7 @@ public class Item : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.greenStat += TheItem.stickerGreen.value;
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 
