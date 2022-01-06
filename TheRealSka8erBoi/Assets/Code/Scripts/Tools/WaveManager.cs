@@ -34,7 +34,6 @@ public class WaveManager : MonoBehaviour
     private GameObject[] probabilityForSpawn;
     public static WaveManager instance;
     [Header("Scoring Parameters")]
-    private BonusManager bm;
     [SerializeField] private int frameCounter=0;
     [SerializeField] private int scoreRef;
     private bool stopFrameCounter=false;
@@ -74,7 +73,7 @@ public class WaveManager : MonoBehaviour
     {
         if (!stopFrameCounter) return;
         finalFrameCounter = frameCounter;
-        bm.finalScore += (scoreRef - finalFrameCounter/10);
+        BonusManager.instance.finalScore += (scoreRef - finalFrameCounter/10);
     }
     IEnumerator CoroutineForWave()
     {

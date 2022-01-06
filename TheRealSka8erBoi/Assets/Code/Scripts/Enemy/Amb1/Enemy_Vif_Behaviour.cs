@@ -24,9 +24,7 @@ public class Enemy_Vif_Behaviour : AbstComp
     [SerializeField] float initcooldown;
     [SerializeField] private float fireForce=100f;
     
-    
     [SerializeField] private EnemyBulletPool ebp;
-    private BonusManager bm;
 
     void Start()
     {
@@ -156,7 +154,7 @@ public class Enemy_Vif_Behaviour : AbstComp
                     
             }
 
-            bm.finalScore += 175;
+            BonusManager.instance.finalScore += 175;
             
             Destroy(gameObject,1f);
         }

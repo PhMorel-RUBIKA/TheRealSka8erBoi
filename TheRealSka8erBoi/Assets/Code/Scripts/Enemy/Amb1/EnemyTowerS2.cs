@@ -29,8 +29,7 @@ public class EnemyTowerS2 : AbstComp
     [SerializeField] private EnemyBulletPool ebp;
     [SerializeField] public int bulletsAmount = 8;
     [SerializeField] private float rayonAngle=90;
-
-    private BonusManager bm;
+    
 
     void Start()
     {
@@ -82,11 +81,11 @@ public class EnemyTowerS2 : AbstComp
         {
             if (s2)
             {
-                bm.finalScore += 175;
+                BonusManager.instance.finalScore += 175;
             }
             else
             {
-                bm.finalScore += 100;
+                BonusManager.instance.finalScore += 100;
             }
             animator.SetTrigger("Ded");
             Destroy(gameObject,1f);

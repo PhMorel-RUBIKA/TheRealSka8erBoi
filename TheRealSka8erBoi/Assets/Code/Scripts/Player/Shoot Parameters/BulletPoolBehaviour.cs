@@ -17,10 +17,10 @@ public class BulletPoolBehaviour : MonoBehaviour
     //[SerializeField] private Transform damagePopUp;
     public GameObject impactTir;
     private PlayerBehaviour pb;
-    private BonusManager bm;
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
+        pb = PlayerBehaviour.playerBehaviour;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,7 +29,7 @@ public class BulletPoolBehaviour : MonoBehaviour
         {
             if (pb.perfectTiming)
             {
-                bm.finalScore += 50;
+                BonusManager.instance.finalScore += 50;
                 pb.perfectTiming = false;
             }
             other.GetComponent<DamageManager>().TakeDamage(damage);

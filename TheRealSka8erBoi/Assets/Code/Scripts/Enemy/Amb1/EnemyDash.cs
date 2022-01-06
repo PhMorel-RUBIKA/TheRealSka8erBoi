@@ -30,8 +30,6 @@ public class EnemyDash : AbstComp
     [SerializeField] private int damages = 10;
     [SerializeField] private bool s2;
 
-    private BonusManager bm;
-
     void Start()
     { 
         pj = PlayerBehaviour.playerBehaviour.gameObject;
@@ -99,11 +97,11 @@ public class EnemyDash : AbstComp
             Destroy(gameObject,1f);
             if (s2)
             {
-                bm.finalScore += 315;
+                BonusManager.instance.finalScore += 315;
             }
             else
             {
-                bm.finalScore += 255;
+                BonusManager.instance.finalScore += 255;
             }
         }
     }

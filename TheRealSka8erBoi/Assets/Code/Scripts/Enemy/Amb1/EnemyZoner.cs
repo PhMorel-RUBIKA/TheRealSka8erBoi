@@ -27,8 +27,7 @@ public class EnemyZoner : AbstComp
     [SerializeField] private int bulletAmount;
     private GameObject implosionZone;
     private GameObject sndImplosionZone;
-
-    private BonusManager bm;
+    
     void Start()
     {
         pj = PlayerBehaviour.playerBehaviour.gameObject;
@@ -77,11 +76,11 @@ public class EnemyZoner : AbstComp
             Destroy(gameObject,1f);
             if (s2)
             {
-                bm.finalScore += 275;
+                BonusManager.instance.finalScore += 275;
             }
             else
             {
-                bm.finalScore += 195;
+                BonusManager.instance.finalScore += 195;
             }
         }
     }
