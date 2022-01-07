@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class EnemyProjFollower : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private int damages = 3;
     public GameObject playerImpact;
+    public MMFeedbacks perfection;
 
 
     private void Start()
@@ -35,9 +37,10 @@ public class EnemyProjFollower : MonoBehaviour
             gameObject.SetActive(false);
             Instantiate(playerImpact, transform.position, quaternion.identity);
         }
-
+        
         
     }
+    
 
     private void FixedUpdate()
     {

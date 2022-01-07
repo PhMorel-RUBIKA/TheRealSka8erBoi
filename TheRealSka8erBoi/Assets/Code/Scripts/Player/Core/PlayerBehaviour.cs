@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using MoreMountains.NiceVibrations;
 using System.Collections.Generic;
@@ -100,7 +101,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool canActivateStepSound;
 
-
+    public MMFeedbacks perfection;
     private void Awake()
     {
         if (playerBehaviour == null)
@@ -385,6 +386,18 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void GetHealth(int healthNumber)
+    {
+        currentHealth += healthNumber;
+        if (currentHealth>maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        healthBar.value = (float) currentHealth / maxHealth;
+        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+       
+    }
+
     IEnumerator Invincibility()
     {
         if (!canTakeDamage) yield break;
@@ -392,6 +405,14 @@ public class PlayerBehaviour : MonoBehaviour
         canTakeDamage = false;
         yield return new WaitForSeconds(1);
         canTakeDamage = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("EnemyBullet"))
+        {
+            perfection.PlayFeedbacks();
+        }
     }
 
     public void DashSpell()
