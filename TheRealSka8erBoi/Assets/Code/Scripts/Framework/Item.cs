@@ -137,7 +137,7 @@ public class Item : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             BonusManager.instance.redStat += TheItem.stickerRed.value;
-            player.GetComponent<PlayerBehaviour>().TakeDamage((int)(-player.GetComponent<PlayerBehaviour>().RedStatModifier));
+            player.GetComponent<PlayerBehaviour>().GetHealth((int)(player.GetComponent<PlayerBehaviour>().RedStatModifier));
             Destroy(transform.parent.gameObject);
         }
     }
@@ -171,7 +171,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
-            player.GetComponent<PlayerBehaviour>().TakeDamage(-TheItem.food.value);
+            player.GetComponent<PlayerBehaviour>().GetHealth(TheItem.food.value);
             Destroy(gameObject);
         }
     }
