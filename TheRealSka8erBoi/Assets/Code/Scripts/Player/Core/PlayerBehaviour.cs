@@ -78,12 +78,12 @@ public class PlayerBehaviour : MonoBehaviour
     [Space]
 
     //Declaration UI
-    public TextMeshProUGUI lifeText;
+    //public TextMeshProUGUI lifeText;
     [SerializeField] private int _maxHealth = 5;
 
     public int maxHealth => (int)(_maxHealth + BonusManager.instance.redStat * RedStatModifier);
     [HideInInspector] public int currentHealth;
-    public Slider healthBar;
+    public Image healthBar;
     
     [Space(20)]
     
@@ -117,7 +117,7 @@ public class PlayerBehaviour : MonoBehaviour
         animatorPlayer = GetComponent<Animator>();
         dashGoingFor = dashDuration;
         currentHealth = maxHealth;
-        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         canActivateStepSound = true;
         over9000Power = false;
         canTakeDamage = true;
@@ -373,8 +373,8 @@ public class PlayerBehaviour : MonoBehaviour
         if(!canTakeDamage) return;
         
         currentHealth -= damageNumber;
-        healthBar.value = (float)currentHealth / maxHealth;
-        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        healthBar.fillAmount = (float)currentHealth / maxHealth;
+        //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
         StartCoroutine(Invincibility());
         DamageFeedbacks.PlayFeedbacks();
@@ -393,8 +393,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        healthBar.value = (float) currentHealth / maxHealth;
-        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        healthBar.fillAmount = (float) currentHealth / maxHealth;
+        //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
        
     }
 
