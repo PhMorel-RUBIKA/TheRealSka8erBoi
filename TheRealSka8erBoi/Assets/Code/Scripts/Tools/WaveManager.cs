@@ -186,4 +186,13 @@ public class WaveManager : MonoBehaviour
                 break;
         } 
     }
+
+    public void KillEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Target");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i]);
+        }
+    }
 }

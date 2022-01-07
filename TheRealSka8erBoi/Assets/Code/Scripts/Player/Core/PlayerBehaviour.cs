@@ -22,6 +22,8 @@ public class PlayerBehaviour : MonoBehaviour
     public int playerSpeed => (int) (_playerSpeed + (BonusManager.instance.greenStat * GreenStatModifier));
     
     [SerializeField] private float deadzoneController = 0.3f;
+    public bool over9000Power;
+    public bool canTakeDamage;
     [Space]
     
     //Declaration Dash
@@ -116,6 +118,8 @@ public class PlayerBehaviour : MonoBehaviour
         currentHealth = maxHealth;
         lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         canActivateStepSound = true;
+        over9000Power = false;
+        canTakeDamage = true;
         
         //Set animatorID
         animatorID.Add(Animator.StringToHash("GoingUp"));
@@ -351,7 +355,9 @@ public class PlayerBehaviour : MonoBehaviour
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
         spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.4f;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge) * multiplicatorShoot);
+        if(over9000Power) spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge * 1000) * multiplicatorShoot);
+        else spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge) * multiplicatorShoot);
+        
 
         if (shurikenActive)
         {
@@ -363,17 +369,29 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void TakeDamage(int damageNumber)
     {
+        if(!canTakeDamage) return;
+        
         currentHealth -= damageNumber;
         healthBar.value = (float)currentHealth / maxHealth;
         lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
-        
+
+        StartCoroutine(Invincibility());
         DamageFeedbacks.PlayFeedbacks();
         CameraShake.instance.StartShake(0.2f, 0.15f, 10f);
-        
+
         if (currentHealth < 1)
         {
             animatorPlayer.SetTrigger(animatorID[7]);
         }
+    }
+
+    IEnumerator Invincibility()
+    {
+        if (!canTakeDamage) yield break;
+
+        canTakeDamage = false;
+        yield return new WaitForSeconds(1);
+        canTakeDamage = true;
     }
 
     public void DashSpell()

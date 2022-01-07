@@ -43,11 +43,11 @@ public class LoadSceneManager : MonoBehaviour
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.R) && Input.GetKeyDown(KeyCode.P))
-            {
-                SceneManager.LoadScene("Amb1-Room1");
-                player.transform.position = Vector3.zero;
-            }
+           if (Input.GetKey(KeyCode.O) && Input.GetKeyDown(KeyCode.P))
+           {
+                transition.SetTrigger("Start");
+                StartCoroutine(ChangeRoom());
+           }
         }
 
         void GetRandomNumber()
