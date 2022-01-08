@@ -73,12 +73,13 @@ public class LoadSceneManager : MonoBehaviour
             finalList.Add(roomS1[randomIndex[2]]);
         
             finalList.Add(utilityRoom[0]);
+            finalList.Add(utilityRoom[4]);
 
             finalList.Add(roomS2[randomIndex[2]]);
             finalList.Add(roomS2[randomIndex[1]]);
             finalList.Add(roomS2[randomIndex[0]]);
         
-            finalList.Add(utilityRoom[0]);
+            finalList.Add(utilityRoom[4]);
             finalList.Add(utilityRoom[1]);
             finalList.Add(utilityRoom[2]);
         }
