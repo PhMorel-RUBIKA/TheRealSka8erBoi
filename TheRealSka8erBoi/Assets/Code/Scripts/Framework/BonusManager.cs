@@ -8,10 +8,9 @@ public class BonusManager : MonoBehaviour
 {
     public static BonusManager instance;
     public bool isDebug;
-    public int redStat, greenStat, blueStat, money;
-    public TextMeshProUGUI redText, greenText, blueText, moneyText;
+    public int redStat, greenStat, blueStat, money, finalScore;
+    public TextMeshProUGUI moneyText, finalScoreText;
     public Canvas canvas;
-    public int finalScore = 0;
     private void Awake()
     {
         if (instance == null)
@@ -24,6 +23,7 @@ public class BonusManager : MonoBehaviour
         greenStat = 0;
         blueStat = 0;
         money = 0;
+        finalScore = 0;
     }
 
     private void Update()
@@ -33,10 +33,8 @@ public class BonusManager : MonoBehaviour
 
     void ActualizeText()
     {
-        //redText.text = redStat.ToString();
-        //greenText.text = greenStat.ToString();
-        //blueText.text = blueStat.ToString();
         moneyText.text = money.ToString();
+        finalScoreText.text = finalScore.ToString();
     }
 
     public void GainCoins(int gain)
@@ -44,4 +42,12 @@ public class BonusManager : MonoBehaviour
         money += gain;
         ActualizeText();
     }
+
+    public void GainScore(int score)
+    {
+        finalScore += score;
+        ActualizeText();
+    }
+    
+    
 }
