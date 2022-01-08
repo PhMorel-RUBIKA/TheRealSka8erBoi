@@ -11,7 +11,7 @@ public class DoggoScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.JoystickButton3))
+            if (Input.GetKeyDown(KeyCode.JoystickButton1))
             {
                 StartCoroutine(Manager.SceneChangement()); 
             }

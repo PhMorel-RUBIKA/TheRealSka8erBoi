@@ -121,6 +121,7 @@ public class PlayerBehaviour : MonoBehaviour
         canActivateStepSound = true;
         over9000Power = false;
         canTakeDamage = true;
+        shurikenActive = false;
         
         //Set animatorID
         animatorID.Add(Animator.StringToHash("GoingUp"));
@@ -403,7 +404,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (!canTakeDamage) yield break;
 
         canTakeDamage = false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.8f);
         canTakeDamage = true;
     }
 
