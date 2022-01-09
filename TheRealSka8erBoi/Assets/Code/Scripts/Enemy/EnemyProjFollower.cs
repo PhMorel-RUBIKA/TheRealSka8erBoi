@@ -53,7 +53,7 @@ public class EnemyProjFollower : MonoBehaviour
 
     IEnumerator Evaporate()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
     }
 }

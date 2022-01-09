@@ -1844,6 +1844,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: dashNode
+      value: 
+      objectReference: {fileID: 8967867004947012951, guid: d9b18206db012f740aab63e285e69ee8, type: 3}
+    - target: {fileID: 8990785056844604476, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: spellDashLaser
+      value: 
+      objectReference: {fileID: 669065867579327252, guid: 626e8a795baa1394da70509c1c057bf1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
 --- !u!1 &395609624
@@ -2650,6 +2658,11 @@ CapsuleCollider2D:
   m_Offset: {x: 0.05382489, y: -0.008971452}
   m_Size: {x: 0.46411496, y: 0.599304}
   m_Direction: 0
+--- !u!1 &533318385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3498011852449812487, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+  m_PrefabInstance: {fileID: 393572416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &596559974
 GameObject:
   m_ObjectHideFlags: 0
@@ -6095,7 +6108,7 @@ MonoBehaviour:
   - MainMenu
   - Merchant_S2
   finalList: []
-  player: {fileID: 0}
+  player: {fileID: 533318385}
   transition: {fileID: 1415255819}
   transitionTime: 3
   nextItemToSpawn: {fileID: 0}
@@ -7090,7 +7103,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "Waouf Waouf Waouf, ram\xE8ne toi stp\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

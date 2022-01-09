@@ -624,7 +624,7 @@ MonoBehaviour:
   firePoint: {fileID: 8838285122159194605}
   cooldown: 0.5
   initcooldown: 4
-  fireForce: 800
+  fireForce: 600
   ebp: {fileID: 2120568775219422793, guid: 9b4e18f01823a20459d6dd987e3b0499, type: 3}
 --- !u!61 &1119283989612834508
 BoxCollider2D:
@@ -665,6 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abstComp: {fileID: 1890644171}
+  currentHealth: 25
   spellItem: {fileID: 7387089405965634867, guid: 3473cd015b9aa65489aa7cddd46c9183, type: 3}
   damageFeedback: {fileID: 4997741865296599665}
   floatingDamage: {fileID: 9033067666689128871}

@@ -7,17 +7,15 @@ using MoreMountains.Tools;
 public class DamageManager : MonoBehaviour
 {
     public AbstComp abstComp;
-    private float currentHealth;
+    public float currentHealth;
     private GameObject player;
-    public static DamageManager instance;
     public GameObject spellItem;
     public MMFeedbacks damageFeedback;
     public MMFeedbacks floatingDamage;
 
     private void Start()
     {
-        DamageManager.instance = this;
-        currentHealth = this.abstComp.hp;
+        //currentHealth = this.abstComp.hp;
         player = GameObject.FindWithTag("Player");
         if (player == null)
         {
@@ -28,7 +26,6 @@ public class DamageManager : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
         damageFeedback.PlayFeedbacks();
         if (floatingDamage.TryGetComponent(out MMFeedbackFloatingText feedbackFloatingText))
         {
@@ -47,8 +44,10 @@ public class DamageManager : MonoBehaviour
     public void Die()
     {
         GiveTheSpell();
-        Destroy(this.gameObject);
+        BonusManager.instance.GainScore(Random.Range(200, 251));
+        BonusManager.instance.GainCoins(Random.Range(2,12));
         WaveManager.instance.enemyOnScreen.RemoveAt(0);
+        Destroy(this.gameObject);
     }
 
     void GiveTheSpell()
