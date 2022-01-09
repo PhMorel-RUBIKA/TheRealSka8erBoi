@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: e5383e8d1518176e4d91e9ae000000009542adc3a5eab11bc1e52647c18808cebdecd2bc8ba2867d878df2b5
+  m_ApplyToSortingLayers: e5383e8d1518176e4d91e9ae000000009542adc3a5eab11bc1e52647c18808ce8ba2867d878df2b5
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -804,6 +804,7 @@ GameObject:
   - component: {fileID: 4079825448089906176}
   - component: {fileID: 8142624679806005322}
   - component: {fileID: 5777669981931234101}
+  - component: {fileID: 1023647315}
   m_Layer: 6
   m_Name: PlayerWithCamera
   m_TagString: Player
@@ -987,6 +988,7 @@ MonoBehaviour:
   _dashCd: 1.5
   dashSpeed: 40
   dashDuration: 0.1
+  dash: 1
   dashSpellActive: 0
   dashSpellactivation: 0
   dashNode: {fileID: 0}
@@ -1255,6 +1257,21 @@ MonoBehaviour:
   ZoomTransitionDuration: 0.05
   ZoomDuration: 0.1
   RelativeFieldOfView: 0
+--- !u!114 &1023647315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498011852449812487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c936cb0ec6eae104a88353603ce01b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostDelay: 0.0000001
+  ghostRed: {fileID: 5559310082250676971, guid: 6812c98d3832fc04bb2e6819d22a8141, type: 3}
+  ghostBLue: {fileID: 147710078612983943, guid: 4cb8f109aaa995e4bb5708301a8374f2, type: 3}
 --- !u!1 &3727118582301772759
 GameObject:
   m_ObjectHideFlags: 0
