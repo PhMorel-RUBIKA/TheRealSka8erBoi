@@ -120,6 +120,11 @@ public class PauseMenu : MonoBehaviour
     {
         audioMixer.SetFloat("MasterVolume", volume);
     }
+    
+    public void SetVolumeEffects(float volume)
+    {
+        audioMixer.SetFloat("SfxVolume", volume);
+    }
 
 
 
