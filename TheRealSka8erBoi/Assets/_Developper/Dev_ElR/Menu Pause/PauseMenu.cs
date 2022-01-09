@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -19,9 +20,11 @@ public class PauseMenu : MonoBehaviour
     public MMFeedbacks timeFeedbacks;
     public MMFeedbacks noTimeFeedbacks;
     
-    public GameObject pauseFirstButton, optionsFirstButton, quitFirstButton;
+    public GameObject pauseFirstButton, optionsFirstButton, optionsQuitButton;
 
+    public GameObject optionsMenuUI;
 
+    public AudioMixer audioMixer;
 
 
     // Start is called before the first frame update
@@ -47,6 +50,11 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+
+        /*if (Input.GetKeyDown(KeyCode.JoystickButton3))
+        {
+            optionsMenuUI.SetActive(false);
+        }*/
     }
 
    public void FixedUpdate()
@@ -87,6 +95,32 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    
-    
+    public void OptionsMenu()
+    {
+        optionsMenuUI.SetActive(true);
+        Debug.Log("OPTIONS");
+        
+        //clear selected object
+        EventSystem.current.SetSelectedGameObject(null);
+        //Set new selected object
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+    }
+
+    public void CloseOptionsMenu()
+    {
+        optionsMenuUI.SetActive(false);
+
+        //clear selected object
+        EventSystem.current.SetSelectedGameObject(null);
+        //Set new selected object
+        EventSystem.current.SetSelectedGameObject(optionsQuitButton);
+    }
+
+    public void SetVolume(float volume)
+    {
+        audioMixer.SetFloat("MasterVolume", volume);
+    }
+
+
+
 }
