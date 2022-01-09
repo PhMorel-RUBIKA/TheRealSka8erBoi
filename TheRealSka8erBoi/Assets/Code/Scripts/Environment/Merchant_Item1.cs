@@ -13,6 +13,7 @@ public class Merchant_Item1 : MonoBehaviour
     private bool setImagePosition;
 
     [SerializeField] private Camera currentCamera;
+    
 
     private void Update()
     {
@@ -28,4 +29,5 @@ public class Merchant_Item1 : MonoBehaviour
         
     }
 
+   
 }
