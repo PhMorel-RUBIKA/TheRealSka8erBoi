@@ -36,7 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float dashDuration;
     private float dashOngoingCd;
     private float dashGoingFor;
-    private bool dash = true;
+    public bool dash = true;
     public bool dashSpellActive = false;
     public int dashSpellactivation;
     public GameObject dashNode;
