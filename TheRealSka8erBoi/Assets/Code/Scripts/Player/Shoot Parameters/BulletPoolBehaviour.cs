@@ -29,7 +29,7 @@ public class BulletPoolBehaviour : MonoBehaviour
         {
             if (pb.perfectTiming)
             {
-                BonusManager.instance.finalScore += 50;
+                BonusManager.instance.GainScore(50);
                 pb.perfectTiming = false;
             }
             other.GetComponent<DamageManager>().TakeDamage(damage);

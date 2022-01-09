@@ -85,7 +85,7 @@ public class EnemyTowerS2 : AbstComp
             else if (pj.transform.position.x - transform.position.x > 3 &
                      pj.transform.position.y - transform.position.y > 0)
             {
-                animator.SetTrigger("AtkN");
+                animator.SetTrigger("AtkNE");
                 animValue = 4;
             }
             else if (pj.transform.position.x - transform.position.x < -3 &
@@ -98,7 +98,7 @@ public class EnemyTowerS2 : AbstComp
                      pj.transform.position.x - transform.position.x < 3 &
                      pj.transform.position.y - transform.position.y > 0)
             {
-                animator.SetTrigger("AtkNE");
+                animator.SetTrigger("AtkN");
                 animValue = 6;
             }
         if (!canshoot) return;
@@ -121,11 +121,11 @@ public class EnemyTowerS2 : AbstComp
         {
             if (s2)
             {
-                BonusManager.instance.finalScore += 175;
+                BonusManager.instance.GainScore(175);
             }
             else
             {
-                BonusManager.instance.finalScore += 100;
+                BonusManager.instance.GainScore(100);
             }
             animator.SetTrigger("Ded");
             Destroy(gameObject,1f);

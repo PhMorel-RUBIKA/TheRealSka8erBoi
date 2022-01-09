@@ -147,11 +147,11 @@ public class EnemyZoner : AbstComp
             Destroy(gameObject,1f);
             if (s2)
             {
-                BonusManager.instance.finalScore += 275;
+                BonusManager.instance.GainScore(275);
             }
             else
             {
-                BonusManager.instance.finalScore += 195;
+                BonusManager.instance.GainScore(195);
             }
         }
     }

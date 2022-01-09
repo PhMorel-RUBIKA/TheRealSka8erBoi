@@ -73,7 +73,7 @@ public class WaveManager : MonoBehaviour
     {
         if (!stopFrameCounter) return;
         finalFrameCounter = frameCounter;
-        BonusManager.instance.finalScore += (scoreRef - finalFrameCounter/10);
+        BonusManager.instance.GainScore(scoreRef - finalFrameCounter/10); 
     }
     IEnumerator CoroutineForWave()
     {
