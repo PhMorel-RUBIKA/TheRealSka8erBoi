@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4797543804666966272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8421939845522524391}
+  - component: {fileID: 7783887953982981291}
+  m_Layer: 0
+  m_Name: GeneratorISland
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8421939845522524391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797543804666966272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7783887953982981291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797543804666966272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc47351c209b86b4cb4b2fb2a4108c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleIsland: 1
+  generatorSize: 2
+  gizmoColor: 5
+  minObjectToSpawn: 1
+  maxObjectToSpawn: 1
+  gapBetweenObjects: 5
+  objectToSpawn:
+  - {fileID: 6031160455126469741, guid: 0d925a221b8dbe74ca2c7f91b38b0005, type: 3}
+  - {fileID: 3492076119406715197, guid: d462adcc10b2328488fa82a94ece887c, type: 3}
+  - {fileID: 6927626311349122619, guid: b54deb130dab7fe44997e132797cd296, type: 3}
+  - {fileID: 5178115113124589894, guid: c276a448337df844dafb3093c4ee433e, type: 3}
+  - {fileID: 3321494759976643253, guid: 9e7fcab69f7709a4a9820f7f2daa09ca, type: 3}

@@ -374,7 +374,8 @@ public class PlayerBehaviour : MonoBehaviour
         if(!canTakeDamage) return;
         
         currentHealth -= damageNumber;
-        healthBar.fillAmount = (float)currentHealth / maxHealth;
+        float division = (float)currentHealth / maxHealth;
+        healthBar.fillAmount = 1 - division;
         //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
         StartCoroutine(Invincibility());
@@ -384,6 +385,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (currentHealth < 1)
         {
             animatorPlayer.SetTrigger(animatorID[7]);
+            
         }
     }
 
