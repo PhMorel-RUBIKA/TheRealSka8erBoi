@@ -21,7 +21,7 @@ public class MarcheantGameManager : MonoBehaviour
         canvas1.SetActive(false);
         canvas2.SetActive(true);
         
-        CameraShake.instance.StartShake(12f, 2.5f, 10f);
+        CameraShake.instance.StartShake(12f, 2f, 7f);
 
         yield return new WaitForSeconds(3);
         canvas2.SetActive(false);

@@ -33,17 +33,17 @@ public class VendingMachine : MonoBehaviour
                 int rand = Random.Range(1, 4);
                 item = possibleItems[rand].prefab;
                 itemValue = possibleItems[rand].value;
-                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
+                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
                 break;
             case "food" : 
                 item = possibleItems[0].prefab;
                 itemValue = possibleItems[0].value;
-                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
+                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
                 break;
             case "death" : 
                 item = possibleItems[4].prefab;
                 itemValue = possibleItems[4].value;
-                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponentInChildren<SpriteRenderer>().sprite;
+                gameObject.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
                 break;
         }
     }
