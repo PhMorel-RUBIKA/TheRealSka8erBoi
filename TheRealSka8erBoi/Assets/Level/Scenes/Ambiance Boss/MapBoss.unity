@@ -3238,18 +3238,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2034238983, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
-      propertyPath: m_Radius
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034238983, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
-      propertyPath: m_Offset.x
-      value: -2.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034238983, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.11
-      objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427456, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: m_Name
       value: ProtoBoss
@@ -5101,6 +5089,8 @@ MonoBehaviour:
   itemDoor1: {fileID: 0}
   itemDoor2: {fileID: 0}
   enemyOnScreen: 
+  frameCounter: 0
+  scoreRef: 0
 --- !u!4 &2143781287
 Transform:
   m_ObjectHideFlags: 0
