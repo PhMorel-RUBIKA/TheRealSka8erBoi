@@ -154,7 +154,7 @@ public class Enemy_Vif_Behaviour : AbstComp
                     
             }
 
-            BonusManager.instance.finalScore += 175;
+            BonusManager.instance.GainScore(175);
             
             Destroy(gameObject,1f);
         }

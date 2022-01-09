@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4076993939007909672}
   - component: {fileID: 4076993939007909679}
   - component: {fileID: -6058959303261608746}
+  - component: {fileID: 8214935335154789312}
   m_Layer: 0
   m_Name: EnemyDasherS1
   m_TagString: Target
@@ -53,6 +54,7 @@ MonoBehaviour:
   hp: 30
   lineOfSight: 11
   range: 4
+  animator: {fileID: 6607537010148446112}
   hitcd: 1.5
   inithitcd: 3
   rb: {fileID: 4076993939007909673}
@@ -70,7 +72,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4076993939007909676}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -82,7 +84,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &4076993939007909672
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 3
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -147,6 +149,25 @@ MonoBehaviour:
   spellItem: {fileID: 0}
   damageFeedback: {fileID: 0}
   floatingDamage: {fileID: 0}
+--- !u!95 &8214935335154789312
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4076993939007909676}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d6ab7d7105bce043b4782a45fdd4961, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4840534593195589288
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class EnemyDash : AbstComp
 {
     [Header("Comportment Parameters")]
-    //public Animator animator;
+    public Animator animator;
     private bool canhit = true;
     public float hitcd = 0.5f;
     public float inithitcd=0.5f;
@@ -32,6 +32,7 @@ public class EnemyDash : AbstComp
 
     void Start()
     { 
+        animator.SetBool("Atk",false);
         pj = PlayerBehaviour.playerBehaviour.gameObject;
         target = pj.transform;
         agent = GetComponent<NavMeshAgent>();
@@ -59,6 +60,40 @@ public class EnemyDash : AbstComp
             GoToPlayer();
             if(CheckPlayerInRange())
             {
+                if (pj.transform.position.x - transform.position.x > -3 &
+                    pj.transform.position.x - transform.position.x < 3 &
+                    pj.transform.position.y - transform.position.y <= 0)
+                {
+                    animator.SetTrigger("S");
+                    
+                }
+                else if (pj.transform.position.x - transform.position.x < -3 &
+                         pj.transform.position.y - transform.position.y <= 0)
+                {
+                    animator.SetTrigger("SW");
+                }
+                else if (pj.transform.position.x - transform.position.x > 3 &
+                         pj.transform.position.y - transform.position.y <= 0)
+                {
+                    animator.SetTrigger("SE");
+                  
+                }
+                else if (pj.transform.position.x - transform.position.x > 3 &
+                         pj.transform.position.y - transform.position.y > 0)
+                {
+                    animator.SetTrigger("NW");
+                }
+                else if (pj.transform.position.x - transform.position.x < -3 &
+                         pj.transform.position.y - transform.position.y > 0)
+                {
+                    animator.SetTrigger("NW");
+                }
+                else if (pj.transform.position.x - transform.position.x > -3 &
+                         pj.transform.position.x - transform.position.x < 3 &
+                         pj.transform.position.y - transform.position.y > 0)
+                {
+                    animator.SetTrigger("N");
+                }
                 if (canhit && !s2)
                 {
                     //attackFinished = false;
@@ -97,35 +132,16 @@ public class EnemyDash : AbstComp
             Destroy(gameObject,1f);
             if (s2)
             {
-                BonusManager.instance.finalScore += 315;
+                BonusManager.instance.GainScore(315);
             }
             else
             {
-                BonusManager.instance.finalScore += 255;
+                BonusManager.instance.GainScore(255);
             }
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (pj.transform.position.x-transform.position.x < 0)
-        {
-            //myspriterenderer.flipX = false;
-        }
-        else
-        {
-           // myspriterenderer.flipX = true;
-        }
-           
-        if(hp<=0)
-        {
-            //animator.SetTrigger("isded");
-            Destroy(gameObject, 0.35f);
-        }
-        
-    }
-
-    IEnumerator StopMotion()
+     IEnumerator StopMotion()
     {
         agent.SetDestination(transform.position);
         rb.velocity=Vector2.zero;
@@ -156,20 +172,22 @@ public class EnemyDash : AbstComp
     private const float upToFitPlayer = 0.1f;
     IEnumerator DashAttck()
     {
+        animator.SetBool("Atk",true);
         agent.SetDestination(transform.position);
         rb.velocity=Vector2.zero;
         boxCo.isTrigger = true;
         //Debug.Log("je commence le dash");
         dashPointPos = (target.position - transform.position);
         dashPointPos.Normalize();
-        yield return new WaitForSeconds(.5f);
-
+        yield return new WaitForSeconds(1.3f);
+        animator.SetBool("Atk",false);
         rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
-        yield return new WaitForSeconds(.6f);
+        yield return new WaitForSeconds(.7f);
         rb.velocity=Vector2.zero;
         attackFinished = true;
-        boxCo.isTrigger = false;
+        
         agent.SetDestination(target.position);
+        boxCo.isTrigger = false;
         
         //Debug.Log("Je fini le dash");
     }
@@ -179,16 +197,17 @@ public class EnemyDash : AbstComp
     IEnumerator MultipleDashAttack()
     {
         agent.SetDestination(transform.position);
+        animator.SetBool("Atk",true);
         rb.velocity=Vector2.zero;
         boxCo.isTrigger = true;
         for (int i = 0; i < 3; i++)
         {
             dashPointPos = (target.position - transform.position);
             dashPointPos.Normalize();
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(1.3f);
 
             rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
-            yield return new WaitForSeconds(.6f);
+            yield return new WaitForSeconds(.7f);
             rb.velocity=Vector2.zero;
 
         }
@@ -196,6 +215,7 @@ public class EnemyDash : AbstComp
         agent.SetDestination(target.position);
         boxCo.isTrigger = false;
         attackFinished = true;
+        animator.SetBool("Atk",false);
 
     }
     
