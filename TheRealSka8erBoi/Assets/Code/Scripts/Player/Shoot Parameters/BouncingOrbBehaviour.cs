@@ -51,7 +51,8 @@ public class BouncingOrbBehaviour : MonoBehaviour
              
         }
 
-
+        if (transform ==null) return;
+        
         if ((target.CompareTag("Player") && Vector3.Distance(transform.position,target.position + new Vector3(0f,0.8f,0)) < 0.1f ) || Vector3.Distance(transform.position,target.position) < 0.1f)
         {
             if (target.CompareTag("Target"))
