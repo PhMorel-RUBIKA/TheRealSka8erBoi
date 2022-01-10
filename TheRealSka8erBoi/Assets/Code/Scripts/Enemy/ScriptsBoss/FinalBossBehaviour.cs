@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using static UnityEngine.Random;
-using Random = UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FinalBossBehaviour : MonoBehaviour
 {
@@ -18,49 +18,93 @@ public class FinalBossBehaviour : MonoBehaviour
     public List<int> keyFrames=new List<int>();
 
     public int define;
+    
     [Space] [Header("Behaviour")]
     private Transform target;
     public int hpBoss;
     [SerializeField] private int maxHPBoss;
     public bool bossIsMidLife=false;
+    
     [Space] [Header("ArmAttack Parameters")]
     [SerializeField] private GameObject armAtck;
     private GameObject lArmAtckInstance;
+
+    [SerializeField] public CircleCollider2D leftHandCollider;
+    [SerializeField] public CircleCollider2D rightHandCollider;
+    
     private GameObject rArmAtckInstance;
     private bool leftArmReady=true;
     private bool rightArmReady=true;
     [SerializeField] private float leftArmRecover = 10;
     [SerializeField] private float rightArmRecover = 10;
     [SerializeField] private float armRecoverInit = 10;
-    [Space] [Header("Crush Parameters")]
+
+    [Space]
+    [Header("Crush Parameters")]
     //[SerializeField] private Rigidbody2D Crush;
+
+    [SerializeField] public GameObject armLeft;
+
+    [SerializeField] public GameObject armRight;
+    
     [SerializeField] private float areaSize;
     [SerializeField] private int damage;
     private int punchDamage = 10;
+    
     [Space] [Header("EnemySpawnParameters")]
     private int spawningFactor;
     [SerializeField] List<GameObject> enemyPool;
     private int enemySelection;
     public Transform[] spawnPoints;
     private List<Transform> waypointUsed = new List<Transform>();
+    
     [Space] [Header("Shoot Parameters")] 
     [SerializeField] private GameObject bossProjectile;
     public Transform[] firePoints;
     private List<Transform> firePointsUsed = new List<Transform>();
     [SerializeField] private float fireForce = 100;
-    
 
-
+    [Space] [Header("Animation Parameters")]
+    public Animator crown;
+    public Animator leftHand;
+    public Animator rightHand;
+    public Animator Head;
+    public Animator BigEye;
+    public Animator EyeB;
+    public Animator EyeC;
+    public Animator EyeD;
+    public Animator EyeE;
+    public Animator EyeF;
+    public Animator EyeG;
+    public Animator EyeH;
+    public Animator EyeI;
+    public Animator EyeJ;
+    public Animator EyeK;
+    public Animator EyeL;
+    public Animator EyeM;
+    public Animator EyeN;
+    public Animator EyeO;
+    public Animator[] eyesArray;
+    private int regulation = 0;
 
     void Start()
     {
+        crown.SetFloat("BossHp",hpBoss);
+        leftHandCollider.enabled = false;
         hpBoss = maxHPBoss;
         target = PlayerBehaviour.playerBehaviour.transform;
+
+        leftHand.SetBool("Atk", false);
+        rightHand.SetBool("Atk", false);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+
+        crown.SetFloat("BossHp",hpBoss);
         if (hpBoss<=maxHPBoss/2)
         {
             bossIsMidLife = true;
@@ -97,6 +141,12 @@ public class FinalBossBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
+        regulation+=1;
+        if (regulation==15)
+        {
+            regulation = 0;
+            EyesAnimated();
+        }
         if (_frameCounter < refreshTime) _frameCounter += 1;
         else _frameCounter = 0;
         inSecond = (int)(_frameCounter / 50);
@@ -247,24 +297,42 @@ public class FinalBossBehaviour : MonoBehaviour
 
     IEnumerator LeftArmAtck()
     {
+        leftHand.SetBool("Atk",true);
+        leftHand.SetTrigger("Slam");
         leftArmReady = false;
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.9f);
+        leftHandCollider.enabled = true;
         lArmAtckInstance=Instantiate(armAtck, new Vector2(target.position.x-6,target.position.y), Quaternion.identity);
         Destroy(lArmAtckInstance,3f);
+        yield return new WaitForSeconds(1.6f);
+        leftHandCollider.enabled = false;
+        leftHand.SetBool("Atk", false);
         
     }
     IEnumerator RightArmAtck()
     {
+        rightHand.SetBool("Atk",true);
+        rightHand.SetTrigger("Slam");
         rightArmReady = false;
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.9f);
+        rightHandCollider.enabled = true;
         rArmAtckInstance=Instantiate(armAtck, new Vector2(target.position.x+6,target.position.y), Quaternion.identity);
         Destroy(rArmAtckInstance,3f);
+        yield return new WaitForSeconds(1.6f);
+        rightHandCollider.enabled = false;
+        rightHand.SetBool("Atk", false);
     }
 
     IEnumerator Crush()
     {
+        leftHand.SetBool("Atk", true);
+        rightHand.SetBool("Atk",true);
+        rightHand.SetTrigger("Crush");
+        leftHand.SetTrigger("Crush");
+        armLeft.transform.position = (target.transform.position * (new Vector2(5, 0)));
+        armRight.transform.position = target.transform.position * (new Vector2(-5, 0));
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(target.transform.position,areaSize);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.gameObject.CompareTag("Player"))
@@ -272,6 +340,16 @@ public class FinalBossBehaviour : MonoBehaviour
                 PlayerBehaviour.playerBehaviour.TakeDamage(damage);
             }
         }
+
+        yield return new WaitForSeconds(1.1f);
+        leftHandCollider.enabled = true;
+        rightHandCollider.enabled = true;
+        yield return new WaitForSeconds(1.5f);
+        leftHandCollider.enabled = false;
+        rightHandCollider.enabled = false;
+        leftHand.SetBool("Atk", false);
+        rightHand.SetBool("Atk",false);
+        
     }
     
         void BossMakesEnemiesSpawn()
@@ -350,5 +428,12 @@ public class FinalBossBehaviour : MonoBehaviour
         }
       
     }
-    
+
+    private void EyesAnimated()
+    {
+        int rand = Random.Range(0, 15);
+        Animator current = eyesArray[rand];
+        current.SetTrigger("Wink");
+    }
+
 }
