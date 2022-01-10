@@ -34,6 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float dashCd => _dashCd - (BonusManager.instance.greenStat * GreenStatModifier);
     public float dashSpeed;
     public float dashDuration;
+    public Image dashUI;
     private float dashOngoingCd;
     private float dashGoingFor;
     public bool dash = true;
@@ -182,8 +183,9 @@ public class PlayerBehaviour : MonoBehaviour
             Destroy(chargeProjectile);
             
         }
-        
 
+        dashUI.fillAmount = 1 - dashOngoingCd / dashCd;
+        
         dashOngoingCd -= Time.deltaTime;
         if (Input.GetAxisRaw("Dash") > 0 && !isAiming)
         {
