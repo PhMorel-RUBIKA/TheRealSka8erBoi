@@ -223,7 +223,7 @@ public class EnemyZoner : AbstComp
         
         implosionZone = Instantiate(zone, target.transform.position, Quaternion.identity);
         implosionZone.transform.localScale=Vector3.zero;
-        implosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack);
+        implosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(.2f);
         agent.SetDestination(target.position);
     }

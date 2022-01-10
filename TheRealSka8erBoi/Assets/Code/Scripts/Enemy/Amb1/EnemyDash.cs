@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,6 +31,11 @@ public class EnemyDash : AbstComp
     [SerializeField] private int damages = 10;
     [SerializeField] private bool s2;
 
+    private bool canMove;
+    
+    //VFX
+    public GameObject previewDash;
+
     void Start()
     { 
         animator.SetBool("Atk",false);
@@ -39,6 +45,7 @@ public class EnemyDash : AbstComp
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         rb = this.GetComponent<Rigidbody2D>();
+        canMove = true;
     }
 
     void Update()
@@ -57,7 +64,7 @@ public class EnemyDash : AbstComp
         if(CheckPlayerInSight())
         {
             lineOfSight = 100;
-            GoToPlayer();
+            if (canMove) GoToPlayer();
             if(CheckPlayerInRange())
             {
                 if (pj.transform.position.x - transform.position.x > -3 &
@@ -172,7 +179,13 @@ public class EnemyDash : AbstComp
     private const float upToFitPlayer = 0.1f;
     IEnumerator DashAttck()
     {
+        canMove = false;
         animator.SetBool("Atk",true);
+        dashPointPos = (target.position - transform.position);
+        dashPointPos.Normalize();
+        float rotZ = Mathf.Atan2(dashPointPos.y, dashPointPos.x) * Mathf.Rad2Deg;
+        previewDash.transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
+        Instantiate(previewDash, transform.position, Quaternion.Euler(0f, 0f, rotZ));
         agent.SetDestination(transform.position);
         rb.velocity=Vector2.zero;
         boxCo.isTrigger = true;
@@ -185,7 +198,8 @@ public class EnemyDash : AbstComp
         yield return new WaitForSeconds(.7f);
         rb.velocity=Vector2.zero;
         attackFinished = true;
-        
+
+        canMove = true;
         agent.SetDestination(target.position);
         boxCo.isTrigger = false;
         
