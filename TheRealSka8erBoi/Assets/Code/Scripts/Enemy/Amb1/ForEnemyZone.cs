@@ -9,7 +9,7 @@ public class ForEnemyZone : MonoBehaviour
 
     [SerializeField] private int damage=10;
 
-    [SerializeField] private int cd = 2;
+    [SerializeField] private float cd = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +35,5 @@ public class ForEnemyZone : MonoBehaviour
                 PlayerBehaviour.playerBehaviour.TakeDamage(damage);
             }
         }
-        Destroy(gameObject);
     }
 }
