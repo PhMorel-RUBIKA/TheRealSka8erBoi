@@ -58057,6 +58057,7 @@ GameObject:
   - component: {fileID: 522411623083824142}
   - component: {fileID: 522411623083824143}
   - component: {fileID: 522411623083824140}
+  - component: {fileID: -7395440880463677147}
   m_Layer: 0
   m_Name: P_ESEnemySpawnZone
   m_TagString: Untagged
@@ -62884,6 +62885,21 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-7395440880463677147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522411623083824141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b310d084992a2bf4ab566b6a51640fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaSize: 0
+  damage: 5
+  cd: 3.5
 --- !u!1 &522411623096342759
 GameObject:
   m_ObjectHideFlags: 0

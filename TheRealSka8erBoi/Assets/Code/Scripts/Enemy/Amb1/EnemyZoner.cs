@@ -261,7 +261,7 @@ public class EnemyZoner : AbstComp
         GetAngle(pj.transform.position, transform.right, out float angle);
         implosionZone = Instantiate(zone, target.transform.position, Quaternion.identity);
         implosionZone.transform.localScale=Vector3.zero;
-        implosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack);
+        implosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(.5f);
         for (int i = 0; i < bulletAmount; i++)
         {
@@ -271,7 +271,7 @@ public class EnemyZoner : AbstComp
             Vector3 newPosition = particular + q * Vector3.right * 1.5f;
             sndImplosionZone= Instantiate(zone, newPosition, Quaternion.identity);
             sndImplosionZone.transform.localScale=Vector3.zero;
-            sndImplosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack);
+            sndImplosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
             //sndImplosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack).SetDelay(Random.Range(0,0.35f));
         }
 
