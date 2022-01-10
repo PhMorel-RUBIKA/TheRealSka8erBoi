@@ -10,6 +10,8 @@ public class EnemyProjFollower : MonoBehaviour
     private Transform target;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private int damages = 3;
+    [SerializeField] private float speedModifier;
+    [SerializeField] private float factorFollow;
     public GameObject playerImpact;
     public MMFeedbacks perfection;
 
@@ -21,11 +23,6 @@ public class EnemyProjFollower : MonoBehaviour
         Vector3 direction = target.transform.position - transform.position;
         transform.forward = direction;
 
-        /*Vector2 toplayer = (target.transform.position - transform.position).normalized;
-        float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
-        transform.rotation= Quaternion.Euler(0f, 0f, rotZ);*/
-        
-        
         StartCoroutine(Evaporate());
     }
     
@@ -37,8 +34,6 @@ public class EnemyProjFollower : MonoBehaviour
             gameObject.SetActive(false);
             Instantiate(playerImpact, transform.position, quaternion.identity);
         }
-        
-        
     }
     
 
@@ -48,12 +43,13 @@ public class EnemyProjFollower : MonoBehaviour
         Vector2 adjust = direction.normalized;
         
         transform.rotation = Quaternion.FromToRotation(Vector3.forward, target.position);
-        rb.velocity = adjust*5.5f;
+        rb.velocity = adjust * factorFollow;
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedModifier);
     }
 
     IEnumerator Evaporate()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3.5f);
         gameObject.SetActive(false);
     }
 }
