@@ -195,6 +195,7 @@ public class PlayerBehaviour : MonoBehaviour
                 dashGoingFor = 0;
                 dash = true;
                 gameObject.tag = "PlayerDashing";
+                Physics2D.IgnoreLayerCollision(6, 10, true);
                 if (dashSpellActive && dashSpellactivation == 4)
                 {
                     dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
@@ -244,6 +245,7 @@ public class PlayerBehaviour : MonoBehaviour
                 playerRigid.velocity = Vector2.zero;
                 dash = false;
                 gameObject.tag = "Player";
+                Physics2D.IgnoreLayerCollision(6, 10, false);
                 if (dashSpellActive)
                 {
                     DashSpell();
