@@ -96,13 +96,13 @@ public class LoadSceneManager : MonoBehaviour
             if (numberOfRoom == 11) ResetProcedural();
         }
 
-        void ResetProcedural()
+        public void ResetProcedural()
         {
             finalList = new List<string>();
             randomIndex = new List<int>();
             numberOfRoom = 0;
         
             GetRandomNumber();
-            CreateFinalList();
+            CreateFinalList(); 
         }
 }

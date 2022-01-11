@@ -6,6 +6,7 @@ using MoreMountains.Feedbacks;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -103,6 +104,8 @@ public class PlayerBehaviour : MonoBehaviour
     private bool canActivateStepSound;
 
     public MMFeedbacks perfection;
+    public GameObject DeathCanvasGroup;
+    
     private void Awake()
     {
         if (playerBehaviour == null)
@@ -389,7 +392,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (currentHealth < 1)
         {
             animatorPlayer.SetTrigger(animatorID[7]);
-            
+            StartCoroutine(DyingCharacter());
+
         }
     }
 
@@ -451,5 +455,14 @@ public class PlayerBehaviour : MonoBehaviour
             }
             Destroy(dashNodeList[dashNodeList.Count-1], 3);
         }
+    }
+
+    IEnumerator DyingCharacter()
+    {
+        yield return new WaitForSeconds(3);
+        DeathCanvasGroup.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(1);
+        Destroy(PlayerManager.instance.gameObject);
     }
 }

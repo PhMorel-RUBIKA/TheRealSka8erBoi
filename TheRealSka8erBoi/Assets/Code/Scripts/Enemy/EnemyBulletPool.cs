@@ -34,7 +34,10 @@ public class EnemyBulletPool : MonoBehaviour
                  {
                      if (!enemyBullets[i].activeInHierarchy)
                      {
-                         return enemyBullets[i];
+                         if (enemyBullets[i] != null)
+                         {
+                             return enemyBullets[i];
+                         }
                      }
                  }
              }

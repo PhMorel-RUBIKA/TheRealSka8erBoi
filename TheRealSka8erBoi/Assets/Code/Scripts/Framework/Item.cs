@@ -136,6 +136,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
+            TheItem.stickerRed.value = 1;
             BonusManager.instance.redStat += TheItem.stickerRed.value;
             player.GetComponent<PlayerBehaviour>().GetHealth((int)(player.GetComponent<PlayerBehaviour>().RedStatModifier));
             Destroy(gameObject.transform.parent == null ? gameObject : transform.parent.gameObject);
@@ -145,6 +146,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
+            TheItem.stickerBlue.value = 1;
             BonusManager.instance.blueStat += TheItem.stickerBlue.value;
             Destroy(gameObject.transform.parent == null ? gameObject : transform.parent.gameObject);
         }
@@ -153,6 +155,7 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
+            TheItem.stickerGreen.value = 1;
             BonusManager.instance.greenStat += TheItem.stickerGreen.value;
             Destroy(gameObject.transform.parent == null ? gameObject : transform.parent.gameObject);
         }
