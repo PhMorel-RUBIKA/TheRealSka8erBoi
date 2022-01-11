@@ -29,6 +29,7 @@ public class EnemyZoner : AbstComp
     [SerializeField] private int bulletAmount;
     private GameObject implosionZone;
     private GameObject sndImplosionZone;
+    private bool canmove = true;
     
     void Start()
     {
@@ -54,7 +55,7 @@ public class EnemyZoner : AbstComp
         }
         if (!CheckPlayerInSight()) return;
         lineOfSight = 100;
-        GoToPlayer();
+        if(canmove) GoToPlayer();
         if (!CheckPlayerInRange()) return;
         if (pj.transform.position.x - transform.position.x > -3 &
                 pj.transform.position.x - transform.position.x < 3 &
@@ -192,6 +193,7 @@ public class EnemyZoner : AbstComp
             
     IEnumerator SoloZone()
     {
+        canmove = false;
         animator.SetBool("TriggerLaunched",true);
         agent.SetDestination(transform.position);
         switch(animValue)
@@ -226,10 +228,12 @@ public class EnemyZoner : AbstComp
         implosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(.2f);
         agent.SetDestination(target.position);
+        canmove = true;
     }
  
     IEnumerator MultiZone()
     {
+        canmove = false;
         agent.SetDestination(transform.position);
         animator.SetBool("TriggerLaunched",true);
         switch(animValue)
@@ -272,12 +276,13 @@ public class EnemyZoner : AbstComp
             sndImplosionZone= Instantiate(zone, newPosition, Quaternion.identity);
             sndImplosionZone.transform.localScale=Vector3.zero;
             sndImplosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
+            yield return new WaitForSeconds(.3f);
             //sndImplosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack).SetDelay(Random.Range(0,0.35f));
         }
 
         yield return new WaitForSeconds(.2f);
         agent.SetDestination(target.position);
-
+        canmove = true;
     }
 
 

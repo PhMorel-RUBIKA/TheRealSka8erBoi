@@ -63,44 +63,44 @@ public class EnemyDash : AbstComp
         }
         if(CheckPlayerInSight())
         {
+            if (pj.transform.position.x - transform.position.x > -3 &
+                pj.transform.position.x - transform.position.x < 3 &
+                pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetTrigger("S");
+                    
+            }
+            else if (pj.transform.position.x - transform.position.x < -3 &
+                     pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetTrigger("SW");
+            }
+            else if (pj.transform.position.x - transform.position.x > 3 &
+                     pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetTrigger("SE");
+                  
+            }
+            else if (pj.transform.position.x - transform.position.x >= 3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetTrigger("NE");
+            }
+            else if (pj.transform.position.x - transform.position.x <= -3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetTrigger("NW");
+            }
+            else if (pj.transform.position.x - transform.position.x >= -3 &
+                     pj.transform.position.x - transform.position.x <= 3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetTrigger("N");
+            }
             lineOfSight = 100;
-            if (canMove) GoToPlayer();
+            if(canMove) GoToPlayer();
             if(CheckPlayerInRange())
             {
-                if (pj.transform.position.x - transform.position.x > -3 &
-                    pj.transform.position.x - transform.position.x < 3 &
-                    pj.transform.position.y - transform.position.y <= 0)
-                {
-                    animator.SetTrigger("S");
-                    
-                }
-                else if (pj.transform.position.x - transform.position.x < -3 &
-                         pj.transform.position.y - transform.position.y <= 0)
-                {
-                    animator.SetTrigger("SW");
-                }
-                else if (pj.transform.position.x - transform.position.x > 3 &
-                         pj.transform.position.y - transform.position.y <= 0)
-                {
-                    animator.SetTrigger("SE");
-                  
-                }
-                else if (pj.transform.position.x - transform.position.x > 3 &
-                         pj.transform.position.y - transform.position.y > 0)
-                {
-                    animator.SetTrigger("NW");
-                }
-                else if (pj.transform.position.x - transform.position.x < -3 &
-                         pj.transform.position.y - transform.position.y > 0)
-                {
-                    animator.SetTrigger("NW");
-                }
-                else if (pj.transform.position.x - transform.position.x > -3 &
-                         pj.transform.position.x - transform.position.x < 3 &
-                         pj.transform.position.y - transform.position.y > 0)
-                {
-                    animator.SetTrigger("N");
-                }
                 if (canhit && !s2)
                 {
                     //attackFinished = false;
@@ -211,6 +211,7 @@ public class EnemyDash : AbstComp
     IEnumerator MultipleDashAttack()
     {
         agent.SetDestination(transform.position);
+        canMove = false;
         animator.SetBool("Atk",true);
         rb.velocity=Vector2.zero;
         boxCo.isTrigger = true;
@@ -230,7 +231,7 @@ public class EnemyDash : AbstComp
         boxCo.isTrigger = false;
         attackFinished = true;
         animator.SetBool("Atk",false);
-
+        canMove = true;
     }
     
 
