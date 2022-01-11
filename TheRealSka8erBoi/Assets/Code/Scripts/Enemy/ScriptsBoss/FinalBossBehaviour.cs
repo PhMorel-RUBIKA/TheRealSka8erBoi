@@ -57,8 +57,9 @@ public class FinalBossBehaviour : MonoBehaviour
     private int enemySelection;
     public Transform[] spawnPoints;
     private List<Transform> waypointUsed = new List<Transform>();
-    
+
     [Space] [Header("Shoot Parameters")] 
+    [SerializeField] private Animator headAnim;
     [SerializeField] private GameObject bossProjectile;
     public Transform[] firePoints;
     private List<Transform> firePointsUsed = new List<Transform>();
@@ -351,8 +352,14 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHand.SetBool("Atk",false);
         
     }
-    
-        void BossMakesEnemiesSpawn()
+
+    public void TakeDamage(int damage)
+    {
+        hpBoss -= damage;
+
+    }
+
+    void BossMakesEnemiesSpawn()
     {
         if(bossIsMidLife)
         {
@@ -390,7 +397,7 @@ public class FinalBossBehaviour : MonoBehaviour
         return randomPoint;
     }
 
-            Transform GetRandomFirePoint()
+    Transform GetRandomFirePoint()
     {
         int index = Range(0, firePoints.Length);
 
@@ -406,6 +413,8 @@ public class FinalBossBehaviour : MonoBehaviour
     }
     IEnumerator BossShooting()
     {
+        headAnim.SetBool("fire",true);
+        yield return new WaitForSeconds(.7f);
         if (bossIsMidLife)
         {
             for (int p = 0; p < 2; p++)
@@ -426,7 +435,10 @@ public class FinalBossBehaviour : MonoBehaviour
             Instantiate(bossProjectile, randomFirePosition);
             bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized*fireForce);
         }
-      
+
+        yield return new WaitForSeconds(.1f);
+        headAnim.SetBool("fire",false);
+
     }
 
     private void EyesAnimated()
