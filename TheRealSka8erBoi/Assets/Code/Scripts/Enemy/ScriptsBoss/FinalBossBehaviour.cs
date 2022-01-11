@@ -90,7 +90,7 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void Start()
     {
-        crown.SetFloat("BossHp",hpBoss);
+        crown.SetInteger("BossHp", hpBoss);
         leftHandCollider.enabled = false;
         hpBoss = maxHPBoss;
         target = PlayerBehaviour.playerBehaviour.transform;
@@ -340,6 +340,11 @@ public class FinalBossBehaviour : MonoBehaviour
             {
                 PlayerBehaviour.playerBehaviour.TakeDamage(damage);
             }
+
+            if (enemy.gameObject.CompareTag("Target"))
+            {
+                enemy.GetComponent<DamageManager>().TakeDamage(damage);
+            }
         }
 
         yield return new WaitForSeconds(1.1f);
@@ -366,7 +371,7 @@ public class FinalBossBehaviour : MonoBehaviour
             spawningFactor = Range(2, 4);
             for (int e = 0; e < spawningFactor; e++)
             {
-                enemySelection = Range(0, 5);
+                enemySelection = Range(0, 3);
                 Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity);
             }
         }
@@ -375,7 +380,7 @@ public class FinalBossBehaviour : MonoBehaviour
             spawningFactor = Range(1, 2);
             for (int e = 0; e < spawningFactor; e++)
             {
-                enemySelection = Range(0, 5);
+                enemySelection = Range(0, 3);
                 Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity); 
             }
         }
@@ -421,7 +426,6 @@ public class FinalBossBehaviour : MonoBehaviour
             { 
                 Transform randomFirePosition = GetRandomFirePoint();
                 Vector2 toplayer = (target.transform.position - randomFirePosition.position).normalized;
-                float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
                 Instantiate(bossProjectile, randomFirePosition);
                 bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized*fireForce);
                 yield return new WaitForSeconds(.2f);
