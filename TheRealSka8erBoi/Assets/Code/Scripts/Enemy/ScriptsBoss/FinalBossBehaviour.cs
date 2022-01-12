@@ -28,7 +28,9 @@ public class FinalBossBehaviour : MonoBehaviour
     [Space] [Header("ArmAttack Parameters")]
     [SerializeField] private GameObject armAtck;
     private GameObject lArmAtckInstance;
-
+    [SerializeField] private float rayMaxDistance;
+    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private float hitDistance;
     [SerializeField] public CircleCollider2D leftHandCollider;
     [SerializeField] public CircleCollider2D rightHandCollider;
     
@@ -102,10 +104,8 @@ public class FinalBossBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
-        crown.SetFloat("BossHp",hpBoss);
+        
+       crown.SetFloat("BossHp",hpBoss);
         if (hpBoss<=maxHPBoss/2)
         {
             bossIsMidLife = true;
@@ -299,6 +299,8 @@ public class FinalBossBehaviour : MonoBehaviour
     IEnumerator LeftArmAtck()
     {
         leftHand.SetBool("Atk",true);
+        Vector3 initLeft = leftHand.transform.position;
+        leftHand.transform.position = (target.transform.position + new Vector3(0,10,0));
         leftHand.SetTrigger("Slam");
         leftArmReady = false;
         yield return new WaitForSeconds(.9f);
@@ -308,11 +310,14 @@ public class FinalBossBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1.6f);
         leftHandCollider.enabled = false;
         leftHand.SetBool("Atk", false);
-        
+        leftHand.transform.position = initLeft;
+
     }
     IEnumerator RightArmAtck()
     {
         rightHand.SetBool("Atk",true);
+        Vector3 initRight = rightHand.transform.position;
+        rightHand.transform.position = (target.transform.position + new Vector3(0,10,0));
         rightHand.SetTrigger("Slam");
         rightArmReady = false;
         yield return new WaitForSeconds(.9f);
@@ -322,6 +327,7 @@ public class FinalBossBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1.6f);
         rightHandCollider.enabled = false;
         rightHand.SetBool("Atk", false);
+        rightHand.transform.position = initRight;
     }
 
     IEnumerator Crush()

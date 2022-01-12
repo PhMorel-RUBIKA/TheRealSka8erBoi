@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class ArmBossBehaviour : MonoBehaviour
@@ -29,54 +30,29 @@ public class ArmBossBehaviour : MonoBehaviour
 
     private void Update()
     {
-        
+        transform.DOScale(new Vector3(5, 5, 1), .4f).SetEase(Ease.OutBack);
     }
 
     private void ShockWave()
     {
        
-        var toplayer = new Vector2(target.position.x-transform.position.x, transform.position.y);
-        if (toplayer.x>0)
-        {
-            rb.AddForce(Vector2.right * moveSpeed);
-            pushValue = 1;
-            Destroy(gameObject,1f);
-        }
-        else if (toplayer.x<0)
-        {
-            rb.AddForce(Vector2.left* moveSpeed);
-            pushValue = 2;
-            Destroy(gameObject,1.5f);
-        }
+        
 
     }
     
-        private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        var projection = new Vector2(other.transform.position.x-transform.position.x, other.transform.position.y - transform.position.y);
         if (other.gameObject.CompareTag("Player")) 
         {
             PlayerBehaviour.playerBehaviour.TakeDamage(damage);
-            if(pushValue==1)
-            {
-                other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right*strenght);
-            }
-            else if (pushValue==2)
-            {
-                other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left*strenght);
-            }
-            Destroy(gameObject);
+            other.gameObject.GetComponent<Rigidbody2D>().AddForce(projection*strenght);
+            Destroy(this);
         }
-        else if (other.gameObject.CompareTag("Target"))
+        if (other.gameObject.CompareTag("Target"))
         {
             other.GetComponent<DamageManager>().TakeDamage(damage);
-             if(pushValue==1)
-            {
-                other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right*strenght);
-            }
-            else if (pushValue==2)
-            {
-                other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left*strenght);
-            }
+            other.gameObject.GetComponent<Rigidbody2D>().AddForce(projection*strenght);
         }
     }
 }
