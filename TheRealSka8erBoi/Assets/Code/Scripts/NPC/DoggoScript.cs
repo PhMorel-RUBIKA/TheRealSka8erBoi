@@ -13,7 +13,8 @@ public class DoggoScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.JoystickButton1))
             {
-                StartCoroutine(Manager.SceneChangement()); 
+                StartCoroutine(Manager.SceneChangement());
+                PlayerBehaviour.playerBehaviour.isDogActive = true;
             }
         }
     }
