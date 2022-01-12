@@ -105,6 +105,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public MMFeedbacks perfection;
     public GameObject DeathCanvasGroup;
+    public GameObject ChienCanvas;
+    public bool isDogActive;
     
     private void Awake()
     {
@@ -126,6 +128,7 @@ public class PlayerBehaviour : MonoBehaviour
         over9000Power = false;
         canTakeDamage = true;
         shurikenActive = false;
+        isDogActive = false;
         
         //Set animatorID
         animatorID.Add(Animator.StringToHash("GoingUp"));
@@ -146,6 +149,15 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         MyInput();
+        switch (isDogActive)
+        {
+            case true:
+                ChienCanvas.SetActive(true);
+                break;
+            case false:
+                ChienCanvas.SetActive(false);
+                break;
+        }
     }
 
    void FixedUpdate()
@@ -391,9 +403,23 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (currentHealth < 1)
         {
+            if (gameObject.GetComponent<Inventory>().deathDefiance1)
+            {
+                RestoreLife(1);
+            }
+            else
+            {
+                if (gameObject.GetComponent<Inventory>().deathDefiance2)
+                {
+                    RestoreLife(2);
+                }
+                else
+                {
+                    StartCoroutine(DyingCharacter());
+                }
+            }
             animatorPlayer.SetTrigger(animatorID[7]);
             StartCoroutine(DyingCharacter());
-
         }
     }
 
@@ -455,6 +481,14 @@ public class PlayerBehaviour : MonoBehaviour
             }
             Destroy(dashNodeList[dashNodeList.Count-1], 3);
         }
+    }
+
+    void RestoreLife(int number)
+    {
+        if (number == 1) gameObject.GetComponent<Inventory>().deathDefiance1 = false;
+        if (number == 2) gameObject.GetComponent<Inventory>().deathDefiance2 = false;
+        
+        GetHealth(maxHealth / 4);
     }
 
     IEnumerator DyingCharacter()
