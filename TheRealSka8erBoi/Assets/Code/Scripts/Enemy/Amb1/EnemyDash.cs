@@ -57,10 +57,6 @@ public class EnemyDash : AbstComp
 
     private void BehaviourAggro()
     {
-        if (hp<maxhp)
-        {
-            lineOfSight = 100;
-        }
         if(CheckPlayerInSight())
         {
             if (pj.transform.position.x - transform.position.x > -3 &
@@ -131,6 +127,7 @@ public class EnemyDash : AbstComp
      public void TakeDamage(int damage)
     {
         hp -= damage;
+        lineOfSight = 100;
         Debug.Log(hp);
          if (hp <= 0)
          {
@@ -220,10 +217,11 @@ public class EnemyDash : AbstComp
             dashPointPos = (target.position - transform.position);
             dashPointPos.Normalize();
             yield return new WaitForSeconds(1.3f);
-
+            canMove = true;
             rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
             yield return new WaitForSeconds(.7f);
             rb.velocity=Vector2.zero;
+            canMove = false;
 
         }
 

@@ -122,6 +122,7 @@ public class Enemy_Vif_Behaviour : AbstComp
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        lineOfSight = 100;
         Debug.Log(hp);
         if (hp <= 0)
         {
