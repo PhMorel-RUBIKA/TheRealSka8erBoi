@@ -50,57 +50,53 @@ public class EnemyTowerS2 : AbstComp
     
     protected void BehaviourAggro()
     {
-        if (hp>maxhp)
-        {
-            lineOfSight = 100;
-        }
         if (!CheckPlayerInSight()) return;
         lineOfSight = 100;
+        if (pj.transform.position.x - transform.position.x > -3 &
+            pj.transform.position.x - transform.position.x < 3 &
+            pj.transform.position.y - transform.position.y <= 0)
+        {
+            animator.SetTrigger("AtkS");
+
+            animValue = 1;
+        }
+        else if (pj.transform.position.x - transform.position.x < -3 &
+                 pj.transform.position.y - transform.position.y <= 0)
+        {
+            animator.SetTrigger("AtkSW");
+            animValue = 2;
+        }
+        else if (pj.transform.position.x - transform.position.x > 3 &
+                 pj.transform.position.y - transform.position.y <= 0)
+        {
+            animator.SetTrigger("AtkSE");
+            animValue = 3;
+        }
+        else if (pj.transform.position.x - transform.position.x > 3 &
+                 pj.transform.position.y - transform.position.y > 0)
+        {
+            animator.SetTrigger("AtkNE");
+            animValue = 4;
+        }
+        else if (pj.transform.position.x - transform.position.x < -3 &
+                 pj.transform.position.y - transform.position.y > 0)
+        {
+            animator.SetTrigger("AtkNW");
+            animValue = 5;
+        }
+        else if (pj.transform.position.x - transform.position.x > -3 &
+                 pj.transform.position.x - transform.position.x < 3 &
+                 pj.transform.position.y - transform.position.y > 0)
+        {
+            animator.SetTrigger("AtkN");
+            animValue = 6;
+        }
         if (!motionless)
         {
             GoToPlayer();  
         }
 
         if (!CheckPlayerInRange()) return;
-        if (pj.transform.position.x - transform.position.x > -3 &
-                pj.transform.position.x - transform.position.x < 3 &
-                pj.transform.position.y - transform.position.y <= 0)
-            {
-                animator.SetTrigger("AtkS");
-
-                animValue = 1;
-            }
-            else if (pj.transform.position.x - transform.position.x < -3 &
-                     pj.transform.position.y - transform.position.y <= 0)
-            {
-                animator.SetTrigger("AtkSW");
-                animValue = 2;
-            }
-            else if (pj.transform.position.x - transform.position.x > 3 &
-                     pj.transform.position.y - transform.position.y <= 0)
-            {
-                animator.SetTrigger("AtkSE");
-                animValue = 3;
-            }
-            else if (pj.transform.position.x - transform.position.x > 3 &
-                     pj.transform.position.y - transform.position.y > 0)
-            {
-                animator.SetTrigger("AtkNE");
-                animValue = 4;
-            }
-            else if (pj.transform.position.x - transform.position.x < -3 &
-                     pj.transform.position.y - transform.position.y > 0)
-            {
-                animator.SetTrigger("AtkNW");
-                animValue = 5;
-            }
-            else if (pj.transform.position.x - transform.position.x > -3 &
-                     pj.transform.position.x - transform.position.x < 3 &
-                     pj.transform.position.y - transform.position.y > 0)
-            {
-                animator.SetTrigger("AtkN");
-                animValue = 6;
-            }
         if (!canshoot) return;
        //animator.SetTrigger("Atk");
         if (s2 == false)
@@ -116,6 +112,7 @@ public class EnemyTowerS2 : AbstComp
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        lineOfSight = 100;
         Debug.Log(hp);
          if (hp <= 0)
         {

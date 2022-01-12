@@ -9,7 +9,7 @@ public class ForEnemyZone : MonoBehaviour
 
     [SerializeField] private int damage=10;
 
-    [SerializeField] private float cd = 2;
+    [SerializeField] private float cd = 0;
     // Start is called before the first frame update
     void Start()
     {

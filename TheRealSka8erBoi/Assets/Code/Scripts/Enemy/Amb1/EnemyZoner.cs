@@ -54,7 +54,75 @@ public class EnemyZoner : AbstComp
             lineOfSight = 100;
         }
         if (!CheckPlayerInSight()) return;
-        lineOfSight = 100;
+        if (pj.transform.position.x - transform.position.x > -3 &
+                pj.transform.position.x - transform.position.x < 3 &
+                pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",true);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                
+                animValue = 1;
+            }
+            else if (pj.transform.position.x - transform.position.x < -3 &
+                     pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",true);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 2;
+            }
+            else if (pj.transform.position.x - transform.position.x > 3 &
+                     pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",true);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 3;
+            }
+            else if (pj.transform.position.x - transform.position.x > 3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",true);
+                animator.SetBool("Back",false);
+                animValue = 4;
+            }
+            else if (pj.transform.position.x - transform.position.x < -3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",true);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 5;
+            }
+            else if (pj.transform.position.x - transform.position.x > -3 &
+                     pj.transform.position.x - transform.position.x < 3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",true);
+                animValue = 6;
+            }
         if(canmove) GoToPlayer();
         if (!CheckPlayerInRange()) return;
         if (pj.transform.position.x - transform.position.x > -3 &
@@ -142,6 +210,7 @@ public class EnemyZoner : AbstComp
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        lineOfSight = 100;
         if (hp <= 0)
         {
              //animator.SetTrigger("Ded");
@@ -220,13 +289,12 @@ public class EnemyZoner : AbstComp
         
         
         canshoot = false;
-        yield return new WaitForSeconds(.9f);
-        animator.SetBool("TriggerLaunched", false);
-        
         implosionZone = Instantiate(zone, target.transform.position, Quaternion.identity);
         implosionZone.transform.localScale=Vector3.zero;
         implosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.9f);
+        animator.SetBool("TriggerLaunched", false);
+        
         agent.SetDestination(target.position);
         canmove = true;
     }
@@ -258,9 +326,6 @@ public class EnemyZoner : AbstComp
                 break;
         }
         canshoot = false;
-        yield return new WaitForSeconds(.9f);
-        animator.SetBool("TriggerLaunched", false);
-        
         float intervalle = rayonAngle / bulletAmount;
         GetAngle(pj.transform.position, transform.right, out float angle);
         implosionZone = Instantiate(zone, target.transform.position, Quaternion.identity);
@@ -277,12 +342,14 @@ public class EnemyZoner : AbstComp
             sndImplosionZone.transform.localScale=Vector3.zero;
             sndImplosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(.3f);
+            animator.SetBool("TriggerLaunched", false);
             //sndImplosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack).SetDelay(Random.Range(0,0.35f));
         }
-
         yield return new WaitForSeconds(.2f);
         agent.SetDestination(target.position);
         canmove = true;
+
+
     }
 
 
