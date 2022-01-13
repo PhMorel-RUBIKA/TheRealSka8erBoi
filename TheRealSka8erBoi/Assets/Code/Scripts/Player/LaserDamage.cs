@@ -22,7 +22,7 @@ public class LaserDamage : MonoBehaviour
         {
             if (hit.gameObject.CompareTag("Target"))
             {
-                hit.GetComponent<DamageManager>().TakeDamage(4);
+                hit.GetComponent<DamageManager>().TakeDamage(8);
             }
         }
         StartCoroutine(DealDamage());

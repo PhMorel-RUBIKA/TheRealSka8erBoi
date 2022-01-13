@@ -189,7 +189,7 @@ public class EnemyDash : AbstComp
         //Debug.Log("je commence le dash");
         dashPointPos = (target.position - transform.position);
         dashPointPos.Normalize();
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(0.8f);
         animator.SetBool("Atk",false);
         rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
         yield return new WaitForSeconds(.7f);
