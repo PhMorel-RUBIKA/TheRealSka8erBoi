@@ -74,7 +74,7 @@ public class FinalBossBehaviour : MonoBehaviour
     public Animator Head;
     public Animator BigEye;
     public Animator EyeB;
-    public Animator EyeC;
+    
     public Animator EyeD;
     public Animator EyeE;
     public Animator EyeF;
@@ -300,7 +300,6 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         leftHand.SetBool("Atk",true);
         Vector3 initLeft = leftHand.transform.position;
-        leftHand.transform.position = (target.transform.position + new Vector3(0,10,0));
         leftHand.SetTrigger("Slam");
         leftArmReady = false;
         yield return new WaitForSeconds(.9f);
@@ -317,7 +316,6 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         rightHand.SetBool("Atk",true);
         Vector3 initRight = rightHand.transform.position;
-        rightHand.transform.position = (target.transform.position + new Vector3(0,10,0));
         rightHand.SetTrigger("Slam");
         rightArmReady = false;
         yield return new WaitForSeconds(.9f);
@@ -453,7 +451,7 @@ public class FinalBossBehaviour : MonoBehaviour
 
     private void EyesAnimated()
     {
-        int rand = Random.Range(0, 15);
+        int rand = Random.Range(0, 14);
         Animator current = eyesArray[rand];
         current.SetTrigger("Wink");
     }
