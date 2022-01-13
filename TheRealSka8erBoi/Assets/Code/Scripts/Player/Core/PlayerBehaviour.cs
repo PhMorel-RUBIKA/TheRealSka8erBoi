@@ -55,6 +55,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float perfectShootValue;
     [SerializeField] private HapticTypes _hapticTypesForPerfectShoot = HapticTypes.Success;
     [SerializeField] private float _baseDamage;
+    [SerializeField] private float shootingCooldown;
+    [SerializeField] private float shootingCd;
     public float baseDamage => _baseDamage + (BonusManager.instance.blueStat * BlueStatModifier);
     public bool shurikenActive;
     [Space]
@@ -199,19 +201,22 @@ public class PlayerBehaviour : MonoBehaviour
             
         }
 
-        dashUI.fillAmount = 1 - dashOngoingCd / dashCd;
         
         dashOngoingCd -= Time.deltaTime;
+        shootingCooldown -= Time.deltaTime;
+        dashUI.fillAmount = 1 - shootingCooldown / shootingCd;
+        
         if (Input.GetAxisRaw("Dash") > 0 && !isAiming)
         {
             if (dashOngoingCd <= 0)
             {
-                dashOngoingCd = dashCd ;
+                if (dashSpellActive) dashOngoingCd = dashCd / 4;
+                else dashOngoingCd = dashCd ;
                 dashGoingFor = 0;
                 dash = true;
                 gameObject.tag = "PlayerDashing";
                 Physics2D.IgnoreLayerCollision(6, 10, true);
-                if (dashSpellActive && dashSpellactivation == 4)
+                if (dashSpellActive && dashSpellactivation == 3)
                 {
                     dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
                 }
@@ -323,13 +328,16 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Shoot(float charge, Vector2 projDirection)
     {
+        if (shootingCooldown >= 0) return;
+
         float multiplicatorShoot = 1;
 
         if (charge < timeMaxCharge/3)
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("lightArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(muzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
-            
+            shootingCooldown = shootingCd * 0.4f;
+            multiplicatorShoot = 0.5f;
             if (shurikenActive)
             {
                 spawnedShuriken =
@@ -340,6 +348,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("mediumArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(bigMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            shootingCooldown = shootingCd * 0.7f;
+            multiplicatorShoot = 0.8f;
             if (shurikenActive)
             {
                 spawnedShuriken =
@@ -355,6 +365,7 @@ public class PlayerBehaviour : MonoBehaviour
             Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             multiplicatorShoot = 1.5f;
+            shootingCooldown = shootingCd * 0.7f;
             MMVibrationManager.Haptic(_hapticTypesForPerfectShoot, false, true, this);
             if (shurikenActive)
             {
@@ -367,6 +378,8 @@ public class PlayerBehaviour : MonoBehaviour
             spawnedProj = PoolObjectManager.Instance.GetBullet("heavyArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            shootingCooldown = shootingCd;
+            multiplicatorShoot = 1;
             if (shurikenActive)
             {
                 spawnedShuriken =
@@ -377,7 +390,7 @@ public class PlayerBehaviour : MonoBehaviour
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
         spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.4f;
         if(over9000Power) spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge * 1000) * multiplicatorShoot);
-        else spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge) * multiplicatorShoot);
+        else spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge * 1.15f) * multiplicatorShoot);
         
 
         if (shurikenActive)

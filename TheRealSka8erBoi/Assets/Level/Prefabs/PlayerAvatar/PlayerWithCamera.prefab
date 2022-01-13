@@ -5675,11 +5675,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftJoy: {x: 0, y: 0}
   latestDirection: {x: 0, y: 0}
-  _playerSpeed: 5
+  _playerSpeed: 6
   deadzoneController: 0.3
   over9000Power: 0
   canTakeDamage: 1
-  _dashCd: 1.5
+  _dashCd: 0.5
   dashSpeed: 40
   dashDuration: 0.1
   dashUI: {fileID: 812440257}
@@ -5693,7 +5693,9 @@ MonoBehaviour:
   timeMaxCharge: 0.5
   perfectShootValue: 0.05
   _hapticTypesForPerfectShoot: 6
-  _baseDamage: 7
+  _baseDamage: 11
+  shootingCooldown: 0
+  shootingCd: 1.7
   shurikenActive: 0
   perfectTiming: 0
   cylindre: {fileID: 1475337109035453509, guid: ea5cc55a7c063a64bab39f45100101c1, type: 3}
@@ -5714,6 +5716,8 @@ MonoBehaviour:
   GreenStatModifier: 0.2
   perfection: {fileID: 4079825448089906176}
   DeathCanvasGroup: {fileID: 359328145}
+  ChienCanvas: {fileID: 4107401510824275237}
+  isDogActive: 0
 --- !u!114 &3498011852449812536
 MonoBehaviour:
   m_ObjectHideFlags: 0

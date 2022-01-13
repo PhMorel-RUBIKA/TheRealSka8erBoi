@@ -52,12 +52,10 @@ public class DamageManager : MonoBehaviour
 
     void GiveTheSpell()
     {
-        int rand = Random.Range(1,4);
-        if (rand == 2)
-        {
-            GameObject spellToGive = Instantiate(spellItem, this.gameObject.transform.position, Quaternion.identity);
-            spellToGive.GetComponent<Item>()._inventory = player.GetComponent<Inventory>();
-            spellToGive.GetComponent<SpriteRenderer>().sprite = spellItem.GetComponent<Item>().TheItem.SpellItem.spellImage;
-        }
+        int rand = Random.Range(1,5);
+        if (rand != 2) return;
+        GameObject spellToGive = Instantiate(spellItem, this.gameObject.transform.position, Quaternion.identity);
+        spellToGive.GetComponent<Item>()._inventory = player.GetComponent<Inventory>();
+        spellToGive.GetComponent<SpriteRenderer>().sprite = spellItem.GetComponent<Item>().TheItem.SpellItem.spellImage;
     }
 }
