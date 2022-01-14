@@ -25,12 +25,13 @@ public class ArmBossBehaviour : MonoBehaviour
         {
             damage *= 2;
         }
+        Destroy(gameObject,3f);
     }
     
 
     private void Update()
     {
-        transform.DOScale(new Vector3(5, 5, 1), .4f).SetEase(Ease.OutBack);
+        transform.DOScale(new Vector3(10, 10, 1), 1f).SetEase(Ease.OutBack);
     }
 
     private void ShockWave()

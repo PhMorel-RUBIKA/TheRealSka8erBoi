@@ -28,9 +28,7 @@ public class FinalBossBehaviour : MonoBehaviour
     [Space] [Header("ArmAttack Parameters")]
     [SerializeField] private GameObject armAtck;
     private GameObject lArmAtckInstance;
-    [SerializeField] private float rayMaxDistance;
-    [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private float hitDistance;
+    
     [SerializeField] public CircleCollider2D leftHandCollider;
     [SerializeField] public CircleCollider2D rightHandCollider;
     
@@ -63,8 +61,7 @@ public class FinalBossBehaviour : MonoBehaviour
     [Space] [Header("Shoot Parameters")] 
     [SerializeField] private Animator headAnim;
     [SerializeField] private GameObject bossProjectile;
-    public Transform[] firePoints;
-    private List<Transform> firePointsUsed = new List<Transform>();
+    [SerializeField] private Transform[] firePoints;
     [SerializeField] private float fireForce = 100;
 
     [Space] [Header("Animation Parameters")]
@@ -143,7 +140,7 @@ public class FinalBossBehaviour : MonoBehaviour
     private void FixedUpdate()
     {
         regulation+=1;
-        if (regulation==15)
+        if (regulation==30)
         {
             regulation = 0;
             EyesAnimated();
@@ -299,43 +296,39 @@ public class FinalBossBehaviour : MonoBehaviour
     IEnumerator LeftArmAtck()
     {
         leftHand.SetBool("Atk",true);
-        Vector3 initLeft = leftHand.transform.position;
-        leftHand.SetTrigger("Slam");
+        leftHand.SetBool("Slam",true);
         leftArmReady = false;
         yield return new WaitForSeconds(.9f);
         leftHandCollider.enabled = true;
-        lArmAtckInstance=Instantiate(armAtck, new Vector2(target.position.x-6,target.position.y), Quaternion.identity);
-        Destroy(lArmAtckInstance,3f);
+        lArmAtckInstance=Instantiate(armAtck, leftHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
         leftHandCollider.enabled = false;
         leftHand.SetBool("Atk", false);
-        leftHand.transform.position = initLeft;
+        leftHand.SetBool("Slam", false);
 
     }
     IEnumerator RightArmAtck()
     {
         rightHand.SetBool("Atk",true);
-        Vector3 initRight = rightHand.transform.position;
-        rightHand.SetTrigger("Slam");
+        rightHand.SetBool("Slam",true);
         rightArmReady = false;
         yield return new WaitForSeconds(.9f);
         rightHandCollider.enabled = true;
-        rArmAtckInstance=Instantiate(armAtck, new Vector2(target.position.x+6,target.position.y), Quaternion.identity);
-        Destroy(rArmAtckInstance,3f);
+        rArmAtckInstance=Instantiate(armAtck, rightHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
         rightHandCollider.enabled = false;
         rightHand.SetBool("Atk", false);
-        rightHand.transform.position = initRight;
+        rightHand.SetBool("Slam", false);
     }
 
     IEnumerator Crush()
     {
         leftHand.SetBool("Atk", true);
         rightHand.SetBool("Atk",true);
-        rightHand.SetTrigger("Crush");
-        leftHand.SetTrigger("Crush");
-        armLeft.transform.position = (target.transform.position * (new Vector2(5, 0)));
-        armRight.transform.position = target.transform.position * (new Vector2(-5, 0));
+        rightHand.SetBool("Crush",true);
+        leftHand.SetBool("Crush",true);
+        armLeft.transform.position = (target.transform.position + (new Vector3(5, 0,0)));
+        armRight.transform.position = target.transform.position + (new Vector3(-5, 0,0));
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(target.transform.position,areaSize);
         yield return new WaitForSeconds(1.5f);
         foreach (Collider2D enemy in hitEnemies)
@@ -359,6 +352,8 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHandCollider.enabled = false;
         leftHand.SetBool("Atk", false);
         rightHand.SetBool("Atk",false);
+        rightHand.SetBool("Crush",false);
+        leftHand.SetBool("Crush",false);
         
     }
 
@@ -405,43 +400,33 @@ public class FinalBossBehaviour : MonoBehaviour
 
         return randomPoint;
     }
-
-    Transform GetRandomFirePoint()
-    {
-        int index = Range(0, firePoints.Length);
-
-        while (firePointsUsed.Contains(firePoints[index]))
-        {
-            index = Range(0, firePoints.Length);
-        }
-        
-        Transform randomFirePoint = firePoints[index];
-        firePointsUsed.Add(firePoints[index]);
-
-        return randomFirePoint;
-    }
+    
     IEnumerator BossShooting()
     {
         headAnim.SetBool("fire",true);
         yield return new WaitForSeconds(.7f);
         if (bossIsMidLife)
         {
-            for (int p = 0; p < 2; p++)
-            { 
-                Transform randomFirePosition = GetRandomFirePoint();
-                Vector2 toplayer = (target.transform.position - randomFirePosition.position).normalized;
-                Instantiate(bossProjectile, randomFirePosition);
-                bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized*fireForce);
-                yield return new WaitForSeconds(.2f);
+            foreach (Transform q in firePoints)
+            {
+                for (int p = 0; p < 2; p++)
+                {
+                    Vector2 toplayer = (target.transform.position - q.position).normalized;
+                    Instantiate(bossProjectile, q.position, q.rotation);
+                    bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized*fireForce);
+                    yield return new WaitForSeconds(.2f);
+                }
             }
+            
         }
         else
         {
-            Transform randomFirePosition = GetRandomFirePoint();
-            Vector2 toplayer = (target.transform.position - randomFirePosition.position).normalized;
-            float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
-            Instantiate(bossProjectile, randomFirePosition);
-            bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized*fireForce);
+            foreach (Transform q in firePoints)
+            {
+                    Vector2 toplayer = (target.transform.position - q.position).normalized;
+                    Instantiate(bossProjectile, q.position, Quaternion.identity);
+                    bossProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.right.normalized*fireForce);
+            }
         }
 
         yield return new WaitForSeconds(.1f);
