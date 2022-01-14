@@ -1,7 +1,109 @@
 fileFormatVersion: 2
 guid: a6934710ad0a7fa40a4292d3c0087505
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2796182936825832763
+    second: Sp_Amb1_Shadow_1_0
+  - first:
+      213: -5370770889929081717
+    second: Sp_Amb1_Shadow_1_1
+  - first:
+      213: -5828738099246509455
+    second: Sp_Amb1_Shadow_1_2
+  - first:
+      213: 9093416378690077041
+    second: Sp_Amb1_Shadow_1_3
+  - first:
+      213: 8161129888057417121
+    second: Sp_Amb1_Shadow_1_4
+  - first:
+      213: -8141184153020192588
+    second: Sp_Amb1_Shadow_1_5
+  - first:
+      213: 8991751629603952502
+    second: Sp_Amb1_Shadow_1_6
+  - first:
+      213: -67375026142585670
+    second: Sp_Amb1_Shadow_1_7
+  - first:
+      213: 7930271293636144808
+    second: Sp_Amb1_Shadow_1_8
+  - first:
+      213: -7944004518126525984
+    second: Sp_Amb1_Shadow_1_9
+  - first:
+      213: 3316439749131012590
+    second: Sp_Amb1_Shadow_1_10
+  - first:
+      213: -3587436933284934866
+    second: Sp_Amb1_Shadow_1_11
+  - first:
+      213: 6305256876220357383
+    second: Sp_Amb1_Shadow_1_12
+  - first:
+      213: -419348065919348197
+    second: Sp_Amb1_Shadow_1_13
+  - first:
+      213: -6646676814365709772
+    second: Sp_Amb1_Shadow_1_14
+  - first:
+      213: -5398495405330455540
+    second: Sp_Amb1_Shadow_1_15
+  - first:
+      213: -7963080324626611176
+    second: Sp_Amb1_Shadow_1_16
+  - first:
+      213: -3918450059595469741
+    second: Sp_Amb1_Shadow_1_17
+  - first:
+      213: 2397679860256254559
+    second: Sp_Amb1_Shadow_1_18
+  - first:
+      213: -4275063934854043934
+    second: Sp_Amb1_Shadow_1_19
+  - first:
+      213: -1430918366119041516
+    second: Sp_Amb1_Shadow_1_20
+  - first:
+      213: 627347012312184300
+    second: Sp_Amb1_Shadow_1_21
+  - first:
+      213: 2528766886774497507
+    second: Sp_Amb1_Shadow_1_22
+  - first:
+      213: 2693648567554137164
+    second: Sp_Amb1_Shadow_1_23
+  - first:
+      213: 5500179524431089596
+    second: Sp_Amb1_Shadow_1_24
+  - first:
+      213: 3979369362785947751
+    second: Sp_Amb1_Shadow_1_25
+  - first:
+      213: 1818339168139333815
+    second: Sp_Amb1_Shadow_1_26
+  - first:
+      213: -5814314105569946251
+    second: Sp_Amb1_Shadow_1_27
+  - first:
+      213: -9048511351365266755
+    second: Sp_Amb1_Shadow_1_28
+  - first:
+      213: -489606300820889656
+    second: Sp_Amb1_Shadow_1_29
+  - first:
+      213: 5189651118726368442
+    second: Sp_Amb1_Shadow_1_30
+  - first:
+      213: 6431535424478914638
+    second: Sp_Amb1_Shadow_1_31
+  - first:
+      213: 8790156593255972366
+    second: Sp_Amb1_Shadow_1_32
+  - first:
+      213: 5187092722283163443
+    second: Sp_Amb1_Shadow_1_33
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -32,7 +134,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -41,12 +143,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -65,10 +167,22 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,7 +191,721 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 429
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cadc7b0f66f139d0800000000000000
+      internalID: -2796182936825832763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_1
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 433
+        width: 78
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8cb4c7c4503775b0800000000000000
+      internalID: -5370770889929081717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_2
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 456
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17250a9a4992c1fa0800000000000000
+      internalID: -5828738099246509455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_3
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 453
+        width: 55
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1718a86740e423e70800000000000000
+      internalID: 9093416378690077041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_4
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 453
+        width: 55
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ad5c77c468224170800000000000000
+      internalID: 8161129888057417121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_5
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 358
+        width: 81
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b8213c8524b40f80800000000000000
+      internalID: -8141184153020192588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_6
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 383
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 677551f777e19cc70800000000000000
+      internalID: 8991751629603952502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_7
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 384
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abcd90c45c2a01ff0800000000000000
+      internalID: -67375026142585670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_8
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 385
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8aee8a5a9bbfd0e60800000000000000
+      internalID: 7930271293636144808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_9
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 379
+        width: 23
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e168fadaf931c190800000000000000
+      internalID: -7944004518126525984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_10
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 380
+        width: 55
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee980fd616c560e20800000000000000
+      internalID: 3316439749131012590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_11
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 285
+        width: 24
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2b4f61cd1dd63ec0800000000000000
+      internalID: -3587436933284934866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_12
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 287
+        width: 56
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70b14b4e8b5c08750800000000000000
+      internalID: 6305256876220357383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_13
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 318
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1251a5e72d2e2af0800000000000000
+      internalID: -419348065919348197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_14
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 321
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43a28e627a242c3a0800000000000000
+      internalID: -6646676814365709772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_15
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 317
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0423b30801b415b0800000000000000
+      internalID: -5398495405330455540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_16
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 316
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8148abc82a47d7190800000000000000
+      internalID: -7963080324626611176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_17
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 321
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35c24bf7e6ede99c0800000000000000
+      internalID: -3918450059595469741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_18
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 308
+        width: 29
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5aaea32125464120800000000000000
+      internalID: 2397679860256254559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_19
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 262
+        width: 27
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e6e0f2600ceba4c0800000000000000
+      internalID: -4275063934854043934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_20
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 265
+        width: 25
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41664ecc35b542ce0800000000000000
+      internalID: -1430918366119041516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_21
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 242
+        width: 37
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce535cba8c8c4b800800000000000000
+      internalID: 627347012312184300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_22
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 261
+        width: 28
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e0e6f5e51cf71320800000000000000
+      internalID: 2528766886774497507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_23
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 241
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4cddc2c913c16520800000000000000
+      internalID: 2693648567554137164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_24
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 243
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf8792e220945c40800000000000000
+      internalID: 5500179524431089596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_25
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 196
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 760dde21a5f893730800000000000000
+      internalID: 3979369362785947751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_26
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 209
+        width: 18
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b0df16e6d90c3910800000000000000
+      internalID: 1818339168139333815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_27
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 196
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 575d5f460286f4fa0800000000000000
+      internalID: -5814314105569946251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_28
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 194
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db298c3fdda3d6280800000000000000
+      internalID: -9048511351365266755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_29
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 193
+        width: 24
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cf17c7d9a19439f0800000000000000
+      internalID: -489606300820889656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_30
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 192
+        width: 32
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abcc4ef4238550840800000000000000
+      internalID: 5189651118726368442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_31
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 137
+        width: 34
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4828609467614950800000000000000
+      internalID: 6431535424478914638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_32
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 135
+        width: 33
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0e741d69d8ecf970800000000000000
+      internalID: 8790156593255972366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sp_Amb1_Shadow_1_33
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 136
+        width: 27
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33fa3b839514cf740800000000000000
+      internalID: 5187092722283163443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
