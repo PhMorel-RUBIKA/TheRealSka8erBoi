@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.AI;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EnemyTowerS2 : AbstComp
 {
@@ -137,8 +138,9 @@ public class EnemyTowerS2 : AbstComp
             //Debug.Log(Time.deltaTime);
             if(cooldown <= 0)
             {
+                float random = Random.Range(-0.5f, 0.6f);
                 canshoot = true; 
-                cooldown = initcooldown;
+                cooldown = initcooldown + random;
             }
         }  
     }    

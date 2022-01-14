@@ -57,6 +57,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float _baseDamage;
     [SerializeField] private float shootingCooldown;
     [SerializeField] private float shootingCd;
+    [SerializeField] private MMFeedbacks shootingCDFB;
     public float baseDamage => _baseDamage + (BonusManager.instance.blueStat * BlueStatModifier);
     public bool shurikenActive;
     [Space]
@@ -205,17 +206,19 @@ public class PlayerBehaviour : MonoBehaviour
         dashOngoingCd -= Time.deltaTime;
         shootingCooldown -= Time.deltaTime;
         dashUI.fillAmount = 1 - shootingCooldown / shootingCd;
+
+        if (Math.Abs(dashUI.fillAmount - 0.98f) < 0.01f) shootingCDFB.PlayFeedbacks(); 
         
         if (Input.GetAxisRaw("Dash") > 0 && !isAiming)
         {
             if (dashOngoingCd <= 0)
             {
-                if (dashSpellActive) dashOngoingCd = dashCd / 4;
-                else dashOngoingCd = dashCd ;
                 dashGoingFor = 0;
                 dash = true;
                 gameObject.tag = "PlayerDashing";
                 Physics2D.IgnoreLayerCollision(6, 10, true);
+                if (dashSpellActive) dashOngoingCd = dashCd / 2 + dashDuration;
+                else dashOngoingCd = dashCd + dashDuration ;
                 if (dashSpellActive && dashSpellactivation == 3)
                 {
                     dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
