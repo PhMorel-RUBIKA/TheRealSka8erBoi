@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using static UnityEngine.Random;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 public class FinalBossBehaviour : MonoBehaviour
@@ -71,7 +72,6 @@ public class FinalBossBehaviour : MonoBehaviour
     public Animator Head;
     public Animator BigEye;
     public Animator EyeB;
-    
     public Animator EyeD;
     public Animator EyeE;
     public Animator EyeF;
@@ -86,6 +86,13 @@ public class FinalBossBehaviour : MonoBehaviour
     public Animator EyeO;
     public Animator[] eyesArray;
     private int regulation = 0;
+
+    [Space] [Header("VFX")] 
+    public GameObject chargeLeftBoss;
+    //public GameObject chargeRightBoss;
+    public GameObject energyballLeftBoss;
+    //public GameObject energyballRightBoss;
+    
 
     void Start()
     {
@@ -297,11 +304,17 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         leftHand.SetBool("Atk",true);
         leftHand.SetBool("Slam",true);
+        Debug.Log("Je mactiv");
+        Instantiate(chargeLeftBoss, new Vector3(-5, 15, 0), Quaternion.identity);
+        Instantiate(energyballLeftBoss, new Vector3(-3, 18, 0), Quaternion.identity);
         leftArmReady = false;
         yield return new WaitForSeconds(.9f);
         leftHandCollider.enabled = true;
         lArmAtckInstance=Instantiate(armAtck, leftHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
+        Instantiate(chargeLeftBoss, new Vector3(-5, 15, 0), Quaternion.identity);
+        Instantiate(energyballLeftBoss, new Vector3(-3, 18, 0), Quaternion.identity);
+        Debug.Log("C re moi");
         leftHandCollider.enabled = false;
         leftHand.SetBool("Atk", false);
         leftHand.SetBool("Slam", false);
