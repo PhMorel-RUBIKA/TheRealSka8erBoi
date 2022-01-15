@@ -109,7 +109,7 @@ public class FinalBossBehaviour : MonoBehaviour
     void Update()
     {
         
-       crown.SetFloat("BossHp",hpBoss);
+        crown.SetInteger("BossHp",hpBoss);
         if (hpBoss<=maxHPBoss/2)
         {
             bossIsMidLife = true;
@@ -173,7 +173,8 @@ public class FinalBossBehaviour : MonoBehaviour
     void BehaviourSelector()
     {
         define = Range(1, 5);
-        switch(define)
+        StartCoroutine("BossShooting");
+        /*switch(define)
         {
             case 1:
                 if (leftArmReady)
@@ -212,7 +213,7 @@ public class FinalBossBehaviour : MonoBehaviour
             case 5 :
                 StartCoroutine(Crush());
                 break;
-        }
+        }*/
     }
 
     void EnragedBehaviour()
@@ -417,7 +418,7 @@ public class FinalBossBehaviour : MonoBehaviour
     IEnumerator BossShooting()
     {
         headAnim.SetBool("fire",true);
-        yield return new WaitForSeconds(.7f);
+        yield return new WaitForSeconds(.8f);
         if (bossIsMidLife)
         {
             foreach (Transform q in firePoints)
@@ -425,7 +426,7 @@ public class FinalBossBehaviour : MonoBehaviour
                 for (int p = 0; p < 2; p++)
                 {
                     Vector2 toplayer = (target.transform.position - q.position).normalized;
-                    Instantiate(bossProjectile, q.position, q.rotation);
+                    Instantiate(bossProjectile, q.position, gameObject.transform.parent.rotation);
                     bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized*fireForce);
                     yield return new WaitForSeconds(.2f);
                 }
@@ -437,8 +438,10 @@ public class FinalBossBehaviour : MonoBehaviour
             foreach (Transform q in firePoints)
             {
                     Vector2 toplayer = (target.transform.position - q.position).normalized;
-                    Instantiate(bossProjectile, q.position, Quaternion.identity);
-                    bossProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.right.normalized*fireForce);
+                    
+                    GameObject currentProjectile = Instantiate(bossProjectile, q.position, q.rotation, q);
+                    currentProjectile.transform.rotation = currentProjectile.transform.parent.rotation;
+                    //bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer*fireForce, ForceMode2D.Impulse);
             }
         }
 

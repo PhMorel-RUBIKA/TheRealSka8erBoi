@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Win32.SafeHandles;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BossProjectileBehaviour : MonoBehaviour
 {
@@ -17,17 +20,26 @@ public class BossProjectileBehaviour : MonoBehaviour
     {
         target = PlayerBehaviour.playerBehaviour.gameObject.transform;
         
-        StartCoroutine(Evaporate());
+        Vector2 direction = Vector2.MoveTowards(rb.velocity, (target.position - transform.position), 0.25f);
+        Vector2 adjust = direction.normalized;
+        
+        transform.rotation = Quaternion.FromToRotation(Vector3.forward, target.position);
+         
+        rb.velocity = adjust * factorFollow;
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedModifier);
+        
+        
+        Destroy(gameObject,1.5f);
         
     }
-    
-    void OnTriggerEnter2D(Collider2D other) 
+
+     void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerBehaviour>().TakeDamage(damages);
-            gameObject.SetActive(false);
-            Instantiate(playerImpact, transform.position, quaternion.identity);
+            Destroy(gameObject);
+            //Instantiate(playerImpact, transform.position, quaternion.identity);
         }
     }
     
