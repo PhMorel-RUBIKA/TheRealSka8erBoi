@@ -56,7 +56,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private HapticTypes _hapticTypesForPerfectShoot = HapticTypes.Success;
     [SerializeField] private float _baseDamage;
     [SerializeField] private float shootingCooldown;
-    [SerializeField] private float shootingCd;
+    [SerializeField] private float _shootingCd;
+    public float shootingCd => _shootingCd - (BonusManager.instance.greenStat / 7);
     [SerializeField] private MMFeedbacks shootingCDFB;
     public float baseDamage => _baseDamage + (BonusManager.instance.blueStat * BlueStatModifier);
     public bool shurikenActive;
