@@ -1106,15 +1106,15 @@ MonoBehaviour:
   pj: {fileID: 5394200822797100280, guid: db987897e5064e54c9968672d46499df, type: 3}
   maxhp: 0
   hp: 50
-  lineOfSight: 11
-  range: 10
+  lineOfSight: 14
+  range: 12
   animator: {fileID: 4978791673133387750}
   rb: {fileID: 6544971654555334630}
   target: {fileID: 0}
   s2: 1
   zone: {fileID: 522411623083824141, guid: 95ecf9ef4f7dee54a803e117fa2a3f2f, type: 3}
   cooldown: 1
-  initcooldown: 8
+  initcooldown: 3.5
   rayonAngle: 90
   bulletAmount: 12
 --- !u!114 &7961317576052152610
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abstComp: {fileID: 6544971654555334628}
-  currentHealth: 50
+  currentHealth: 55
   spellItem: {fileID: 7785707712691717809, guid: 0f006dbd349fad7479d7a9910a1995c8, type: 3}
   damageFeedback: {fileID: 4835763153286099833}
   floatingDamage: {fileID: 827953217680803313}

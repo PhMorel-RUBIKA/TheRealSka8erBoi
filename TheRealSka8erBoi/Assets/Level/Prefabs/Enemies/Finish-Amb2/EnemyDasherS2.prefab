@@ -1067,17 +1067,17 @@ MonoBehaviour:
   pj: {fileID: 5394200822797100280, guid: db987897e5064e54c9968672d46499df, type: 3}
   maxhp: 0
   hp: 30
-  lineOfSight: 6
-  range: 4
+  lineOfSight: 11
+  range: 7
   animator: {fileID: 8104358847079697754}
   hitcd: 1.5
-  inithitcd: 3
+  inithitcd: 2.5
   rb: {fileID: 4076993939007909673}
   facingRight: 1
   target: {fileID: 0}
   boxCo: {fileID: 4076993939007909672}
-  dashSpeed: 7
-  damages: 5
+  dashSpeed: 11
+  damages: 12
   s2: 1
   previewDash: {fileID: 0}
 --- !u!50 &4076993939007909673
@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abstComp: {fileID: 4076993939007909674}
-  currentHealth: 30
+  currentHealth: 45
   spellItem: {fileID: 4651320251387781764, guid: 3a6ce697ba48e7c4a9b47b93457e137a, type: 3}
   damageFeedback: {fileID: 2759269038100159033}
   floatingDamage: {fileID: 4793235193949319125}
