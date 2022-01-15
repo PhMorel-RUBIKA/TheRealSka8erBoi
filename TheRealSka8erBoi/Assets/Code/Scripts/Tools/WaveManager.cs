@@ -100,6 +100,7 @@ public class WaveManager : MonoBehaviour
     {
         GameObject randomEnemy = GetRandomEnemy();
         Instantiate(enemySpawn, position + new Vector3(-0.05f, -0.5f, 0), Quaternion.identity);
+        StartCoroutine(SoundCaller.instance.SpawnEnemiesSound());
         yield return new WaitForSeconds(0.8f);
         Instantiate(randomEnemy, position, Quaternion.identity);
     }

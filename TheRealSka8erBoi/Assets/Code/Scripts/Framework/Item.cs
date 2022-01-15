@@ -93,10 +93,12 @@ public class Item : MonoBehaviour
                         return;
                     case false:
                         WitchSpellItem(1);
+                        SoundCaller.instance.PickUpItemsSound();
                         break;
                 }
             }
             else WitchSpellItem(0);
+            SoundCaller.instance.PickUpItemsSound();
         }
     }
 
@@ -148,6 +150,7 @@ public class Item : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton1) &&  checkIfGood)
         {
             BonusManager.instance.GainCoins(TheItem.CoinItem.value);
+            SoundCaller.instance.PickUpItemsSound();
             Destroy(gameObject);
         }
     }
@@ -157,6 +160,7 @@ public class Item : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
             player.GetComponent<PlayerBehaviour>().GetHealth(TheItem.food.value);
+            SoundCaller.instance.PickUpItemsSound();
             Destroy(gameObject);
         }
     }
@@ -169,10 +173,12 @@ public class Item : MonoBehaviour
             {
                 case false:
                     _inventory.deathDefiance1 = true;
+                    SoundCaller.instance.PickUpItemsSound();
                     Destroy(gameObject);
                     return;
                 case true when !_inventory.deathDefiance2:
                     _inventory.deathDefiance2 = true;
+                    SoundCaller.instance.PickUpItemsSound();
                     break;
             }
             Destroy(gameObject);

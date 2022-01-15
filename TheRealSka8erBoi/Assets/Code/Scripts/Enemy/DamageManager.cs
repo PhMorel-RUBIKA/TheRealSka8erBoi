@@ -34,7 +34,8 @@ public class DamageManager : MonoBehaviour
         floatingDamage.PlayFeedbacks();
         
         CameraShake.instance.StartShake(0.05f, 0.05f, 3f);
-
+        SoundCaller.instance.EnemiesDamage();
+        
         if (currentHealth <= 0)
         {
             Die();

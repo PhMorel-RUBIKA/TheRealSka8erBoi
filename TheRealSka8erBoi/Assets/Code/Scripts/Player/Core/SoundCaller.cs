@@ -7,6 +7,10 @@ using Random = UnityEngine.Random;
 public class SoundCaller : MonoBehaviour
 {
     public static SoundCaller instance;
+
+    [Header("Player Maj")] public AudioClip pickUpItems;
+    
+    [Space]
     
     [Header("Step Sound")]
     public float timeBetweenSoundsStep = 0.3f;
@@ -18,6 +22,14 @@ public class SoundCaller : MonoBehaviour
     [Header("Dash Sound")]
     public AudioSource dashAudioSource;
     public AudioClip dashSound;
+    
+    [Space]
+    
+    [Header("EnnemiSound")]
+    public AudioSource gameManagerAudioSource;
+    public AudioClip[] enemyDamageSound;
+    public AudioClip[] spawnEnemies;
+    public AudioClip damageSound;
     
     private void Awake()
     {
@@ -33,5 +45,28 @@ public class SoundCaller : MonoBehaviour
     public void DashSound()
     {
         dashAudioSource.PlayOneShot(dashSound);
+    }
+
+    public void EnemiesShotSound()
+    {
+        int rand = Random.Range(0, enemyDamageSound.Length); 
+        gameManagerAudioSource.PlayOneShot(enemyDamageSound[rand]);
+    }
+    
+    public void EnemiesDamage()
+    {
+        gameManagerAudioSource.PlayOneShot(damageSound);
+    }
+
+    public IEnumerator SpawnEnemiesSound()
+    {
+        gameManagerAudioSource.PlayOneShot(spawnEnemies[0]);
+        yield return new WaitForSeconds(0.5f);
+        gameManagerAudioSource.PlayOneShot(spawnEnemies[1]);
+    }
+
+    public void PickUpItemsSound()
+    {
+        gameManagerAudioSource.PlayOneShot(pickUpItems);
     }
 }
