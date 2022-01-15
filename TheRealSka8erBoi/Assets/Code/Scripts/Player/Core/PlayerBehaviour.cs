@@ -184,6 +184,8 @@ public class PlayerBehaviour : MonoBehaviour
         
         if (Input.GetButtonDown("BowShot"))
         {
+            if (shootingCooldown - 0.05f >= 0 ) return;
+            
             transform.GetChild(0).gameObject.SetActive(true);
             isAiming = true;
             animatorPlayer.SetBool(animatorID[9], isAiming);
@@ -334,8 +336,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Shoot(float charge, Vector2 projDirection)
     {
-        if (shootingCooldown - 0.05f >= 0 ) return;
-        
         float multiplicatorShoot = 1;
 
         if (charge < timeMaxCharge/3)
