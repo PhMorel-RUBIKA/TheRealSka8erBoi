@@ -1167,15 +1167,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.86
+      value: -7.06
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.38
+      value: 7.46
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1216,7 +1216,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
   m_PrefabInstance: {fileID: 420449688}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &420449690 stripped
+--- !u!95 &420449690 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1664467373629367595, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
+  m_PrefabInstance: {fileID: 420449688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &420449691 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1367639375154162631, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
   m_PrefabInstance: {fileID: 420449688}
@@ -3017,8 +3022,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveLevel: {fileID: 11400000, guid: 087ff309c8768414ab84695a84d8a4f5, type: 2}
-  gateZone1: {fileID: 420449690}
+  gateZone1: {fileID: 420449691}
   gateZone2: {fileID: 1642634742}
+  doorAnimation1: {fileID: 420449690}
+  doorAnimation2: {fileID: 1642634743}
   timeBetweenWave: 1
   enemySpawn: {fileID: 8918617544157970407, guid: daba2895abe84694ca367d2c3e189222, type: 3}
   fireflies: {fileID: 7841743204720765774}
@@ -4542,15 +4549,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.96
+      value: 7.75
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.45
+      value: 9.62
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4590,6 +4597,11 @@ Transform:
 --- !u!1 &1642634742 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3338514224121820465, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
+  m_PrefabInstance: {fileID: 1642634740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1642634743 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4934348565926859015, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
   m_PrefabInstance: {fileID: 1642634740}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1673268663

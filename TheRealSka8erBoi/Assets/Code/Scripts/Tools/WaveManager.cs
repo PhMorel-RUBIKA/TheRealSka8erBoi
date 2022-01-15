@@ -12,6 +12,8 @@ public class WaveManager : MonoBehaviour
     public WaveLevel waveLevel;
     public GameObject gateZone1;
     public GameObject gateZone2;
+    public Animator doorAnimation1;
+    public Animator doorAnimation2;
     public float timeBetweenWave;
     public GameObject enemySpawn;
     public GameObject fireflies;
@@ -43,6 +45,7 @@ public class WaveManager : MonoBehaviour
     {
         WaveManager.instance = this;
         canEndwave = true;
+        
         for (int i = 0; i < waveLevel.waves.Length; i++) currentNumberOfEnemies.Add(waveLevel.waves[i].numberOfenemies);
     }
 
@@ -158,7 +161,9 @@ public class WaveManager : MonoBehaviour
         RandomItem(itemDoor2);
         
         gateZone1.SetActive(true);
+        doorAnimation1.SetBool("S2Active", true);
         gateZone2.SetActive(true);
+        doorAnimation2.SetBool("S2Active", true);
 
         if (fireflies != null) fireflies.SetActive(true);
 

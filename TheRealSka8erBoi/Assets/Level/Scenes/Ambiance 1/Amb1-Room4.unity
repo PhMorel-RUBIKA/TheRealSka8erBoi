@@ -354,15 +354,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1874084533732010165, guid: e475dcc8d3dd0a146a1feeb6d1407f1c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.75406
+      value: 6.35
       objectReference: {fileID: 0}
     - target: {fileID: 1874084533732010165, guid: e475dcc8d3dd0a146a1feeb6d1407f1c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1874084533732010165, guid: e475dcc8d3dd0a146a1feeb6d1407f1c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.41656
+      value: 8.73
       objectReference: {fileID: 0}
     - target: {fileID: 1874084533732010165, guid: e475dcc8d3dd0a146a1feeb6d1407f1c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -406,6 +406,11 @@ Transform:
 --- !u!1 &56881389 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2771417311650749414, guid: e475dcc8d3dd0a146a1feeb6d1407f1c, type: 3}
+  m_PrefabInstance: {fileID: 56881387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &56881390 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2448422821233082823, guid: e475dcc8d3dd0a146a1feeb6d1407f1c, type: 3}
   m_PrefabInstance: {fileID: 56881387}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &78719072
@@ -7570,6 +7575,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2771417311650749414, guid: 0bd0d5fe53911584cac6e03cb400f758, type: 3}
   m_PrefabInstance: {fileID: 1261248186}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1261248189 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 190128004356700073, guid: 0bd0d5fe53911584cac6e03cb400f758, type: 3}
+  m_PrefabInstance: {fileID: 1261248186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1281441427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10012,6 +10022,8 @@ MonoBehaviour:
   waveLevel: {fileID: 11400000, guid: e6aa8fdba5df00843921e09b9607203e, type: 2}
   gateZone1: {fileID: 1261248188}
   gateZone2: {fileID: 56881389}
+  doorAnimation1: {fileID: 1261248189}
+  doorAnimation2: {fileID: 56881390}
   timeBetweenWave: 8
   enemySpawn: {fileID: 8918617544157970407, guid: daba2895abe84694ca367d2c3e189222, type: 3}
   fireflies: {fileID: 2034349324}

@@ -615,11 +615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.0110235
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.604391
+      value: 10.66
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.z
@@ -667,6 +667,11 @@ Transform:
 --- !u!1 &118977516 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1367639375154162631, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
+  m_PrefabInstance: {fileID: 118977514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &118977517 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1664467373629367595, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
   m_PrefabInstance: {fileID: 118977514}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &151018319
@@ -2457,11 +2462,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.741448
+      value: 5.8
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.482859
+      value: 9.83
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2505,6 +2510,11 @@ Transform:
 --- !u!1 &998788705 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3338514224121820465, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
+  m_PrefabInstance: {fileID: 998788703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &998788706 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4934348565926859015, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
   m_PrefabInstance: {fileID: 998788703}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1024479900
@@ -3578,7 +3588,9 @@ MonoBehaviour:
   waveLevel: {fileID: 11400000, guid: 6b0567f0bd07f7a49899b4ceb617583b, type: 2}
   gateZone1: {fileID: 118977516}
   gateZone2: {fileID: 998788705}
-  timeBetweenWave: 0
+  doorAnimation1: {fileID: 118977517}
+  doorAnimation2: {fileID: 998788706}
+  timeBetweenWave: 1
   enemySpawn: {fileID: 8918617544157970407, guid: daba2895abe84694ca367d2c3e189222, type: 3}
   fireflies: {fileID: 2096789678}
   spawnPoints:

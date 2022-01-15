@@ -1049,6 +1049,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1367639375154162631, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
   m_PrefabInstance: {fileID: 165482921}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &165482924 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1664467373629367595, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
+  m_PrefabInstance: {fileID: 165482921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &166227972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1302,6 +1307,8 @@ MonoBehaviour:
   waveLevel: {fileID: 11400000, guid: b1bd1da885389124ca22070f1599dbb9, type: 2}
   gateZone1: {fileID: 165482923}
   gateZone2: {fileID: 1065479437}
+  doorAnimation1: {fileID: 165482924}
+  doorAnimation2: {fileID: 1065479439}
   timeBetweenWave: 1
   enemySpawn: {fileID: 8918617544157970407, guid: daba2895abe84694ca367d2c3e189222, type: 3}
   fireflies: {fileID: 1252573551}
@@ -5936,6 +5943,11 @@ GameObject:
 --- !u!4 &1065479438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
+  m_PrefabInstance: {fileID: 1065479436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1065479439 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4934348565926859015, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
   m_PrefabInstance: {fileID: 1065479436}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1091249837

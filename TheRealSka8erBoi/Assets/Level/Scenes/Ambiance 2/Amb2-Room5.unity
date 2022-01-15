@@ -4036,11 +4036,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5988855
+      value: 7.73
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.037244
+      value: 15.35
       objectReference: {fileID: 0}
     - target: {fileID: 1943829342910561635, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4079,6 +4079,11 @@ PrefabInstance:
 --- !u!1 &1069094723 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3338514224121820465, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
+  m_PrefabInstance: {fileID: 1069094722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1069094724 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4934348565926859015, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
   m_PrefabInstance: {fileID: 1069094722}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1082549837
@@ -4171,6 +4176,11 @@ PrefabInstance:
 --- !u!1 &1113703430 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1367639375154162631, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
+  m_PrefabInstance: {fileID: 1113703429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1113703431 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1664467373629367595, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
   m_PrefabInstance: {fileID: 1113703429}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1121986534
@@ -4342,6 +4352,8 @@ MonoBehaviour:
   waveLevel: {fileID: 11400000, guid: aebf19db055e45d4dac7a93761c04ca8, type: 2}
   gateZone1: {fileID: 1113703430}
   gateZone2: {fileID: 1069094723}
+  doorAnimation1: {fileID: 1113703431}
+  doorAnimation2: {fileID: 1069094724}
   timeBetweenWave: 1
   enemySpawn: {fileID: 8918617544157970407, guid: daba2895abe84694ca367d2c3e189222, type: 3}
   fireflies: {fileID: 1580822510}

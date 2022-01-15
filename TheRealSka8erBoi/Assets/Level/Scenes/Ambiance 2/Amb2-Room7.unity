@@ -1172,11 +1172,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7769678
+      value: -3.35
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.5163555
+      value: 8.61
       objectReference: {fileID: 0}
     - target: {fileID: 2762890505381618581, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1224,6 +1224,11 @@ Transform:
 --- !u!1 &285001075 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1367639375154162631, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
+  m_PrefabInstance: {fileID: 285001073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &285001076 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1664467373629367595, guid: 6611c82e2e83dac40a7456462b539847, type: 3}
   m_PrefabInstance: {fileID: 285001073}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &299535914
@@ -1985,6 +1990,11 @@ Transform:
 --- !u!1 &504043273 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3338514224121820465, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
+  m_PrefabInstance: {fileID: 504043271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &504043274 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4934348565926859015, guid: 5008728b16f6d5b4d8aa8a93dfa23332, type: 3}
   m_PrefabInstance: {fileID: 504043271}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &507318312
@@ -7061,6 +7071,8 @@ MonoBehaviour:
   waveLevel: {fileID: 11400000, guid: 13a8a73078bc2294aa9c5c54982a5d6e, type: 2}
   gateZone1: {fileID: 285001075}
   gateZone2: {fileID: 504043273}
+  doorAnimation1: {fileID: 285001076}
+  doorAnimation2: {fileID: 504043274}
   timeBetweenWave: 1
   enemySpawn: {fileID: 8918617544157970407, guid: daba2895abe84694ca367d2c3e189222, type: 3}
   fireflies: {fileID: 2072832750}
