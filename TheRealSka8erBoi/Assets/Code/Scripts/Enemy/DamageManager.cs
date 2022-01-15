@@ -45,7 +45,7 @@ public class DamageManager : MonoBehaviour
     {
         GiveTheSpell();
         BonusManager.instance.GainScore(Random.Range(200, 251));
-        BonusManager.instance.GainCoins(Random.Range(2,12));
+        BonusManager.instance.GainCoins(Random.Range(2,8));
         if (WaveManager.instance.enemyOnScreen.Count != 0) WaveManager.instance.enemyOnScreen.RemoveAt(0);
         Destroy(this.gameObject);
     }

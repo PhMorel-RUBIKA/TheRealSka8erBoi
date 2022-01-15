@@ -92,30 +92,12 @@ public class Item : MonoBehaviour
                     case true:
                         return;
                     case false:
-                        StartCoroutine(GetSpellItem(1, TheItem.SpellItem.timeToPick));
+                        WitchSpellItem(1);
                         break;
                 }
             }
-            else StartCoroutine(GetSpellItem(0, TheItem.SpellItem.timeToPick));
+            else WitchSpellItem(0);
         }
-    }
-
-    IEnumerator GetSpellItem(int slotNumber, float timeToPick)
-    {
-        Vector3 position = player.transform.position;
-        DissolveEffect dissolveEffect = GetComponent<DissolveEffect>();
-
-        dissolveEffect.StartDissolve(timeToPick);
-        yield return new WaitForSeconds(timeToPick);
-
-        if (Vector3.Distance(player.transform.position, position) <= 0.1)
-        {
-            WitchSpellItem(slotNumber);
-        }
-        else
-        {
-            dissolveEffect.StopDissolve(timeToPick);
-        } 
     }
 
     void WitchSpellItem(int slotNumber)
