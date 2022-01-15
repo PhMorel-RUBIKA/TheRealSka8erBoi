@@ -214,12 +214,14 @@ public class EnemyDash : AbstComp
         boxCo.isTrigger = true;
         for (int i = 0; i < 3; i++)
         {
-            dashPointPos = (target.position - transform.position);
+            dashPointPos = ((target.position - transform.position)*1.1f);
             dashPointPos.Normalize();
-            yield return new WaitForSeconds(1.3f);
+            float rotZ = Mathf.Atan2(dashPointPos.y, dashPointPos.x) * Mathf.Rad2Deg;
+            Instantiate(previewDash, transform.position, Quaternion.Euler(0f, 0f, rotZ));
+            yield return new WaitForSeconds(.8f);
             canMove = true;
             rb.velocity = new Vector2(dashPointPos.x, dashPointPos.y+upToFitPlayer) * dashSpeed;
-            yield return new WaitForSeconds(.7f);
+            yield return new WaitForSeconds(.5f);
             rb.velocity=Vector2.zero;
             canMove = false;
 
