@@ -5,7 +5,7 @@ using UnityEngine;
 public class ForEnemyZone : MonoBehaviour
 {
 
-    [SerializeField] private float areaSize;
+    [SerializeField] private float areaSize=1.2f;
 
     [SerializeField] private int damage=10;
 
@@ -13,7 +13,7 @@ public class ForEnemyZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        areaSize = transform.localScale.x;
+       // areaSize = transform.localScale.x;
         StartCoroutine(Implosion());
     }
 

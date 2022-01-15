@@ -24,6 +24,7 @@ public class EnemyZoner : AbstComp
     public GameObject zone;
     private bool canshoot=false;
     [SerializeField] float cooldown;
+    [SerializeField] private float s2Cooldown;
     [SerializeField] float initcooldown;
     [SerializeField] private float rayonAngle=360;
     [SerializeField] private int bulletAmount;
@@ -231,13 +232,27 @@ public class EnemyZoner : AbstComp
     { 
         if(canshoot==false) 
         {
-            cooldown = cooldown - Time.deltaTime; 
-            //Debug.Log(Time.deltaTime);
-            if(cooldown <= 0)
+            if (s2)
             {
-                canshoot = true; 
-                cooldown = initcooldown;
+                cooldown = cooldown - Time.deltaTime; 
+                //Debug.Log(Time.deltaTime);
+                if(cooldown <= 0)
+                {
+                    canshoot = true; 
+                    cooldown = s2Cooldown;
+                }
             }
+            else
+            {
+                cooldown = cooldown - Time.deltaTime; 
+                //Debug.Log(Time.deltaTime);
+                if(cooldown <= 0)
+                {
+                    canshoot = true; 
+                    cooldown = initcooldown;
+                } 
+            }
+            
         }  
     }    
          
@@ -348,6 +363,7 @@ public class EnemyZoner : AbstComp
         yield return new WaitForSeconds(.2f);
         agent.SetDestination(target.position);
         canmove = true;
+        
 
 
     }
