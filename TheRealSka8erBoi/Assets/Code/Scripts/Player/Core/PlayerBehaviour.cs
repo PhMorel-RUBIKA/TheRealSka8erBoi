@@ -207,8 +207,8 @@ public class PlayerBehaviour : MonoBehaviour
         shootingCooldown -= Time.deltaTime;
         dashUI.fillAmount = 1 - shootingCooldown / shootingCd;
 
-        if (Math.Abs(dashUI.fillAmount - 0.98f) < 0.01f) shootingCDFB.PlayFeedbacks(); 
-        
+        if (Math.Abs(dashUI.fillAmount - 0.98f) < 0.01f) shootingCDFB.PlayFeedbacks();
+
         if (Input.GetAxisRaw("Dash") > 0 && !isAiming)
         {
             if (dashOngoingCd <= 0)
@@ -217,6 +217,7 @@ public class PlayerBehaviour : MonoBehaviour
                 dash = true;
                 gameObject.tag = "PlayerDashing";
                 Physics2D.IgnoreLayerCollision(6, 10, true);
+                Physics2D.IgnoreLayerCollision(6, 11, true);
                 if (dashSpellActive) dashOngoingCd = dashCd / 2 + dashDuration;
                 else dashOngoingCd = dashCd + dashDuration ;
                 if (dashSpellActive && dashSpellactivation == 3)
@@ -269,6 +270,7 @@ public class PlayerBehaviour : MonoBehaviour
                 dash = false;
                 gameObject.tag = "Player";
                 Physics2D.IgnoreLayerCollision(6, 10, false);
+                Physics2D.IgnoreLayerCollision(6, 11, false);
                 if (dashSpellActive)
                 {
                     DashSpell();
@@ -331,7 +333,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Shoot(float charge, Vector2 projDirection)
     {
-        if (shootingCooldown >= 0) return;
+        if (shootingCooldown - 0.05f >= 0 ) return;
 
         float multiplicatorShoot = 1;
 

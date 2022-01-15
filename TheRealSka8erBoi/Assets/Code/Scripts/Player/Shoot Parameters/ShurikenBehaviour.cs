@@ -13,7 +13,7 @@ public class ShurikenBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        Invoke("Explode", GetComponent<BulletPoolBehaviour>().waitForDestruction+0.04f);
+        //Invoke("Explode", GetComponent<BulletPoolBehaviour>().waitForDestruction+0.04f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
