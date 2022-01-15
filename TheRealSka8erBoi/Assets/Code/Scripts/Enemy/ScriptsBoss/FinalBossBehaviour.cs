@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.Mathematics;
 using UnityEngine;
 using static UnityEngine.Random;
 using Debug = UnityEngine.Debug;
@@ -89,9 +90,10 @@ public class FinalBossBehaviour : MonoBehaviour
 
     [Space] [Header("VFX")] 
     public GameObject chargeLeftBoss;
-    //public GameObject chargeRightBoss;
+    public GameObject chargeRightBoss;
     public GameObject energyballLeftBoss;
-    //public GameObject energyballRightBoss;
+    public GameObject energyballRightBoss;
+    
     
 
     void Start()
@@ -173,8 +175,8 @@ public class FinalBossBehaviour : MonoBehaviour
     void BehaviourSelector()
     {
         define = Range(1, 5);
-        StartCoroutine("BossShooting");
-        /*switch(define)
+        //StartCoroutine("BossShooting");
+        switch(define)
         {
             case 1:
                 if (leftArmReady)
@@ -213,7 +215,7 @@ public class FinalBossBehaviour : MonoBehaviour
             case 5 :
                 StartCoroutine(Crush());
                 break;
-        }*/
+        }
     }
 
     void EnragedBehaviour()
@@ -313,10 +315,10 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHandCollider.enabled = true;
         lArmAtckInstance=Instantiate(armAtck, leftHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
-        Instantiate(chargeLeftBoss, new Vector3(-5, 15, 0), Quaternion.identity);
-        Instantiate(energyballLeftBoss, new Vector3(-3, 18, 0), Quaternion.identity);
         Debug.Log("C re moi");
         leftHandCollider.enabled = false;
+        Instantiate(chargeLeftBoss, new Vector3(-5, 15, 0), Quaternion.identity);
+        Instantiate(energyballLeftBoss, new Vector3(-3, 18, 0), Quaternion.identity);
         leftHand.SetBool("Atk", false);
         leftHand.SetBool("Slam", false);
 
@@ -325,11 +327,15 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         rightHand.SetBool("Atk",true);
         rightHand.SetBool("Slam",true);
+        Instantiate(chargeRightBoss, new Vector3(11, 15, 0), quaternion.identity);
+        Instantiate(energyballRightBoss, new Vector3(9, 18, 0), quaternion.identity);
         rightArmReady = false;
         yield return new WaitForSeconds(.9f);
         rightHandCollider.enabled = true;
         rArmAtckInstance=Instantiate(armAtck, rightHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
+        Instantiate(chargeRightBoss, new Vector3(11, 15, 0), quaternion.identity);
+        Instantiate(energyballRightBoss, new Vector3(9, 18, 0), quaternion.identity);
         rightHandCollider.enabled = false;
         rightHand.SetBool("Atk", false);
         rightHand.SetBool("Slam", false);
