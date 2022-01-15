@@ -46,6 +46,9 @@ public class CursorBehaviour : MonoBehaviour
          }
          target = AimDirection().Item1; 
          transform.rotation = Quaternion.Lerp(transform.rotation, target, smoothSpeed);
+         
+         if (PlayerBehaviour.playerBehaviour.shootingCooldown - 0.05f >= 0 ) gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+         else gameObject.GetComponent<SpriteRenderer>().color = Color.white;
      }
 
     

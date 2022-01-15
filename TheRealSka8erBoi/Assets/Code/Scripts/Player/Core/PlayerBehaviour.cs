@@ -55,7 +55,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float perfectShootValue;
     [SerializeField] private HapticTypes _hapticTypesForPerfectShoot = HapticTypes.Success;
     [SerializeField] private float _baseDamage;
-    [SerializeField] private float shootingCooldown;
+    public float shootingCooldown;
     [SerializeField] private float _shootingCd;
     public float shootingCd => _shootingCd - (BonusManager.instance.greenStat / 7);
     [SerializeField] private MMFeedbacks shootingCDFB;
@@ -335,7 +335,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void Shoot(float charge, Vector2 projDirection)
     {
         if (shootingCooldown - 0.05f >= 0 ) return;
-
+        
         float multiplicatorShoot = 1;
 
         if (charge < timeMaxCharge/3)
