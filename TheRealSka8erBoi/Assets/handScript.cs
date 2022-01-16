@@ -1,26 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class handScript : MonoBehaviour
 {
     [SerializeField] private FinalBossBehaviour fb;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public MMFeedbacks mmf;
+
 
     public void TakeDamage(int damage)
     {
-        fb.hpBoss -= (damage*2);
+        fb.hpBoss -= (damage);
+        mmf.PlayFeedbacks();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

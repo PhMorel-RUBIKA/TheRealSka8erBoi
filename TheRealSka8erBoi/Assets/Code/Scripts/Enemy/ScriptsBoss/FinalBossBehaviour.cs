@@ -38,11 +38,9 @@ public class FinalBossBehaviour : MonoBehaviour
     [SerializeField] public CircleCollider2D rightHandCollider;
     
     private GameObject rArmAtckInstance;
-    private bool leftArmReady=true;
-    private bool rightArmReady=true;
-    [SerializeField] private float leftArmRecover = 10;
-    [SerializeField] private float rightArmRecover = 10;
-    [SerializeField] private float armRecoverInit = 10;
+
+    [SerializeField] private GameObject rightDamageFeeler;
+    [SerializeField] private GameObject leftDamageFeeler;
 
     [SerializeField] private GameObject shockInstance;
 
@@ -95,18 +93,16 @@ public class FinalBossBehaviour : MonoBehaviour
     public Animator EyeO;
     public Animator[] eyesArray;
     private int regulation = 0;
+    
 
     [Space] [Header("VFX")] 
     public GameObject chargeLeftBoss;
     public GameObject chargeRightBoss;
     public GameObject energyballLeftBoss;
     public GameObject energyballRightBoss;
-    //public GameObject hugeCracksStorms;
     public GameObject firstHugeCracksStorms;
-    //public Transform jeSuisLaGauche;
-    //public Transform jeSuisLaDroite;
-    
-    
+
+
 
     void Start()
     {
@@ -130,34 +126,7 @@ public class FinalBossBehaviour : MonoBehaviour
         {
             bossIsMidLife = true;
         }
-        if (!leftArmReady)
-        {
-            leftArmRecover= -Time.deltaTime;
-            if (leftArmRecover <= 0)
-            {
-                leftArmReady = true;
-                leftArmRecover = armRecoverInit;
-            }
-        }
-
-        if (!rightArmReady)
-        {
-            rightArmRecover = -Time.deltaTime;
-            if (rightArmRecover <= 0)
-            {
-                rightArmReady = true;
-                rightArmRecover = armRecoverInit;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.L)&leftArmReady)
-        {
-            StartCoroutine(LeftArmAtck());
-        }
-
-        if (Input.GetKeyDown(KeyCode.M) & rightArmReady)
-        {
-            StartCoroutine(RightArmAtck());
-        }
+        
     }
 
     private void FixedUpdate()
@@ -188,7 +157,7 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void BehaviourSelector()
     {
-        define = 1; //Range(1, 6);
+        define = 5; // Range(1, 6);
         //if (selectorELENNA != 0)
           //  define = selectorELENNA;
         //StartCoroutine("BossShooting");
@@ -197,13 +166,16 @@ public class FinalBossBehaviour : MonoBehaviour
             case 1:
                 
                    StartCoroutine(LeftArmAtck());
+                   StartCoroutine(BossShooting());
                    break;
             case 2:
                 
                 StartCoroutine(RightArmAtck());
+                StartCoroutine(BossShooting());
                 break;
             
             case 3 :
+                StartCoroutine(BossShooting());
                 StartCoroutine(BossShooting());
                 break;
             case 4 : 
@@ -229,18 +201,10 @@ public class FinalBossBehaviour : MonoBehaviour
 
                   break;
               case 2:
-                  if (leftArmReady)
-                  {
-                      StartCoroutine(LeftArmAtck());
+                    StartCoroutine(LeftArmAtck());
                       StartCoroutine(RightArmAtck());
-                  }
-                  else
-                  {
-                      StartCoroutine(BossShooting());
-                      StartCoroutine(Crush());
-                  }
-
                   break;
+              
               case 3:
                   BossMakesEnemiesSpawn();
                   StartCoroutine(BossShooting());
@@ -264,18 +228,16 @@ public class FinalBossBehaviour : MonoBehaviour
         //Instantiate pour la paume de main gauche avec la charge et la boule d'energie 1rst
         Instantiate(chargeLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
         
-        leftArmReady = false;
         yield return new WaitForSeconds(.9f);
         Instantiate(energyballLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
         Instantiate(shockInstance, leftHand.transform.position - new Vector3(0, 6, 0), Quaternion.identity);
         leftHand.SetBool("Atk", false);
         leftHand.SetBool("Slam", false);
-        leftHandCollider.enabled = true;
-        lArmAtckInstance=Instantiate(armAtck, leftHand.transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(1.6f);
+        leftDamageFeeler.SetActive(true);
+        yield return new WaitForSeconds(2.6f);
         Debug.Log("C re moi");
         //Instantiate pour la paume de main gauche avec la charge et la boule d'energie 2nd
-        leftHandCollider.enabled = false;
+        leftDamageFeeler.SetActive(false);
       
 
     }
@@ -286,29 +248,28 @@ public class FinalBossBehaviour : MonoBehaviour
         //Instantiate pour la paume de main droite avec la charge et la boule d'energie 1rst
         Instantiate(chargeRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         
-        rightArmReady = false;
         yield return new WaitForSeconds(.9f);
         Instantiate(energyballRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         Instantiate(shockInstance, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         leftHand.SetBool("Atk", false);
         leftHand.SetBool("Slam", false);
-        rightHandCollider.enabled = true;
-        rArmAtckInstance=Instantiate(armAtck, rightHand.transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(1.6f);
+        rightDamageFeeler.SetActive(true);
+        yield return new WaitForSeconds(2.6f);
         //Instantiate pour la paume de main droite avec la charge et la boule d'energie 2nd
-        rightHandCollider.enabled = false;
+        rightDamageFeeler.SetActive(false);
 
     }
 
     IEnumerator Crush()
     {
+        Vector3 originArmRight = armRight.transform.position;
+        Vector3 originArmLeft = armLeft.transform.position;
         leftHand.SetBool("Atk", true);
         rightHand.SetBool("Atk",true);
         rightHand.SetBool("Crush",true);
         leftHand.SetBool("Crush",true);
         //Debug.Log("Premier");
-        Vector3 originArmRight = armRight.transform.position;
-        Vector3 originArmLeft = armLeft.transform.position;
+        
         armRight.transform.position = (target.transform.position + (new Vector3(3.5f, 10,0)));
         armLeft.transform.position = target.transform.position + (new Vector3(-3.5f, 10,0));
         //Instantiate hugeCracks gauche et droite 1rst
@@ -352,11 +313,11 @@ public class FinalBossBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(1.25f);
         //Debug.Log("Third");
-        leftHandCollider.enabled = true;
-        rightHandCollider.enabled = true;
-        yield return new WaitForSeconds(1.5f);
-        leftHandCollider.enabled = false;
-        rightHandCollider.enabled = false;
+        rightDamageFeeler.SetActive(true);
+        leftDamageFeeler.SetActive(true);
+        yield return new WaitForSeconds(2.8f);
+        rightDamageFeeler.SetActive(false);
+        leftDamageFeeler.SetActive(false);
 
 
         armRight.transform.position = originArmRight;
@@ -446,6 +407,7 @@ public class FinalBossBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(.1f);
         headAnim.SetBool("fire",false);
+        yield return new WaitForSeconds(1f);
 
     }
 
