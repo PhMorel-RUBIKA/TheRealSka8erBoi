@@ -17,6 +17,8 @@ public class FinalBossBehaviour : MonoBehaviour
     [Space(20)]
     public int refreshTime = 1500;
 
+    private Quaternion quaternionFx;
+    private  Vector3 rotationFx = new Vector3(-90, 0, 0); 
     public List<int> keyFrames=new List<int>();
 
     public int define;
@@ -59,7 +61,10 @@ public class FinalBossBehaviour : MonoBehaviour
     private int enemySelection;
     public Transform[] spawnPoints;
     private List<Transform> waypointUsed = new List<Transform>();
-
+    //[SerializeField]
+    //private int selectorELENNA;
+    //[SerializeField]
+    //private int selectorAAAAHHH; 
     [Space] [Header("Shoot Parameters")] 
     [SerializeField] private Animator headAnim;
     [SerializeField] private GameObject bossProjectile;
@@ -93,11 +98,16 @@ public class FinalBossBehaviour : MonoBehaviour
     public GameObject chargeRightBoss;
     public GameObject energyballLeftBoss;
     public GameObject energyballRightBoss;
+    //public GameObject hugeCracksStorms;
+    public GameObject firstHugeCracksStorms;
+    //public Transform jeSuisLaGauche;
+    //public Transform jeSuisLaDroite;
     
     
 
     void Start()
     {
+        quaternionFx = Quaternion.Euler(rotationFx);
         crown.SetInteger("BossHp", hpBoss);
         leftHandCollider.enabled = false;
         hpBoss = maxHPBoss;
@@ -174,7 +184,9 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void BehaviourSelector()
     {
-        define = Range(1, 5);
+        define = Range(1, 6);
+        //if (selectorELENNA != 0)
+          //  define = selectorELENNA;
         //StartCoroutine("BossShooting");
         switch(define)
         {
@@ -220,7 +232,9 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void EnragedBehaviour()
     {
-        define = Range(1, 8);
+        define = Range(1, 9);
+        //if (selectorAAAAAHHHH != 0)
+          //  define = selectorAAAAAHHHH;
         switch (define)
         {
             case 1:
@@ -308,6 +322,7 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Atk",true);
         leftHand.SetBool("Slam",true);
         Debug.Log("Je mactiv");
+        //Instantiate pour la paume de main gauche avec la charge et la boule d'energie 1rst
         Instantiate(chargeLeftBoss, new Vector3(-5, 15, 0), Quaternion.identity);
         Instantiate(energyballLeftBoss, new Vector3(-3, 18, 0), Quaternion.identity);
         leftArmReady = false;
@@ -316,9 +331,10 @@ public class FinalBossBehaviour : MonoBehaviour
         lArmAtckInstance=Instantiate(armAtck, leftHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
         Debug.Log("C re moi");
-        leftHandCollider.enabled = false;
+        //Instantiate pour la paume de main gauche avec la charge et la boule d'energie 2nd
         Instantiate(chargeLeftBoss, new Vector3(-5, 15, 0), Quaternion.identity);
         Instantiate(energyballLeftBoss, new Vector3(-3, 18, 0), Quaternion.identity);
+        leftHandCollider.enabled = false;
         leftHand.SetBool("Atk", false);
         leftHand.SetBool("Slam", false);
 
@@ -327,6 +343,7 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         rightHand.SetBool("Atk",true);
         rightHand.SetBool("Slam",true);
+        //Instantiate pour la paume de main droite avec la charge et la boule d'energie 1rst
         Instantiate(chargeRightBoss, new Vector3(11, 15, 0), quaternion.identity);
         Instantiate(energyballRightBoss, new Vector3(9, 18, 0), quaternion.identity);
         rightArmReady = false;
@@ -334,6 +351,7 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHandCollider.enabled = true;
         rArmAtckInstance=Instantiate(armAtck, rightHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
+        //Instantiate pour la paume de main droite avec la charge et la boule d'energie 2nd
         Instantiate(chargeRightBoss, new Vector3(11, 15, 0), quaternion.identity);
         Instantiate(energyballRightBoss, new Vector3(9, 18, 0), quaternion.identity);
         rightHandCollider.enabled = false;
@@ -347,10 +365,17 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHand.SetBool("Atk",true);
         rightHand.SetBool("Crush",true);
         leftHand.SetBool("Crush",true);
-        armLeft.transform.position = (target.transform.position + (new Vector3(5, 0,0)));
-        armRight.transform.position = target.transform.position + (new Vector3(-5, 0,0));
+        //Debug.Log("Premier");
+        
+        armRight.transform.position = (target.transform.position + (new Vector3(11, 2,0)));
+        armLeft.transform.position = target.transform.position + (new Vector3(-9, 2,0));
+        //Instantiate hugeCracks gauche et droite 1rst
+        Instantiate(firstHugeCracksStorms, new Vector3(14, 5, 0), quaternionFx);
+        Instantiate(firstHugeCracksStorms, new Vector3(-6, 5, 0), quaternionFx);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(target.transform.position,areaSize);
+        
         yield return new WaitForSeconds(1.5f);
+        //Debug.Log("Second");
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.gameObject.CompareTag("Player"))
@@ -365,9 +390,14 @@ public class FinalBossBehaviour : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.1f);
+        //Debug.Log("Third");
         leftHandCollider.enabled = true;
         rightHandCollider.enabled = true;
         yield return new WaitForSeconds(1.5f);
+        //Instantiate hugeCracks gauche et droite 2nd
+        Instantiate(firstHugeCracksStorms, new Vector3(14, 5, 0), quaternionFx);
+        Instantiate(firstHugeCracksStorms, new Vector3(-6, 5, 0), quaternionFx);
+        //Debug.Log("Quatre");
         leftHandCollider.enabled = false;
         rightHandCollider.enabled = false;
         leftHand.SetBool("Atk", false);

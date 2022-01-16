@@ -50,10 +50,10 @@ public class ArmBossBehaviour : MonoBehaviour
             other.gameObject.GetComponent<Rigidbody2D>().AddForce(projection*strenght);
             Destroy(this);
         }
-        if (other.gameObject.CompareTag("Target"))
+        /*if (other.gameObject.CompareTag("Target"))
         {
             other.GetComponent<DamageManager>().TakeDamage(damage);
             other.gameObject.GetComponent<Rigidbody2D>().AddForce(projection*strenght);
-        }
+        }*/
     }
 }
