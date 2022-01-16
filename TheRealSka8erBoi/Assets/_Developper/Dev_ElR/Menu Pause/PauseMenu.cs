@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaussed = false;
 
     public GameObject pauseMenuUI;
+    public GameObject deathMenu;
 
     public MMFeedbacks timeFeedbacks;
     public MMFeedbacks noTimeFeedbacks;
@@ -25,6 +26,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject optionsMenuUI;
 
     public AudioMixer audioMixer;
+
+    public GameObject[] managers;
+    
 
 
     // Start is called before the first frame update
@@ -36,7 +40,17 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
    void Update()
     {
-        
+        if (Input.GetAxisRaw("Dash") > 0)
+        {
+            if (deathMenu.activeSelf)
+            {
+                foreach (GameObject manager in managers )
+                {
+                    Destroy(manager);
+                }
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
          
         
         if (Input.GetKeyDown(KeyCode.JoystickButton7))
@@ -88,10 +102,23 @@ public class PauseMenu : MonoBehaviour
         
     }
 
+    public void GameOverPause()
+    {
+        timeFeedbacks.StopFeedbacks();
+        noTimeFeedbacks.PlayFeedbacks();
+        //Time.timeScale = 0f;
+        gameIsPaussed = true;
+        Debug.Log("Game Over");
+    }
+
     public void LoadMenu()
     {
         timeFeedbacks.StopFeedbacks();
         noTimeFeedbacks.PlayFeedbacks();
+        foreach (GameObject manager in managers )
+        {
+            Destroy(manager);
+        }
         SceneManager.LoadScene("MainMenu");
     }
 
