@@ -6,7 +6,7 @@ using UnityEngine;
 public class MarcheantGameManager : MonoBehaviour
 {
     public GameObject canvas1, canvas2;
-    public Animation animation;
+    public Animator[] animation;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -21,7 +21,12 @@ public class MarcheantGameManager : MonoBehaviour
         canvas1.SetActive(false);
         canvas2.SetActive(true);
         
-        CameraShake.instance.StartShake(12f, 2f, 7f);
+        CameraShake.instance.StartShake(12f, 1.5f, 4f);
+
+        foreach (var t in animation)
+        {
+            t.SetTrigger("GoOn");
+        }
 
         yield return new WaitForSeconds(3);
         canvas2.SetActive(false);
