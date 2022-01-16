@@ -32,7 +32,8 @@ public class BulletPoolBehaviour : MonoBehaviour
                 BonusManager.instance.GainScore(50);
                 pb.perfectTiming = false;
             }
-            other.GetComponent<DamageManager>().TakeDamage(damage);
+            if (other.GetComponent<DamageManager>() != null) other.GetComponent<DamageManager>().TakeDamage(damage);
+            else other.GetComponent<handScript>().TakeDamage(damage);
             //Transform damageUI = Instantiate(damagePopUp, new Vector3(other.transform.position.x,other.transform.position.y + 1,other.transform.position.z - 2),Quaternion.identity);
             //damageUI.gameObject.GetComponent<TextMeshPro>().text = damage.ToString();
             //Destroy(damageUI.gameObject,1);

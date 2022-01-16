@@ -19,17 +19,18 @@ public class ArmBossBehaviour : MonoBehaviour
     void Start()
     {
         target = PlayerBehaviour.playerBehaviour.transform;
+        
         if (fbb.bossIsMidLife)
         {
             damage *= 2;
         }
-        Destroy(gameObject,3f);
+        Destroy(gameObject,.5f);
     }
     
 
     private void Update()
     {
-        transform.DOScale(new Vector3(5, 5, 1), 1f).SetEase(Ease.OutBack);
+        
     }
     
     
