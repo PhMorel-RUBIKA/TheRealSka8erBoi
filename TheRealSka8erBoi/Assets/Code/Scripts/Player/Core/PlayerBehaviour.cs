@@ -63,6 +63,8 @@ public class PlayerBehaviour : MonoBehaviour
     public bool shurikenActive;
     [Space]
     private bool isAiming;
+
+    private bool isDead;
     private float charge;
 
     private GameObject spawnedProj;
@@ -86,6 +88,8 @@ public class PlayerBehaviour : MonoBehaviour
     //Declaration UI
     //public TextMeshProUGUI lifeText;
     [SerializeField] private int _maxHealth = 5;
+    public PauseMenu pause;
+    
 
     public int maxHealth => (int)(_maxHealth + BonusManager.instance.redStat * RedStatModifier);
     [HideInInspector] public int currentHealth;
@@ -152,7 +156,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {
-        MyInput();
+        if (!isDead)
+        {
+            MyInput();
+        }
+        
         switch (isDogActive)
         {
             case true:
@@ -410,7 +418,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(int damageNumber)
     {
         if(!canTakeDamage) return;
-        
+        if(isDead) return;
         currentHealth -= damageNumber;
         float division = (float)currentHealth / maxHealth;
         healthBar.fillAmount = 1 - division;
@@ -437,7 +445,9 @@ public class PlayerBehaviour : MonoBehaviour
                     StartCoroutine(DyingCharacter());
                 }
             }
-            animatorPlayer.SetTrigger(animatorID[7]);
+
+            isDead = true;
+            animatorPlayer.SetBool(animatorID[7], true);
             StartCoroutine(DyingCharacter());
         }
     }
@@ -513,9 +523,8 @@ public class PlayerBehaviour : MonoBehaviour
     IEnumerator DyingCharacter()
     {
         yield return new WaitForSeconds(3);
+        DeathCanvasGroup.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Score : " + BonusManager.instance.finalScore;
         DeathCanvasGroup.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(1);
-        Destroy(PlayerManager.instance.gameObject);
+        pause.GameOverPause();
     }
 }

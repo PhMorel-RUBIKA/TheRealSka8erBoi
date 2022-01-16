@@ -56,6 +56,7 @@ public class PoolObjectManager : MonoBehaviour
             GameObject bulletParent = new GameObject();
             bulletParent.name = bullet.name + "Pool";
             GameObject.DontDestroyOnLoad(bulletParent);
+            bulletParent.transform.SetParent(transform);
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
             for (int i = 0; i < bullet.size; i++)
