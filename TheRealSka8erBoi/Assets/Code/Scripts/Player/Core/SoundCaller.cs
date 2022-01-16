@@ -58,11 +58,9 @@ public class SoundCaller : MonoBehaviour
         gameManagerAudioSource.PlayOneShot(damageSound);
     }
 
-    public IEnumerator SpawnEnemiesSound()
+    public void SpawnEnemiesSound()
     {
         gameManagerAudioSource.PlayOneShot(spawnEnemies[0]);
-        yield return new WaitForSeconds(0.5f);
-        gameManagerAudioSource.PlayOneShot(spawnEnemies[1]);
     }
 
     public void PickUpItemsSound()
