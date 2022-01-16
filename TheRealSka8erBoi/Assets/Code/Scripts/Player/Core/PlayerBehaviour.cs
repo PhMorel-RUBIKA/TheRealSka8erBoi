@@ -115,6 +115,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject DeathCanvasGroup;
     public GameObject ChienCanvas;
     public bool isDogActive;
+    public Animator refusMortAnimator;
     
     private void Awake()
     {
@@ -422,6 +423,7 @@ public class PlayerBehaviour : MonoBehaviour
         currentHealth -= damageNumber;
         float division = (float)currentHealth / maxHealth;
         healthBar.fillAmount = 1 - division;
+        if (division > 1) healthBar.fillAmount = 1;
         //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
         StartCoroutine(Invincibility());
@@ -433,12 +435,14 @@ public class PlayerBehaviour : MonoBehaviour
             if (gameObject.GetComponent<Inventory>().deathDefiance1)
             {
                 RestoreLife(1);
+                refusMortAnimator.SetTrigger("Niv1Down");
             }
             else
             {
                 if (gameObject.GetComponent<Inventory>().deathDefiance2)
                 {
                     RestoreLife(2);
+                    refusMortAnimator.SetTrigger("Niv2Down");
                 }
                 else
                 {
@@ -455,6 +459,9 @@ public class PlayerBehaviour : MonoBehaviour
     public void GetHealth(int healthNumber)
     {
         currentHealth += healthNumber;
+        float division = (float)currentHealth / maxHealth;
+        healthBar.fillAmount = 1 - division;
+        if (division > 1) healthBar.fillAmount = 1;
         if (currentHealth>maxHealth)
         {
             currentHealth = maxHealth;

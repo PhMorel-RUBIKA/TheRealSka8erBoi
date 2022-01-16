@@ -141,6 +141,12 @@ public class WaveManager : MonoBehaviour
     {
         if (LoadSceneManager.instance.nextItemToSpawn != null)
             Instantiate(LoadSceneManager.instance.nextItemToSpawn, BonusManager.instance.gameObject.transform.position, Quaternion.identity);
+        else
+        {
+            int rand = Random.Range(0, rewardObjects.Length);
+            LoadSceneManager.instance.nextItemToSpawn = rewardObjects[rand];
+            Instantiate(LoadSceneManager.instance.nextItemToSpawn, BonusManager.instance.gameObject.transform.position, Quaternion.identity);
+        }
 
         LoadSceneManager.instance.nextItemToSpawn = null;
         itemDoor1 = null;

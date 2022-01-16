@@ -26,12 +26,6 @@ public class Door : MonoBehaviour
                     CallTheChangeRoom();
                     LoadSceneManager.instance.nextItemToSpawn = WaveManager.instance.itemDoor2;
                     break;
-                case 3:
-                    if (Input.GetKeyDown(KeyCode.JoystickButton3))
-                    {
-                        
-                    }
-                    break;
             }
         }
     }

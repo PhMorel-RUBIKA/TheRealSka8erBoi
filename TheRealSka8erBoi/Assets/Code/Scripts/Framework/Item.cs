@@ -122,7 +122,7 @@ public class Item : MonoBehaviour
         {
             TheItem.stickerRed.value = 1;
             BonusManager.instance.redStat += TheItem.stickerRed.value;
-            player.GetComponent<PlayerBehaviour>().GetHealth((int)(player.GetComponent<PlayerBehaviour>().RedStatModifier));
+            player.GetComponent<PlayerBehaviour>().GetHealth(10);
             Destroy(gameObject.transform.parent == null ? gameObject : transform.parent.gameObject);
         }
     }
@@ -173,11 +173,13 @@ public class Item : MonoBehaviour
             {
                 case false:
                     _inventory.deathDefiance1 = true;
+                    PlayerBehaviour.playerBehaviour.refusMortAnimator.SetTrigger("Niv1Up");
                     SoundCaller.instance.PickUpItemsSound();
                     Destroy(gameObject);
                     return;
                 case true when !_inventory.deathDefiance2:
                     _inventory.deathDefiance2 = true;
+                    PlayerBehaviour.playerBehaviour.refusMortAnimator.SetTrigger("Niv2Up");
                     SoundCaller.instance.PickUpItemsSound();
                     break;
             }
