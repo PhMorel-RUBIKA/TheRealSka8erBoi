@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5000733226828333225}
+  - component: {fileID: -7320929537695630848}
+  - component: {fileID: -1207561741235671356}
   m_Layer: 0
   m_Name: ShockWave
   m_TagString: EnemyBullet
@@ -31,6 +33,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &-7320929537695630848
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421469145051772971}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2
+--- !u!114 &-1207561741235671356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421469145051772971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f2161b1216db64ba35458facc4f6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fbb: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+  target: {fileID: 0}
+  zone: {fileID: -7320929537695630848}
+  strenght: 50
+  damage: 7
 --- !u!1 &5381166040697216332
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,8 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fbb: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
   target: {fileID: 0}
-  rb: {fileID: 1876975775167253553}
-  moveSpeed: 350
+  zone: {fileID: 0}
   strenght: 3000
   damage: 5
 --- !u!58 &769578895797759903
