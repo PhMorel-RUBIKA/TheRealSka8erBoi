@@ -268,7 +268,7 @@ public class PlayerBehaviour : MonoBehaviour
         else
         {
             animatorPlayer.SetBool(animatorID[8], false);
-            if (charge < timeMaxCharge)
+            if (charge < timeMaxCharge + perfectShootValue)
             {
                 charge += Time.deltaTime;
             }
@@ -371,7 +371,7 @@ public class PlayerBehaviour : MonoBehaviour
                     PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
             }
         }
-        else if (charge >= timeMaxCharge - perfectShootValue && charge <= timeMaxCharge)
+        else if (charge >= timeMaxCharge - perfectShootValue && charge < timeMaxCharge + perfectShootValue)
         {
             perfectTiming = true;
             spawnedProj = PoolObjectManager.Instance.GetBullet("perfectTimingAmmo",
@@ -382,6 +382,19 @@ public class PlayerBehaviour : MonoBehaviour
             multiplicatorShoot = 1.5f;
             shootingCooldown = shootingCd * 0.7f;
             MMVibrationManager.Haptic(_hapticTypesForPerfectShoot, false, true, this);
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
+        }
+        else if (charge >= timeMaxCharge + perfectShootValue)
+        {
+            spawnedProj = PoolObjectManager.Instance.GetBullet("heavyArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
+            Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            shootingCooldown = shootingCd;
+            multiplicatorShoot = 1;
             if (shurikenActive)
             {
                 spawnedShuriken =
@@ -459,6 +472,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void GetHealth(int healthNumber)
     {
         currentHealth += healthNumber;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         float division = (float)currentHealth / maxHealth;
         healthBar.fillAmount = 1 - division;
         if (division > 1) healthBar.fillAmount = 1;
