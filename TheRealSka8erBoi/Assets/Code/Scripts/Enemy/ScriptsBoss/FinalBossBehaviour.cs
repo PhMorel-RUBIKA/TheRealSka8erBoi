@@ -22,8 +22,9 @@ public class FinalBossBehaviour : MonoBehaviour
     public List<int> keyFrames=new List<int>();
 
     public int define;
-    
-    [Space] [Header("Behaviour")]
+
+    [Space] [Header("Behaviour")] 
+    [SerializeField] private Animation intro;
     private Transform target;
     public int hpBoss;
     [SerializeField] private int maxHPBoss;
@@ -43,6 +44,8 @@ public class FinalBossBehaviour : MonoBehaviour
     [SerializeField] private float rightArmRecover = 10;
     [SerializeField] private float armRecoverInit = 10;
 
+    [SerializeField] private GameObject shockInstance;
+
     [Space]
     [Header("Crush Parameters")]
     //[SerializeField] private Rigidbody2D Crush;
@@ -53,7 +56,7 @@ public class FinalBossBehaviour : MonoBehaviour
     
     [SerializeField] private float areaSize;
     [SerializeField] private int damage;
-    private int punchDamage = 10;
+    private int punchDamage = 7;
     
     [Space] [Header("EnemySpawnParameters")]
     private int spawningFactor;
@@ -107,6 +110,7 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void Start()
     {
+        intro.Play();
         quaternionFx = Quaternion.Euler(rotationFx);
         crown.SetInteger("BossHp", hpBoss);
         leftHandCollider.enabled = false;
@@ -184,40 +188,21 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void BehaviourSelector()
     {
-        define = Range(1, 6);
+        define = 1; //Range(1, 6);
         //if (selectorELENNA != 0)
           //  define = selectorELENNA;
         //StartCoroutine("BossShooting");
         switch(define)
         {
             case 1:
-                if (leftArmReady)
-                {
-                   StartCoroutine(LeftArmAtck()); 
-                }
-                else if (rightArmReady)
-                {
-                    StartCoroutine(RightArmAtck());
-                }
-                else
-                {
-                    StartCoroutine(Crush());
-                }
-                break;
+                
+                   StartCoroutine(LeftArmAtck());
+                   break;
             case 2:
-                if (rightArmReady)
-                {
-                    StartCoroutine(RightArmAtck());
-                }
-                else if (leftArmReady)
-                {
-                    StartCoroutine(LeftArmAtck());
-                }
-                else
-                {
-                    StartCoroutine(Crush());
-                }
+                
+                StartCoroutine(RightArmAtck());
                 break;
+            
             case 3 :
                 StartCoroutine(BossShooting());
                 break;
@@ -232,89 +217,43 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void EnragedBehaviour()
     {
-        define = Range(1, 9);
+        define = Range(1, 6);
         //if (selectorAAAAAHHHH != 0)
           //  define = selectorAAAAAHHHH;
-        switch (define)
-        {
-            case 1:
-                if (leftArmReady)
-                {
-                    StartCoroutine(LeftArmAtck());
-                    StartCoroutine(Crush());
-                }
-                else if (rightArmReady)
-                {
-                    StartCoroutine(RightArmAtck());
-                    StartCoroutine(Crush());
-                }
-                else
-                {
-                    BossMakesEnemiesSpawn();
-                    StartCoroutine(Crush());
-                }
+          switch (define)
+          {
+              case 1:
 
-                break;
-            case 2:
-                if (leftArmReady)
-                {
-                    StartCoroutine(LeftArmAtck());
-                    if (rightArmReady)
-                    {
-                        StartCoroutine(RightArmAtck());
-                    }
-                    else
-                    {
-                        StartCoroutine(BossShooting());
-                    }
-                }
-                else
-                {
-                    StartCoroutine(Crush());
-                    StartCoroutine(BossShooting());
-                }
+                  StartCoroutine(BossShooting());
+                  StartCoroutine(Crush());
 
-                break;
-            case 3:
-                BossMakesEnemiesSpawn();
-                if (leftArmReady)
-                {
-                    StartCoroutine(LeftArmAtck());
-                    if (rightArmReady)
-                    {
-                        StartCoroutine(RightArmAtck());
-                    }
-                }
+                  break;
+              case 2:
+                  if (leftArmReady)
+                  {
+                      StartCoroutine(LeftArmAtck());
+                      StartCoroutine(RightArmAtck());
+                  }
+                  else
+                  {
+                      StartCoroutine(BossShooting());
+                      StartCoroutine(Crush());
+                  }
 
-                break;
-            case 4:
-                BossMakesEnemiesSpawn();
-                StartCoroutine(BossShooting());
-                break;
-            case 5:
-                StartCoroutine(BossShooting());
-                StartCoroutine(Crush());
-                break;
-            case 6:
-                StartCoroutine(RightArmAtck());
-                StartCoroutine(LeftArmAtck());
-                break;
-            case 7 :
-                if (leftArmReady)
-                {
-                    StartCoroutine(LeftArmAtck());
-                }
-                else if (rightArmReady)
-                {
-                    StartCoroutine((RightArmAtck()));
-                }
-                BossMakesEnemiesSpawn();
-                break;
-            case 8 :
-                StartCoroutine(Crush());
-                StartCoroutine(BossShooting());
-                break;
-                }
+                  break;
+              case 3:
+                  BossMakesEnemiesSpawn();
+                  StartCoroutine(BossShooting());
+                  break;
+              case 4:
+                  StartCoroutine(RightArmAtck());
+                  StartCoroutine(BossShooting());
+                  break;
+              case 5:
+                  StartCoroutine(BossShooting());
+                  StartCoroutine(BossShooting());
+                  break;
+          }
     }
 
     IEnumerator LeftArmAtck()
@@ -323,20 +262,21 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Slam",true);
         Debug.Log("Je mactiv");
         //Instantiate pour la paume de main gauche avec la charge et la boule d'energie 1rst
-        Instantiate(chargeLeftBoss, new Vector3(-5, 15, 0), Quaternion.identity);
-        Instantiate(energyballLeftBoss, new Vector3(-3, 18, 0), Quaternion.identity);
+        Instantiate(chargeLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
+        
         leftArmReady = false;
         yield return new WaitForSeconds(.9f);
+        Instantiate(energyballLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
+        Instantiate(shockInstance, leftHand.transform.position - new Vector3(0, 6, 0), Quaternion.identity);
+        leftHand.SetBool("Atk", false);
+        leftHand.SetBool("Slam", false);
         leftHandCollider.enabled = true;
         lArmAtckInstance=Instantiate(armAtck, leftHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
         Debug.Log("C re moi");
         //Instantiate pour la paume de main gauche avec la charge et la boule d'energie 2nd
-        Instantiate(chargeLeftBoss, new Vector3(-5, 15, 0), Quaternion.identity);
-        Instantiate(energyballLeftBoss, new Vector3(-3, 18, 0), Quaternion.identity);
         leftHandCollider.enabled = false;
-        leftHand.SetBool("Atk", false);
-        leftHand.SetBool("Slam", false);
+      
 
     }
     IEnumerator RightArmAtck()
@@ -344,19 +284,20 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHand.SetBool("Atk",true);
         rightHand.SetBool("Slam",true);
         //Instantiate pour la paume de main droite avec la charge et la boule d'energie 1rst
-        Instantiate(chargeRightBoss, new Vector3(11, 15, 0), quaternion.identity);
-        Instantiate(energyballRightBoss, new Vector3(9, 18, 0), quaternion.identity);
+        Instantiate(chargeRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
+        
         rightArmReady = false;
         yield return new WaitForSeconds(.9f);
+        Instantiate(energyballRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
+        Instantiate(shockInstance, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
+        leftHand.SetBool("Atk", false);
+        leftHand.SetBool("Slam", false);
         rightHandCollider.enabled = true;
         rArmAtckInstance=Instantiate(armAtck, rightHand.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.6f);
         //Instantiate pour la paume de main droite avec la charge et la boule d'energie 2nd
-        Instantiate(chargeRightBoss, new Vector3(11, 15, 0), quaternion.identity);
-        Instantiate(energyballRightBoss, new Vector3(9, 18, 0), quaternion.identity);
         rightHandCollider.enabled = false;
-        rightHand.SetBool("Atk", false);
-        rightHand.SetBool("Slam", false);
+
     }
 
     IEnumerator Crush()
@@ -366,45 +307,67 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHand.SetBool("Crush",true);
         leftHand.SetBool("Crush",true);
         //Debug.Log("Premier");
-        
-        armRight.transform.position = (target.transform.position + (new Vector3(11, 2,0)));
-        armLeft.transform.position = target.transform.position + (new Vector3(-9, 2,0));
+        Vector3 originArmRight = armRight.transform.position;
+        Vector3 originArmLeft = armLeft.transform.position;
+        armRight.transform.position = (target.transform.position + (new Vector3(3.5f, 10,0)));
+        armLeft.transform.position = target.transform.position + (new Vector3(-3.5f, 10,0));
         //Instantiate hugeCracks gauche et droite 1rst
-        Instantiate(firstHugeCracksStorms, new Vector3(14, 5, 0), quaternionFx);
-        Instantiate(firstHugeCracksStorms, new Vector3(-6, 5, 0), quaternionFx);
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(target.transform.position,areaSize);
+        Instantiate(firstHugeCracksStorms, armRight.transform.position+new Vector3(0,-9.5f,0), quaternionFx);
+        Instantiate(firstHugeCracksStorms, armLeft.transform.position+new Vector3(0,-9.5f,0), quaternionFx);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(armRight.transform.position+new Vector3(0,-9.5f,0),areaSize);
+        Collider2D[] hitEnemies2 = Physics2D.OverlapCircleAll(armLeft.transform.position+new Vector3(0,-9.5f,0),areaSize);
         
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(.75f);
         //Debug.Log("Second");
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.gameObject.CompareTag("Player"))
             {
-                PlayerBehaviour.playerBehaviour.TakeDamage(damage);
+                PlayerBehaviour.playerBehaviour.TakeDamage(punchDamage);
             }
 
             if (enemy.gameObject.CompareTag("Target"))
             {
-                enemy.GetComponent<DamageManager>().TakeDamage(damage);
+                enemy.GetComponent<DamageManager>().TakeDamage(punchDamage);
             }
         }
 
-        yield return new WaitForSeconds(1.1f);
-        //Debug.Log("Third");
-        leftHandCollider.enabled = true;
-        rightHandCollider.enabled = true;
-        yield return new WaitForSeconds(1.5f);
-        //Instantiate hugeCracks gauche et droite 2nd
-        Instantiate(firstHugeCracksStorms, new Vector3(14, 5, 0), quaternionFx);
-        Instantiate(firstHugeCracksStorms, new Vector3(-6, 5, 0), quaternionFx);
-        //Debug.Log("Quatre");
-        leftHandCollider.enabled = false;
-        rightHandCollider.enabled = false;
+        foreach (Collider2D enemy in hitEnemies2)
+        {
+            if (enemy.gameObject.CompareTag("Player"))
+            {
+                PlayerBehaviour.playerBehaviour.TakeDamage(punchDamage);
+            }
+
+            if (enemy.gameObject.CompareTag("Target"))
+            {
+                enemy.GetComponent<DamageManager>().TakeDamage(punchDamage);
+            }
+        }
+
         leftHand.SetBool("Atk", false);
         rightHand.SetBool("Atk",false);
         rightHand.SetBool("Crush",false);
         leftHand.SetBool("Crush",false);
-        
+
+        yield return new WaitForSeconds(1.25f);
+        //Debug.Log("Third");
+        leftHandCollider.enabled = true;
+        rightHandCollider.enabled = true;
+        yield return new WaitForSeconds(1.5f);
+        leftHandCollider.enabled = false;
+        rightHandCollider.enabled = false;
+
+
+        armRight.transform.position = originArmRight;
+        armLeft.transform.position = originArmLeft;
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, areaSize);
     }
 
     public void TakeDamage(int damage)

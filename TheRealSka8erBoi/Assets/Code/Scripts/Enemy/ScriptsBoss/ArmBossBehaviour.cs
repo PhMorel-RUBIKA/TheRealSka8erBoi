@@ -6,12 +6,11 @@ public class ArmBossBehaviour : MonoBehaviour
     [Header("Behaviour")] 
     [SerializeField] private FinalBossBehaviour fbb;
     [SerializeField] private Transform target;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float moveSpeed;
-    [Space]
-    [Header("AtckParameters")]
+
+    [Space] [Header("AtckParameters")] 
+    [SerializeField] private CircleCollider2D zone;
     [SerializeField] private float strenght;
-    [SerializeField] private int damage = 7;
+    [SerializeField] private int damage = 5;
     private int pushValue;
     
     
@@ -20,7 +19,6 @@ public class ArmBossBehaviour : MonoBehaviour
     void Start()
     {
         target = PlayerBehaviour.playerBehaviour.transform;
-        ShockWave();
         if (fbb.bossIsMidLife)
         {
             damage *= 2;
@@ -31,15 +29,9 @@ public class ArmBossBehaviour : MonoBehaviour
 
     private void Update()
     {
-        transform.DOScale(new Vector3(10, 10, 1), 1f).SetEase(Ease.OutBack);
+        transform.DOScale(new Vector3(5, 5, 1), 1f).SetEase(Ease.OutBack);
     }
-
-    private void ShockWave()
-    {
-       
-        
-
-    }
+    
     
     private void OnTriggerEnter2D(Collider2D other)
     {
