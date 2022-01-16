@@ -1,18 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class LetterLore : MonoBehaviour
 {
     public GameObject canvasLetter;
     private bool isActive;
-    private bool canActive; 
+    private bool canActive;
+    public MMFeedbacks letterOutline;
 
     private void Start()
     {
         isActive = false;
         canActive = false;
+        letterOutline.PlayFeedbacks();
     }
 
     private void Update()
