@@ -5725,7 +5725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3355568937275351504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3498011852449812537}
@@ -5746,8 +5746,8 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.849
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.5854009, g: 0.374466, b: 0.8018868, a: 1}
+  m_Intensity: 0.6
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: e5383e8d1518176e4d91e9ae000000009542adc3a5eab11bc18808ce8ba2867d878df2b5
   m_LightCookieSprite: {fileID: 0}
@@ -6124,6 +6124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979751f157117a3429d5c83bd5dd7a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpItems: {fileID: 0}
   timeBetweenSoundsStep: 0.3
   stepAudioSource: {fileID: 981861918790300087}
   stepSound:
@@ -6131,6 +6132,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 71f5d34229a1d79439fabfe47cca3bb6, type: 3}
   dashAudioSource: {fileID: 7311228104423619502}
   dashSound: {fileID: 8300000, guid: fa8ca8098014b0c4fac1da73ad30a88e, type: 3}
+  gameManagerAudioSource: {fileID: 0}
+  enemyDamageSound: []
+  spawnEnemies: []
+  damageSound: {fileID: 0}
 --- !u!114 &4079825448089906176
 MonoBehaviour:
   m_ObjectHideFlags: 0
