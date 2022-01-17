@@ -13,6 +13,7 @@ public class DebugController : MonoBehaviour
     public static DebugCommand OVER9000;
     public static DebugCommand SUPERMAN;
     public static DebugCommand RESET_TIMESCLALE;
+    public static DebugCommand PLAYER_TP;
      
     public List<object> commandList;
 
@@ -41,6 +42,10 @@ public class DebugController : MonoBehaviour
         {
             Time.timeScale = 1;
         });
+        PLAYER_TP = new DebugCommand("player_tp", "Reset player Position on 0,0,0.", "player_tp", () =>
+        {
+            PlayerBehaviour.playerBehaviour.gameObject.transform.position = Vector3.zero;
+        });
 
         commandList = new List<object>
         {
@@ -49,6 +54,7 @@ public class DebugController : MonoBehaviour
             OVER9000,
             SUPERMAN,
             RESET_TIMESCLALE,
+            PLAYER_TP,
         };
     }
 
