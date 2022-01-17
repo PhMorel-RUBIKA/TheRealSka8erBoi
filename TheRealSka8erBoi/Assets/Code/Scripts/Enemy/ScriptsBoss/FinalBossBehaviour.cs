@@ -25,6 +25,7 @@ public class FinalBossBehaviour : MonoBehaviour
     public List<int> keyFrames=new List<int>();
 
     public int define;
+    public int decrementalValue;
 
     [Space] [Header("Behaviour")] 
     [SerializeField] private Animation intro;
@@ -32,7 +33,8 @@ public class FinalBossBehaviour : MonoBehaviour
     public int hpBoss;
     [SerializeField] private int maxHPBoss;
     public bool bossIsMidLife=false;
-    
+    public List<BossAttack> bossAttacks = new List<BossAttack>();
+
     [Space] [Header("ArmAttack Parameters")]
     [SerializeField] private GameObject armAtck;
     private GameObject lArmAtckInstance;
@@ -91,10 +93,17 @@ public class FinalBossBehaviour : MonoBehaviour
     public GameObject energyballRightBoss;
     public GameObject firstHugeCracksStorms;
 
+    private int currentKeyframe;
+    private int nextKeyFrame;
 
-
+    public List<float> stepLifeBossList;
+    
     void Start()
     {
+        float stepLifeBoss = (float)maxHPBoss / 8;
+        stepLifeBossList = new List<float>();
+        for (int i = 1; i < 9; i++) stepLifeBossList.Add(stepLifeBoss*i);
+
         intro.Play();
         quaternionFx = Quaternion.Euler(rotationFx);
         crown.SetInteger("BossHp", hpBoss);
@@ -108,17 +117,16 @@ public class FinalBossBehaviour : MonoBehaviour
     
     void Update()
     {
-        float division = (float) hpBoss / maxHPBoss;
-        hpBoss = Mathf.Clamp(hpBoss,0,300);
-        if (division > 1) bossBar.fillAmount = 1;
-        bossBar.fillAmount = 1 - division;
+        float division = (float)hpBoss/maxHPBoss;
+        float value = Mathf.Clamp(division, 0, 1);
+        bossBar.fillAmount = value;
         crown.SetInteger("BossHp",hpBoss);
         if (hpBoss<=maxHPBoss/2)
         {
             bossBar.color = new Color(183,34,18,200);
             bossIsMidLife = true;
         }
-
+        
         if (hpBoss<=0)
         {
             PlayerBehaviour.playerBehaviour.WinningCharacter();
@@ -134,6 +142,7 @@ public class FinalBossBehaviour : MonoBehaviour
             regulation = 0;
             EyesAnimated();
         }
+        
         if (_frameCounter < refreshTime) _frameCounter += 1;
         else _frameCounter = 0;
         inSecond = (int)(_frameCounter / 50);
@@ -154,67 +163,142 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void BehaviourSelector()
     {
-        define = Range(1, 6);
+        define = GetRandomAttack();
         switch(define)
         {
-            case 1:
-                
+            case 1: 
                 StartCoroutine(LeftArmAtck());
+                bossAttacks[0].probability -= decrementalValue;
+                bossAttacks[1].probability += decrementalValue / 4;
+                bossAttacks[2].probability += decrementalValue / 4;
+                bossAttacks[3].probability += decrementalValue / 4;
+                bossAttacks[4].probability += decrementalValue / 4;
+                foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                 break;
-            case 2:
+            case 2: 
                 StartCoroutine(RightArmAtck());
+                bossAttacks[0].probability += decrementalValue / 4;
+                bossAttacks[1].probability -= decrementalValue;
+                bossAttacks[2].probability += decrementalValue / 4;
+                bossAttacks[3].probability += decrementalValue / 4;
+                bossAttacks[4].probability += decrementalValue / 4;
+                foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                 break;
-            
             case 3 :
                 StartCoroutine(BossShooting());
+                bossAttacks[0].probability += decrementalValue / 4;
+                bossAttacks[1].probability += decrementalValue / 4;
+                bossAttacks[2].probability -= decrementalValue;
+                bossAttacks[3].probability += decrementalValue / 4;
+                bossAttacks[4].probability += decrementalValue / 4;
+                foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                 break;
             case 4 : 
                 BossMakesEnemiesSpawn();
+                bossAttacks[0].probability += decrementalValue / 4;
+                bossAttacks[1].probability += decrementalValue / 4;
+                bossAttacks[2].probability += decrementalValue / 4;
+                bossAttacks[3].probability -= decrementalValue;
+                bossAttacks[4].probability += decrementalValue / 4;
+                foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                 break;
             case 5 :
                 StartCoroutine(Crush());
+                bossAttacks[0].probability += decrementalValue / 4;
+                bossAttacks[1].probability += decrementalValue / 4;
+                bossAttacks[2].probability += decrementalValue / 4;
+                bossAttacks[3].probability += decrementalValue / 4;
+                bossAttacks[4].probability -= decrementalValue;
+                foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                 break;
         }
     }
 
     void EnragedBehaviour()
     {
-        define = Range(1, 6);
+        define = GetRandomAttack();
         switch (define)
           {
               case 1:
-
                   StartCoroutine(BossShooting());
                   StartCoroutine(Crush());
-
+                  bossAttacks[0].probability -= decrementalValue;
+                  bossAttacks[1].probability += decrementalValue / 4;
+                  bossAttacks[2].probability += decrementalValue / 4;
+                  bossAttacks[3].probability += decrementalValue / 4;
+                  bossAttacks[4].probability += decrementalValue / 4;
+                  foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                   break;
               case 2:
-                    StartCoroutine(LeftArmAtck());
-                    StartCoroutine(RightArmAtck());
+                  StartCoroutine(LeftArmAtck());
+                  StartCoroutine(RightArmAtck());
+                  bossAttacks[0].probability += decrementalValue / 4;
+                  bossAttacks[1].probability -= decrementalValue;
+                  bossAttacks[2].probability += decrementalValue / 4;
+                  bossAttacks[3].probability += decrementalValue / 4;
+                  bossAttacks[4].probability += decrementalValue / 4;
+                  foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                   break;
-              
               case 3:
                   BossMakesEnemiesSpawn();
                   StartCoroutine(BossShooting());
+                  bossAttacks[0].probability += decrementalValue / 4;
+                  bossAttacks[1].probability += decrementalValue / 4;
+                  bossAttacks[2].probability -= decrementalValue;
+                  bossAttacks[3].probability += decrementalValue / 4;
+                  bossAttacks[4].probability += decrementalValue / 4;
+                  foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                   break;
               case 4:
                   StartCoroutine(RightArmAtck());
                   StartCoroutine(BossShooting());
+                  bossAttacks[0].probability += decrementalValue / 4;
+                  bossAttacks[1].probability += decrementalValue / 4;
+                  bossAttacks[2].probability += decrementalValue / 4;
+                  bossAttacks[3].probability -= decrementalValue;
+                  bossAttacks[4].probability += decrementalValue / 4;
+                  foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                   break;
               case 5:
                   StartCoroutine(BossShooting());
                   StartCoroutine(BossShooting());
+                  bossAttacks[0].probability += decrementalValue / 4;
+                  bossAttacks[1].probability += decrementalValue / 4;
+                  bossAttacks[2].probability += decrementalValue / 4;
+                  bossAttacks[3].probability += decrementalValue / 4;
+                  bossAttacks[4].probability -= decrementalValue;
+                  foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                   break;
           }
+    }
+
+    int GetRandomAttack()
+    {
+        int i = 0;
+        int value = 0;
+        int random = Random.Range(0,100);
+
+        while ( random > bossAttacks[i].probability + value)
+        {
+            value += bossAttacks[i].probability;
+            i++;
+        }
+
+        Debug.Log(bossAttacks[i].id);
+        return bossAttacks[i].id;
     }
 
     IEnumerator LeftArmAtck()
     {
         leftHand.SetBool("Atk",true);
         leftHand.SetBool("Slam",true);
+        yield return new WaitForSeconds(0.50f);
+        leftHand.speed = 0;
+        yield return new WaitForSeconds(1.5f);
+        leftHand.speed = 1;
         Instantiate(chargeLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
         
-        yield return new WaitForSeconds(.9f);
+        yield return new WaitForSeconds(5);
         Instantiate(energyballLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
         Instantiate(shockInstance, leftHand.transform.position - new Vector3(0, 6, 0), Quaternion.identity);
         leftHand.SetBool("Atk", false);
@@ -229,14 +313,17 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         rightHand.SetBool("Atk",true);
         rightHand.SetBool("Slam",true);
-        
+        yield return new WaitForSeconds(0.50f);
+        rightHand.speed = 0;
+        yield return new WaitForSeconds(2f);
+        rightHand.speed = 1;
         Instantiate(chargeRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         
-        yield return new WaitForSeconds(.9f);
+        yield return new WaitForSeconds(5);
         Instantiate(energyballRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         Instantiate(shockInstance, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
-        leftHand.SetBool("Atk", false);
-        leftHand.SetBool("Slam", false);
+        rightHand.SetBool("Atk", false);
+        rightHand.SetBool("Slam", false);
         rightDamageFeeler.SetActive(true);
         yield return new WaitForSeconds(2.6f);
         
@@ -254,10 +341,14 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHand.SetBool("Atk",true);
         rightHand.SetBool("Crush",true);
         leftHand.SetBool("Crush",true);
-        //Debug.Log("Premier");
-
+        yield return new WaitForSeconds(0.30f);
+        rightHand.speed = 0;
+        leftHand.speed = 0;
         armRight.transform.position = (target.transform.position + (new Vector3(3.5f, 10,0)));
         armLeft.transform.position = target.transform.position + (new Vector3(-3.5f, 10,0));
+        yield return new WaitForSeconds(2f);
+        rightHand.speed = 1;
+        leftHand.speed = 1;
 
         Instantiate(firstHugeCracksStorms, armRight.transform.position+new Vector3(0,-9.5f,0), quaternionFx);
         Instantiate(firstHugeCracksStorms, armLeft.transform.position+new Vector3(0,-9.5f,0), quaternionFx);
@@ -270,28 +361,14 @@ public class FinalBossBehaviour : MonoBehaviour
         
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy.gameObject.CompareTag("Player"))
-            {
-                PlayerBehaviour.playerBehaviour.TakeDamage(punchDamage);
-            }
-
-            if (enemy.gameObject.CompareTag("Target"))
-            {
-                enemy.GetComponent<DamageManager>().TakeDamage(punchDamage);
-            }
+            if (enemy.gameObject.CompareTag("Player")) PlayerBehaviour.playerBehaviour.TakeDamage(punchDamage);
+            if (enemy.gameObject.CompareTag("Target")) enemy.GetComponent<DamageManager>().TakeDamage(punchDamage);
         }
 
         foreach (Collider2D enemy in hitEnemies2)
         {
-            if (enemy.gameObject.CompareTag("Player"))
-            {
-                PlayerBehaviour.playerBehaviour.TakeDamage(punchDamage);
-            }
-
-            if (enemy.gameObject.CompareTag("Target"))
-            {
-                enemy.GetComponent<DamageManager>().TakeDamage(punchDamage);
-            }
+            if (enemy.gameObject.CompareTag("Player")) PlayerBehaviour.playerBehaviour.TakeDamage(punchDamage);
+            if (enemy.gameObject.CompareTag("Target")) enemy.GetComponent<DamageManager>().TakeDamage(punchDamage);
         }
 
         leftHand.SetBool("Atk", false);
@@ -320,43 +397,32 @@ public class FinalBossBehaviour : MonoBehaviour
         Gizmos.DrawWireSphere(leftDamageFeeler.transform.position, areaSize);
     }
 
-    public void TakeDamage(int damage)
-    {
-        hpBoss -= damage;
-
-    }
-
+    public void TakeDamage(int damage) { hpBoss -= damage; }
     void BossMakesEnemiesSpawn()
     {
-        if(bossIsMidLife)
+        int spawningFactor = 1;
+
+        if (hpBoss >= maxHPBoss - stepLifeBossList[0]) spawningFactor = 1;
+        if (hpBoss <  maxHPBoss - stepLifeBossList[0] && hpBoss >= maxHPBoss - stepLifeBossList[1]) spawningFactor = 2;
+        if (hpBoss < maxHPBoss - stepLifeBossList[1] && hpBoss >= maxHPBoss - stepLifeBossList[2]) spawningFactor = 3;
+        if (hpBoss < maxHPBoss - stepLifeBossList[2] && hpBoss >= maxHPBoss - stepLifeBossList[3]) spawningFactor = 4;
+        if (hpBoss < maxHPBoss - stepLifeBossList[3] && hpBoss >= maxHPBoss - stepLifeBossList[4]) spawningFactor = 5;
+        if (hpBoss < maxHPBoss - stepLifeBossList[4] && hpBoss >= maxHPBoss - stepLifeBossList[5]) spawningFactor = 6;
+        if (hpBoss < maxHPBoss - stepLifeBossList[5] && hpBoss >= maxHPBoss - stepLifeBossList[6]) spawningFactor = 7;
+        if (hpBoss < maxHPBoss - stepLifeBossList[6] && hpBoss >= maxHPBoss - stepLifeBossList[7]) spawningFactor = 8;
+
+        for (int e = 0; e < spawningFactor; e++)
         {
-            spawningFactor = Range(2, 4);
-            for (int e = 0; e < spawningFactor; e++)
-            {
-                enemySelection = Range(0, 3);
-                Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity);
-            }
+            enemySelection = Range(0, 4);
+            Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity);
         }
-        else
-        {
-            spawningFactor = Range(1, 2);
-            for (int e = 0; e < spawningFactor; e++)
-            {
-                enemySelection = Range(0, 3);
-                Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity); 
-            }
-        }
-        
     }
     Transform GetRandomPoint()
     {
         Transform randomPoint = null;
         int index = Range(0, spawnPoints.Length);
 
-        while (waypointUsed.Contains(spawnPoints[index]))
-        {
-            index = Range(0, spawnPoints.Length);
-        }
+        while (waypointUsed.Contains(spawnPoints[index])) { index = Range(0, spawnPoints.Length); }
         
         randomPoint = spawnPoints[index];
         waypointUsed.Add(spawnPoints[index]);
@@ -369,32 +435,32 @@ public class FinalBossBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1f);
         headAnim.SetBool("fire",true);
         yield return new WaitForSeconds(.8f);
-        if (bossIsMidLife)
+
+        int spawningFactor = 1;
+        
+        if (hpBoss >= maxHPBoss - stepLifeBossList[0]) spawningFactor = 1;
+        if (hpBoss <  maxHPBoss - stepLifeBossList[0] && hpBoss >= maxHPBoss - stepLifeBossList[1]) spawningFactor = 2;
+        if (hpBoss < maxHPBoss - stepLifeBossList[1] && hpBoss >= maxHPBoss - stepLifeBossList[2]) spawningFactor = 3;
+        if (hpBoss < maxHPBoss - stepLifeBossList[2] && hpBoss >= maxHPBoss - stepLifeBossList[3]) spawningFactor = 4;
+        if (hpBoss < maxHPBoss - stepLifeBossList[3] && hpBoss >= maxHPBoss - stepLifeBossList[4]) spawningFactor = 5;
+        if (hpBoss < maxHPBoss - stepLifeBossList[4] && hpBoss >= maxHPBoss - stepLifeBossList[5]) spawningFactor = 6;
+        if (hpBoss < maxHPBoss - stepLifeBossList[5] && hpBoss >= maxHPBoss - stepLifeBossList[6]) spawningFactor = 7;
+        if (hpBoss < maxHPBoss - stepLifeBossList[6] && hpBoss >= maxHPBoss - stepLifeBossList[7]) spawningFactor = 8;
+        
+        for (int i = 0; i < spawningFactor; i++)
         {
             foreach (Transform q in firePoints)
             {
-                for (int p = 0; p < 2; p++)
-                {
-                    Vector2 toplayer = (target.transform.position - q.position).normalized;
-                    Instantiate(bossProjectile, q.position, gameObject.transform.parent.rotation);
-                    bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized*fireForce);
-                    yield return new WaitForSeconds(.2f);
-                }
+                Vector2 toplayer = (target.transform.position - q.position).normalized;
+                    
+                GameObject currentProjectile = Instantiate(bossProjectile, q.position, q.rotation, q);
+                currentProjectile.transform.rotation = currentProjectile.transform.parent.rotation;
+                bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer*fireForce, ForceMode2D.Impulse);
             }
             
+            yield return new WaitForSeconds(0.5f);
         }
-        else
-        {
-            foreach (Transform q in firePoints)
-            {
-                    Vector2 toplayer = (target.transform.position - q.position).normalized;
-                    
-                    GameObject currentProjectile = Instantiate(bossProjectile, q.position, q.rotation, q);
-                    currentProjectile.transform.rotation = currentProjectile.transform.parent.rotation;
-                    //bossProjectile.GetComponent<Rigidbody2D>().AddForce(toplayer*fireForce, ForceMode2D.Impulse);
-            }
-        }
-
+            
         yield return new WaitForSeconds(.1f);
         headAnim.SetBool("fire",false);
         yield return new WaitForSeconds(1f);
@@ -408,4 +474,12 @@ public class FinalBossBehaviour : MonoBehaviour
         current.SetTrigger("Wink");
     }
 
+}
+
+[Serializable]
+public class BossAttack
+{
+    public int id;
+    public string name;
+    [Range(0, 100)] public int probability;
 }
