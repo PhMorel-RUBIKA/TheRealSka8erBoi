@@ -236,6 +236,7 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Slam", false);
         rightDamageFeeler.SetActive(true);
         yield return new WaitForSeconds(2.6f);
+        
         rightDamageFeeler.SetActive(false);
 
     }
