@@ -100,9 +100,9 @@ public class FinalBossBehaviour : MonoBehaviour
     
     void Start()
     {
-        float stepLifeBoss = (float)maxHPBoss / 8;
+        float stepLifeBoss = (float)maxHPBoss / 6;
         stepLifeBossList = new List<float>();
-        for (int i = 1; i < 9; i++) stepLifeBossList.Add(stepLifeBoss*i);
+        for (int i = 1; i < 7; i++) stepLifeBossList.Add(stepLifeBoss*i);
 
         intro.Play();
         quaternionFx = Quaternion.Euler(rotationFx);
@@ -294,17 +294,21 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Slam",true);
         yield return new WaitForSeconds(0.50f);
         leftHand.speed = 0;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         leftHand.speed = 1;
         Instantiate(chargeLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
         
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(.3f);
         Instantiate(energyballLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
-        Instantiate(shockInstance, leftHand.transform.position - new Vector3(0, 6, 0), Quaternion.identity);
+        Instantiate(shockInstance, leftDamageFeeler.transform.position - new Vector3(0, 6, 0), Quaternion.identity);
         leftHand.SetBool("Atk", false);
         leftHand.SetBool("Slam", false);
         leftDamageFeeler.SetActive(true);
-        yield return new WaitForSeconds(2.6f);
+        yield return new WaitForSeconds(1f);
+        leftHand.speed = 0;
+        yield return new WaitForSeconds(1f);
+        leftHand.speed = 1;
+        yield return new WaitForSeconds(1.6f);
 
         leftDamageFeeler.SetActive(false);
 
@@ -315,18 +319,21 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHand.SetBool("Slam",true);
         yield return new WaitForSeconds(0.50f);
         rightHand.speed = 0;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         rightHand.speed = 1;
         Instantiate(chargeRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(.3f);
         Instantiate(energyballRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         Instantiate(shockInstance, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         rightHand.SetBool("Atk", false);
         rightHand.SetBool("Slam", false);
         rightDamageFeeler.SetActive(true);
-        yield return new WaitForSeconds(2.6f);
-        
+        yield return new WaitForSeconds(1f);
+        rightHand.speed = 0;
+        yield return new WaitForSeconds(1f);
+        rightHand.speed = 1;
+        yield return new WaitForSeconds(1.6f);
         rightDamageFeeler.SetActive(false);
 
     }
@@ -346,7 +353,7 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.speed = 0;
         armRight.transform.position = (target.transform.position + (new Vector3(3.5f, 10,0)));
         armLeft.transform.position = target.transform.position + (new Vector3(-3.5f, 10,0));
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         rightHand.speed = 1;
         leftHand.speed = 1;
 
@@ -354,8 +361,8 @@ public class FinalBossBehaviour : MonoBehaviour
         Instantiate(firstHugeCracksStorms, armLeft.transform.position+new Vector3(0,-9.5f,0), quaternionFx);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(armRight.transform.position+new Vector3(0,-9.5f,0),areaSize);
         Collider2D[] hitEnemies2 = Physics2D.OverlapCircleAll(armLeft.transform.position+new Vector3(0,-9.5f,0),areaSize);
-        leftDamageFeeler.transform.position = armLeft.transform.position+new Vector3(0,-9.5f,0);
-        rightDamageFeeler.transform.position= armRight.transform.position+new Vector3(0,-9.5f,0);
+        leftDamageFeeler.transform.position = armLeft.transform.position+new Vector3(0,-7.5f,0);
+        rightDamageFeeler.transform.position= armRight.transform.position+new Vector3(0,-7.5f,0);
         
         yield return new WaitForSeconds(.75f);
         
@@ -402,14 +409,14 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         int spawningFactor = 1;
 
-        if (hpBoss >= maxHPBoss - stepLifeBossList[0]) spawningFactor = 1;
-        if (hpBoss <  maxHPBoss - stepLifeBossList[0] && hpBoss >= maxHPBoss - stepLifeBossList[1]) spawningFactor = 2;
-        if (hpBoss < maxHPBoss - stepLifeBossList[1] && hpBoss >= maxHPBoss - stepLifeBossList[2]) spawningFactor = 3;
-        if (hpBoss < maxHPBoss - stepLifeBossList[2] && hpBoss >= maxHPBoss - stepLifeBossList[3]) spawningFactor = 4;
-        if (hpBoss < maxHPBoss - stepLifeBossList[3] && hpBoss >= maxHPBoss - stepLifeBossList[4]) spawningFactor = 5;
-        if (hpBoss < maxHPBoss - stepLifeBossList[4] && hpBoss >= maxHPBoss - stepLifeBossList[5]) spawningFactor = 6;
-        if (hpBoss < maxHPBoss - stepLifeBossList[5] && hpBoss >= maxHPBoss - stepLifeBossList[6]) spawningFactor = 7;
-        if (hpBoss < maxHPBoss - stepLifeBossList[6] && hpBoss >= maxHPBoss - stepLifeBossList[7]) spawningFactor = 8;
+        if (hpBoss >= maxHPBoss- stepLifeBossList[0]) spawningFactor = 1;
+        if (hpBoss <  maxHPBoss-stepLifeBossList[0] && hpBoss >=  maxHPBoss-stepLifeBossList[1]) spawningFactor = 2;
+        if (hpBoss <  maxHPBoss-stepLifeBossList[1] && hpBoss >=  maxHPBoss-stepLifeBossList[2]) spawningFactor = 3;
+        if (hpBoss <  maxHPBoss-stepLifeBossList[2] && hpBoss >=  maxHPBoss-stepLifeBossList[3]) spawningFactor = 4;
+        if (hpBoss < maxHPBoss- stepLifeBossList[3] && hpBoss >=  maxHPBoss-stepLifeBossList[4]) spawningFactor = 5;
+        if (hpBoss < maxHPBoss-stepLifeBossList[4] && hpBoss >= maxHPBoss-stepLifeBossList[5]) spawningFactor = 6;
+        //if (hpBoss < maxHPBoss - stepLifeBossList[5] && hpBoss >= maxHPBoss - stepLifeBossList[6]) spawningFactor = 7;
+        //if (hpBoss < maxHPBoss - stepLifeBossList[6] && hpBoss >= maxHPBoss - stepLifeBossList[7]) spawningFactor = 8;
 
         for (int e = 0; e < spawningFactor; e++)
         {
@@ -435,17 +442,18 @@ public class FinalBossBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1f);
         headAnim.SetBool("fire",true);
         yield return new WaitForSeconds(.8f);
+        headAnim.SetBool("fire",false);
 
         int spawningFactor = 1;
         
-        if (hpBoss >= maxHPBoss - stepLifeBossList[0]) spawningFactor = 1;
-        if (hpBoss <  maxHPBoss - stepLifeBossList[0] && hpBoss >= maxHPBoss - stepLifeBossList[1]) spawningFactor = 2;
-        if (hpBoss < maxHPBoss - stepLifeBossList[1] && hpBoss >= maxHPBoss - stepLifeBossList[2]) spawningFactor = 3;
-        if (hpBoss < maxHPBoss - stepLifeBossList[2] && hpBoss >= maxHPBoss - stepLifeBossList[3]) spawningFactor = 4;
-        if (hpBoss < maxHPBoss - stepLifeBossList[3] && hpBoss >= maxHPBoss - stepLifeBossList[4]) spawningFactor = 5;
-        if (hpBoss < maxHPBoss - stepLifeBossList[4] && hpBoss >= maxHPBoss - stepLifeBossList[5]) spawningFactor = 6;
-        if (hpBoss < maxHPBoss - stepLifeBossList[5] && hpBoss >= maxHPBoss - stepLifeBossList[6]) spawningFactor = 7;
-        if (hpBoss < maxHPBoss - stepLifeBossList[6] && hpBoss >= maxHPBoss - stepLifeBossList[7]) spawningFactor = 8;
+        if (hpBoss >= maxHPBoss- stepLifeBossList[0]) spawningFactor = 1;
+        if (hpBoss <  maxHPBoss-stepLifeBossList[0] && hpBoss >=  maxHPBoss-stepLifeBossList[1]) spawningFactor = 2;
+        if (hpBoss <  maxHPBoss-stepLifeBossList[1] && hpBoss >=  maxHPBoss-stepLifeBossList[2]) spawningFactor = 3;
+        if (hpBoss <  maxHPBoss-stepLifeBossList[2] && hpBoss >=  maxHPBoss-stepLifeBossList[3]) spawningFactor = 4;
+        if (hpBoss < maxHPBoss- stepLifeBossList[3] && hpBoss >=  maxHPBoss-stepLifeBossList[4]) spawningFactor = 5;
+        if (hpBoss < maxHPBoss-stepLifeBossList[4] && hpBoss >= maxHPBoss-stepLifeBossList[5]) spawningFactor = 6;
+        //if (hpBoss < maxHPBoss - stepLifeBossList[5] && hpBoss >= maxHPBoss - stepLifeBossList[6]) spawningFactor = 7;
+        //if (hpBoss < maxHPBoss - stepLifeBossList[6] && hpBoss >= maxHPBoss - stepLifeBossList[7]) spawningFactor = 8;
         
         for (int i = 0; i < spawningFactor; i++)
         {
@@ -462,8 +470,7 @@ public class FinalBossBehaviour : MonoBehaviour
         }
             
         yield return new WaitForSeconds(.1f);
-        headAnim.SetBool("fire",false);
-        yield return new WaitForSeconds(1f);
+        
 
     }
 

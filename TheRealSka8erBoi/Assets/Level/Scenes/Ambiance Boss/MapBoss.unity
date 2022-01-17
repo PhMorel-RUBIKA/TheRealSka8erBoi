@@ -16018,19 +16018,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: hpBoss
-      value: 500
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: bossBar
       value: 
       objectReference: {fileID: 231357524}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: areaSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: fireForce
-      value: 20
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: maxHPBoss
-      value: 500
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: decrementalValue
@@ -16039,6 +16043,14 @@ PrefabInstance:
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: bossAttacks.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: keyFrames.Array.data[0]
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: stepLifeBossList.Array.size
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: bossAttacks.Array.data[0].id
@@ -16081,6 +16093,30 @@ PrefabInstance:
       value: Crush
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: stepLifeBossList.Array.data[0]
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: stepLifeBossList.Array.data[1]
+      value: 295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: stepLifeBossList.Array.data[2]
+      value: 236
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: stepLifeBossList.Array.data[3]
+      value: 177
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: stepLifeBossList.Array.data[4]
+      value: 118
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
+      propertyPath: stepLifeBossList.Array.data[5]
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: bossAttacks.Array.data[0].probability
       value: 0
       objectReference: {fileID: 0}
@@ -16094,11 +16130,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: bossAttacks.Array.data[3].probability
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: bossAttacks.Array.data[4].probability
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1245467362402427485, guid: 6dd0ebe82865adb4984d293998e94c36, type: 3}
       propertyPath: bossAttacks.Array.data[0].frameCounter
