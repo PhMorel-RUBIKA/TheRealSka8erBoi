@@ -12,7 +12,8 @@ public class DebugController : MonoBehaviour
     public static DebugCommand MOULAGA;
     public static DebugCommand OVER9000;
     public static DebugCommand SUPERMAN;
-    
+    public static DebugCommand RESET_TIMESCLALE;
+     
     public List<object> commandList;
 
     private void Awake()
@@ -36,6 +37,10 @@ public class DebugController : MonoBehaviour
         {
             PlayerBehaviour.playerBehaviour.canTakeDamage = !PlayerBehaviour.playerBehaviour.canTakeDamage;
         });
+        RESET_TIMESCLALE = new DebugCommand("reset_timescale", "Reset the timescale of the game.", "reset_timescale", () =>
+        {
+            Time.timeScale = 1;
+        });
 
         commandList = new List<object>
         {
@@ -43,6 +48,7 @@ public class DebugController : MonoBehaviour
             MOULAGA,
             OVER9000,
             SUPERMAN,
+            RESET_TIMESCLALE,
         };
     }
 
