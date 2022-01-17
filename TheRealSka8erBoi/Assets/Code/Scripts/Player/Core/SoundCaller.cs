@@ -12,7 +12,11 @@ public class SoundCaller : MonoBehaviour
     public float volumeMusic;
     public AudioSource musicAudioSource;
 
-    [Header("Player Maj")] public AudioClip pickUpItems;
+    [Header("Player Maj")] 
+    public AudioClip pickUpItems;
+    public AudioClip playerDeath;
+    public AudioClip chargeTir;
+    public AudioClip lacheTir;
     
     [Space]
     
@@ -87,6 +91,16 @@ public class SoundCaller : MonoBehaviour
     public void PickUpItemsSound()
     {
         gameManagerAudioSource.PlayOneShot(pickUpItems);
+    }
+
+    public void PlayerDeath()
+    {
+        gameManagerAudioSource.PlayOneShot(playerDeath);
+    }
+
+    public void PLayerTirSound()
+    {
+        gameManagerAudioSource.PlayOneShot(lacheTir);
     }
 
     public void SliderSD(float volume)
