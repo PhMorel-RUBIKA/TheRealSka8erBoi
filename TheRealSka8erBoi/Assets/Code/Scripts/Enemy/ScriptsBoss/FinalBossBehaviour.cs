@@ -118,6 +118,11 @@ public class FinalBossBehaviour : MonoBehaviour
             bossBar.color = new Color(183,34,18,200);
             bossIsMidLife = true;
         }
+
+        if (hpBoss<=0)
+        {
+            PlayerBehaviour.playerBehaviour.WinningCharacter();
+        }
         
     }
 
@@ -207,8 +212,6 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         leftHand.SetBool("Atk",true);
         leftHand.SetBool("Slam",true);
-        Debug.Log("Je mactiv");
-        //Instantiate pour la paume de main gauche avec la charge et la boule d'energie 1rst
         Instantiate(chargeLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
         
         yield return new WaitForSeconds(.9f);
@@ -226,7 +229,7 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         rightHand.SetBool("Atk",true);
         rightHand.SetBool("Slam",true);
-        //Instantiate pour la paume de main droite avec la charge et la boule d'energie 1rst
+        
         Instantiate(chargeRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
         
         yield return new WaitForSeconds(.9f);
