@@ -14,6 +14,7 @@ public class DebugController : MonoBehaviour
     public static DebugCommand SUPERMAN;
     public static DebugCommand RESET_TIMESCLALE;
     public static DebugCommand PLAYER_TP;
+    public static DebugCommand REGEN;
      
     public List<object> commandList;
 
@@ -45,6 +46,10 @@ public class DebugController : MonoBehaviour
         PLAYER_TP = new DebugCommand("player_tp", "Reset player Position on 0,0,0.", "player_tp", () =>
         {
             PlayerBehaviour.playerBehaviour.gameObject.transform.position = Vector3.zero;
+        });
+        REGEN = new DebugCommand("regen", "Reset player Current Life.", "regen", () =>
+        {
+            PlayerBehaviour.playerBehaviour.currentHealth = PlayerBehaviour.playerBehaviour.maxHealth;
         });
 
         commandList = new List<object>

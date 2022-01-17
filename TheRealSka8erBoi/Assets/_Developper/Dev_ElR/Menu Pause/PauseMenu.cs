@@ -115,6 +115,7 @@ public class PauseMenu : MonoBehaviour
     {
         timeFeedbacks.StopFeedbacks();
         noTimeFeedbacks.PlayFeedbacks();
+        Time.timeScale = 1;
         foreach (GameObject manager in managers )
         {
             Destroy(manager);
