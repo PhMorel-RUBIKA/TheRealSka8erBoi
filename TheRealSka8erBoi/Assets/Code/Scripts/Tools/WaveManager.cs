@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -11,6 +12,8 @@ public class WaveManager : MonoBehaviour
     public WaveLevel waveLevel;
     public GameObject gateZone1;
     public GameObject gateZone2;
+    public Animator doorAnimation1;
+    public Animator doorAnimation2;
     public float timeBetweenWave;
     public GameObject enemySpawn;
     public GameObject fireflies;
@@ -32,11 +35,17 @@ public class WaveManager : MonoBehaviour
     private List<int> currentNumberOfEnemies = new List<int>();
     private GameObject[] probabilityForSpawn;
     public static WaveManager instance;
+    [Header("Scoring Parameters")]
+    [SerializeField] private int frameCounter=0;
+    [SerializeField] private int scoreRef;
+    private bool stopFrameCounter=false;
+    private int finalFrameCounter;
 
     private void Start()
     {
         WaveManager.instance = this;
         canEndwave = true;
+        
         for (int i = 0; i < waveLevel.waves.Length; i++) currentNumberOfEnemies.Add(waveLevel.waves[i].numberOfenemies);
     }
 
@@ -53,6 +62,22 @@ public class WaveManager : MonoBehaviour
         else if (enemyOnScreen.Count == 0 && !canSpawn && currentWaveNumber + 1 == waveLevel.waves.Length && canEndwave) EndWave();
     }
 
+    private void FixedUpdate()
+    {
+        IncrementingFramesCounter();
+    }
+
+    private void IncrementingFramesCounter()
+    {
+        frameCounter +=1;
+    }
+
+    private void GettingScore()
+    {
+        if (!stopFrameCounter) return;
+        finalFrameCounter = frameCounter;
+        BonusManager.instance.GainScore(scoreRef - finalFrameCounter/10); 
+    }
     IEnumerator CoroutineForWave()
     {
         yield return new WaitForSeconds(timeBetweenWave);
@@ -78,6 +103,7 @@ public class WaveManager : MonoBehaviour
     {
         GameObject randomEnemy = GetRandomEnemy();
         Instantiate(enemySpawn, position + new Vector3(-0.05f, -0.5f, 0), Quaternion.identity);
+        SoundCaller.instance.SpawnEnemiesSound();
         yield return new WaitForSeconds(0.8f);
         Instantiate(randomEnemy, position, Quaternion.identity);
     }
@@ -115,6 +141,12 @@ public class WaveManager : MonoBehaviour
     {
         if (LoadSceneManager.instance.nextItemToSpawn != null)
             Instantiate(LoadSceneManager.instance.nextItemToSpawn, BonusManager.instance.gameObject.transform.position, Quaternion.identity);
+        else
+        {
+            int rand = Random.Range(0, rewardObjects.Length);
+            LoadSceneManager.instance.nextItemToSpawn = rewardObjects[rand];
+            Instantiate(LoadSceneManager.instance.nextItemToSpawn, BonusManager.instance.gameObject.transform.position, Quaternion.identity);
+        }
 
         LoadSceneManager.instance.nextItemToSpawn = null;
         itemDoor1 = null;
@@ -135,7 +167,9 @@ public class WaveManager : MonoBehaviour
         RandomItem(itemDoor2);
         
         gateZone1.SetActive(true);
+        doorAnimation1.SetBool("S2Active", true);
         gateZone2.SetActive(true);
+        doorAnimation2.SetBool("S2Active", true);
 
         if (fireflies != null) fireflies.SetActive(true);
 
@@ -143,6 +177,7 @@ public class WaveManager : MonoBehaviour
         BonusManager.instance.GainCoins(randMoney);
         
         canEndwave = false;
+        GettingScore();
     }
 
     void RandomItem(GameObject item)
@@ -162,5 +197,14 @@ public class WaveManager : MonoBehaviour
                 item.GetComponent<Item>().TheItem.CoinItem.value += (int)(200 + LoadSceneManager.instance.numberOfRoom * 2f);
                 break;
         } 
+    }
+
+    public void KillEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Target");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i]);
+        }
     }
 }

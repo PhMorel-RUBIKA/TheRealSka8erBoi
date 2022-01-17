@@ -145,7 +145,7 @@ public class Kamikazee : AbstComp
 
             else if (enemy.gameObject.CompareTag("Target"))
             {
-                DamageManager.instance.TakeDamage(damages);
+                gameObject.GetComponent<DamageManager>().TakeDamage(damages);
             }
         }
         Destroy(gameObject,0f);

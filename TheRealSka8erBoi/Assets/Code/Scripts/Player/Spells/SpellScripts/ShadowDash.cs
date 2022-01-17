@@ -15,6 +15,6 @@ public class ShadowDash : Spell
 
         parent.GetComponent<PlayerBehaviour>().dashNodeList = new List<GameObject>(); 
         parent.GetComponent<PlayerBehaviour>().dashSpellActive = true;
-        parent.GetComponent<PlayerBehaviour>().dashSpellactivation = 4;
+        parent.GetComponent<PlayerBehaviour>().dashSpellactivation = 3;
     }
 }

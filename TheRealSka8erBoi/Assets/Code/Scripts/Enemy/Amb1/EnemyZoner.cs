@@ -1,17 +1,17 @@
 using System;
 using System.Collections;
 using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine.AI;
 using UnityEngine;
-using static UnityEngine.Random;
-using Random = UnityEngine.Random;
+
 
 public class EnemyZoner : AbstComp
 {
-    //[Header("Animator Parameters")]
-    //[SerializeField] private Animator animator;
-    //[Space]
+    [Header("Animator Parameters")]
+    [SerializeField] private Animator animator;
+
+    private int animValue = 0;
+    [Space]
     [Header("Behaviour")]
     private Vector2 movement;
     public Rigidbody2D rb;
@@ -24,11 +24,13 @@ public class EnemyZoner : AbstComp
     public GameObject zone;
     private bool canshoot=false;
     [SerializeField] float cooldown;
+    [SerializeField] private float s2Cooldown;
     [SerializeField] float initcooldown;
     [SerializeField] private float rayonAngle=360;
     [SerializeField] private int bulletAmount;
     private GameObject implosionZone;
     private GameObject sndImplosionZone;
+    private bool canmove = true;
     
     void Start()
     {
@@ -48,15 +50,156 @@ public class EnemyZoner : AbstComp
     
     protected void BehaviourAggro()
     {
+        if (hp<maxhp)
+        {
+            lineOfSight = 100;
+        }
         if (!CheckPlayerInSight()) return;
-        lineOfSight = 100;
-        GoToPlayer();
+        if (pj.transform.position.x - transform.position.x > -3 &
+                pj.transform.position.x - transform.position.x < 3 &
+                pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",true);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                
+                animValue = 1;
+            }
+            else if (pj.transform.position.x - transform.position.x < -3 &
+                     pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",true);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 2;
+            }
+            else if (pj.transform.position.x - transform.position.x > 3 &
+                     pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",true);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 3;
+            }
+            else if (pj.transform.position.x - transform.position.x > 3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",true);
+                animator.SetBool("Back",false);
+                animValue = 4;
+            }
+            else if (pj.transform.position.x - transform.position.x < -3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",true);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 5;
+            }
+            else if (pj.transform.position.x - transform.position.x > -3 &
+                     pj.transform.position.x - transform.position.x < 3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",true);
+                animValue = 6;
+            }
+        if(canmove) GoToPlayer();
         if (!CheckPlayerInRange()) return;
+        if (pj.transform.position.x - transform.position.x > -3 &
+                pj.transform.position.x - transform.position.x < 3 &
+                pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",true);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                
+                animValue = 1;
+            }
+            else if (pj.transform.position.x - transform.position.x < -3 &
+                     pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",true);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 2;
+            }
+            else if (pj.transform.position.x - transform.position.x > 3 &
+                     pj.transform.position.y - transform.position.y <= 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",true);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 3;
+            }
+            else if (pj.transform.position.x - transform.position.x > 3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",true);
+                animator.SetBool("Back",false);
+                animValue = 4;
+            }
+            else if (pj.transform.position.x - transform.position.x < -3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",true);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",false);
+                animValue = 5;
+            }
+            else if (pj.transform.position.x - transform.position.x > -3 &
+                     pj.transform.position.x - transform.position.x < 3 &
+                     pj.transform.position.y - transform.position.y > 0)
+            {
+                animator.SetBool("Front",false);
+                animator.SetBool("FrontLeft",false);
+                animator.SetBool("FrontRight",false);
+                animator.SetBool("BackLeft",false);
+                animator.SetBool("BackRight",false);
+                animator.SetBool("Back",true);
+                animValue = 6;
+            }
         if (!canshoot) return;
-       //animator.SetTrigger("Atk");
+
         if (s2 == false)
         {
-            SoloZone();
+            StartCoroutine(SoloZone());
         }
         else
         {
@@ -64,20 +207,52 @@ public class EnemyZoner : AbstComp
             agent.SetDestination(target.transform.position);
         }
     }
-
+    
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        lineOfSight = 100;
+        if (hp <= 0)
+        {
+             //animator.SetTrigger("Ded");
+            Destroy(gameObject,1f);
+            if (s2)
+            {
+                BonusManager.instance.GainScore(275);
+            }
+            else
+            {
+                BonusManager.instance.GainScore(195);
+            }
+        }
+    }
 
 
     void Shoot() 
     { 
         if(canshoot==false) 
         {
-            cooldown = cooldown - Time.deltaTime; 
-            //Debug.Log(Time.deltaTime);
-            if(cooldown <= 0)
+            if (s2)
             {
-                canshoot = true; 
-                cooldown = initcooldown;
+                cooldown = cooldown - Time.deltaTime; 
+                //Debug.Log(Time.deltaTime);
+                if(cooldown <= 0)
+                {
+                    canshoot = true; 
+                    cooldown = s2Cooldown;
+                }
             }
+            else
+            {
+                cooldown = cooldown - Time.deltaTime; 
+                //Debug.Log(Time.deltaTime);
+                if(cooldown <= 0)
+                {
+                    canshoot = true; 
+                    cooldown = initcooldown;
+                } 
+            }
+            
         }  
     }    
          
@@ -89,8 +264,8 @@ public class EnemyZoner : AbstComp
         agent.SetDestination(target.position);
 
         Vector2 direction = pj.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rb.rotation = angle;
+       // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //rb.rotation = angle;
     }
 
 
@@ -100,21 +275,77 @@ public class EnemyZoner : AbstComp
             angle = (180 / Mathf.PI) * angleRad;
         }
             
-    private void SoloZone()
+    IEnumerator SoloZone()
     {
+        canmove = false;
+        animator.SetBool("TriggerLaunched",true);
+        agent.SetDestination(transform.position);
+        switch(animValue)
+        {
+            case 1 :
+                animator.SetTrigger("SAtk");
+                break;
+            case 2 :
+                animator.SetTrigger("SWAtk");
+                break;
+            case 3 :
+                animator.SetTrigger("SEAtk");
+                break;
+            case 4 :
+                animator.SetTrigger("NEAtk");
+                break;
+            case 5 :
+                animator.SetTrigger("NWAtk");
+                break;
+            case 6 :
+                animator.SetTrigger("NTAtk");
+                break;
+        }
+        
+        
         canshoot = false;
         implosionZone = Instantiate(zone, target.transform.position, Quaternion.identity);
         implosionZone.transform.localScale=Vector3.zero;
-        implosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack);
+        implosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
+        yield return new WaitForSeconds(.9f);
+        animator.SetBool("TriggerLaunched", false);
+        
+        agent.SetDestination(target.position);
+        canmove = true;
     }
-
+ 
     IEnumerator MultiZone()
     {
-        canshoot = false;
+        canmove = false;
         agent.SetDestination(transform.position);
+        animator.SetBool("TriggerLaunched",true);
+        switch(animValue)
+        {
+            case 1 :
+                animator.SetTrigger("SAtk");
+                break;
+            case 2 :
+                animator.SetTrigger("SWAtk");
+                break;
+            case 3 :
+                animator.SetTrigger("SEAtk");
+                break;
+            case 4 :
+                animator.SetTrigger("NEAtk");
+                break;
+            case 5 :
+                animator.SetTrigger("NWAtk");
+                break;
+            case 6 :
+                animator.SetTrigger("NTAtk");
+                break;
+        }
+        canshoot = false;
         float intervalle = rayonAngle / bulletAmount;
         GetAngle(pj.transform.position, transform.right, out float angle);
-        SoloZone();
+        implosionZone = Instantiate(zone, target.transform.position, Quaternion.identity);
+        implosionZone.transform.localScale=Vector3.zero;
+        implosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(.5f);
         for (int i = 0; i < bulletAmount; i++)
         {
@@ -124,10 +355,17 @@ public class EnemyZoner : AbstComp
             Vector3 newPosition = particular + q * Vector3.right * 1.5f;
             sndImplosionZone= Instantiate(zone, newPosition, Quaternion.identity);
             sndImplosionZone.transform.localScale=Vector3.zero;
-            sndImplosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack);
+            sndImplosionZone.transform.DOScale(new Vector3(1, 1, 1), .25f).SetEase(Ease.OutBack);
+            yield return new WaitForSeconds(.3f);
+            animator.SetBool("TriggerLaunched", false);
             //sndImplosionZone.transform.DOScale(new Vector3(3, 3, 3), .25f).SetEase(Ease.OutBack).SetDelay(Random.Range(0,0.35f));
         }
+        yield return new WaitForSeconds(.2f);
+        agent.SetDestination(target.position);
+        canmove = true;
         
+
+
     }
 
 

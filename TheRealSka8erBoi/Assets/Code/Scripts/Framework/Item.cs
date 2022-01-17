@@ -92,30 +92,14 @@ public class Item : MonoBehaviour
                     case true:
                         return;
                     case false:
-                        StartCoroutine(GetSpellItem(1, TheItem.SpellItem.timeToPick));
+                        WitchSpellItem(1);
+                        SoundCaller.instance.PickUpItemsSound();
                         break;
                 }
             }
-            else StartCoroutine(GetSpellItem(0, TheItem.SpellItem.timeToPick));
+            else WitchSpellItem(0);
+            SoundCaller.instance.PickUpItemsSound();
         }
-    }
-
-    IEnumerator GetSpellItem(int slotNumber, float timeToPick)
-    {
-        Vector3 position = player.transform.position;
-        DissolveEffect dissolveEffect = GetComponent<DissolveEffect>();
-
-        dissolveEffect.StartDissolve(timeToPick);
-        yield return new WaitForSeconds(timeToPick);
-
-        if (Vector3.Distance(player.transform.position, position) <= 0.1)
-        {
-            WitchSpellItem(slotNumber);
-        }
-        else
-        {
-            dissolveEffect.StopDissolve(timeToPick);
-        } 
     }
 
     void WitchSpellItem(int slotNumber)
@@ -136,25 +120,28 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
+            TheItem.stickerRed.value = 1;
             BonusManager.instance.redStat += TheItem.stickerRed.value;
-            player.GetComponent<PlayerBehaviour>().TakeDamage((int)(-player.GetComponent<PlayerBehaviour>().RedStatModifier));
-            Destroy(gameObject);
+            player.GetComponent<PlayerBehaviour>().GetHealth(10);
+            Destroy(gameObject.transform.parent == null ? gameObject : transform.parent.gameObject);
         }
     }
     void GetItemStickerBlue()
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
+            TheItem.stickerBlue.value = 1;
             BonusManager.instance.blueStat += TheItem.stickerBlue.value;
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent == null ? gameObject : transform.parent.gameObject);
         }
     }
     void GetItemStickerGreen()
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
+            TheItem.stickerGreen.value = 1;
             BonusManager.instance.greenStat += TheItem.stickerGreen.value;
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent == null ? gameObject : transform.parent.gameObject);
         }
     }
 
@@ -163,6 +150,7 @@ public class Item : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton1) &&  checkIfGood)
         {
             BonusManager.instance.GainCoins(TheItem.CoinItem.value);
+            SoundCaller.instance.PickUpItemsSound();
             Destroy(gameObject);
         }
     }
@@ -171,7 +159,8 @@ public class Item : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && checkIfGood)
         {
-            player.GetComponent<PlayerBehaviour>().TakeDamage(-TheItem.food.value);
+            player.GetComponent<PlayerBehaviour>().GetHealth(TheItem.food.value);
+            SoundCaller.instance.PickUpItemsSound();
             Destroy(gameObject);
         }
     }
@@ -184,10 +173,14 @@ public class Item : MonoBehaviour
             {
                 case false:
                     _inventory.deathDefiance1 = true;
+                    PlayerBehaviour.playerBehaviour.refusMortAnimator.SetTrigger("Niv1Up");
+                    SoundCaller.instance.PickUpItemsSound();
                     Destroy(gameObject);
                     return;
                 case true when !_inventory.deathDefiance2:
                     _inventory.deathDefiance2 = true;
+                    PlayerBehaviour.playerBehaviour.refusMortAnimator.SetTrigger("Niv2Up");
+                    SoundCaller.instance.PickUpItemsSound();
                     break;
             }
             Destroy(gameObject);

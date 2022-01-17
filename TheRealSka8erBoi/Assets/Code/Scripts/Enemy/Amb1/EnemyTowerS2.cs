@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using DG.Tweening;
 using UnityEngine.AI;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EnemyTowerS2 : AbstComp
 {
@@ -31,9 +31,10 @@ public class EnemyTowerS2 : AbstComp
     [SerializeField] public int bulletsAmount = 8;
     [SerializeField] private float rayonAngle=90;
     
-    
+
     void Start()
     {
+        animator.SetBool("Attaking", false);
         pj = PlayerBehaviour.playerBehaviour.gameObject;
         target = pj.transform;
         
@@ -52,6 +53,45 @@ public class EnemyTowerS2 : AbstComp
     {
         if (!CheckPlayerInSight()) return;
         lineOfSight = 100;
+        if (pj.transform.position.x - transform.position.x > -3 &
+            pj.transform.position.x - transform.position.x < 3 &
+            pj.transform.position.y - transform.position.y <= 0)
+        {
+            animator.SetTrigger("AtkS");
+
+            animValue = 1;
+        }
+        else if (pj.transform.position.x - transform.position.x < -3 &
+                 pj.transform.position.y - transform.position.y <= 0)
+        {
+            animator.SetTrigger("AtkSW");
+            animValue = 2;
+        }
+        else if (pj.transform.position.x - transform.position.x > 3 &
+                 pj.transform.position.y - transform.position.y <= 0)
+        {
+            animator.SetTrigger("AtkSE");
+            animValue = 3;
+        }
+        else if (pj.transform.position.x - transform.position.x > 3 &
+                 pj.transform.position.y - transform.position.y > 0)
+        {
+            animator.SetTrigger("AtkNE");
+            animValue = 4;
+        }
+        else if (pj.transform.position.x - transform.position.x < -3 &
+                 pj.transform.position.y - transform.position.y > 0)
+        {
+            animator.SetTrigger("AtkNW");
+            animValue = 5;
+        }
+        else if (pj.transform.position.x - transform.position.x > -3 &
+                 pj.transform.position.x - transform.position.x < 3 &
+                 pj.transform.position.y - transform.position.y > 0)
+        {
+            animator.SetTrigger("AtkN");
+            animValue = 6;
+        }
         if (!motionless)
         {
             GoToPlayer();  
@@ -66,16 +106,25 @@ public class EnemyTowerS2 : AbstComp
         }
         else
         {
-            SpreadShot();
+            StartCoroutine(SpreadShot());
         }
     }
 
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        lineOfSight = 100;
         Debug.Log(hp);
          if (hp <= 0)
         {
+            if (s2)
+            {
+                BonusManager.instance.GainScore(175);
+            }
+            else
+            {
+                BonusManager.instance.GainScore(100);
+            }
             animator.SetTrigger("Ded");
             Destroy(gameObject,1f);
         }
@@ -89,8 +138,9 @@ public class EnemyTowerS2 : AbstComp
             //Debug.Log(Time.deltaTime);
             if(cooldown <= 0)
             {
+                float random = Random.Range(-0.5f, 0.6f);
                 canshoot = true; 
-                cooldown = initcooldown;
+                cooldown = initcooldown + random;
             }
         }  
     }    
@@ -110,7 +160,7 @@ public class EnemyTowerS2 : AbstComp
 
     IEnumerator LongShot()
     {
-
+        animator.SetBool("Attaking",true);
         canshoot = false;
         float distanceX = pj.transform.position.x - transform.position.x;
         float distanceY = pj.transform.position.y - transform.position.y;
@@ -123,7 +173,7 @@ public class EnemyTowerS2 : AbstComp
             }
             else if (distanceX <= -4)
             {
-                animator.SetTrigger("AtkSE");
+                animator.SetTrigger("AtkSW");
                 animValue = 2;
             }
             else if (distanceX >= 4)
@@ -146,20 +196,20 @@ public class EnemyTowerS2 : AbstComp
             }
             else if (distanceX <= -4)
             {
-                animator.SetTrigger("AtkNW");
+                animator.SetTrigger("AtkNE");
                 animValue = 6;
             }
         }
 
-        yield return new WaitForSeconds(0.7f);
-
+        yield return new WaitForSeconds(1f);
+        
         GameObject bul = ebp.enemyBulletPoolInstance.GetBullet();
         Vector2 toplayer = (pj.transform.position - firePoint.transform.position).normalized;
         float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
         bul.transform.position = firePoint.transform.position;
         bul.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
         bul.SetActive(true);
-        
+        animator.SetBool("Attaking",false);
         bul.GetComponent<Rigidbody2D>().AddForce(toplayer.normalized * fireForce);
     }
     
@@ -169,22 +219,62 @@ public class EnemyTowerS2 : AbstComp
             angle = (180 / Mathf.PI) * angleRad;
         }
             
-    private void SpreadShot()
+    IEnumerator SpreadShot()
     {
+        animator.SetBool("Attaking",true);
         canshoot = false;
+        float distanceX = pj.transform.position.x - transform.position.x;
+        float distanceY = pj.transform.position.y - transform.position.y;
+        if (distanceY <= 0)
+        {
+            if (distanceX >= -4 & distanceX < 4)
+            {
+                animator.SetTrigger("AtkS");
+                animValue = 1;
+            }
+            else if (distanceX <= -4)
+            {
+                animator.SetTrigger("AtkSW");
+                animValue = 2;
+            }
+            else if (distanceX >= 4)
+            {
+                animator.SetTrigger("AtkSE");
+                animValue = 3;
+            }
+        }
+        else if (distanceY > 0)
+        {
+            if (distanceX >= -4 & distanceX < 4)
+            {
+                animator.SetTrigger("AtkN");
+                animValue = 4;
+            }
+            else if (distanceX > -4)
+            {
+                animator.SetTrigger("AtkNW");
+                animValue = 5;
+            }
+            else if (distanceX <= -4)
+            {
+                animator.SetTrigger("AtkNE");
+                animValue = 6;
+            }
+        }
+
+        yield return new WaitForSeconds(1f);
+        
         var intervalle = rayonAngle / bulletsAmount;
         for (int i = 0; i < bulletsAmount; i++)
         {
-            var index = i - bulletsAmount / 2;
-            Vector2 toplayer = (pj.transform.position - firePoint.transform.position).normalized;
-            float rotZ = Mathf.Atan2(toplayer.y, toplayer.x) * Mathf.Rad2Deg;
+            var index = i-bulletsAmount/2;
             GameObject bul = ebp.enemyBulletPoolInstance.GetBullet();
             bul.transform.position = firePoint.transform.position;
             bul.SetActive(true);
-
-            GetAngle(pj.transform.position, firePoint.position, out float angle); 
-            bul.transform.rotation = Quaternion.Euler(0, 0, (angle+index*intervalle));
-            bul.GetComponent<Rigidbody2D>().AddForce(-bul.transform.right*fireForce);
+            animator.SetBool("Attaking",false);
+            GetAngle(firePoint.position,pj.transform.position, out float angle);
+            bul.transform.rotation = Quaternion.Euler(0,0,(angle+index*intervalle));
+            bul.GetComponent<Rigidbody2D>().AddForce(bul.transform.right*fireForce);
             
             
             //bul.transform.DOScale(new Vector3(3, 3, 3), 0.5f);

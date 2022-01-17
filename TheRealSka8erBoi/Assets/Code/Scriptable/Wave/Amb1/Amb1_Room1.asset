@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736bea936facbbb488857bf11fc8e923, type: 3}
+  m_Name: Amb1_Room1
+  m_EditorClassIdentifier: 
+  waves:
+  - waveName: Wave Start
+    spawnInterval: 2
+    numberOfenemies: 3
+    typeOfEnnemies:
+    - enemy: {fileID: 4076993939007909676, guid: 6152cfb64a5b70a4492b477d1118f0b9, type: 3}
+      probability: 30
+    - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
+      probability: 70
+  - waveName: Dasheur
+    spawnInterval: 1
+    numberOfenemies: 3
+    typeOfEnnemies:
+    - enemy: {fileID: 4076993939007909676, guid: 6152cfb64a5b70a4492b477d1118f0b9, type: 3}
+      probability: 100
+  - waveName: All
+    spawnInterval: 1
+    numberOfenemies: 4
+    typeOfEnnemies:
+    - enemy: {fileID: 4076993939007909676, guid: 6152cfb64a5b70a4492b477d1118f0b9, type: 3}
+      probability: 20
+    - enemy: {fileID: 1721679794653617870, guid: 4d0385a7b85d0b449942d36d6d116344, type: 3}
+      probability: 50
+    - enemy: {fileID: 6544971654555334627, guid: ad71485b5fcce044bbb2841008139605, type: 3}
+      probability: 30

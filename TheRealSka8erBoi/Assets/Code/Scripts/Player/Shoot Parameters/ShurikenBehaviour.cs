@@ -9,44 +9,23 @@ public class ShurikenBehaviour : MonoBehaviour
 {
     public GameObject VFX;
     public int damage;
-    public Transform target;
-    
+    public float endExplosion;
 
     private void OnEnable()
     {
-        StartCoroutine(Explode());
-        GetComponent<BulletPoolBehaviour>().speed = 20;
-        target = null;
-    }
-    
-
-    private void FixedUpdate()
-    {
-        
-        if (target != null)
-        {
-            transform.position = Vector3.Lerp(transform.position,target.position,0.1f);
-        }
-        else
-        {
-            GetComponent<BulletPoolBehaviour>().speed -= 6 * Time.deltaTime;
-        }
+        //Invoke("Explode", GetComponent<BulletPoolBehaviour>().waitForDestruction+0.04f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("ui");
         if (other.gameObject.CompareTag("Target"))
         {
-            GetComponent<BulletPoolBehaviour>().speed = 0;
-            target = other.transform;
+            Invoke("Explode",0.04f);
         }
     }
 
-
-    IEnumerator Explode()
+    public void Explode()
     {
-        yield return new WaitForSeconds(2.5f);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 2.5f);
         Instantiate(VFX, transform.position, quaternion.identity);
 

@@ -60,7 +60,7 @@ public class VendingMachine : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.JoystickButton3) && BonusManager.instance.money < itemValue) return;
         
         Instantiate(item, gameObject.transform.position + new Vector3(0,-1f,0), Quaternion.identity);
-        BonusManager.instance.money -= itemValue;
+        BonusManager.instance.GainCoins(-itemValue);
         Destroy(gameObject);
     }
 }

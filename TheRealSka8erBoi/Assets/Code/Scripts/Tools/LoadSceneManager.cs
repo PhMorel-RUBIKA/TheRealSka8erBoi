@@ -25,6 +25,8 @@ public class LoadSceneManager : MonoBehaviour
         public static LoadSceneManager instance;
         public GameObject nextItemToSpawn;
 
+        public bool canChangeRoom;
+
         public void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
@@ -36,20 +38,16 @@ public class LoadSceneManager : MonoBehaviour
         {
             GetRandomNumber();
             CreateFinalList();
+            canChangeRoom = true;
         }
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                ChangeRoom();
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                SceneManager.LoadScene("Amb1-Room1");
-                player.transform.position = Vector3.zero;
-            }
+           if (Input.GetKey(KeyCode.O) && Input.GetKeyDown(KeyCode.P))
+           {
+                transition.SetTrigger("Start");
+                StartCoroutine(ChangeRoom());
+           }
         }
 
         void GetRandomNumber()
@@ -75,12 +73,13 @@ public class LoadSceneManager : MonoBehaviour
             finalList.Add(roomS1[randomIndex[2]]);
         
             finalList.Add(utilityRoom[0]);
+            finalList.Add(utilityRoom[4]);
 
             finalList.Add(roomS2[randomIndex[2]]);
             finalList.Add(roomS2[randomIndex[1]]);
             finalList.Add(roomS2[randomIndex[0]]);
         
-            finalList.Add(utilityRoom[0]);
+            finalList.Add(utilityRoom[4]);
             finalList.Add(utilityRoom[1]);
             finalList.Add(utilityRoom[2]);
         }
@@ -93,16 +92,17 @@ public class LoadSceneManager : MonoBehaviour
             transition.SetTrigger("Stop");
             
             numberOfRoom++;
+            canChangeRoom = true;
             if (numberOfRoom == 11) ResetProcedural();
         }
 
-        void ResetProcedural()
+        public void ResetProcedural()
         {
             finalList = new List<string>();
             randomIndex = new List<int>();
             numberOfRoom = 0;
         
             GetRandomNumber();
-            CreateFinalList();
+            CreateFinalList(); 
         }
 }

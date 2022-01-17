@@ -24,9 +24,7 @@ public class Enemy_Vif_Behaviour : AbstComp
     [SerializeField] float initcooldown;
     [SerializeField] private float fireForce=100f;
     
-    
     [SerializeField] private EnemyBulletPool ebp;
-
 
     void Start()
     {
@@ -40,6 +38,10 @@ public class Enemy_Vif_Behaviour : AbstComp
 
     protected void BehaviourAggro()
     {
+        if (hp<maxhp)
+        {
+            lineOfSight = 100;
+        }
         if(CheckPlayerInSight())
         {
             if (pj.transform.position.x-transform.position.x>-3 & pj.transform.position.x-transform.position.x < 3 & pj.transform.position.y-transform.position.y <= 0)
@@ -120,6 +122,7 @@ public class Enemy_Vif_Behaviour : AbstComp
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        lineOfSight = 100;
         Debug.Log(hp);
         if (hp <= 0)
         {
@@ -151,6 +154,8 @@ public class Enemy_Vif_Behaviour : AbstComp
                     break;
                     
             }
+
+            BonusManager.instance.GainScore(175);
             
             Destroy(gameObject,1f);
         }

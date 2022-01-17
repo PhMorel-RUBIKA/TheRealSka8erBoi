@@ -1,12 +1,16 @@
+using System;
+using System.Collections;
 using MoreMountains.NiceVibrations;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour
 {
+    private GameObject chargeProjectile;
     //Declaration Movement
     private Rigidbody2D playerRigid;
     private SpriteRenderer playerRender;
@@ -20,6 +24,8 @@ public class PlayerBehaviour : MonoBehaviour
     public int playerSpeed => (int) (_playerSpeed + (BonusManager.instance.greenStat * GreenStatModifier));
     
     [SerializeField] private float deadzoneController = 0.3f;
+    public bool over9000Power;
+    public bool canTakeDamage;
     [Space]
     
     //Declaration Dash
@@ -29,9 +35,10 @@ public class PlayerBehaviour : MonoBehaviour
     public float dashCd => _dashCd - (BonusManager.instance.greenStat * GreenStatModifier);
     public float dashSpeed;
     public float dashDuration;
+    public Image dashUI;
     private float dashOngoingCd;
     private float dashGoingFor;
-    private bool dash = true;
+    public bool dash = true;
     public bool dashSpellActive = false;
     public int dashSpellactivation;
     public GameObject dashNode;
@@ -48,20 +55,30 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float perfectShootValue;
     [SerializeField] private HapticTypes _hapticTypesForPerfectShoot = HapticTypes.Success;
     [SerializeField] private float _baseDamage;
+    public float shootingCooldown;
+    [SerializeField] private float _shootingCd;
+    public float shootingCd => _shootingCd - (BonusManager.instance.greenStat / 7);
+    [SerializeField] private MMFeedbacks shootingCDFB;
     public float baseDamage => _baseDamage + (BonusManager.instance.blueStat * BlueStatModifier);
-    
+    public bool shurikenActive;
     [Space]
     private bool isAiming;
+
+    private bool isDead;
     private float charge;
 
     private GameObject spawnedProj;
+    private GameObject spawnedShuriken;
 
+    public bool perfectTiming=false;
     //Declaration VFXShoot
     [Header("FX Declaration")]
     public GameObject cylindre;
     public GameObject bigMuzzle;
     public GameObject muzzle;
     public GameObject giantMuzzle;
+    public GameObject chargeProjo;
+    
 
     [Space] [Header("Feedback Declaration")]
     public MMFeedbacks DamageFeedbacks;
@@ -69,12 +86,14 @@ public class PlayerBehaviour : MonoBehaviour
     [Space]
 
     //Declaration UI
-    public TextMeshProUGUI lifeText;
+    //public TextMeshProUGUI lifeText;
     [SerializeField] private int _maxHealth = 5;
+    public PauseMenu pause;
+    
 
     public int maxHealth => (int)(_maxHealth + BonusManager.instance.redStat * RedStatModifier);
     [HideInInspector] public int currentHealth;
-    public Slider healthBar;
+    public Image healthBar;
     
     [Space(20)]
     
@@ -90,7 +109,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     public static PlayerBehaviour playerBehaviour;
 
+    private bool canActivateStepSound;
 
+    public MMFeedbacks perfection;
+    public GameObject DeathCanvasGroup;
+    public GameObject ChienCanvas;
+    public bool isDogActive;
+    public Animator refusMortAnimator;
+    
     private void Awake()
     {
         if (playerBehaviour == null)
@@ -106,7 +132,12 @@ public class PlayerBehaviour : MonoBehaviour
         animatorPlayer = GetComponent<Animator>();
         dashGoingFor = dashDuration;
         currentHealth = maxHealth;
-        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+        canActivateStepSound = true;
+        over9000Power = false;
+        canTakeDamage = true;
+        shurikenActive = false;
+        isDogActive = false;
         
         //Set animatorID
         animatorID.Add(Animator.StringToHash("GoingUp"));
@@ -126,7 +157,20 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {
-        MyInput();
+        if (!isDead)
+        {
+            MyInput();
+        }
+        
+        switch (isDogActive)
+        {
+            case true:
+                ChienCanvas.SetActive(true);
+                break;
+            case false:
+                ChienCanvas.SetActive(false);
+                break;
+        }
     }
 
    void FixedUpdate()
@@ -144,13 +188,19 @@ public class PlayerBehaviour : MonoBehaviour
         {
             latestDirection = leftJoy;
         }
+
+       
         
         if (Input.GetButtonDown("BowShot"))
         {
+            if (shootingCooldown - 0.05f >= 0 ) return;
+            
             transform.GetChild(0).gameObject.SetActive(true);
             isAiming = true;
             animatorPlayer.SetBool(animatorID[9], isAiming);
             charge = 0;
+            
+            chargeProjectile = Instantiate(chargeProjo, transform.position, Quaternion.identity);
         }
         if (Input.GetButtonUp("BowShot") && isAiming)
         {
@@ -159,23 +209,34 @@ public class PlayerBehaviour : MonoBehaviour
             isAiming = false;
             animatorPlayer.SetTrigger(animatorID[6]);//Release
             animatorPlayer.SetBool(animatorID[9], isAiming);
+       
+            Destroy(chargeProjectile);
             
         }
 
+        
         dashOngoingCd -= Time.deltaTime;
+        shootingCooldown -= Time.deltaTime;
+        dashUI.fillAmount = 1 - shootingCooldown / shootingCd;
+
+        if (Math.Abs(dashUI.fillAmount - 0.98f) < 0.01f) shootingCDFB.PlayFeedbacks();
+
         if (Input.GetAxisRaw("Dash") > 0 && !isAiming)
         {
             if (dashOngoingCd <= 0)
             {
-                dashOngoingCd = dashCd ;
                 dashGoingFor = 0;
                 dash = true;
                 gameObject.tag = "PlayerDashing";
-                if (dashSpellActive && dashSpellactivation == 4)
+                Physics2D.IgnoreLayerCollision(6, 10, true);
+                Physics2D.IgnoreLayerCollision(6, 11, true);
+                if (dashSpellActive) dashOngoingCd = dashCd / 2 + dashDuration;
+                else dashOngoingCd = dashCd + dashDuration ;
+                if (dashSpellActive && dashSpellactivation == 3)
                 {
                     dashNodeList.Add(Instantiate(dashNode, transform.position, quaternion.identity));
                 }
-                    
+                SoundCaller.instance.DashSound();
             }
         }
     }
@@ -197,6 +258,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 animatorPlayer.SetBool(animatorID[8],true); 
                 playerRigid.velocity = leftJoy * playerSpeed;
+                
             }
             else
             {
@@ -206,7 +268,7 @@ public class PlayerBehaviour : MonoBehaviour
         else
         {
             animatorPlayer.SetBool(animatorID[8], false);
-            if (charge < timeMaxCharge)
+            if (charge < timeMaxCharge + perfectShootValue)
             {
                 charge += Time.deltaTime;
             }
@@ -219,6 +281,8 @@ public class PlayerBehaviour : MonoBehaviour
                 playerRigid.velocity = Vector2.zero;
                 dash = false;
                 gameObject.tag = "Player";
+                Physics2D.IgnoreLayerCollision(6, 10, false);
+                Physics2D.IgnoreLayerCollision(6, 11, false);
                 if (dashSpellActive)
                 {
                     DashSpell();
@@ -230,6 +294,19 @@ public class PlayerBehaviour : MonoBehaviour
                 playerRigid.velocity = new Vector2(leftJoy.x, leftJoy.y) * dashSpeed;
             }
         }
+
+        if (playerRigid.velocity != Vector2.zero && canActivateStepSound)
+        {
+            canActivateStepSound = false;
+            StartCoroutine(CallStepSound()); 
+        }
+    }
+
+    IEnumerator CallStepSound()
+    {
+        SoundCaller.instance.StepSound();
+        yield return new WaitForSeconds(SoundCaller.instance.timeBetweenSoundsStep);
+        canActivateStepSound = true;
     }
 
     private void AnimatorManagement()
@@ -269,54 +346,161 @@ public class PlayerBehaviour : MonoBehaviour
     private void Shoot(float charge, Vector2 projDirection)
     {
         float multiplicatorShoot = 1;
-        
+
         if (charge < timeMaxCharge/3)
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("lightArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(muzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
-            
-
+            shootingCooldown = shootingCd * 0.4f;
+            multiplicatorShoot = 0.5f;
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
         }
         else if (charge < timeMaxCharge/1.5)
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("mediumArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(bigMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
-            
+            shootingCooldown = shootingCd * 0.7f;
+            multiplicatorShoot = 0.8f;
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
         }
-        else if (charge >= timeMaxCharge - perfectShootValue && charge <= timeMaxCharge)
+        else if (charge >= timeMaxCharge - perfectShootValue && charge < timeMaxCharge + perfectShootValue)
         {
+            perfectTiming = true;
             spawnedProj = PoolObjectManager.Instance.GetBullet("perfectTimingAmmo",
                 transform.GetChild(0).position - new Vector3(-projDirection.x, -projDirection.y, 0).normalized,
                 transform.GetChild(0).rotation);
             Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
-            multiplicatorShoot = 1.5f;
+            multiplicatorShoot = 1.25f;
+            shootingCooldown = shootingCd * 0.7f;
             MMVibrationManager.Haptic(_hapticTypesForPerfectShoot, false, true, this);
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
+        }
+        else if (charge >= timeMaxCharge + perfectShootValue)
+        {
+            spawnedProj = PoolObjectManager.Instance.GetBullet("heavyArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
+            Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            shootingCooldown = shootingCd;
+            multiplicatorShoot = 1;
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
         }
         else
         {
             spawnedProj = PoolObjectManager.Instance.GetBullet("heavyArrow", transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized,transform.GetChild(0).rotation);
             Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
+            shootingCooldown = shootingCd;
+            multiplicatorShoot = 1;
+            if (shurikenActive)
+            {
+                spawnedShuriken =
+                    PoolObjectManager.Instance.GetBullet("shurikenFaucheuse", transform.position, Quaternion.Euler(Mathf.Atan2(GetComponent<PlayerBehaviour>().latestDirection.y, -GetComponent<PlayerBehaviour>().latestDirection.x) * Mathf.Rad2Deg,90,0));
+            }
         }
         
         spawnedProj.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
         spawnedProj.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.4f;
-        spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge) * multiplicatorShoot);
+        if(over9000Power) spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge * 1000) * multiplicatorShoot);
+        else spawnedProj.GetComponent<BulletPoolBehaviour>().damage =(int) ((baseDamage + baseDamage * charge * 1.15f) * multiplicatorShoot);
+        
+
+        if (shurikenActive)
+        {
+            spawnedShuriken.GetComponent<BulletPoolBehaviour>().force = projDirection.normalized;
+            spawnedShuriken.GetComponent<BulletPoolBehaviour>().waitForDestruction = charge * 0.4f;
+            shurikenActive = false;
+        }
     }
 
     public void TakeDamage(int damageNumber)
     {
+        if(!canTakeDamage) return;
+        if(isDead) return;
         currentHealth -= damageNumber;
-        healthBar.value = (float)currentHealth / maxHealth;
-        lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
-        
+        float division = (float)currentHealth / maxHealth;
+        healthBar.fillAmount = 1 - division;
+        if (division > 1) healthBar.fillAmount = 1;
+        //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+
+        StartCoroutine(Invincibility());
         DamageFeedbacks.PlayFeedbacks();
         CameraShake.instance.StartShake(0.2f, 0.15f, 10f);
-        
+
         if (currentHealth < 1)
         {
-            animatorPlayer.SetTrigger(animatorID[7]);
+            if (gameObject.GetComponent<Inventory>().deathDefiance1)
+            {
+                RestoreLife(1);
+                refusMortAnimator.SetTrigger("Niv1Down");
+                return;
+            }
+            else
+            {
+                if (gameObject.GetComponent<Inventory>().deathDefiance2)
+                {
+                    RestoreLife(2);
+                    refusMortAnimator.SetTrigger("Niv2Down");
+                    return;
+                }
+                else
+                {
+                    StartCoroutine(DyingCharacter());
+                }
+            }
+
+            isDead = true;
+            animatorPlayer.SetBool(animatorID[7], true);
+            StartCoroutine(DyingCharacter());
+        }
+    }
+
+    public void GetHealth(int healthNumber)
+    {
+        currentHealth += healthNumber;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        float division = (float)currentHealth / maxHealth;
+        healthBar.fillAmount = 1 - division;
+        if (division > 1) healthBar.fillAmount = 1;
+        if (currentHealth>maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        healthBar.fillAmount = (float) currentHealth / maxHealth;
+        //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+       
+    }
+
+    IEnumerator Invincibility()
+    {
+        if (!canTakeDamage) yield break;
+
+        canTakeDamage = false;
+        yield return new WaitForSeconds(0.8f);
+        canTakeDamage = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("EnemyBullet"))
+        {
+            perfection.PlayFeedbacks();
         }
     }
 
@@ -349,5 +533,21 @@ public class PlayerBehaviour : MonoBehaviour
             }
             Destroy(dashNodeList[dashNodeList.Count-1], 3);
         }
+    }
+
+    void RestoreLife(int number)
+    {
+        if (number == 1) gameObject.GetComponent<Inventory>().deathDefiance1 = false;
+        if (number == 2) gameObject.GetComponent<Inventory>().deathDefiance2 = false;
+        
+        GetHealth(maxHealth / 4);
+    }
+
+    IEnumerator DyingCharacter()
+    {
+        yield return new WaitForSeconds(3);
+        DeathCanvasGroup.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Score : " + BonusManager.instance.finalScore;
+        DeathCanvasGroup.gameObject.SetActive(true);
+        pause.GameOverPause();
     }
 }

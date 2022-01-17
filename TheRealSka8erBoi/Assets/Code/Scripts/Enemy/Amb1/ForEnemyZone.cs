@@ -5,13 +5,15 @@ using UnityEngine;
 public class ForEnemyZone : MonoBehaviour
 {
 
-    [SerializeField] private float areaSize;
+    [SerializeField] private float areaSize=1.2f;
 
-    [SerializeField] private int damage=5;
+    [SerializeField] private int damage=10;
+
+    [SerializeField] private float cd = 0;
     // Start is called before the first frame update
     void Start()
     {
-        areaSize = transform.localScale.x;
+       // areaSize = transform.localScale.x;
         StartCoroutine(Implosion());
     }
 
@@ -23,7 +25,7 @@ public class ForEnemyZone : MonoBehaviour
 
     IEnumerator Implosion()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(cd);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position,areaSize);
 
         foreach (Collider2D enemy in hitEnemies)
@@ -33,6 +35,5 @@ public class ForEnemyZone : MonoBehaviour
                 PlayerBehaviour.playerBehaviour.TakeDamage(damage);
             }
         }
-        Destroy(gameObject);
     }
 }

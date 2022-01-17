@@ -32,9 +32,12 @@ public class EnemyBulletPool : MonoBehaviour
              {
                  for (int i = 0; i < enemyBullets.Count; i++)
                  {
-                     if (!enemyBullets[i].activeInHierarchy)
+                     if (enemyBullets[i] != null && !enemyBullets[i].activeInHierarchy)
                      {
-                         return enemyBullets[i];
+                         if (enemyBullets[i] != null)
+                         {
+                             return enemyBullets[i];
+                         }
                      }
                  }
              }
