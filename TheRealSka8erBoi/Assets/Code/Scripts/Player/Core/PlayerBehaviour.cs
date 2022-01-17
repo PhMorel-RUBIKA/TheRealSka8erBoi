@@ -118,6 +118,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public MMFeedbacks perfection;
     public GameObject DeathCanvasGroup;
+    public GameObject WinningCanvas;
     public GameObject ChienCanvas;
     public bool isDogActive;
     public Animator refusMortAnimator;
@@ -447,8 +448,8 @@ public class PlayerBehaviour : MonoBehaviour
         if(isDead) return;
         currentHealth -= damageNumber;
         float division = (float)currentHealth / maxHealth;
-        healthBar.fillAmount = 1 - division;
-        if (division > 1) healthBar.fillAmount = 1;
+        float value = Mathf.Clamp(1 - division, 0, 1);
+        healthBar.fillAmount = value;
         //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
         StartCoroutine(Invincibility());
@@ -488,13 +489,8 @@ public class PlayerBehaviour : MonoBehaviour
         currentHealth += healthNumber;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         float division = (float)currentHealth / maxHealth;
-        healthBar.fillAmount = 1 - division;
-        if (division > 1) healthBar.fillAmount = 1;
-        if (currentHealth>maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-        healthBar.fillAmount = (float) currentHealth / maxHealth;
+        float value = Mathf.Clamp(1 - division, 0, 1);
+        healthBar.fillAmount = value;
         //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
        
     }
@@ -561,6 +557,13 @@ public class PlayerBehaviour : MonoBehaviour
         SoundCaller.instance.PlayerDeath();
         DeathCanvasGroup.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Score : " + BonusManager.instance.finalScore;
         DeathCanvasGroup.gameObject.SetActive(true);
+        pause.GameOverPause();
+    }
+
+    public void WinningCharacter()
+    {
+        WinningCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Score : " + BonusManager.instance.finalScore;
+        WinningCanvas.gameObject.SetActive(true);
         pause.GameOverPause();
     }
 }

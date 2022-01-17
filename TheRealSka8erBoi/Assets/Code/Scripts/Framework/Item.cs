@@ -122,7 +122,7 @@ public class Item : MonoBehaviour
         {
             TheItem.stickerRed.value = 1;
             BonusManager.instance.redStat += TheItem.stickerRed.value;
-            player.GetComponent<PlayerBehaviour>().GetHealth(10);
+            player.GetComponent<PlayerBehaviour>().GetHealth(15);
             Destroy(gameObject.transform.parent == null ? gameObject : transform.parent.gameObject);
         }
     }
