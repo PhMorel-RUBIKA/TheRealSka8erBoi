@@ -57,7 +57,7 @@ public class FinalBossBehaviour : MonoBehaviour
     
     [SerializeField] private float areaSize;
     [SerializeField] private int damage;
-    private int punchDamage = 7;
+    [SerializeField] private int punchDamage = 7;
     
     [Space] [Header("EnemySpawnParameters")]
     private int spawningFactor;
@@ -79,21 +79,7 @@ public class FinalBossBehaviour : MonoBehaviour
     public Animator crown;
     public Animator leftHand;
     public Animator rightHand;
-    public Animator Head;
-    public Animator BigEye;
-    public Animator EyeB;
-    public Animator EyeD;
-    public Animator EyeE;
-    public Animator EyeF;
-    public Animator EyeG;
-    public Animator EyeH;
-    public Animator EyeI;
-    public Animator EyeJ;
-    public Animator EyeK;
-    public Animator EyeL;
-    public Animator EyeM;
-    public Animator EyeN;
-    public Animator EyeO;
+
     public Animator[] eyesArray;
     private int regulation = 0;
     
@@ -119,8 +105,7 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Atk", false);
         rightHand.SetBool("Atk", false);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         float division = (float) hpBoss / maxHPBoss;
@@ -233,10 +218,8 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Slam", false);
         leftDamageFeeler.SetActive(true);
         yield return new WaitForSeconds(2.6f);
-        Debug.Log("C re moi");
-        //Instantiate pour la paume de main gauche avec la charge et la boule d'energie 2nd
+
         leftDamageFeeler.SetActive(false);
-      
 
     }
     IEnumerator RightArmAtck()
@@ -253,13 +236,14 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Slam", false);
         rightDamageFeeler.SetActive(true);
         yield return new WaitForSeconds(2.6f);
-        //Instantiate pour la paume de main droite avec la charge et la boule d'energie 2nd
         rightDamageFeeler.SetActive(false);
 
     }
 
     IEnumerator Crush()
     {
+        Vector3 originLeftFeel = leftDamageFeeler.transform.position;
+        Vector3 originRightFeel = rightDamageFeeler.transform.position;
         Vector3 originArmRight = armRight.transform.position;
         Vector3 originArmLeft = armLeft.transform.position;
         leftHand.SetBool("Atk", true);
@@ -267,17 +251,19 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHand.SetBool("Crush",true);
         leftHand.SetBool("Crush",true);
         //Debug.Log("Premier");
-        
+
         armRight.transform.position = (target.transform.position + (new Vector3(3.5f, 10,0)));
         armLeft.transform.position = target.transform.position + (new Vector3(-3.5f, 10,0));
-        //Instantiate hugeCracks gauche et droite 1rst
+
         Instantiate(firstHugeCracksStorms, armRight.transform.position+new Vector3(0,-9.5f,0), quaternionFx);
         Instantiate(firstHugeCracksStorms, armLeft.transform.position+new Vector3(0,-9.5f,0), quaternionFx);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(armRight.transform.position+new Vector3(0,-9.5f,0),areaSize);
         Collider2D[] hitEnemies2 = Physics2D.OverlapCircleAll(armLeft.transform.position+new Vector3(0,-9.5f,0),areaSize);
+        leftDamageFeeler.transform.position = armLeft.transform.position+new Vector3(0,-9.5f,0);
+        rightDamageFeeler.transform.position= armRight.transform.position+new Vector3(0,-9.5f,0);
         
         yield return new WaitForSeconds(.75f);
-        //Debug.Log("Second");
+        
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.gameObject.CompareTag("Player"))
@@ -316,8 +302,9 @@ public class FinalBossBehaviour : MonoBehaviour
         yield return new WaitForSeconds(2.8f);
         rightDamageFeeler.SetActive(false);
         leftDamageFeeler.SetActive(false);
-
-
+        rightDamageFeeler.transform.position = originRightFeel;
+        leftDamageFeeler.transform.position = originLeftFeel;
+        
         armRight.transform.position = originArmRight;
         armLeft.transform.position = originArmLeft;
 
@@ -326,7 +313,7 @@ public class FinalBossBehaviour : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, areaSize);
+        Gizmos.DrawWireSphere(leftDamageFeeler.transform.position, areaSize);
     }
 
     public void TakeDamage(int damage)
@@ -375,6 +362,7 @@ public class FinalBossBehaviour : MonoBehaviour
     
     IEnumerator BossShooting()
     {
+        yield return new WaitForSeconds(1f);
         headAnim.SetBool("fire",true);
         yield return new WaitForSeconds(.8f);
         if (bossIsMidLife)
