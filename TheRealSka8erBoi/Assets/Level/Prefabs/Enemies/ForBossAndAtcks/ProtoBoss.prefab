@@ -176,7 +176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028228275}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.64, y: -6, z: 0}
+  m_LocalPosition: {x: 0.64, y: -5.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1707197530}
@@ -211,7 +211,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1.5
 --- !u!1 &1438560071
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +674,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -838301503
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 6619717628854564720, guid: 758d24a070c013c49abc8f3b1393a484, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -839,7 +839,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -838301503
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_Sprite: {fileID: 9110821381041767589, guid: 758d24a070c013c49abc8f3b1393a484, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -878,7 +878,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062573982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.64, y: -6, z: 0}
+  m_LocalPosition: {x: -0.41, y: -5.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2054843808}
@@ -913,7 +913,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1.5
 --- !u!1 &2066782905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   inSecond: 0
   _frameCounter: 0
   refreshTime: 2500
-  keyFrames: c8000000bc020000b0040000a406000098080000
+  keyFrames: f4010000e8030000dc050000d0070000c4090000
   define: 0
   intro: {fileID: 1298398632}
   hpBoss: 300
@@ -1477,8 +1477,9 @@ MonoBehaviour:
   shockInstance: {fileID: 1421469145051772971, guid: 1a509b472f4f8a449b25fe9133c11368, type: 3}
   armLeft: {fileID: 2491700272334720326}
   armRight: {fileID: 7131567449391885746}
-  areaSize: 3.5
-  damage: 6
+  areaSize: 2.5
+  damage: 5
+  punchDamage: 5
   enemyPool:
   - {fileID: 4076993939007909676, guid: 294231e3e2194a641b598d28e1d448fd, type: 3}
   - {fileID: 6544971654555334627, guid: 340b4c6b59392e146931eccc1827eae8, type: 3}
@@ -1503,21 +1504,6 @@ MonoBehaviour:
   crown: {fileID: 6900578445495902613}
   leftHand: {fileID: 2054843806}
   rightHand: {fileID: 1707197528}
-  Head: {fileID: 4102800835903528847}
-  BigEye: {fileID: 6499354073139870110}
-  EyeB: {fileID: 3820177910266179733}
-  EyeD: {fileID: 7426094668488261236}
-  EyeE: {fileID: 6755238447983540278}
-  EyeF: {fileID: 7245764178292431503}
-  EyeG: {fileID: 5209079689113080520}
-  EyeH: {fileID: 8598536885173802618}
-  EyeI: {fileID: 7945264368819388170}
-  EyeJ: {fileID: 2923859517247779539}
-  EyeK: {fileID: 3276575036358731112}
-  EyeL: {fileID: 513691685575307648}
-  EyeM: {fileID: 2487296306659721101}
-  EyeN: {fileID: 669126997683454573}
-  EyeO: {fileID: 666048179122449015}
   eyesArray:
   - {fileID: 6499354073139870110}
   - {fileID: 3820177910266179733}
@@ -3004,7 +2990,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 464644773
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: 6619717628854564720, guid: 758d24a070c013c49abc8f3b1393a484, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
