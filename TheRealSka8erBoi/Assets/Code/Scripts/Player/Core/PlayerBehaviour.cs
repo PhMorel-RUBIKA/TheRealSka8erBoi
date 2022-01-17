@@ -379,7 +379,7 @@ public class PlayerBehaviour : MonoBehaviour
                 transform.GetChild(0).rotation);
             Instantiate(giantMuzzle, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
             Instantiate(cylindre, transform.GetChild(0).position - new Vector3(-projDirection.x,-projDirection.y,0).normalized, transform.GetChild(0).rotation);
-            multiplicatorShoot = 1.5f;
+            multiplicatorShoot = 1.25f;
             shootingCooldown = shootingCd * 0.7f;
             MMVibrationManager.Haptic(_hapticTypesForPerfectShoot, false, true, this);
             if (shurikenActive)
@@ -449,6 +449,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 RestoreLife(1);
                 refusMortAnimator.SetTrigger("Niv1Down");
+                return;
             }
             else
             {
@@ -456,6 +457,7 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     RestoreLife(2);
                     refusMortAnimator.SetTrigger("Niv2Down");
+                    return;
                 }
                 else
                 {

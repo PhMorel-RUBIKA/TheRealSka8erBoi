@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class SoundCaller : MonoBehaviour
 {
     public static SoundCaller instance;
+    public float volumeSD;
+    public float volumeMusic;
+    public AudioSource musicAudioSource;
 
     [Header("Player Maj")] public AudioClip pickUpItems;
     
@@ -34,6 +38,23 @@ public class SoundCaller : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
+    }
+
+    private void Update()
+    {
+        volumeSD = Mathf.Clamp(volumeSD, 0f, 0.05f);
+        gameManagerAudioSource.volume = volumeSD;
+        dashAudioSource.volume = volumeSD;
+        stepAudioSource.volume = volumeSD;
+
+        if (musicAudioSource == null)
+        {
+            GameObject audioSource = GameObject.FindWithTag("WorldTag");
+            musicAudioSource = audioSource.GetComponent<AudioSource>();
+        }
+        
+        volumeMusic = Mathf.Clamp(volumeMusic, 0f, 0.30f);
+        musicAudioSource.volume = volumeMusic;
     }
 
     public void StepSound()
@@ -66,5 +87,15 @@ public class SoundCaller : MonoBehaviour
     public void PickUpItemsSound()
     {
         gameManagerAudioSource.PlayOneShot(pickUpItems);
+    }
+
+    public void SliderSD(float volume)
+    {
+        volumeSD = volume;
+    }
+
+    public void SliderMusic(float volume)
+    {
+        volumeMusic = volume;
     }
 }

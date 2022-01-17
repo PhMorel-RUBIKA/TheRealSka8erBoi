@@ -24,6 +24,9 @@ public class FightMusicManager : MonoBehaviour
             playsong = true;
 
         }
+
+        if (intro.volume != SoundCaller.instance.volumeMusic) intro.volume = SoundCaller.instance.volumeMusic;
+        if (fightloop.volume != SoundCaller.instance.volumeMusic) fightloop.volume = SoundCaller.instance.volumeMusic;
     }
 
     void LoopClip()
