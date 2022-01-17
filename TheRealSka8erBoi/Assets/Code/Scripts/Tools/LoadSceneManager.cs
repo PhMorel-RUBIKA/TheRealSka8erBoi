@@ -24,6 +24,7 @@ public class LoadSceneManager : MonoBehaviour
 
         public static LoadSceneManager instance;
         public GameObject nextItemToSpawn;
+        public Sprite ShopImage;
 
         public bool canChangeRoom;
 

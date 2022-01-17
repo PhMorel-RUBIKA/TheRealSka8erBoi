@@ -165,6 +165,12 @@ public class WaveManager : MonoBehaviour
         gateZone1.GetComponent<SpriteRenderer>().sprite = itemDoor1.GetComponent<SpriteRenderer>().sprite;
         itemDoor2 = rewardObjects[rand2];
         gateZone2.GetComponent<SpriteRenderer>().sprite = itemDoor2.GetComponent<SpriteRenderer>().sprite;
+
+        if (LoadSceneManager.instance.numberOfRoom == 3 || LoadSceneManager.instance.numberOfRoom == 8)
+        {
+            gateZone1.GetComponent<SpriteRenderer>().sprite = LoadSceneManager.instance.ShopImage;
+            gateZone2.GetComponent<SpriteRenderer>().sprite = LoadSceneManager.instance.ShopImage;
+        }
         
         RandomItem(itemDoor1);
         RandomItem(itemDoor2);
