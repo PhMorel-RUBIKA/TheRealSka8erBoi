@@ -122,6 +122,8 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject ChienCanvas;
     public bool isDogActive;
     public Animator refusMortAnimator;
+
+    private Vector3 lastPos;
     
 
     private void Awake()
@@ -243,6 +245,7 @@ public class PlayerBehaviour : MonoBehaviour
                 gameObject.tag = "PlayerDashing";
                 Physics2D.IgnoreLayerCollision(6, 10, true);
                 Physics2D.IgnoreLayerCollision(6, 11, true);
+                Vector3 lastPos = gameObject.transform.position;
                 if (dashSpellActive) dashOngoingCd = dashCd / 2 + dashDuration;
                 else dashOngoingCd = dashCd + dashDuration ;
                 if (dashSpellActive && dashSpellactivation == 3)
@@ -354,6 +357,13 @@ public class PlayerBehaviour : MonoBehaviour
         {//GoingLeftBack
             animatorPlayer.SetTrigger(animatorID[5]);
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (dash) return;
+        if (other.gameObject.layer != 11) return;
+        gameObject.transform.position = lastPos;
     }
 
     private void Shoot(float charge, Vector2 projDirection)
