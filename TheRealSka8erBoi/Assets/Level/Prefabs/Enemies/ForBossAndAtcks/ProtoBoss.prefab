@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fb: {fileID: 1245467362402427485}
-  mmf: {fileID: 1611898810}
+  mmf: {fileID: 2113007264}
 --- !u!58 &1028228277
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -674,7 +674,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -838301503
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 6619717628854564720, guid: 758d24a070c013c49abc8f3b1393a484, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -839,7 +839,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -838301503
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_Sprite: {fileID: 9110821381041767589, guid: 758d24a070c013c49abc8f3b1393a484, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1459,6 +1459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da8aba47c7caa247a24c31a3a4ca717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossBar: {fileID: 0}
   inSecond: 0
   _frameCounter: 0
   refreshTime: 2500
@@ -1476,7 +1477,7 @@ MonoBehaviour:
   shockInstance: {fileID: 1421469145051772971, guid: 1a509b472f4f8a449b25fe9133c11368, type: 3}
   armLeft: {fileID: 2491700272334720326}
   armRight: {fileID: 7131567449391885746}
-  areaSize: 4
+  areaSize: 3.5
   damage: 6
   enemyPool:
   - {fileID: 4076993939007909676, guid: 294231e3e2194a641b598d28e1d448fd, type: 3}

@@ -1,5 +1,100 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &79197246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79197247}
+  - component: {fileID: 79197250}
+  - component: {fileID: 79197249}
+  - component: {fileID: 79197248}
+  m_Layer: 0
+  m_Name: RefusMort
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &79197247
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79197246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2.1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 775155876048753875}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -868, y: -441}
+  m_SizeDelta: {x: 58, y: 51}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &79197250
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79197246}
+  m_CullTransparentMesh: 1
+--- !u!114 &79197249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79197246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 8413487528060534840, guid: 555bde392a338ec4a94ac279511ead68, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!95 &79197248
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79197246}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: faa9dd59a23355946a1df5f959fe12df, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &117480631
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &150907958
 RectTransform:
   m_ObjectHideFlags: 0
@@ -429,7 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1920674492}
-  deathMenu: {fileID: 0}
+  deathMenu: {fileID: 359328145}
   timeFeedbacks: {fileID: 251591757}
   noTimeFeedbacks: {fileID: 862557962}
   pauseFirstButton: {fileID: 386438434}
@@ -437,7 +532,10 @@ MonoBehaviour:
   optionsQuitButton: {fileID: 386438434}
   optionsMenuUI: {fileID: 1962060403}
   audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
-  managers: []
+  managers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &150907963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,7 +1006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &359328146
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4039,7 +4137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1920674493
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5864,7 +5962,7 @@ RectTransform:
   m_GameObject: {fileID: 3237888538170543910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 359328146}
   m_RootOrder: 1
@@ -6199,7 +6297,6 @@ GameObject:
   - component: {fileID: 5501638938004983748}
   - component: {fileID: 6902068902137927784}
   - component: {fileID: 75124782}
-  - component: {fileID: 8241900980699886744}
   - component: {fileID: 4079825448089906176}
   - component: {fileID: 8142624679806005322}
   - component: {fileID: 5777669981931234101}
@@ -6396,11 +6493,11 @@ MonoBehaviour:
   spellDashLaser: {fileID: 669065867579327252, guid: 626e8a795baa1394da70509c1c057bf1, type: 3}
   animatorID: 
   timeMaxCharge: 0.5
-  perfectShootValue: 0.05
+  perfectShootValue: 0.025
   _hapticTypesForPerfectShoot: 6
   _baseDamage: 11
   shootingCooldown: 0
-  _shootingCd: 1.5
+  _shootingCd: 1.3
   shootingCDFB: {fileID: 1206409527}
   shurikenActive: 0
   perfectTiming: 0
@@ -6411,7 +6508,7 @@ MonoBehaviour:
   chargeProjo: {fileID: 4256947756831842849, guid: 6fa15d20c3e677747beb0407012da557, type: 3}
   DamageFeedbacks: {fileID: 2947749812057125447}
   _maxHealth: 50
-  pause: {fileID: 0}
+  pause: {fileID: 150907962}
   currentHealth: 0
   healthBar: {fileID: 3897998804608217820}
   descriptonRouge: maxHealth = BaseLife + (RedStatQuantity / BaseLife) * 100
@@ -6425,6 +6522,7 @@ MonoBehaviour:
   DeathCanvasGroup: {fileID: 359328145}
   ChienCanvas: {fileID: 4107401510824275237}
   isDogActive: 0
+  refusMortAnimator: {fileID: 79197248}
 --- !u!114 &3498011852449812536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6520,30 +6618,6 @@ MonoBehaviour:
   moneyText: {fileID: 9144132831515516534}
   finalScoreText: {fileID: 1257678039116765107}
   canvas: {fileID: 8476999721323049797}
---- !u!114 &8241900980699886744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3498011852449812487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 979751f157117a3429d5c83bd5dd7a5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpItems: {fileID: 0}
-  timeBetweenSoundsStep: 0.3
-  stepAudioSource: {fileID: 981861918790300087}
-  stepSound:
-  - {fileID: 8300000, guid: ee8c0395782147d46a8eba7e1f12ca0c, type: 3}
-  - {fileID: 8300000, guid: 71f5d34229a1d79439fabfe47cca3bb6, type: 3}
-  dashAudioSource: {fileID: 7311228104423619502}
-  dashSound: {fileID: 8300000, guid: fa8ca8098014b0c4fac1da73ad30a88e, type: 3}
-  gameManagerAudioSource: {fileID: 0}
-  enemyDamageSound: []
-  spawnEnemies: []
-  damageSound: {fileID: 0}
 --- !u!114 &4079825448089906176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6729,6 +6803,7 @@ RectTransform:
   - {fileID: 275109207391029070}
   - {fileID: 812440255}
   - {fileID: 723673407}
+  - {fileID: 79197247}
   m_Father: {fileID: 3498011853565448037}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7135,7 +7210,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8528,7 +8603,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1797927603601474115, guid: c8e821273cb35ae4bb6d2d71d5eb03b7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4745098}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

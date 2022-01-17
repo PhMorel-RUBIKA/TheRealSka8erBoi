@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.Random;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
+using Slider = UnityEngine.UIElements.Slider;
 
 public class FinalBossBehaviour : MonoBehaviour
 {
-    
-    [Header("Show Value")]
+
+    [Header("Show Value")] 
+    [SerializeField] private Image bossBar;
     [SerializeField] private int inSecond;
     [SerializeField] private int _frameCounter;
     [Space(20)]
@@ -120,10 +123,14 @@ public class FinalBossBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float division = (float) hpBoss / maxHPBoss;
+        hpBoss = Mathf.Clamp(hpBoss,0,300);
+        if (division > 1) bossBar.fillAmount = 1;
+        bossBar.fillAmount = 1 - division;
         crown.SetInteger("BossHp",hpBoss);
         if (hpBoss<=maxHPBoss/2)
         {
+            bossBar.color = new Color(183,34,18,200);
             bossIsMidLife = true;
         }
         
@@ -157,25 +164,18 @@ public class FinalBossBehaviour : MonoBehaviour
 
     void BehaviourSelector()
     {
-        define = 5; // Range(1, 6);
-        //if (selectorELENNA != 0)
-          //  define = selectorELENNA;
-        //StartCoroutine("BossShooting");
+        define = Range(1, 6);
         switch(define)
         {
             case 1:
                 
-                   StartCoroutine(LeftArmAtck());
-                   StartCoroutine(BossShooting());
-                   break;
+                StartCoroutine(LeftArmAtck());
+                break;
             case 2:
-                
                 StartCoroutine(RightArmAtck());
-                StartCoroutine(BossShooting());
                 break;
             
             case 3 :
-                StartCoroutine(BossShooting());
                 StartCoroutine(BossShooting());
                 break;
             case 4 : 
@@ -190,9 +190,7 @@ public class FinalBossBehaviour : MonoBehaviour
     void EnragedBehaviour()
     {
         define = Range(1, 6);
-        //if (selectorAAAAAHHHH != 0)
-          //  define = selectorAAAAAHHHH;
-          switch (define)
+        switch (define)
           {
               case 1:
 
@@ -202,7 +200,7 @@ public class FinalBossBehaviour : MonoBehaviour
                   break;
               case 2:
                     StartCoroutine(LeftArmAtck());
-                      StartCoroutine(RightArmAtck());
+                    StartCoroutine(RightArmAtck());
                   break;
               
               case 3:
