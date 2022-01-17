@@ -446,8 +446,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if(!canTakeDamage) return;
         if(isDead) return;
+        
         currentHealth -= damageNumber;
-        float division = (float)currentHealth / maxHealth;
+        float division = (float)currentHealth/maxHealth;
         float value = Mathf.Clamp(1 - division, 0, 1);
         healthBar.fillAmount = value;
         //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
@@ -487,7 +488,6 @@ public class PlayerBehaviour : MonoBehaviour
     public void GetHealth(int healthNumber)
     {
         currentHealth += healthNumber;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         float division = (float)currentHealth / maxHealth;
         float value = Mathf.Clamp(1 - division, 0, 1);
         healthBar.fillAmount = value;

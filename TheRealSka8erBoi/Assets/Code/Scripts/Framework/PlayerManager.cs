@@ -12,4 +12,9 @@ public class PlayerManager : MonoBehaviour
         if (instance == null) instance = this;
         DontDestroyOnLoad(this);
     }
+
+    void Start()
+    {
+        if (Time.timeScale != 1) Time.timeScale = 1;
+    }
 }
