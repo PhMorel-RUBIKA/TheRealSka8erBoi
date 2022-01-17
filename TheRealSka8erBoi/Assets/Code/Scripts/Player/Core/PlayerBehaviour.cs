@@ -218,6 +218,7 @@ public class PlayerBehaviour : MonoBehaviour
             Shoot(charge, GetComponentInChildren<CursorBehaviour>().AimDirection().Item2);
             transform.GetChild(0).gameObject.SetActive(false);
             isAiming = false;
+            SoundCaller.instance.PLayerTirSound();
             animatorPlayer.SetTrigger(animatorID[6]);//Release
             animatorPlayer.SetBool(animatorID[9], isAiming);
        
@@ -557,6 +558,7 @@ public class PlayerBehaviour : MonoBehaviour
     IEnumerator DyingCharacter()
     {
         yield return new WaitForSeconds(3);
+        SoundCaller.instance.PlayerDeath();
         DeathCanvasGroup.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Score : " + BonusManager.instance.finalScore;
         DeathCanvasGroup.gameObject.SetActive(true);
         pause.GameOverPause();

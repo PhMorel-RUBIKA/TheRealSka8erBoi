@@ -41,6 +41,7 @@ public class SpellHolder : MonoBehaviour
                 if (Input.GetAxisRaw(AxeKey) > 0.90f)
                 {
                     spell.Activate(this.gameObject);
+                    SoundCaller.instance.SpellSound();
                     state = SpellState.active;
                     activeTime = spell.activeTime;
                     spell = null;

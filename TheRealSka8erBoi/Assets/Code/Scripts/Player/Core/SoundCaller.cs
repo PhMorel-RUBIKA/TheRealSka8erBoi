@@ -15,8 +15,8 @@ public class SoundCaller : MonoBehaviour
     [Header("Player Maj")] 
     public AudioClip pickUpItems;
     public AudioClip playerDeath;
-    public AudioClip chargeTir;
     public AudioClip lacheTir;
+    public AudioClip spellSound;
     
     [Space]
     
@@ -101,6 +101,11 @@ public class SoundCaller : MonoBehaviour
     public void PLayerTirSound()
     {
         gameManagerAudioSource.PlayOneShot(lacheTir);
+    }
+    
+    public void SpellSound()
+    {
+        gameManagerAudioSource.PlayOneShot(spellSound);
     }
 
     public void SliderSD(float volume)
