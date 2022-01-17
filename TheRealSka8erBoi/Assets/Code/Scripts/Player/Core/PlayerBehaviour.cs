@@ -8,6 +8,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Object = System.Object;
+
 public class PlayerBehaviour : MonoBehaviour
 {
     private GameObject chargeProjectile;
@@ -83,6 +85,9 @@ public class PlayerBehaviour : MonoBehaviour
     [Space] [Header("Feedback Declaration")]
     public MMFeedbacks DamageFeedbacks;
 
+    public GameObject feedbackKunai;
+    private GameObject currentFBShuriken;
+
     [Space]
 
     //Declaration UI
@@ -117,6 +122,7 @@ public class PlayerBehaviour : MonoBehaviour
     public bool isDogActive;
     public Animator refusMortAnimator;
     
+
     private void Awake()
     {
         if (playerBehaviour == null)
@@ -152,7 +158,8 @@ public class PlayerBehaviour : MonoBehaviour
         animatorID.Add(Animator.StringToHash("IsAiming"));
         animatorID.Add(Animator.StringToHash("Horizontal"));
         animatorID.Add(Animator.StringToHash("Vertical"));
-        
+
+
     }
 
     void Update()
@@ -171,6 +178,10 @@ public class PlayerBehaviour : MonoBehaviour
                 ChienCanvas.SetActive(false);
                 break;
         }
+
+        if (shurikenActive) feedbackKunai.GetComponent<ParticleSystem>().Play();
+        else feedbackKunai.GetComponent<ParticleSystem>().Stop();
+        
     }
 
    void FixedUpdate()
