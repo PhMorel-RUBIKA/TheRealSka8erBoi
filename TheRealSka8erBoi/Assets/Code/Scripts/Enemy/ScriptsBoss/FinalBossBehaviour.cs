@@ -90,6 +90,7 @@ public class FinalBossBehaviour : MonoBehaviour
     public GameObject energyballLeftBoss;
     public GameObject energyballRightBoss;
     public GameObject firstHugeCracksStorms;
+    public GameObject enemySpawnVFX;
 
     private int currentKeyframe;
     public Light2D haloLumière;
@@ -194,8 +195,8 @@ public class FinalBossBehaviour : MonoBehaviour
                 foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
                 keyFrames[0] += bossAttacks[2].frameLength + frameDelayBetweenAttack;
                 break;
-            case 4 : 
-                BossMakesEnemiesSpawn();
+            case 4 :
+                StartCoroutine(BossMakesEnemiesSpawn());
                 bossAttacks[0].probability += decrementalValue / 4;
                 bossAttacks[1].probability += decrementalValue / 4;
                 bossAttacks[2].probability += decrementalValue / 4;
@@ -245,7 +246,7 @@ public class FinalBossBehaviour : MonoBehaviour
                   keyFrames[0] += bossAttacks[0].frameLength + frameDelayBetweenAttack;
                   break;
               case 3:
-                  BossMakesEnemiesSpawn();
+                  StartCoroutine(BossMakesEnemiesSpawn());
                   StartCoroutine(BossShooting());
                   bossAttacks[0].probability += decrementalValue / 4;
                   bossAttacks[1].probability += decrementalValue / 4;
@@ -418,7 +419,7 @@ public class FinalBossBehaviour : MonoBehaviour
     {
         hpBoss -= damage;
     }
-    void BossMakesEnemiesSpawn()
+    IEnumerator BossMakesEnemiesSpawn()
     {
         int spawningFactor = 1;
 
@@ -433,15 +434,18 @@ public class FinalBossBehaviour : MonoBehaviour
 
         for (int e = 0; e < spawningFactor; e++)
         {
-            enemySelection = Range(0, 4);
-            Instantiate(enemyPool[enemySelection].gameObject,GetRandomPoint().position, Quaternion.identity);
+            Vector3 positionEnemi = GetRandomPoint().transform.position;
+            Instantiate(enemySpawnVFX, positionEnemi + new Vector3(-0.05f, -0.5f, 0), Quaternion.identity);
+            SoundCaller.instance.SpawnEnemiesSound();
+            yield return new WaitForSeconds(0.8f);
+            Instantiate(enemyPool[enemySelection].gameObject,positionEnemi, Quaternion.identity);
         }
     }
     Transform GetRandomPoint()
     {
         Transform randomPoint = null;
         int index = Range(0, spawnPoints.Length);
-
+        
         while (waypointUsed.Contains(spawnPoints[index])) { index = Range(0, spawnPoints.Length); }
         
         randomPoint = spawnPoints[index];

@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'But be carefoul, it''s a single use only ... '
+  m_text: 'But be careful, it''s a single use only ... '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29b7c7ad408481a478594bb540af71df, type: 2}
   m_sharedMaterial: {fileID: 8122542159180346413, guid: 29b7c7ad408481a478594bb540af71df, type: 2}
@@ -1702,9 +1702,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1091682851}
     m_Modifications:
     - target: {fileID: 140135055, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: m_Value
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 140135055, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 395609629}
+    - target: {fileID: 150907962, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+      propertyPath: victoryMenu
+      value: 
+      objectReference: {fileID: 272090697}
     - target: {fileID: 150907962, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
       propertyPath: managers.Array.data[0]
       value: 
@@ -1789,6 +1797,11 @@ AudioSource:
 --- !u!82 &272090696 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 981861918790300087, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
+  m_PrefabInstance: {fileID: 272090692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &272090697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1220031486, guid: 93320acae18e7194a8be5e62312b4e02, type: 3}
   m_PrefabInstance: {fileID: 272090692}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &300998210
@@ -2629,8 +2642,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSD: 0.05
-  volumeMusic: 0
-  musicAudioSource: {fileID: 0}
+  volumeMusic: 0.3
+  musicAudioSource:
+  - {fileID: 0}
   pickUpItems: {fileID: 8300000, guid: 19b4ce22e6fe21d4e9523f78c8d112f3, type: 3}
   playerDeath: {fileID: 0}
   lacheTir: {fileID: 0}
@@ -5337,8 +5351,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.5}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -123.03516, y: -232}
-  m_SizeDelta: {x: 871.3521, y: 593.3143}
+  m_AnchoredPosition: {x: -115.10477, y: -232.20767}
+  m_SizeDelta: {x: 887.2183, y: 593.3143}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1088680066
 MonoBehaviour:
@@ -5361,10 +5375,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "I want to be in your hood while you skate, to hug you, to take you for
-    a ride, to be the good boy in the world. \r\nSo please, can you come and get
-    me? I found someone nice who reminds me a bit of you but I really want to be
-    with you again... \r\n\r\nFilled with woofs of encouragement, \nyour good boy
-    ! \n"
+    a ride, to be the best good boy in the world. \r\nSo please, can you come and
+    get me? I found someone nice who reminds me a bit of you but I really want to
+    be with you again... \r\n\r\nFilled with woofs of encouragement, \nyour good
+    boy ! \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29b7c7ad408481a478594bb540af71df, type: 2}
   m_sharedMaterial: {fileID: 8122542159180346413, guid: 29b7c7ad408481a478594bb540af71df, type: 2}
@@ -5543,7 +5557,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Before going up there, maybe ask us advices... '
+  m_text: 'Before going up there, maybe ask us for advices... '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29b7c7ad408481a478594bb540af71df, type: 2}
   m_sharedMaterial: {fileID: 8122542159180346413, guid: 29b7c7ad408481a478594bb540af71df, type: 2}
@@ -9237,7 +9251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Killing enemies would allow you to take their power !
+  m_text: Killing enemies would allows you to take their power !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29b7c7ad408481a478594bb540af71df, type: 2}
   m_sharedMaterial: {fileID: 8122542159180346413, guid: 29b7c7ad408481a478594bb540af71df, type: 2}

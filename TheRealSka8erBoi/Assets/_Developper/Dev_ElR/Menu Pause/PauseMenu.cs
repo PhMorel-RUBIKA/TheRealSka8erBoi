@@ -17,6 +17,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject deathMenu;
+    public GameObject victoryMenu;
 
     public MMFeedbacks timeFeedbacks;
     public MMFeedbacks noTimeFeedbacks;
@@ -42,7 +43,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetAxisRaw("Dash") > 0)
         {
-            if (deathMenu.activeSelf)
+            if (deathMenu.activeSelf || victoryMenu.activeSelf)
             {
                 foreach (GameObject manager in managers )
                 {
