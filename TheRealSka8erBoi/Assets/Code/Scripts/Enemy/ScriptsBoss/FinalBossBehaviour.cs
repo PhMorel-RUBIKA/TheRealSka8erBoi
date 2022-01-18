@@ -53,7 +53,6 @@ public class FinalBossBehaviour : MonoBehaviour
 
     [Space]
     [Header("Crush Parameters")]
-    //[SerializeField] private Rigidbody2D Crush;
 
     [SerializeField] public GameObject armLeft;
 
@@ -69,10 +68,7 @@ public class FinalBossBehaviour : MonoBehaviour
     private int enemySelection;
     public Transform[] spawnPoints;
     private List<Transform> waypointUsed = new List<Transform>();
-    //[SerializeField]
-    //private int selectorELENNA;
-    //[SerializeField]
-    //private int selectorAAAAHHH; 
+
     [Space] [Header("Shoot Parameters")] 
     [SerializeField] private Animator headAnim;
     [SerializeField] private GameObject bossProjectile;
@@ -160,7 +156,7 @@ public class FinalBossBehaviour : MonoBehaviour
 
      private void ChangeLifeInformation()
      {
-         haloLumière.intensity = Mathf.Lerp(haloLumière.intensity, hpBoss / 2.5f * maxHPBoss, 0.01f);
+         haloLumière.intensity = Mathf.Lerp(haloLumière.intensity, hpBoss / 50f, 0.01f);
      }
 
     void BehaviourSelector()
@@ -306,9 +302,10 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Slam",true);
         yield return new WaitForSeconds(0.50f);
         leftHand.speed = 0;
-        yield return new WaitForSeconds(1f);
+        Instantiate(chargeLeftBoss, leftHand.transform.position+ new Vector3(0,2,0), Quaternion.identity);
+        yield return new WaitForSeconds(.7f);
         leftHand.speed = 1;
-        Instantiate(chargeLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
+        
         
         yield return new WaitForSeconds(.3f);
         Instantiate(energyballLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
@@ -331,9 +328,10 @@ public class FinalBossBehaviour : MonoBehaviour
         rightHand.SetBool("Slam",true);
         yield return new WaitForSeconds(0.50f);
         rightHand.speed = 0;
-        yield return new WaitForSeconds(1f);
-        rightHand.speed = 1;
         Instantiate(chargeRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
+        yield return new WaitForSeconds(.7f);
+        rightHand.speed = 1;
+        
         
         yield return new WaitForSeconds(.3f);
         Instantiate(energyballRightBoss, rightHand.transform.position- new Vector3(0,6,0), quaternion.identity);
