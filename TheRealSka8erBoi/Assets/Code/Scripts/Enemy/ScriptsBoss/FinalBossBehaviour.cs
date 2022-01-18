@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.UI;
 using static UnityEngine.Random;
 using Debug = UnityEngine.Debug;
@@ -38,6 +39,7 @@ public class FinalBossBehaviour : MonoBehaviour
     [Space] [Header("ArmAttack Parameters")]
     [SerializeField] private GameObject armAtck;
     private GameObject lArmAtckInstance;
+    public int frameDelayBetweenAttack;
     
     [SerializeField] public CircleCollider2D leftHandCollider;
     [SerializeField] public CircleCollider2D rightHandCollider;
@@ -94,9 +96,9 @@ public class FinalBossBehaviour : MonoBehaviour
     public GameObject firstHugeCracksStorms;
 
     private int currentKeyframe;
-    private int nextKeyFrame;
-
+    public Light2D haloLumière;
     public List<float> stepLifeBossList;
+    public SpriteRenderer couronne;
     
     void Start()
     {
@@ -123,15 +125,12 @@ public class FinalBossBehaviour : MonoBehaviour
         crown.SetInteger("BossHp",hpBoss);
         if (hpBoss<=maxHPBoss/2)
         {
-            bossBar.color = new Color(183,34,18,200);
+            bossBar.color = new Color(255,119,117,255);
             bossIsMidLife = true;
         }
-        
-        if (hpBoss<=0)
-        {
-            PlayerBehaviour.playerBehaviour.WinningCharacter();
-        }
-        
+
+        ChangeLifeInformation();
+        if (hpBoss<=0) { PlayerBehaviour.playerBehaviour.WinningCharacter(); }
     }
 
     private void FixedUpdate()
@@ -146,20 +145,23 @@ public class FinalBossBehaviour : MonoBehaviour
         if (_frameCounter < refreshTime) _frameCounter += 1;
         else _frameCounter = 0;
         inSecond = (int)(_frameCounter / 50);
-        for (int i = 0; i < keyFrames.Count; i++)
+        if (_frameCounter != keyFrames[0]) return;
+        
+        switch (bossIsMidLife) 
         {
-            if (_frameCounter != keyFrames[i]) continue;
-            switch (bossIsMidLife)
-            {
-                case false:
-                    BehaviourSelector();
-                    break;
-                case true:
-                    EnragedBehaviour();
-                    break;
-            }
+            case false:
+                BehaviourSelector();
+                break;
+            case true:
+                EnragedBehaviour();
+                break;
         }
     }
+
+     private void ChangeLifeInformation()
+     {
+         haloLumière.intensity = Mathf.Lerp(haloLumière.intensity, hpBoss / 2.5f * maxHPBoss, 0.01f);
+     }
 
     void BehaviourSelector()
     {
@@ -174,6 +176,7 @@ public class FinalBossBehaviour : MonoBehaviour
                 bossAttacks[3].probability += decrementalValue / 4;
                 bossAttacks[4].probability += decrementalValue / 4;
                 foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                keyFrames[0] += bossAttacks[0].frameLength + frameDelayBetweenAttack;
                 break;
             case 2: 
                 StartCoroutine(RightArmAtck());
@@ -183,6 +186,7 @@ public class FinalBossBehaviour : MonoBehaviour
                 bossAttacks[3].probability += decrementalValue / 4;
                 bossAttacks[4].probability += decrementalValue / 4;
                 foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                keyFrames[0] += bossAttacks[1].frameLength + frameDelayBetweenAttack;
                 break;
             case 3 :
                 StartCoroutine(BossShooting());
@@ -192,6 +196,7 @@ public class FinalBossBehaviour : MonoBehaviour
                 bossAttacks[3].probability += decrementalValue / 4;
                 bossAttacks[4].probability += decrementalValue / 4;
                 foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                keyFrames[0] += bossAttacks[2].frameLength + frameDelayBetweenAttack;
                 break;
             case 4 : 
                 BossMakesEnemiesSpawn();
@@ -201,6 +206,7 @@ public class FinalBossBehaviour : MonoBehaviour
                 bossAttacks[3].probability -= decrementalValue;
                 bossAttacks[4].probability += decrementalValue / 4;
                 foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                keyFrames[0] += bossAttacks[3].frameLength + frameDelayBetweenAttack;
                 break;
             case 5 :
                 StartCoroutine(Crush());
@@ -210,6 +216,7 @@ public class FinalBossBehaviour : MonoBehaviour
                 bossAttacks[3].probability += decrementalValue / 4;
                 bossAttacks[4].probability -= decrementalValue;
                 foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                keyFrames[0] += bossAttacks[4].frameLength + frameDelayBetweenAttack;
                 break;
         }
     }
@@ -228,6 +235,7 @@ public class FinalBossBehaviour : MonoBehaviour
                   bossAttacks[3].probability += decrementalValue / 4;
                   bossAttacks[4].probability += decrementalValue / 4;
                   foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                  keyFrames[0] += bossAttacks[4].frameLength + frameDelayBetweenAttack;
                   break;
               case 2:
                   StartCoroutine(LeftArmAtck());
@@ -238,6 +246,7 @@ public class FinalBossBehaviour : MonoBehaviour
                   bossAttacks[3].probability += decrementalValue / 4;
                   bossAttacks[4].probability += decrementalValue / 4;
                   foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                  keyFrames[0] += bossAttacks[0].frameLength + frameDelayBetweenAttack;
                   break;
               case 3:
                   BossMakesEnemiesSpawn();
@@ -248,6 +257,7 @@ public class FinalBossBehaviour : MonoBehaviour
                   bossAttacks[3].probability += decrementalValue / 4;
                   bossAttacks[4].probability += decrementalValue / 4;
                   foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                  keyFrames[0] += bossAttacks[2].frameLength + frameDelayBetweenAttack;
                   break;
               case 4:
                   StartCoroutine(RightArmAtck());
@@ -258,6 +268,7 @@ public class FinalBossBehaviour : MonoBehaviour
                   bossAttacks[3].probability -= decrementalValue;
                   bossAttacks[4].probability += decrementalValue / 4;
                   foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                  keyFrames[0] += bossAttacks[1].frameLength + frameDelayBetweenAttack;
                   break;
               case 5:
                   StartCoroutine(BossShooting());
@@ -268,6 +279,7 @@ public class FinalBossBehaviour : MonoBehaviour
                   bossAttacks[3].probability += decrementalValue / 4;
                   bossAttacks[4].probability -= decrementalValue;
                   foreach (BossAttack bossAttack in bossAttacks) bossAttack.probability = Mathf.Clamp(bossAttack.probability, 0, 100);
+                  keyFrames[0] += bossAttacks[2].frameLength + frameDelayBetweenAttack;
                   break;
           }
     }
@@ -404,7 +416,10 @@ public class FinalBossBehaviour : MonoBehaviour
         Gizmos.DrawWireSphere(leftDamageFeeler.transform.position, areaSize);
     }
 
-    public void TakeDamage(int damage) { hpBoss -= damage; }
+    public void TakeDamage(int damage)
+    {
+        hpBoss -= damage;
+    }
     void BossMakesEnemiesSpawn()
     {
         int spawningFactor = 1;
@@ -488,5 +503,6 @@ public class BossAttack
 {
     public int id;
     public string name;
+    public int frameLength;
     [Range(0, 100)] public int probability;
 }
