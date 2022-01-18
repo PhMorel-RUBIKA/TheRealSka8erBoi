@@ -156,7 +156,7 @@ public class FinalBossBehaviour : MonoBehaviour
 
      private void ChangeLifeInformation()
      {
-         haloLumière.intensity = Mathf.Lerp(haloLumière.intensity, hpBoss / 50f, 0.01f);
+         haloLumière.intensity = Mathf.Lerp(haloLumière.intensity, hpBoss*2.5f / maxHPBoss, 0.01f);
      }
 
     void BehaviourSelector()
@@ -302,7 +302,7 @@ public class FinalBossBehaviour : MonoBehaviour
         leftHand.SetBool("Slam",true);
         yield return new WaitForSeconds(0.50f);
         leftHand.speed = 0;
-        Instantiate(chargeLeftBoss, leftHand.transform.position+ new Vector3(0,2,0), Quaternion.identity);
+        Instantiate(chargeLeftBoss, leftHand.transform.position- new Vector3(0,6,0), Quaternion.identity);
         yield return new WaitForSeconds(.7f);
         leftHand.speed = 1;
         
@@ -315,7 +315,7 @@ public class FinalBossBehaviour : MonoBehaviour
         leftDamageFeeler.SetActive(true);
         yield return new WaitForSeconds(1f);
         leftHand.speed = 0;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         leftHand.speed = 1;
         yield return new WaitForSeconds(1.6f);
 
@@ -341,7 +341,7 @@ public class FinalBossBehaviour : MonoBehaviour
         rightDamageFeeler.SetActive(true);
         yield return new WaitForSeconds(1f);
         rightHand.speed = 0;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         rightHand.speed = 1;
         yield return new WaitForSeconds(1.6f);
         rightDamageFeeler.SetActive(false);

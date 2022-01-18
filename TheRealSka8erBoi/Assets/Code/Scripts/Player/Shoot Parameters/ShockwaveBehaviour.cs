@@ -21,7 +21,8 @@ public class ShockwaveBehaviour : MonoBehaviour
         {
             if (hit.gameObject.CompareTag("Target"))
             {
-                hit.GetComponent<DamageManager>().TakeDamage(damage);
+                if (hit.gameObject.GetComponent<DamageManager>() != null) hit.gameObject.GetComponent<DamageManager>().TakeDamage(damage);
+                else hit.gameObject.GetComponent<handScript>().TakeDamage(damage);
                 hit.GetComponent<Rigidbody2D>().AddForce( (hit.transform.position - transform.position).normalized* force);
             }
 
