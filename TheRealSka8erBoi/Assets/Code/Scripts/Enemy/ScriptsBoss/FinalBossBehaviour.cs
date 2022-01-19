@@ -434,7 +434,9 @@ public class FinalBossBehaviour : MonoBehaviour
 
         for (int e = 0; e < spawningFactor; e++)
         {
+            enemySelection = Random.Range(0, 4);
             Vector3 positionEnemi = GetRandomPoint().transform.position;
+            
             Instantiate(enemySpawnVFX, positionEnemi + new Vector3(-0.05f, -0.5f, 0), Quaternion.identity);
             SoundCaller.instance.SpawnEnemiesSound();
             yield return new WaitForSeconds(0.8f);

@@ -558,7 +558,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (number == 1) gameObject.GetComponent<Inventory>().deathDefiance1 = false;
         if (number == 2) gameObject.GetComponent<Inventory>().deathDefiance2 = false;
         
-        GetHealth(maxHealth / 4);
+        GetHealth(maxHealth / 3);
     }
 
     IEnumerator DyingCharacter()
