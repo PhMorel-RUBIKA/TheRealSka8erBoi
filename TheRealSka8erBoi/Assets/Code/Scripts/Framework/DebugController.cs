@@ -12,7 +12,10 @@ public class DebugController : MonoBehaviour
     public static DebugCommand MOULAGA;
     public static DebugCommand OVER9000;
     public static DebugCommand SUPERMAN;
-    
+    public static DebugCommand RESET_TIMESCLALE;
+    public static DebugCommand PLAYER_TP;
+    public static DebugCommand REGEN;
+     
     public List<object> commandList;
 
     private void Awake()
@@ -36,6 +39,18 @@ public class DebugController : MonoBehaviour
         {
             PlayerBehaviour.playerBehaviour.canTakeDamage = !PlayerBehaviour.playerBehaviour.canTakeDamage;
         });
+        RESET_TIMESCLALE = new DebugCommand("reset_timescale", "Reset the timescale of the game.", "reset_timescale", () =>
+        {
+            Time.timeScale = 1;
+        });
+        PLAYER_TP = new DebugCommand("player_tp", "Reset player Position on 0,0,0.", "player_tp", () =>
+        {
+            PlayerBehaviour.playerBehaviour.gameObject.transform.position = Vector3.zero;
+        });
+        REGEN = new DebugCommand("regen", "Reset player Current Life.", "regen", () =>
+        {
+            PlayerBehaviour.playerBehaviour.currentHealth = PlayerBehaviour.playerBehaviour.maxHealth;
+        });
 
         commandList = new List<object>
         {
@@ -43,6 +58,8 @@ public class DebugController : MonoBehaviour
             MOULAGA,
             OVER9000,
             SUPERMAN,
+            RESET_TIMESCLALE,
+            PLAYER_TP,
         };
     }
 

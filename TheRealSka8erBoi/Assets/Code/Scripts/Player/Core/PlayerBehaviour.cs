@@ -8,6 +8,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Object = System.Object;
+
 public class PlayerBehaviour : MonoBehaviour
 {
     private GameObject chargeProjectile;
@@ -83,6 +85,9 @@ public class PlayerBehaviour : MonoBehaviour
     [Space] [Header("Feedback Declaration")]
     public MMFeedbacks DamageFeedbacks;
 
+    public GameObject feedbackKunai;
+    private GameObject currentFBShuriken;
+
     [Space]
 
     //Declaration UI
@@ -113,10 +118,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     public MMFeedbacks perfection;
     public GameObject DeathCanvasGroup;
+    public GameObject WinningCanvas;
     public GameObject ChienCanvas;
     public bool isDogActive;
     public Animator refusMortAnimator;
+
+    private Vector3 lastPos;
     
+
     private void Awake()
     {
         if (playerBehaviour == null)
@@ -152,7 +161,8 @@ public class PlayerBehaviour : MonoBehaviour
         animatorID.Add(Animator.StringToHash("IsAiming"));
         animatorID.Add(Animator.StringToHash("Horizontal"));
         animatorID.Add(Animator.StringToHash("Vertical"));
-        
+
+
     }
 
     void Update()
@@ -171,6 +181,10 @@ public class PlayerBehaviour : MonoBehaviour
                 ChienCanvas.SetActive(false);
                 break;
         }
+
+        if (shurikenActive) feedbackKunai.GetComponent<ParticleSystem>().Play();
+        else feedbackKunai.GetComponent<ParticleSystem>().Stop();
+        
     }
 
    void FixedUpdate()
@@ -207,6 +221,7 @@ public class PlayerBehaviour : MonoBehaviour
             Shoot(charge, GetComponentInChildren<CursorBehaviour>().AimDirection().Item2);
             transform.GetChild(0).gameObject.SetActive(false);
             isAiming = false;
+            SoundCaller.instance.PLayerTirSound();
             animatorPlayer.SetTrigger(animatorID[6]);//Release
             animatorPlayer.SetBool(animatorID[9], isAiming);
        
@@ -230,6 +245,7 @@ public class PlayerBehaviour : MonoBehaviour
                 gameObject.tag = "PlayerDashing";
                 Physics2D.IgnoreLayerCollision(6, 10, true);
                 Physics2D.IgnoreLayerCollision(6, 11, true);
+                Vector3 lastPos = gameObject.transform.position;
                 if (dashSpellActive) dashOngoingCd = dashCd / 2 + dashDuration;
                 else dashOngoingCd = dashCd + dashDuration ;
                 if (dashSpellActive && dashSpellactivation == 3)
@@ -343,6 +359,13 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (dash) return;
+        if (other.gameObject.layer != 11) return;
+        gameObject.transform.position = lastPos;
+    }
+
     private void Shoot(float charge, Vector2 projDirection)
     {
         float multiplicatorShoot = 1;
@@ -433,10 +456,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if(!canTakeDamage) return;
         if(isDead) return;
+        
         currentHealth -= damageNumber;
-        float division = (float)currentHealth / maxHealth;
-        healthBar.fillAmount = 1 - division;
-        if (division > 1) healthBar.fillAmount = 1;
+        float division = (float)currentHealth/maxHealth;
+        float value = Mathf.Clamp(1 - division, 0, 1);
+        healthBar.fillAmount = value;
         //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
         StartCoroutine(Invincibility());
@@ -474,15 +498,9 @@ public class PlayerBehaviour : MonoBehaviour
     public void GetHealth(int healthNumber)
     {
         currentHealth += healthNumber;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         float division = (float)currentHealth / maxHealth;
-        healthBar.fillAmount = 1 - division;
-        if (division > 1) healthBar.fillAmount = 1;
-        if (currentHealth>maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-        healthBar.fillAmount = (float) currentHealth / maxHealth;
+        float value = Mathf.Clamp(1 - division, 0, 1);
+        healthBar.fillAmount = value;
         //lifeText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
        
     }
@@ -540,14 +558,22 @@ public class PlayerBehaviour : MonoBehaviour
         if (number == 1) gameObject.GetComponent<Inventory>().deathDefiance1 = false;
         if (number == 2) gameObject.GetComponent<Inventory>().deathDefiance2 = false;
         
-        GetHealth(maxHealth / 4);
+        GetHealth(maxHealth / 3);
     }
 
     IEnumerator DyingCharacter()
     {
         yield return new WaitForSeconds(3);
+        SoundCaller.instance.PlayerDeath();
         DeathCanvasGroup.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Score : " + BonusManager.instance.finalScore;
         DeathCanvasGroup.gameObject.SetActive(true);
+        pause.GameOverPause();
+    }
+
+    public void WinningCharacter()
+    {
+        WinningCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Score : " + BonusManager.instance.finalScore;
+        WinningCanvas.gameObject.SetActive(true);
         pause.GameOverPause();
     }
 }

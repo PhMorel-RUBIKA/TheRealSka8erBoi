@@ -45,6 +45,9 @@ public class WaveManager : MonoBehaviour
     {
         WaveManager.instance = this;
         canEndwave = true;
+
+        if (PlayerBehaviour.playerBehaviour.GetComponentInChildren<Camera>().orthographicSize != 9.5f)
+            PlayerBehaviour.playerBehaviour.GetComponentInChildren<Camera>().orthographicSize = 9.5f;
         
         for (int i = 0; i < waveLevel.waves.Length; i++) currentNumberOfEnemies.Add(waveLevel.waves[i].numberOfenemies);
     }
@@ -162,6 +165,12 @@ public class WaveManager : MonoBehaviour
         gateZone1.GetComponent<SpriteRenderer>().sprite = itemDoor1.GetComponent<SpriteRenderer>().sprite;
         itemDoor2 = rewardObjects[rand2];
         gateZone2.GetComponent<SpriteRenderer>().sprite = itemDoor2.GetComponent<SpriteRenderer>().sprite;
+
+        if (LoadSceneManager.instance.numberOfRoom == 3 || LoadSceneManager.instance.numberOfRoom == 8)
+        {
+            gateZone1.GetComponent<SpriteRenderer>().sprite = LoadSceneManager.instance.ShopImage;
+            gateZone2.GetComponent<SpriteRenderer>().sprite = LoadSceneManager.instance.ShopImage;
+        }
         
         RandomItem(itemDoor1);
         RandomItem(itemDoor2);

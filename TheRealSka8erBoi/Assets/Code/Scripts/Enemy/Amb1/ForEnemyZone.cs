@@ -35,5 +35,8 @@ public class ForEnemyZone : MonoBehaviour
                 PlayerBehaviour.playerBehaviour.TakeDamage(damage);
             }
         }
+
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 }

@@ -57,7 +57,8 @@ public class BouncingOrbBehaviour : MonoBehaviour
         {
             if (target.CompareTag("Target"))
             {
-                target.GetComponent<DamageManager>().TakeDamage(damage);
+                if (target.GetComponent<DamageManager>() != null) target.GetComponent<DamageManager>().TakeDamage(damage);
+                 else target.GetComponent<handScript>().TakeDamage(damage);
                 bounceNumber -= 1;
                 
                 if (bounceNumber < 1)

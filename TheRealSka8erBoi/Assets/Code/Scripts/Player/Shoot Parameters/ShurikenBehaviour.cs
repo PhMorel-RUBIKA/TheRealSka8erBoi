@@ -33,7 +33,8 @@ public class ShurikenBehaviour : MonoBehaviour
         {
             if (enemy.gameObject.CompareTag("Target"))
             {
-                enemy.GetComponent<DamageManager>().TakeDamage(damage);
+                if (enemy.GetComponent<DamageManager>() != null) enemy.GetComponent<DamageManager>().TakeDamage(damage);
+                else enemy.GetComponent<handScript>().TakeDamage(damage);
             }
         }
     }
