@@ -28,7 +28,7 @@ public class BossProjectileBehaviour : MonoBehaviour
         rb.velocity = adjust * factorFollow;
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, speedModifier);
         
-        
+        // Attention après ca c'est mort
         Destroy(gameObject,1.5f);
         
     }
